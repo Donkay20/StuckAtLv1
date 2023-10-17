@@ -7,13 +7,16 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] Transform targetDestination;
     GameObject targetGameObject;
+    
     [SerializeField] float speed;
     [SerializeField] int hp = 4;
 
     Rigidbody2D body;
+    Animator anim;
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         targetGameObject = targetDestination.gameObject;
     }
     
@@ -34,6 +37,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage) {
         hp -= damage;
+        anim.SetTrigger("Hit");
         if (hp < 1) {
             Destroy(gameObject);
         }
