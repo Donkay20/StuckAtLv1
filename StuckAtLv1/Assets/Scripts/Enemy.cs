@@ -12,16 +12,20 @@ public class Enemy : MonoBehaviour
 
     Rigidbody2D body;
     Animator anim;
+    SpriteRenderer rend;
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        rend = GetComponent<SpriteRenderer>();
         targetGameObject = targetDestination.gameObject;
     }
     
     private void FixedUpdate() {
         Vector3 direction = (targetDestination.position - transform.position).normalized;
         body.velocity = direction * speed;
+
+        Flip(direction.x);
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
@@ -39,6 +43,18 @@ public class Enemy : MonoBehaviour
         anim.SetTrigger("Hit");
         if (hp < 1) {
             Destroy(gameObject);
+        }
+    }
+
+    private void Flip(float x)
+    {
+        if(x > 0)
+        {
+            rend.flipX = false;
+        }
+        else if(x < 0)
+        {
+            rend.flipX = true;
         }
     }
 }
