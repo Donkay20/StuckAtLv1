@@ -26,7 +26,8 @@ public class Movement : MonoBehaviour
     {
         movementVector.x = Input.GetAxisRaw("Horizontal");
         movementVector.y = Input.GetAxisRaw("Vertical");
-        movementVector *= speed;
+
+        movementVector = movementVector.normalized * speed;
         body.velocity = movementVector;
 
         RunAnimation();
