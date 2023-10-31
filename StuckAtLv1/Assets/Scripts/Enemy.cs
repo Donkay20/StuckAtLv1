@@ -1,14 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] Transform targetDestination;
+    Transform targetDestination;
     GameObject targetGameObject;
+    Character targetCharacter;
     
     [SerializeField] float speed;
-    [SerializeField] int hp = 4;
+    [SerializeField] int hp = 1000;
+    [SerializeField] int damage = 1;
 
     Rigidbody2D body;
     Animator anim;
@@ -18,7 +21,11 @@ public class Enemy : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
-        targetGameObject = targetDestination.gameObject;
+    }
+
+    public void SetTarget(GameObject target) {
+        targetGameObject = target;
+        targetDestination = target.transform;
     }
     
     private void FixedUpdate() {
@@ -35,7 +42,10 @@ public class Enemy : MonoBehaviour
     }
 
     private void Attack() {
-        //Debug.Log("Attacking the character!!");
+        if (targetCharacter == null) {
+            targetCharacter = targetGameObject.GetComponent<Character>();
+        }
+        targetCharacter.TakeDamage(damage);
     }
 
     public void TakeDamage(int damage) {
