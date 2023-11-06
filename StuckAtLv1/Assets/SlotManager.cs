@@ -13,19 +13,11 @@ public class SlotManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(slotKey1)) {
-            if(!slot1.ContainsSkill) {
-                //fire absorption bullet w/ identity
-            } else {
-                //fire skill w/ identity of skill w/ slot modifiers
-            }
+            slot1.Engage();
         }
-        
+
         if (Input.GetKeyDown(slotKey2)) {
-            if(!slot2.ContainsSkill) {
-                //fire absorption bullet w/ identity
-            } else {
-                //fire skill w/ identity of skill w/ slot modifiers
-            }
+            slot2.Engage();
         }
     }
 }
