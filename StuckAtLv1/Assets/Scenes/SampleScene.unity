@@ -15796,6 +15796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillImage: {fileID: 930586336}
+  bullet: {fileID: 8787017940465851706, guid: 5d659b5f0fc67e941859f49cee1d9ce7, type: 3}
+  bulletTransform: {fileID: 947085473}
 --- !u!1 &1066581303
 GameObject:
   m_ObjectHideFlags: 0
@@ -16208,6 +16210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillImage: {fileID: 772313737}
+  bullet: {fileID: 8787017940465851706, guid: 5d659b5f0fc67e941859f49cee1d9ce7, type: 3}
+  bulletTransform: {fileID: 1237195274}
 --- !u!1 &1276320525
 GameObject:
   m_ObjectHideFlags: 0
