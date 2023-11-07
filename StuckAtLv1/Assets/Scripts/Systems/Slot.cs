@@ -10,7 +10,7 @@ public class Slot : MonoBehaviour
     private int identity;
     private bool containsSkill = false;
     private bool absorbBulletAvailable = true;
-    private int skillID = -1, skillUses = -1;
+    private int skillID = 0, skillUses = 0;
     [SerializeField] private Image skillImage;
     [SerializeField] private TextMeshProUGUI uIText;
     [SerializeField] private GameObject bullet;
@@ -33,17 +33,21 @@ public class Slot : MonoBehaviour
             this.absorbBulletAvailable = false;
         } else {
             Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform);
-            skillUses--; uIText.text = skillUses.ToString();
+            if (skillUses > 0) {
+                skillUses--;
+            }
+            uIText.text = skillUses.ToString();
             if (skillUses <= 0) {
                 //empty out the skill, remove image
                 containsSkill = false;
-                skillImage.sprite = null;
-                skillID = -1; skillUses = -1;
+                //skillImage.sprite = null;
+                skillImage.sprite = attack[0].GetComponent<SpriteRenderer>().sprite;
+                skillID = 0; skillUses = 0;
             }
         }
     }
     public void AcquireSkill(int ID, int uses) {
-        if(ID != -1) {
+        if(ID != 0) {
             skillID = ID;
             skillUses = uses;
             skillImage.sprite = attack[ID].GetComponent<SpriteRenderer>().sprite;
