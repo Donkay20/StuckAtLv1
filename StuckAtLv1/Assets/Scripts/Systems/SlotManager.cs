@@ -13,12 +13,12 @@ public class SlotManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(slotKey1)) {
-            Debug.Log("slot 1 pressed");
+            Debug.Log("Slot 1 pressed.");
             slot1.Engage();
         }
 
         if (Input.GetKeyDown(slotKey2)) {
-            Debug.Log("slot 2 pressed");
+            Debug.Log("Slot 2 pressed.");
             slot2.Engage();
         }
     }
