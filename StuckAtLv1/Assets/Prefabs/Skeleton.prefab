@@ -175,6 +175,7 @@ MonoBehaviour:
   speed: 1
   hp: 4
   damage: 1
+  particlePrefab: {fileID: 1210264596843239824, guid: 5a411476ff72944458cd122769dcdca7, type: 3}
 --- !u!95 &7039329450834369382
 Animator:
   serializedVersion: 5

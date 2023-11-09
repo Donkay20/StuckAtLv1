@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     Animator anim;
     SpriteRenderer rend;
 
+    public GameObject particlePrefab;
+
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -52,6 +54,8 @@ public class Enemy : MonoBehaviour
         hp -= damage;
         anim.SetTrigger("Hit");
         if (hp < 1) {
+            Instantiate(particlePrefab, this.transform.position, this.transform.rotation);
+            //Debug.Log(this.transform);
             Destroy(gameObject);
         }
     }
