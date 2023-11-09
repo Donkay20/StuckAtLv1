@@ -22,6 +22,7 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnEnemy() {
         Vector3 position = GenerateRandomPosition();
+        position += player.transform.position;
         GameObject newEnemy = Instantiate(enemy);
         newEnemy.transform.position = position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);

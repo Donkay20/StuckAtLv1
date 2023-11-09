@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class AbsorbBullet : MonoBehaviour
@@ -30,24 +31,18 @@ public class AbsorbBullet : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
+
         Enemy enemy = col.GetComponent<Enemy>();
+        
         if (enemy != null) {
-            enemy.TakeDamage(1);
-            GetComponentInParent<Slot>().AcquireSkill(1, 3);
-            GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
-            Destroy(gameObject);
-        }
-        /*
-        switch(col.name) {
-            case "Skeleton": //1
-                Enemy enemy = col.GetComponent<Enemy>();
-                GetComponentInParent<Slot>().AcquireSkill(1);
-                Debug.Log("acquired skeleton dna");
+            switch (enemy.tag) {
+                case "Enemy":
                 enemy.TakeDamage(1);
+                GetComponentInParent<Slot>().AcquireSkill(1, 3);
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
                 Destroy(gameObject);
-            break;
+                break;
+            }
         }
-        */
     }
 }
