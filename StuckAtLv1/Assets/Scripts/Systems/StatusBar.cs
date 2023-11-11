@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StatusBar : MonoBehaviour
+/*
+Handles HP bar under main character during combat. Probably temporary.
+*/
 {
     [SerializeField] Transform bar;
 

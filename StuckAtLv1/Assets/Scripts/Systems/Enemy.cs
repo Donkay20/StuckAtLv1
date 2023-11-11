@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
+/*
+Class that handles enemy stats and HP values and taking damage, as well as attacking.
+
+* This class will need to be changed so that it doesn't have the follow-enemy-functionality it currently has. 
+*/
 {
     Transform targetDestination;
     GameObject targetGameObject;

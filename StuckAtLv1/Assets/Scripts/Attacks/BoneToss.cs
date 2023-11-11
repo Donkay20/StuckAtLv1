@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class BoneToss : MonoBehaviour
 {
-    float timer = 2f;
+    float timer = 2f;   //if a modifier increase skill time duration, it would call back to the parent slot and acquire the modifier for calculation
     Rigidbody2D rb;
     private Vector3 mousePosition;
     private Camera mainCamera;
     public float speed;
 
-    void Start() {
+    void Start() {  //aim towards the mouse
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -30,7 +30,7 @@ public class BoneToss : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         Enemy enemy = col.GetComponent<Enemy>();
         if (enemy != null) {
-            enemy.TakeDamage(10);
+            enemy.TakeDamage(10);   //if a modifier increases damage, it would call back to the parent slot and acquire the modifier for calculation
         }
     }
 }
