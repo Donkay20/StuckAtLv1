@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RockThrow : MonoBehaviour
 {
-    float timer = 0.5f;
+    float timer = 0.2f;
     Rigidbody2D rb;
     public float speed;
     public Vector2 direction = new Vector2(0, 0);
