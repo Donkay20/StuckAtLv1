@@ -17,12 +17,14 @@ todo:
     public int currentHp = 10;
     private readonly float iframe = 0.3f;
     private bool invincible;
-    [SerializeField] Animator anim;
+    [SerializeField] Animator playerAnim;
+    [SerializeField] Animator healthBarAnim;
     [SerializeField] StatusBar hpBar;
 
     public void TakeDamage(int damage) { //todo; edit for buffs/dmg reduction values
         if (!invincible) {
-            anim.SetTrigger("Hit");
+            playerAnim.SetTrigger("Hit");
+            healthBarAnim.SetTrigger("Hit");
             invincible = true;
             currentHp -= damage;
             StartCoroutine(InvincibilityFrame());
