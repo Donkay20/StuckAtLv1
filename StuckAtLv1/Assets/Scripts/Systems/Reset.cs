@@ -14,10 +14,9 @@ public class Reset : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.R))
+        if(Input.GetKey(KeyCode.Escape))
         {
-            Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.buildIndex);
+            Application.Quit();
         }
     }
 }

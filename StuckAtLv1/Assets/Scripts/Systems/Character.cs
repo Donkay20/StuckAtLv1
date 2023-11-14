@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Profiling;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Character : MonoBehaviour
