@@ -21,7 +21,7 @@ public class CursorFollow : MonoBehaviour
       Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
       transform.position = cursorPos;  
 
-      Pressed();
+      //Pressed();
     }
 
     void CursorOff(){
@@ -36,6 +36,19 @@ public class CursorFollow : MonoBehaviour
         rend.sprite = clickedCursor;
         Invoke(nameof(Unpress), 0.1f);
       }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+      if(collision.GetComponent<Enemy>() != null)
+      {
+        rend.sprite = clickedCursor;
+      }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+      Unpress();
     }
 
     void Unpress()
