@@ -18,5 +18,11 @@ public class Reset : MonoBehaviour
         {
             Application.Quit();
         }
+
+        if(Input.GetKey(KeyCode.P))
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.buildIndex);
+        }
     }
 }

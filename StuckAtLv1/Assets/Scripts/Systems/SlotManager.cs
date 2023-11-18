@@ -39,7 +39,6 @@ public class SlotManager : MonoBehaviour
         if (Input.GetKeyDown(slotKey1)) {
             slotNum = 1;
             AnimationControl(slots[0], 0);
-
             //Debug.Log("Slot 1 pressed.");
             //slot1.Engage();
         }

@@ -12,6 +12,8 @@ public class AbsorbBullet : MonoBehaviour
     private Camera mainCamera;
     public float speed; //if a modifier increase skill speed, it would call back to the parent slot and acquire the modifier for calculation
 
+    [SerializeField] GameObject spawnSiphon;
+
     void Start() {  //follow the mouse
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
@@ -35,6 +37,7 @@ public class AbsorbBullet : MonoBehaviour
         Enemy enemy = col.GetComponent<Enemy>();                        //the enemy class will need to be changed to a bare-bones calculation class as every enemy will need it, can stack other classes on different enemies for unique behavior
         
         if (enemy != null) {
+            Instantiate(spawnSiphon, transform.position, transform.rotation);
             switch (enemy.tag) {                                        //each enemy will have a unique tag which will identify which one the bullet is hitting. Alternatively, we can swap to their names if need be
                 case "Enemy":
                 enemy.TakeDamage(1);                                    //if a modifier increase skill damage, it would call back to the parent slot and acquire the modifier for calculation
