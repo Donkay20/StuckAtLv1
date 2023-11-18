@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnSiphon : MonoBehaviour
 {
+    [SerializeField] private float timer = 2f;
     [SerializeField] private GameObject siphon;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,9 @@ public class SpawnSiphon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer -= Time.deltaTime;
+        if (timer <= 0) {
+            Destroy(gameObject);
+        }
     }
 }
