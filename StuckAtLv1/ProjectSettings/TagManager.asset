@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Enemy
   - Golem1
+  - Golem2
+  - Golem3
+  - Skeleton1
+  - Skeleton2
+  - Skeleton3
   layers:
   - Default
   - TransparentFX
