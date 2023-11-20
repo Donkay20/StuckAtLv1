@@ -22,8 +22,9 @@ public class Slot : MonoBehaviour
         > if necessary, pooling will need to be used over instantiation if performance suffers because of it
 
     Current Skill IDs and their correspondences:
-    0 - no skill
-    1 - Bone Toss (from Skeleton enemy)
+    0 - Empty
+    1 - Bone Toss (from Skeleton 1)
+    2 - Boulder Toss (from Golem 1) [ideal position: 4]
     */
 
     private int identity;
