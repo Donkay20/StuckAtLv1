@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -18,13 +19,15 @@ todo:
     [SerializeField] Animator playerAnim;
     [SerializeField] Animator healthBarAnim;
     [SerializeField] StatusBar hpBar;
+    [SerializeField] private TextMeshProUGUI healthText;
 
     public void TakeDamage(int damage) { //todo; edit for buffs/dmg reduction values
         if (!invincible) {
             playerAnim.SetTrigger("Hit");
             healthBarAnim.SetTrigger("Hit");
             invincible = true;
-            currentHp -= damage;
+            currentHp -= damage; 
+            healthText.text = currentHp.ToString();
             StartCoroutine(InvincibilityFrame());
         }
         
