@@ -55,7 +55,7 @@ public class AbsorbBullet : MonoBehaviour
 
                 case "Golem2":
                 enemy.TakeDamage(1);
-                GetComponentInParent<Slot>().AcquireSkill(3, 1);
+                GetComponentInParent<Slot>().AcquireSkill(3, 3);
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
                 Destroy(gameObject);
                 break;
