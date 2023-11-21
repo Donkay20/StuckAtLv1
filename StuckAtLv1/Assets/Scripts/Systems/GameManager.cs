@@ -48,4 +48,18 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             break;
         }
     }
+
+    public void ReceiveCommand(String name) {
+        switch (name) {
+            case "map":
+            break;
+            case "combat":
+            Debug.Log("Combat command received.");
+            break;
+            case "event":
+            break;
+            case "upgrade":
+            break;
+        }
+    }
 }

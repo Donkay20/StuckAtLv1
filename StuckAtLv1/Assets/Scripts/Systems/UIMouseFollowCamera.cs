@@ -6,7 +6,7 @@ public class UIMouseFollowCamera : MonoBehaviour
 {
     public Canvas myCanvas;
     void Start () {
-
+        Cursor.visible = false;
     }
    
     void Update () {

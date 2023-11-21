@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +15,17 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Sprite shopImage;
     [SerializeField] private Sprite miniBossImage;
     [SerializeField] private Sprite bossImage;
-    private int level;
+    [SerializeField] private GameManager manager;
+    private int level; private int section;
+    private String report;
 
     void Start()
     {
-        level = 1;
+        level = 0;
+        section = 2;
         node13.onClick.AddListener(() => {clickedNode(1,3);}); //add the rest of the buttons later
+        node22.onClick.AddListener(() => {clickedNode(2,2);});
+        node24.onClick.AddListener(() => {clickedNode(2,4);});
 
         //todo, assign nodes here. how? idk
         node13.GetComponent<Image>().sprite = combatImage;
@@ -28,7 +34,15 @@ public class MapManager : MonoBehaviour
         //the first node is always a combat node, and set the miniboss and boss nodes automatically
     }
 
-    public void clickedNode(int level, int section) {
-
+    public void clickedNode(int clickedLevel, int clickedSection) {
+        if (level + 1 == clickedLevel && (section + 1 == clickedSection || section -1 == clickedSection)) { //check if the button clicked is a valid one
+            switch (clickedLevel, clickedSection) {
+            case (1,3):
+                node13.interactable = false;
+                    report = "combat";
+                    break;
+            }
+            manager.ReceiveCommand(report);
+        }
     }
 }
