@@ -23,6 +23,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     [SerializeField] private GameObject combatUI;
     [SerializeField] private GameObject mapUI;
     [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private GameObject mouseCursorUI;
     private GameState currentState;
     private GameState previousState;
     void Start()

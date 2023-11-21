@@ -32,7 +32,7 @@ todo:
         }
         
         if (currentHp <= 0) {
-            Debug.Log("Jamp is dead.");
+            //Debug.Log("Jamp is dead.");
         }
         hpBar.SetState(currentHp, maxHp);
     }
