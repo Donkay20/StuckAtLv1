@@ -51,14 +51,32 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
     public void ReceiveCommand(String name) {
         switch (name) {
+            //non-map focused
             case "map":
+            Debug.Log("Map command received.");
             break;
+            case "upgrade":
+            Debug.Log("Upgrade command received.");
+            break;
+
+            //map focused
             case "combat":
             Debug.Log("Combat command received.");
             break;
-            case "event":
+            case "survival":
+            Debug.Log("Survival command received.");
             break;
-            case "upgrade":
+            case "event":
+            Debug.Log("Event command received.");
+            break;
+            case "shop":
+            Debug.Log("Shop command received.");
+            break;
+            case "miniboss":
+            Debug.Log("Miniboss command received.");
+            break;
+            case "boss":
+            Debug.Log("Event command received.");
             break;
         }
     }
