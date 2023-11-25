@@ -211,15 +211,13 @@ public class MapManager : MonoBehaviour
                 report = node113.GetComponent<Room>().GetRoomType();
                 break;
             }
-            Debug.Log("level " + level);
-            Debug.Log("section " + section);
+            Debug.Log(report);
             manager.ReceiveCommand(report);
         }
     }
     
     private void GiveRoom(Room r) {
         int number = Random.Range(1,5);
-        Debug.Log(number);
         switch(number) {
             case 1:
                 r.AssignRoomType("combat");
@@ -241,6 +239,7 @@ public class MapManager : MonoBehaviour
     }
 
     private void InitializeButtons() {
+        //initializes the connection between the rooms and their buttons
         node13.onClick.AddListener(() => {clickedNode(1,3);});  //surely there's a better way to do this
         node22.onClick.AddListener(() => {clickedNode(2,2);});
         node24.onClick.AddListener(() => {clickedNode(2,4);});
@@ -257,7 +256,6 @@ public class MapManager : MonoBehaviour
         node75.onClick.AddListener(() => {clickedNode(7,5);});
         node82.onClick.AddListener(() => {clickedNode(8,2);});
         node84.onClick.AddListener(() => {clickedNode(8,4);});
-        node91.onClick.AddListener(() => {clickedNode(9,1);});
         node91.onClick.AddListener(() => {clickedNode(9,1);});
         node93.onClick.AddListener(() => {clickedNode(9,3);});
         node95.onClick.AddListener(() => {clickedNode(9,5);});

@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 /*
 This class manages gameflow. We go from state to state to connect each portion of the game to each other.
-Ideally, we should only need these four states, plus any cutscenes in the middle we need to play for lore purposes.
+Ideally, we should only need these eight states, plus any cutscenes in the middle we need to play for lore purposes.
 
 All UI is in the canvas.
 There are separate combat, map, event, and upgrade scripts that manage each event individually and report back to this script.
@@ -16,35 +16,101 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private enum GameState {
         Map,
         Combat,
+        Survival,
+        Miniboss,
+        Boss,
         Event,
+        Shop,
         Upgrade,
     }
 
     [SerializeField] private GameObject combatUI;
+    [SerializeField] private GameObject combat;
     [SerializeField] private GameObject mapUI;
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private GameObject mouseCursorUI;
     private GameState currentState;
     private GameState previousState;
-    void Start()
+    void Start() //default to the map when the game launches.
     {
         previousState = GameState.Map;
         currentState = GameState.Map;
-        UpdateState(currentState);
+        UpdateState();
     }
 
-    private void UpdateState(GameState state) {
-        switch(state) {
+    private void UpdateState() {
+        /*
+        Updates the game's state, aptly named. 
+        The last line before the break for each state change switches the previous state to the current state to reference for the next one after that.
+        */
+        
+        switch(currentState) {
+            //non map focused
             case GameState.Map:
-            break;
-
-            case GameState.Combat:
-            break;
-
-            case GameState.Event:
+            //do stuff
+            previousState = GameState.Map;
+            Debug.Log("map state");
             break;
 
             case GameState.Upgrade:
+            if (previousState == GameState.Combat || previousState == GameState.Survival) {
+                //give normal upgrades
+                Debug.Log("normal upgrade");
+            }
+            if (previousState == GameState.Miniboss || previousState == GameState.Boss) {
+                //give legendary upgrades
+                Debug.Log("legendary upgrade");
+            }
+            previousState = GameState.Upgrade;
+            break;
+
+            //map focused
+            case GameState.Combat:
+            if (previousState == GameState.Map) {
+                Debug.Log("map to combat");
+                //disable map stuff and go into combat
+            }
+            if (previousState == GameState.Event) {
+                //disable event stuff and go into combat
+                Debug.Log("event to combat");
+            }
+            previousState = GameState.Combat;
+            break;
+
+            case GameState.Survival:
+            if (previousState == GameState.Map) {
+                //disable map stuff and go into survival
+                Debug.Log("map to survival");
+            }
+            if (previousState == GameState.Event) {
+                //disable event stuff and go into survival
+                Debug.Log("event to survival");
+            }
+            previousState = GameState.Survival;
+            break;
+
+            case GameState.Event:
+            //do stuff
+            previousState = GameState.Event;
+            Debug.Log("event state");
+            break;
+
+            case GameState.Shop:
+            //do stuff
+            previousState = GameState.Shop;
+            Debug.Log("shop state");
+            break;
+
+            case GameState.Miniboss:
+            //do stuff
+            previousState = GameState.Miniboss;
+            Debug.Log("miniboss state");
+            break;
+
+            case GameState.Boss:
+            //do stuff
+            previousState = GameState.Boss;
+            Debug.Log("boss state");
             break;
         }
     }
@@ -53,31 +119,32 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         switch (name) {
             //non-map focused
             case "map":
-            Debug.Log("Map command received.");
+            currentState = GameState.Map;
             break;
             case "upgrade":
-            Debug.Log("Upgrade command received.");
+            currentState = GameState.Upgrade;
             break;
 
             //map focused
             case "combat":
-            Debug.Log("Combat command received.");
+            currentState = GameState.Combat;
             break;
             case "survival":
-            Debug.Log("Survival command received.");
+            currentState = GameState.Survival;
             break;
             case "event":
-            Debug.Log("Event command received.");
+            currentState = GameState.Event;
             break;
             case "shop":
-            Debug.Log("Shop command received.");
+            currentState = GameState.Shop;
             break;
             case "miniboss":
-            Debug.Log("Miniboss command received.");
+            currentState = GameState.Miniboss;
             break;
             case "boss":
-            Debug.Log("Event command received.");
+            currentState = GameState.Boss;
             break;
         }
+        UpdateState();
     }
 }

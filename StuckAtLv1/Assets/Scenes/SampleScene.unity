@@ -21172,7 +21172,7 @@ GameObject:
   - component: {fileID: 541258214}
   - component: {fileID: 541258215}
   m_Layer: 5
-  m_Name: Map UI
+  m_Name: Map Manager/UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22890,6 +22890,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a96e1172644dcda47a50b3e3968fa01a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &828058985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 828058986}
+  m_Layer: 0
+  m_Name: Combat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &828058986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828058985}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1093936402}
+  - {fileID: 1295905878}
+  - {fileID: 1138831526}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &888933803
 GameObject:
   m_ObjectHideFlags: 0
@@ -23519,6 +23553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatUI: {fileID: 1512036392}
+  combat: {fileID: 828058985}
   mapUI: {fileID: 541258212}
   upgradeUI: {fileID: 2027940636}
   mouseCursorUI: {fileID: 1863102721}
@@ -23976,7 +24011,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093936400}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23985,7 +24020,7 @@ Transform:
   - {fileID: 1276320526}
   - {fileID: 709875577}
   - {fileID: 404655336}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 828058986}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1093936403
 MonoBehaviour:
@@ -24270,12 +24305,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138831525}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 828058986}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1138831527
 MonoBehaviour:
@@ -25043,7 +25078,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295905877}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -25075,7 +25110,7 @@ Transform:
   - {fileID: 747372589}
   - {fileID: 1626170071}
   - {fileID: 1428776061}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 828058986}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1319169854
 PrefabInstance:
@@ -30155,7 +30190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2027940637}
   m_Layer: 5
-  m_Name: Upgrade UI
+  m_Name: Upgrade Manager/UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30530,10 +30565,8 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1672407291}
   - {fileID: 1437188170}
-  - {fileID: 1093936402}
+  - {fileID: 828058986}
   - {fileID: 888933805}
-  - {fileID: 1295905878}
-  - {fileID: 1138831526}
   - {fileID: 2035683323}
   - {fileID: 1066581307}
   - {fileID: 1781499667}
