@@ -59,6 +59,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         hp -= damage;
         anim.SetTrigger("Hit");
         if (hp < 1) {
+            FindAnyObjectByType<CombatManager>().EnemyKilled();
             Instantiate(particlePrefab, this.transform.position, this.transform.rotation);
             //Debug.Log(this.transform);
             Destroy(gameObject);

@@ -263,4 +263,12 @@ public class MapManager : MonoBehaviour
         node104.onClick.AddListener(() => {clickedNode(10,4);});
         node113.onClick.AddListener(() => {clickedNode(11,3);});
     }
+
+    public int GetWorld() {
+        return world;
+    }
+
+    public int GetLevel() {
+        return level;
+    }
 }
