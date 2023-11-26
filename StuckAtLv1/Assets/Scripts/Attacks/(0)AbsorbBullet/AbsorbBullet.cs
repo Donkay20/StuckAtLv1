@@ -39,7 +39,7 @@ public class AbsorbBullet : MonoBehaviour
         if (enemy != null) {
             Instantiate(spawnSiphon, transform.position, transform.rotation);
             switch (enemy.tag) {                                        //each enemy will have a unique tag which will identify which one the bullet is hitting. Alternatively, we can swap to their names if need be
-                case "Enemy":
+                case "Skeleton1":
                 enemy.TakeDamage(1);                                    //if a modifier increase skill damage, it would call back to the parent slot and acquire the modifier for calculation
                 GetComponentInParent<Slot>().AcquireSkill(1, 3);        //case-by-case; in the terms of this enemy it would return skill 1 with 3 uses.
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
@@ -48,21 +48,21 @@ public class AbsorbBullet : MonoBehaviour
                 
                 case "Golem1":
                 enemy.TakeDamage(1);
-                GetComponentInParent<Slot>().AcquireSkill(2, 3);
+                GetComponentInParent<Slot>().AcquireSkill(2, 3); //ID should be 4
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
                 Destroy(gameObject);
                 break;
 
                 case "Golem2":
                 enemy.TakeDamage(1);
-                GetComponentInParent<Slot>().AcquireSkill(3, 3);
+                GetComponentInParent<Slot>().AcquireSkill(3, 3); //ID should be 5
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
                 Destroy(gameObject);
                 break;
 
                 case "Golem3":
                 enemy.TakeDamage(1);
-                GetComponentInParent<Slot>().AcquireSkill(4, 5);
+                GetComponentInParent<Slot>().AcquireSkill(4, 5); //ID should be 6
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
                 Destroy(gameObject);
                 break;

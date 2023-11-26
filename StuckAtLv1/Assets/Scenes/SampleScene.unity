@@ -24585,6 +24585,8 @@ MonoBehaviour:
   - {fileID: 1249439463100937523, guid: 8879187ed6a01314f85ffb0f4dee69e5, type: 3}
   - {fileID: 3059118022218228874, guid: bdb3b8d40a5901a4fab38292f3f1d2ff, type: 3}
   - {fileID: 3537131524280992513, guid: e751ca34bfe115042b801b30bd27f3fe, type: 3}
+  - {fileID: 2534908092562792715, guid: d4bde4f4711eb0d4e933124676e593bc, type: 3}
+  - {fileID: 669714618770229522, guid: 68bfb92d544fef042a0211ef74e00bb5, type: 3}
   bulletTransform: {fileID: 947085473}
 --- !u!1 &995477025
 GameObject:
@@ -25571,6 +25573,8 @@ MonoBehaviour:
   enemy:
   - {fileID: 8563052029806526177, guid: 20f4264ba31af89499397792bdd40a56, type: 3}
   - {fileID: 7142025147150860068, guid: 7c50231af6365aa48bdf917990f03c63, type: 3}
+  - {fileID: 7142025147150860068, guid: 8ec56c64866dcf84d87f5e47894dbf24, type: 3}
+  - {fileID: 7142025147150860068, guid: 36afc3d3071a02e439569770f565f8dd, type: 3}
   spawnArea: {x: 13, y: 8}
   spawnTimer: 1.5
   player: {fileID: 1093936400}
@@ -26063,6 +26067,8 @@ MonoBehaviour:
   - {fileID: 1249439463100937523, guid: 8879187ed6a01314f85ffb0f4dee69e5, type: 3}
   - {fileID: 3059118022218228874, guid: bdb3b8d40a5901a4fab38292f3f1d2ff, type: 3}
   - {fileID: 3537131524280992513, guid: e751ca34bfe115042b801b30bd27f3fe, type: 3}
+  - {fileID: 2534908092562792715, guid: d4bde4f4711eb0d4e933124676e593bc, type: 3}
+  - {fileID: 669714618770229522, guid: 68bfb92d544fef042a0211ef74e00bb5, type: 3}
   bulletTransform: {fileID: 1237195274}
 --- !u!1 &1240598264
 GameObject:
