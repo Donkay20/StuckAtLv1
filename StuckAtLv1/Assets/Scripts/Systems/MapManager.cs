@@ -22,7 +22,7 @@ public class MapManager : MonoBehaviour
     private int world; private int level; private int section;
     private String report;
 
-    void Start()
+    void Awake()
     {
         world = 1;
         level = 0;
@@ -61,7 +61,7 @@ public class MapManager : MonoBehaviour
             case (2,4):
                 section++;
                 node22.interactable = false; node24.interactable = false;
-                report = node22.GetComponent<Room>().GetRoomType();
+                report = node24.GetComponent<Room>().GetRoomType();
                 break;
             case (3,1):
                 section--;
@@ -211,7 +211,6 @@ public class MapManager : MonoBehaviour
                 report = node113.GetComponent<Room>().GetRoomType();
                 break;
             }
-            Debug.Log(report);
             manager.ReceiveCommand(report);
         }
     }

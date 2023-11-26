@@ -48,22 +48,29 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             //non map focused
             case GameState.Map:
             //do stuff
-            if (previousState == GameState.Combat || previousState == GameState.Survival) {
+            if (previousState == GameState.Combat || previousState == GameState.Survival) { //Not sure if this is needed anymore?
                 combat.SetActive(false);
                 mapUI.SetActive(true); mouseCursorUI.SetActive(true);
             }
+            if (previousState == GameState.Upgrade) {
+                upgradeUI.SetActive(false);
+                mapUI.SetActive(true);
+            }
             previousState = GameState.Map;
-            Debug.Log("map state");
             break;
 
             case GameState.Upgrade:
             if (previousState == GameState.Combat || previousState == GameState.Survival) {
+                combat.SetActive(false); combatUI.SetActive(false);
+                upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().Setup("normal");
+                mouseCursorUI.SetActive(true);
                 //give normal upgrades
-                Debug.Log("normal upgrade");
             }
             if (previousState == GameState.Miniboss || previousState == GameState.Boss) {
+                combat.SetActive(false); combatUI.SetActive(false);
+                upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().Setup("legendary");
+                mouseCursorUI.SetActive(true);
                 //give legendary upgrades
-                Debug.Log("legendary upgrade");
             }
             previousState = GameState.Upgrade;
             break;
@@ -72,13 +79,12 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             case GameState.Combat:
             if (previousState == GameState.Map) {
                 mapUI.SetActive(false); mouseCursorUI.SetActive(false);
-                combat.SetActive(true);
+                combat.SetActive(true); combatUI.SetActive(true);
                 combat.GetComponent<CombatManager>().Setup("combat");
-                Debug.Log("map to combat");
                 //disable map stuff and go into combat
             }
             if (previousState == GameState.Event) {
-                //disable event stuff and go into combat
+                //disable event stuff and go into combat, TODO
                 Debug.Log("event to combat");
             }
             previousState = GameState.Combat;
@@ -87,38 +93,38 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             case GameState.Survival:
             if (previousState == GameState.Map) {
                 mapUI.SetActive(false); mouseCursorUI.SetActive(false);
-                combat.SetActive(true);
+                combat.SetActive(true); combatUI.SetActive(true);
                 combat.GetComponent<CombatManager>().Setup("survival");
                 //disable map stuff and go into survival
                 Debug.Log("map to survival");
             }
             if (previousState == GameState.Event) {
-                //disable event stuff and go into survival
+                //disable event stuff and go into survival, TODO
                 Debug.Log("event to survival");
             }
             previousState = GameState.Survival;
             break;
 
             case GameState.Event:
-            //do stuff
+            //TODO
             previousState = GameState.Event;
             Debug.Log("event state");
             break;
 
             case GameState.Shop:
-            //do stuff
+            //TODO
             previousState = GameState.Shop;
             Debug.Log("shop state");
             break;
 
             case GameState.Miniboss:
-            //do stuff
+            //TODO
             previousState = GameState.Miniboss;
             Debug.Log("miniboss state");
             break;
 
             case GameState.Boss:
-            //do stuff
+            //TODO
             previousState = GameState.Boss;
             Debug.Log("boss state");
             break;

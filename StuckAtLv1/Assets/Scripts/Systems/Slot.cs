@@ -108,18 +108,18 @@ public class Slot : MonoBehaviour
     /*
     List of upgrades (demo):
     Common: 
-    0. Damage +10%
-    1. Size +10%
+    0. Damage +20%
+    1. Size +20%
     2. Duration +20%
 
     Rare:
-    0. Damage +20%
-    1. Size +15%
-    2. Duration +30%
+    0. Damage +40%
+    1. Size +30%
+    2. Duration +40%
 
     Legendary:
-    0. Damage +30%
-    1. Size +20%
-    2. Duration +50%
+    0. Damage +60%
+    1. Size +40%
+    2. Duration +60%
     */
 }

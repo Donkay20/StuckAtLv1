@@ -56,6 +56,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     public void TakeDamage(int damage) {
+        Debug.Log("damage taken: " + damage);
         hp -= damage;
         anim.SetTrigger("Hit");
         if (hp < 1) {

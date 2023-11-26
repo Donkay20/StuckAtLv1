@@ -10,7 +10,7 @@ public class AoeCircle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("AOE Instantiated");
+        //Debug.Log("AOE Instantiated");
         anim = GetComponent<Animator>();
         anim.SetTrigger("Start");
     }
@@ -30,7 +30,7 @@ public class AoeCircle : MonoBehaviour
 
     private void Despawn()
     {
-        Debug.Log("Destory AOE");
+        //Debug.Log("Destory AOE");
         Destroy(gameObject);
     }
 }

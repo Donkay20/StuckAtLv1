@@ -33,7 +33,7 @@ public class CombatManager : MonoBehaviour
             case "combat":
             objective = "combat";
             spawner.enabled = true;
-            enemiesToKill = mapProgress.GetWorld()*(20 + (2 * mapProgress.GetLevel()));
+            enemiesToKill = mapProgress.GetWorld()*(2 + (20 * mapProgress.GetLevel())); //orig 20
             uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
             StartCoroutine(CombatTracker());
             break;
@@ -41,7 +41,7 @@ public class CombatManager : MonoBehaviour
             case "survival":
             objective = "survival";
             spawner.enabled = true;
-            timeLeft = mapProgress.GetWorld()*(30 + mapProgress.GetLevel());
+            timeLeft = mapProgress.GetWorld()*(30 + mapProgress.GetLevel()); //orig 30
             uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
             StartCoroutine(SurvivalTimer());
             break;
@@ -76,7 +76,6 @@ public class CombatManager : MonoBehaviour
             straggler.TakeDamage(999999999);
         }
         objective = "";
-        notify.ReceiveCommand("map");
-        //normally go back to the upgrade screen, but go to map just for testing
+        notify.ReceiveCommand("upgrade");
     }
 }
