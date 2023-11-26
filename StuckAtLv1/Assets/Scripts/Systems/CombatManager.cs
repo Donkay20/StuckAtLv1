@@ -19,17 +19,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private MapManager mapProgress;
     [SerializeField]private GameManager notify;
     [SerializeField] private EnemyManager spawner;
-    private bool active;
-
-    void Update()
-    {
-        //for now, handles checking when combat is done in here. there's prob a better way to do this
-        if (objective == "combat" && active) {
-            if (enemiesToKill <= 0) {
-                Finish();
-            }
-        }
-    }
 
     public void Setup(string format) {
         /*
@@ -43,15 +32,14 @@ public class CombatManager : MonoBehaviour
         switch (format) {
             case "combat":
             objective = "combat";
-            active = true;
             spawner.enabled = true;
             enemiesToKill = mapProgress.GetWorld()*(20 + (2 * mapProgress.GetLevel()));
             uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
+            StartCoroutine(CombatTracker());
             break;
 
             case "survival":
             objective = "survival";
-            active = true;
             spawner.enabled = true;
             timeLeft = mapProgress.GetWorld()*(30 + mapProgress.GetLevel());
             uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
@@ -60,18 +48,23 @@ public class CombatManager : MonoBehaviour
         }
     }
 
-    public void EnemyKilled() {
+    public void EnemyKilled() { //for combat-type encounter use only
         if(objective == "combat") {
             enemiesToKill--; uIObjectiveNumber.text = enemiesToKill.ToString();
         }
     }
 
-    private IEnumerator SurvivalTimer() {
-        //handles timer countdown for survival format
+    private IEnumerator SurvivalTimer() { //handles timer countdown for survival-type encounter format
         while (timeLeft > 0) {
             yield return new WaitForSeconds(1);
             timeLeft--; uIObjectiveNumber.text = timeLeft.ToString();
         }
+        Finish();
+    }
+
+    private IEnumerator CombatTracker() {
+        //handles tracker for combat format
+        yield return new WaitUntil(() => enemiesToKill <= 0);
         Finish();
     }
 
@@ -82,8 +75,6 @@ public class CombatManager : MonoBehaviour
         foreach (Enemy straggler in remainingEnemies) {
             straggler.TakeDamage(999999999);
         }
-
-        active = false;
         objective = "";
         notify.ReceiveCommand("map");
         //normally go back to the upgrade screen, but go to map just for testing

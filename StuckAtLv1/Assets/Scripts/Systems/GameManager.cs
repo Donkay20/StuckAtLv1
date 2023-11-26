@@ -50,7 +50,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             //do stuff
             if (previousState == GameState.Combat || previousState == GameState.Survival) {
                 combat.SetActive(false);
-                mapUI.SetActive(true);
+                mapUI.SetActive(true); mouseCursorUI.SetActive(true);
             }
             previousState = GameState.Map;
             Debug.Log("map state");
@@ -71,7 +71,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             //map focused
             case GameState.Combat:
             if (previousState == GameState.Map) {
-                mapUI.SetActive(false);
+                mapUI.SetActive(false); mouseCursorUI.SetActive(false);
                 combat.SetActive(true);
                 combat.GetComponent<CombatManager>().Setup("combat");
                 Debug.Log("map to combat");
@@ -86,7 +86,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
             case GameState.Survival:
             if (previousState == GameState.Map) {
-                mapUI.SetActive(false);
+                mapUI.SetActive(false); mouseCursorUI.SetActive(false);
                 combat.SetActive(true);
                 combat.GetComponent<CombatManager>().Setup("survival");
                 //disable map stuff and go into survival

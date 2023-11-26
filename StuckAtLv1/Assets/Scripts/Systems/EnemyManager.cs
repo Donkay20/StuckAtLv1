@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] GameObject enemy;
+    [SerializeField] GameObject[] enemy;
     [SerializeField] Vector2 spawnArea;
     [SerializeField] float spawnTimer;
     [SerializeField] GameObject player;
@@ -21,9 +22,10 @@ public class EnemyManager : MonoBehaviour
     }
 
     private void SpawnEnemy() {
+        int number = Random.Range(0, enemy.Length);
         Vector3 position = GenerateRandomPosition();
         position += player.transform.position;
-        GameObject newEnemy = Instantiate(enemy);
+        GameObject newEnemy = Instantiate(enemy[number]);
         newEnemy.transform.position = position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
         newEnemy.transform.parent = transform;

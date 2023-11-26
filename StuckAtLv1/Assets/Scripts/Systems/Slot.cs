@@ -31,6 +31,9 @@ public class Slot : MonoBehaviour
     private bool containsSkill = false;
     private bool absorbBulletAvailable = true;
     private int skillID = 0, skillUses = 0;
+    private int[] commonUpgrades = new int[13];
+    private int[] rareUpgrades = new int[13];
+    private int[] legendaryUpgrades = new int[13];
     [SerializeField] private Image skillImage;                          //display for the skill image on the UI
     [SerializeField] private TextMeshProUGUI uIText;                    //display for the skill usages on the UI
     [SerializeField] private GameObject bullet;                         //exclusively for the absorption bullet
@@ -73,4 +76,50 @@ public class Slot : MonoBehaviour
             containsSkill = true;
         }
     }
+
+    public void ApplySlotUpgrade(string rarity, int upgrade) {
+        switch(rarity) {
+            case "common":
+                commonUpgrades[upgrade]++;
+                Debug.Log("common upgrade applied");
+                break;
+            case "rare":
+                rareUpgrades[upgrade]++;
+                Debug.Log("rare upgrade applied");
+                break;
+            case "legendary":
+                legendaryUpgrades[upgrade]++;
+                Debug.Log("legendary upgrade applied");
+                break;
+        }
+    }
+
+    public int GetCommonUpgrade(int upgrade) {
+        return commonUpgrades[upgrade];
+    }
+
+    public int GetRareUpgrade(int upgrade) {
+        return rareUpgrades[upgrade];
+    }
+
+    public int GetLegendaryUpgrade(int upgrade) {
+        return legendaryUpgrades[upgrade];
+    }
+    /*
+    List of upgrades (demo):
+    Common: 
+    0. Damage +10%
+    1. Size +10%
+    2. Duration +20%
+
+    Rare:
+    0. Damage +20%
+    1. Size +15%
+    2. Duration +30%
+
+    Legendary:
+    0. Damage +30%
+    1. Size +20%
+    2. Duration +50%
+    */
 }
