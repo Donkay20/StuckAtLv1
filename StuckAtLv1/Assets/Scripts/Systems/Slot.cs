@@ -59,8 +59,10 @@ public class Slot : MonoBehaviour
             Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform); //launches the skill, positioned from the player. more checks will need to be added as the player gets more types of skills.
             //-beginning of slot effects-
             //Apply overheal on cast (Upgrade 3)
-            character.Heal((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3]));
-            Debug.Log("heal applied:" + ((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3])));
+            if (containsSkill) {
+                character.Heal((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3]));
+            }
+            Debug.Log("Heal applied: " + ((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3])));
             //-end of slot effects-
             if (skillUses > 0) {
                 skillUses--;
@@ -87,27 +89,15 @@ public class Slot : MonoBehaviour
         switch(rarity) {
             case "common":
                 commonUpgrades[upgrade]++;
-                Debug.Log("common upgrade applied." );
-                Debug.Log("common damage: " + commonUpgrades[0]);
-                Debug.Log("common size: " + commonUpgrades[1]);
-                Debug.Log("common duration: " + commonUpgrades[2]);
-                Debug.Log("common overheal: " + commonUpgrades[3]);
+                Debug.Log("Common upgrade applied." );
                 break;
             case "rare":
                 rareUpgrades[upgrade]++;
-                Debug.Log("rare upgrade applied");
-                Debug.Log("rare damage: " + rareUpgrades[0]);
-                Debug.Log("rare size: " + rareUpgrades[1]);
-                Debug.Log("rare duration: " + rareUpgrades[2]);
-                Debug.Log("rare overheal: " + rareUpgrades[3]);
+                Debug.Log("Rare upgrade applied.");;
                 break;
             case "legendary":
                 legendaryUpgrades[upgrade]++;
-                Debug.Log("legendary upgrade applied");
-                Debug.Log("legendary damage: " + legendaryUpgrades[0]);
-                Debug.Log("legendary size: " + legendaryUpgrades[1]);
-                Debug.Log("legendary duration: " + legendaryUpgrades[2]);
-                Debug.Log("legendary overheal: " + legendaryUpgrades[3]);
+                Debug.Log("Legendary upgrade applied.");
                 break;
         }
     }

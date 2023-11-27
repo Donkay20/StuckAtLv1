@@ -33,7 +33,7 @@ public class SlotManager : MonoBehaviour
         TurnOffSlots();
     }
 
-    //Select Slot Player wants to sue
+    //Select Slot Player wants to use
     private void ToggleSlot()
     {
         if (Input.GetKeyDown(slotKey1)) {

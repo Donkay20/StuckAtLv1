@@ -12,6 +12,7 @@ public class CombatManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI uIObjective;
     [SerializeField] private TextMeshProUGUI uIObjectiveNumber;
+    [SerializeField] private Character character;
     private int enemiesToKill;
     private int timeLeft;
     private string objective;
@@ -46,6 +47,7 @@ public class CombatManager : MonoBehaviour
             StartCoroutine(SurvivalTimer());
             break;
         }
+        character.Heal(0);
     }
 
     public void EnemyKilled() { //for combat-type encounter use only
@@ -76,6 +78,7 @@ public class CombatManager : MonoBehaviour
             straggler.TakeDamage(999999999);
         }
         objective = "";
+        character.Interrupt();
         notify.ReceiveCommand("upgrade");
     }
 }

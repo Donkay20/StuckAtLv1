@@ -15,8 +15,8 @@ todo:
     public readonly int maxHp = 10;
     public int currentHp = 10;
     private readonly float iframe = 0.3f;
-    private bool invincible;
-    private bool healthDraining;
+    private bool invincible; //iframe check
+    private bool healthDraining; //overheal drain check
     [SerializeField] Animator playerAnim;
     [SerializeField] Animator healthBarAnim;
     [SerializeField] StatusBar hpBar;
@@ -51,16 +51,22 @@ todo:
                 healthDraining = false;
                 yield break;
             } else {
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(1); //if there's a buff/debuff that would increase/reduce drain time, add it here.
             }
         }
+    }
+
+    public void Interrupt() { //needed when we stop combat and move to the next scene
+        StopAllCoroutines();
+        invincible = false;
+        healthDraining = false;
     }
 
     public void Heal(int amount) {  //needs to be changed to account for overhealing / temp HP
         if (currentHp <= 0) {
             return;
         }
-        Debug.Log("healed. health: " + currentHp);
+        Debug.Log("Healed " + amount + " HP. Health: " + currentHp);
         currentHp += amount;
         healthText.text = currentHp.ToString();
 
