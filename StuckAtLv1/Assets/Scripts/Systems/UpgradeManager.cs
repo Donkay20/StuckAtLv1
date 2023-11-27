@@ -12,8 +12,8 @@ public class UpgradeManager : MonoBehaviour
     private int[] commonUpgradePool = new int[13];
     private int[] rareUpgradePool = new int[13];
     private int[] legendaryUpgradePool = new int[13];
-    private int[] upgradeRarities = new int[3];         //rarity storage for the 3 upgrades that are available. (rarity: 0-common, 1-rare, 2-legendary)
-    private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 3 upgrades that are available. (goes from 0-2 now but should be updated for 0-12 later)
+    private int[] upgradeRarities = new int[3];         //rarity storage for the 4 upgrades that are available. (rarity: 0-common, 1-rare, 2-legendary)
+    private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 4 upgrades that are available. (goes from 0-2 now but should be updated for 0-12 later)
     //private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use
     private int upgradePositionSelected, slotSelected;                              //determined which one that is clicked on in the game menu (goes from 0-2 for upgradeselected and 0-4 for slot selected)
     [SerializeField] private Slot[] slots = new Slot[2];                    //UPDATE TO 5 LATER ON
@@ -31,12 +31,12 @@ public class UpgradeManager : MonoBehaviour
     [Space]
     //the following are to be held for storage
     [SerializeField] private Sprite[] upgradeRarityImage = new Sprite[3];   //background image for different rarities
-    [SerializeField] private Sprite[] commonIconPool = new Sprite[3];       //image associated w/ upgrades(UPDATE TO 13 LATER ON)
-    [SerializeField] private Sprite[] rareIconPool = new Sprite[3];         //(UPDATE TO 13 LATER ON)
-    [SerializeField] private Sprite[] legendaryIconPool = new Sprite[3];    //(UPDATE TO 13 LATER ON)
-    [SerializeField] private string[] commonUpgradeText = new string[3];    //text that describes what the upgrade does(UPDATE TO 13 LATER ON)
-    [SerializeField] private string[] rareUpgradeText = new string[3];      //(UPDATE TO 13 LATER ON)
-    [SerializeField] private string[] legendaryUpgradeText = new string[3]; //(UPDATE TO 13 LATER ON)
+    [SerializeField] private Sprite[] commonIconPool = new Sprite[4];       //image associated w/ upgrades(UPDATE TO 13 LATER ON)
+    [SerializeField] private Sprite[] rareIconPool = new Sprite[4];         //(UPDATE TO 13 LATER ON)
+    [SerializeField] private Sprite[] legendaryIconPool = new Sprite[4];    //(UPDATE TO 13 LATER ON)
+    [SerializeField] private string[] commonUpgradeText = new string[4];    //text that describes what the upgrade does(UPDATE TO 13 LATER ON)
+    [SerializeField] private string[] rareUpgradeText = new string[4];      //(UPDATE TO 13 LATER ON)
+    [SerializeField] private string[] legendaryUpgradeText = new string[4]; //(UPDATE TO 13 LATER ON)
     [Space]
     [SerializeField] private GameManager notify;
 
@@ -87,11 +87,11 @@ public class UpgradeManager : MonoBehaviour
         }
 
         for (int i = 0; i < 3; i++) {       //checks to see if the specific upgrade is empty. if so, reroll until you get one that isn't
-            int roll = Random.Range(0,3);   //for now, only 3 possible upgrades. (UPDATE TO 13 LATER ON)
+            int roll = Random.Range(0,4);   //for now, only 4 possible upgrades. (UPDATE TO 13 LATER ON)
             switch (upgradeRarities[i]) {
                 case 0: //common
                     while (commonUpgradePool[roll] == 0) {
-                        roll = Random.Range(0,3);   //UPDATE TO 13 LATER ON
+                        roll = Random.Range(0,4);   //UPDATE TO 13 LATER ON
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = commonIconPool[roll];
@@ -99,7 +99,7 @@ public class UpgradeManager : MonoBehaviour
                     break;
                 case 1: //rare
                     while (rareUpgradePool[roll] == 0) {
-                        roll = Random.Range(0,3);   //UPDATE TO 13 LATER ON
+                        roll = Random.Range(0,4);   //UPDATE TO 13 LATER ON
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = rareIconPool[roll];
@@ -107,7 +107,7 @@ public class UpgradeManager : MonoBehaviour
                     break;
                 case 2: //legendary
                     while (legendaryUpgradePool[roll] == 0) {
-                        roll = Random.Range(0,3);   //UPDATE TO 13 LATER ON
+                        roll = Random.Range(0,4);   //UPDATE TO 13 LATER ON
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = legendaryIconPool[roll];
@@ -157,7 +157,7 @@ public class UpgradeManager : MonoBehaviour
     public void Finish() { //Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
         /*
         What's happening is that it's grabbing the rarity from the rarity assigned to each upgrade shown, from upgradeRarities[0-2]. Then, populates an appropriate string based on the rarity.
-        It then grabs the upgrade ID assigned to each upgrade shown, from upgradeSelection[0-2 (UPDATE TO 0-12 LATER)].
+        It then grabs the upgrade ID assigned to each upgrade shown, from upgradeSelection[0-3 (UPDATE TO 0-12 LATER)].
         Then, using the slot selected from slotSelected, it calls the respective slot's ApplySlotUpgrade() and lets it assign itself the upgrade using the rarity strng and upgrade selected previously.
 
         Because of this, the slot upgrade pool must be universal throughout the game.
@@ -209,15 +209,18 @@ public class UpgradeManager : MonoBehaviour
     0. Damage +20%
     1. Size +20%
     2. Duration +20%
+    3. Overheal +5
 
     Rare:
     0. Damage +40%
     1. Size +30%
     2. Duration +40%
+    3. Overheal +7
 
     Legendary:
     0. Damage +60%
     1. Size +40%
     2. Duration +60%
+    3. Overheal +10
     */
 }

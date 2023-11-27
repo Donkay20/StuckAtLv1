@@ -34,6 +34,7 @@ public class Slot : MonoBehaviour
     private int[] commonUpgrades = new int[13];
     private int[] rareUpgrades = new int[13];
     private int[] legendaryUpgrades = new int[13];
+    [SerializeField] private Character character;
     [SerializeField] private Image skillImage;                          //display for the skill image on the UI
     [SerializeField] private TextMeshProUGUI uIText;                    //display for the skill usages on the UI
     [SerializeField] private GameObject bullet;                         //exclusively for the absorption bullet
@@ -56,6 +57,11 @@ public class Slot : MonoBehaviour
             this.absorbBulletAvailable = false;                                                     //the absoption bullet class will set this value back to true when it dissipates
         } else {
             Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform); //launches the skill, positioned from the player. more checks will need to be added as the player gets more types of skills.
+            //-beginning of slot effects-
+            //Apply overheal on cast (Upgrade 3)
+            character.Heal((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3]));
+            Debug.Log("heal applied:" + ((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3])));
+            //-end of slot effects-
             if (skillUses > 0) {
                 skillUses--;
             }
@@ -81,15 +87,27 @@ public class Slot : MonoBehaviour
         switch(rarity) {
             case "common":
                 commonUpgrades[upgrade]++;
-                Debug.Log("common upgrade applied");
+                Debug.Log("common upgrade applied." );
+                Debug.Log("common damage: " + commonUpgrades[0]);
+                Debug.Log("common size: " + commonUpgrades[1]);
+                Debug.Log("common duration: " + commonUpgrades[2]);
+                Debug.Log("common overheal: " + commonUpgrades[3]);
                 break;
             case "rare":
                 rareUpgrades[upgrade]++;
                 Debug.Log("rare upgrade applied");
+                Debug.Log("rare damage: " + rareUpgrades[0]);
+                Debug.Log("rare size: " + rareUpgrades[1]);
+                Debug.Log("rare duration: " + rareUpgrades[2]);
+                Debug.Log("rare overheal: " + rareUpgrades[3]);
                 break;
             case "legendary":
                 legendaryUpgrades[upgrade]++;
                 Debug.Log("legendary upgrade applied");
+                Debug.Log("legendary damage: " + legendaryUpgrades[0]);
+                Debug.Log("legendary size: " + legendaryUpgrades[1]);
+                Debug.Log("legendary duration: " + legendaryUpgrades[2]);
+                Debug.Log("legendary overheal: " + legendaryUpgrades[3]);
                 break;
         }
     }
@@ -105,21 +123,25 @@ public class Slot : MonoBehaviour
     public int GetLegendaryUpgrade(int upgrade) {
         return legendaryUpgrades[upgrade];
     }
+
     /*
     List of upgrades (demo):
     Common: 
     0. Damage +20%
     1. Size +20%
     2. Duration +20%
+    3. Overheal +5
 
     Rare:
     0. Damage +40%
     1. Size +30%
     2. Duration +40%
+    3. Overheal +7
 
     Legendary:
     0. Damage +60%
     1. Size +40%
     2. Duration +60%
+    3. Overheal +10
     */
 }

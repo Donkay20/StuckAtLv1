@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -12,10 +13,11 @@ todo:
 > implement temp hp
 */
 {
-    public int maxHp = 10;
+    public readonly int maxHp = 10;
     public int currentHp = 10;
     private readonly float iframe = 0.3f;
     private bool invincible;
+    private bool healthDraining;
     [SerializeField] Animator playerAnim;
     [SerializeField] Animator healthBarAnim;
     [SerializeField] StatusBar hpBar;
@@ -42,13 +44,29 @@ todo:
         invincible = false;
     }
 
+    IEnumerator DrainHealth() {
+        healthDraining = true;
+        while (currentHp > maxHp) {
+            currentHp--; healthText.text = currentHp.ToString();
+            if (currentHp <= maxHp) {
+                healthDraining = false;
+                yield break;
+            } else {
+                yield return new WaitForSeconds(1);
+            }
+        }
+    }
+
     public void Heal(int amount) {  //needs to be changed to account for overhealing / temp HP
         if (currentHp <= 0) {
             return;
         }
+        Debug.Log("healed. health: " + currentHp);
         currentHp += amount;
-        if (currentHp > maxHp) {
-            currentHp = maxHp;
+        healthText.text = currentHp.ToString();
+
+        if (currentHp > maxHp && !healthDraining) {
+            StartCoroutine(DrainHealth());
         }
     }
 }

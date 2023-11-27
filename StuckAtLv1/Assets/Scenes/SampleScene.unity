@@ -291,7 +291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -271.97, y: 139.5}
+  m_AnchoredPosition: {x: -262.13, y: 139.5}
   m_SizeDelta: {x: 48.7059, y: 57.8087}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &74530383
@@ -20728,7 +20728,7 @@ Transform:
   m_GameObject: {fileID: 341985906}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.10070507, y: 0.22155046, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23997,7 +23997,7 @@ Transform:
   m_GameObject: {fileID: 888933803}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.7668858, y: 2.929911, z: -0.017337848}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24610,6 +24610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb296a2ec5073bf41bf77cd52aaba59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 1093936406}
   skillImage: {fileID: 930586336}
   uIText: {fileID: 177397139}
   bullet: {fileID: 8787017940465851706, guid: 5d659b5f0fc67e941859f49cee1d9ce7, type: 3}
@@ -25402,7 +25403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e93ce1b6b3bd3d24da3487669fbca572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10
   currentHp: 10
   playerAnim: {fileID: 1093936407}
   healthBarAnim: {fileID: 1865911234}
@@ -25652,8 +25652,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140305368}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.10070507, y: -0.22155046, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26141,6 +26141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb296a2ec5073bf41bf77cd52aaba59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 1093936406}
   skillImage: {fileID: 772313737}
   uIText: {fileID: 762053885}
   bullet: {fileID: 8787017940465851706, guid: 5d659b5f0fc67e941859f49cee1d9ce7, type: 3}
@@ -29354,7 +29355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1512036393
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31763,7 +31764,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -281.3, y: 152.2}
+  m_AnchoredPosition: {x: -272, y: 152.2}
   m_SizeDelta: {x: 2.0053, y: 39.3665}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1933423400
@@ -32126,26 +32127,32 @@ MonoBehaviour:
   - {fileID: 21300000, guid: da4d3b30919c1f94988979465ca7fabe, type: 3}
   - {fileID: 21300000, guid: 56bfcece331a8684abcd4fe90a3f72ea, type: 3}
   - {fileID: 21300000, guid: b9429cbbaf9f1694a9385988787bf2c2, type: 3}
+  - {fileID: 21300000, guid: 767309ff103607649a366a7c82428461, type: 3}
   rareIconPool:
   - {fileID: 21300000, guid: da4d3b30919c1f94988979465ca7fabe, type: 3}
   - {fileID: 21300000, guid: 56bfcece331a8684abcd4fe90a3f72ea, type: 3}
   - {fileID: 21300000, guid: b9429cbbaf9f1694a9385988787bf2c2, type: 3}
+  - {fileID: 21300000, guid: 767309ff103607649a366a7c82428461, type: 3}
   legendaryIconPool:
   - {fileID: 21300000, guid: da4d3b30919c1f94988979465ca7fabe, type: 3}
   - {fileID: 21300000, guid: 56bfcece331a8684abcd4fe90a3f72ea, type: 3}
   - {fileID: 21300000, guid: b9429cbbaf9f1694a9385988787bf2c2, type: 3}
+  - {fileID: 21300000, guid: 767309ff103607649a366a7c82428461, type: 3}
   commonUpgradeText:
   - Damage +10%
   - Size +10%
   - Duration +20%
+  - Overheal +5
   rareUpgradeText:
   - Damage +20%
   - Size +15%
   - Duration +30%
+  - Overheal +7
   legendaryUpgradeText:
   - Damage +30%
   - Size +20%
   - Duration +50%
+  - Overheal +10
   notify: {fileID: 995477027}
 --- !u!1 &2035683321
 GameObject:
@@ -32708,8 +32715,8 @@ SceneRoots:
   - {fileID: 1672407291}
   - {fileID: 1437188170}
   - {fileID: 828058986}
+  - {fileID: 341985907}
   - {fileID: 888933805}
   - {fileID: 2035683323}
   - {fileID: 1066581307}
   - {fileID: 1781499667}
-  - {fileID: 341985907}
