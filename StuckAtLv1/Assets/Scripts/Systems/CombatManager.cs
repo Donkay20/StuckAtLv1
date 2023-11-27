@@ -33,7 +33,7 @@ public class CombatManager : MonoBehaviour
             case "combat":
             objective = "combat";
             spawner.enabled = true;
-            enemiesToKill = mapProgress.GetWorld()*(2 + (20 * mapProgress.GetLevel())); //orig 20
+            enemiesToKill = mapProgress.GetWorld()*(20 + (2 * mapProgress.GetLevel())); //orig 20
             uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
             StartCoroutine(CombatTracker());
             break;

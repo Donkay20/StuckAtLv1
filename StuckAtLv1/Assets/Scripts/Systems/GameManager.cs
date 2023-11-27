@@ -29,6 +29,8 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     [SerializeField] private GameObject mapUI;
     [SerializeField] private GameObject upgradeUI;
     [SerializeField] private GameObject mouseCursorUI;
+    [SerializeField] private GameObject eventUI;
+    [SerializeField] private GameObject shopUI;
     private GameState currentState;
     private GameState previousState;
     void Start() //default to the map when the game launches.
@@ -54,6 +56,14 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             }
             if (previousState == GameState.Upgrade) {
                 upgradeUI.SetActive(false);
+                mapUI.SetActive(true);
+            }
+            if (previousState == GameState.Event) {
+                eventUI.SetActive(false);
+                mapUI.SetActive(true);
+            }
+            if (previousState == GameState.Shop) {
+                shopUI.SetActive(false);
                 mapUI.SetActive(true);
             }
             previousState = GameState.Map;
@@ -106,13 +116,15 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             break;
 
             case GameState.Event:
-            //TODO
+            eventUI.SetActive(true);
+            mapUI.SetActive(false);
             previousState = GameState.Event;
             Debug.Log("event state");
             break;
 
             case GameState.Shop:
-            //TODO
+            shopUI.SetActive(true);
+            mapUI.SetActive(false);
             previousState = GameState.Shop;
             Debug.Log("shop state");
             break;

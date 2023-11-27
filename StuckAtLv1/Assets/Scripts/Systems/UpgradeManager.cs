@@ -14,7 +14,7 @@ public class UpgradeManager : MonoBehaviour
     private int[] legendaryUpgradePool = new int[13];
     private int[] upgradeRarities = new int[3];         //rarity storage for the 3 upgrades that are available. (rarity: 0-common, 1-rare, 2-legendary)
     private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 3 upgrades that are available. (goes from 0-2 now but should be updated for 0-12 later)
-    private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use
+    //private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use
     private int upgradePositionSelected, slotSelected;                              //determined which one that is clicked on in the game menu (goes from 0-2 for upgradeselected and 0-4 for slot selected)
     [SerializeField] private Slot[] slots = new Slot[2];                    //UPDATE TO 5 LATER ON
     //in-game buttons
@@ -49,10 +49,10 @@ public class UpgradeManager : MonoBehaviour
             rareUpgradePool[i] = 3;
             legendaryUpgradePool[i] = 1;
         }
-        commonUpgradesAvailable = true;
-        rareUpgradesAvailable = true;
-        legendaryUpgradeAvailable = true;
-        allUpgradesTaken = false;
+        //commonUpgradesAvailable = true;
+        //rareUpgradesAvailable = true;
+        //legendaryUpgradeAvailable = true;
+        //allUpgradesTaken = false;
 
         upgradePositionSelected = -1;
         slotSelected = -1;
