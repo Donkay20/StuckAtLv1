@@ -29,6 +29,10 @@ todo:
             invincible = true;
             currentHp -= damage; 
             healthText.text = currentHp.ToString();
+            if (currentHp <= maxHp) {
+                healthText.color = new Color32(255, 0, 0, 255);
+                healthDraining = false;
+            }
             StartCoroutine(InvincibilityFrame());
         }
         
@@ -48,6 +52,7 @@ todo:
         while (currentHp > maxHp) {
             currentHp--; healthText.text = currentHp.ToString();
             if (currentHp <= maxHp) {
+                healthText.color = new Color32(255, 0, 0, 255);
                 healthDraining = false;
                 yield break;
             } else {
@@ -71,6 +76,7 @@ todo:
         healthText.text = currentHp.ToString();
 
         if (currentHp > maxHp && !healthDraining) {
+            healthText.color = new Color32(166, 254, 0, 255);
             StartCoroutine(DrainHealth());
         }
     }
