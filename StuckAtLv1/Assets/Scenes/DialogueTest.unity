@@ -295,7 +295,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 250}
+  m_SizeDelta: {x: 1600, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &200317475
 MonoBehaviour:
@@ -497,8 +497,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -600, y: 205}
-  m_SizeDelta: {x: -1200, y: -250}
+  m_AnchoredPosition: {x: -600, y: 265}
+  m_SizeDelta: {x: -1200, y: -370}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1287203379
 MonoBehaviour:
@@ -575,8 +575,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: -200, y: -600}
+  m_AnchoredPosition: {x: 0, y: -275}
+  m_SizeDelta: {x: -200, y: -650}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1600156680
 MonoBehaviour:
@@ -629,7 +629,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineText: {fileID: 200317475}
+  nameText: {fileID: 1811491640}
   textSpeed: 0
+  dialogue: {fileID: 1684328872}
+--- !u!1 &1684328871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1684328873}
+  - component: {fileID: 1684328872}
+  m_Layer: 0
+  m_Name: DialogueLines
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1684328872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684328871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1830239f00214749aec4812223d3c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  names:
+  - Jamp
+  - Tiffany
+  - Jamp
+  - Tiffany
+  - Jamp
+  - Tiffany
+  - Jamp
+  sentences:
+  - Good day Mother! To what do I owe the pleasure?
+  - "Jamp\u2026I am so sorry to say, but as of right now, I am disowning you. Please
+    pack your things and leave by tonight."
+  - W-what?!
+  - "We both knew this day was coming, your powers haven\u2019t developed at all
+    since you were 5. That is unacceptable for an heir apparent."
+  - "While it's true I\u2019ve been lacking, is that really something to DISOWN your
+    son over? Please reconsider!"
+  - "I\u2019m sorry, but that\u2019s just how it is, I need a strong heir. Goodbye
+    Jamp."
+  - NOOOOOOOO! Curses!! Where will I go now?!?!?!
+--- !u!4 &1684328873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684328871}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 456.97034, y: 292.1927, z: 1.9398727}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1811491638
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,3 +939,4 @@ SceneRoots:
   - {fileID: 10896064}
   - {fileID: 1829980188}
   - {fileID: 762265351}
+  - {fileID: 1684328873}
