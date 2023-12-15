@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ae85e3d3b5e4242bfdf3abb38e7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 2
   hp: 5
   damage: 2
   particlePrefab: {fileID: 1210264596843239824, guid: 5a411476ff72944458cd122769dcdca7, type: 3}
