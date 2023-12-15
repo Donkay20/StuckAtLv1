@@ -25610,6 +25610,7 @@ MonoBehaviour:
   - {fileID: 8563052029806526177, guid: 20f4264ba31af89499397792bdd40a56, type: 3}
   - {fileID: 7142025147150860068, guid: 7c50231af6365aa48bdf917990f03c63, type: 3}
   - {fileID: 7142025147150860068, guid: 36afc3d3071a02e439569770f565f8dd, type: 3}
+  - {fileID: 6801966897594869061, guid: 2e4fed7256052154eb15e7e1ee43c5de, type: 3}
   spawnArea: {x: 13, y: 8}
   spawnTimer: 1.5
   player: {fileID: 1093936400}
