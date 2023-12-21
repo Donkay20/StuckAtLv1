@@ -34,7 +34,7 @@ public class CombatManager : MonoBehaviour
             case "combat":
             objective = "combat";
             spawner.enabled = true;
-            enemiesToKill = mapProgress.GetWorld()*(10 + (2 * mapProgress.GetLevel())); //orig 10
+            enemiesToKill = mapProgress.GetWorld()*(1 + (2 * mapProgress.GetLevel())); //orig 10
             uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
             StartCoroutine(CombatTracker());
             break;
@@ -42,7 +42,7 @@ public class CombatManager : MonoBehaviour
             case "survival":
             objective = "survival";
             spawner.enabled = true;
-            timeLeft = mapProgress.GetWorld()*(20 + mapProgress.GetLevel()); //orig 20
+            timeLeft = mapProgress.GetWorld()*(2 + mapProgress.GetLevel()); //orig 20
             uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
             StartCoroutine(SurvivalTimer());
             break;
