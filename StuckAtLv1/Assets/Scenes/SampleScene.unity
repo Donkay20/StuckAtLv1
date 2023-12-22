@@ -26990,7 +26990,7 @@ MonoBehaviour:
   eventImage: {fileID: -1115187847, guid: 99066a63d5bbc9a459ee9b2a2c362c83, type: 3}
   shopImage: {fileID: -1418475699, guid: 99066a63d5bbc9a459ee9b2a2c362c83, type: 3}
   miniBossImage: {fileID: 1085190325, guid: 99066a63d5bbc9a459ee9b2a2c362c83, type: 3}
-  bossImage: {fileID: 1085190325, guid: 99066a63d5bbc9a459ee9b2a2c362c83, type: 3}
+  bossImage: {fileID: 21300000, guid: 2d88a8b497db81544b8965df24201b7b, type: 3}
   manager: {fileID: 995477027}
 --- !u!225 &541258215
 CanvasGroup:
@@ -28818,7 +28818,7 @@ RectTransform:
   m_GameObject: {fileID: 744210885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1761163484}
@@ -29503,7 +29503,7 @@ RectTransform:
   m_GameObject: {fileID: 806648654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1761163484}
@@ -31213,7 +31213,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec67959bf2471964f8d9419a5a8e3281, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9097b23b26bbb394298233d8ab4e884d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
