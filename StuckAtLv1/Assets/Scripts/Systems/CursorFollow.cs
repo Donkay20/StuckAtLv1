@@ -7,12 +7,14 @@ public class CursorFollow : MonoBehaviour
     private SpriteRenderer rend;
     public Sprite clickedCursor;
     public Sprite normalCursor;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         CursorOff();
         rend = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,7 @@ public class CursorFollow : MonoBehaviour
       if(Input.GetMouseButtonDown(0))
       {
         Cursor.visible = false;
+        anim.SetTrigger("Hit");
       }
     }
 
