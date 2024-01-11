@@ -19,6 +19,8 @@ public class DialogueManager : MonoBehaviour
     {
         lineText.text = string.Empty;
         storeLines();
+        displayNextSentence();
+        displayNextName();
     }
 
     // Update is called once per frame
