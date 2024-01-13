@@ -249,14 +249,14 @@ GameObject:
   - component: {fileID: 1216821325624853713}
   - component: {fileID: 4967546455578068438}
   - component: {fileID: 3982435783262820412}
-  - component: {fileID: 5961221126541129465}
+  - component: {fileID: 8517851467825792660}
   m_Layer: 5
   m_Name: Skip_Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7614217882802517520
 RectTransform:
   m_ObjectHideFlags: 0
@@ -331,16 +331,16 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
---- !u!114 &5961221126541129465
+--- !u!114 &8517851467825792660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -887,6 +887,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7099856849716075218}
     m_Modifications:
+    - target: {fileID: 1365884885215256473, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
+      propertyPath: m_Name
+      value: LeftCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 1747679264269244081, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1894335242564445842, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -1009,23 +1017,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5661086837318732086, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5661086837318732086, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5661086837318732086, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2180762122646581369}
     - target: {fileID: 5661086837318732086, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5661086837318732086, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5661086837318732086, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5661086837318732086, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5661086837318732086, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7604570560341000612, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
       propertyPath: m_Name
       value: DialogueBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330504608271249225, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

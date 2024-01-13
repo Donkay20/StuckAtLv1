@@ -305,6 +305,9 @@ MonoBehaviour:
   nameText: {fileID: 944232693972724190}
   textSpeed: 0
   dialogue: {fileID: 0}
+  characters: {fileID: 0}
+  leftCharacter: {fileID: 0}
+  rightCharacter: {fileID: 0}
 --- !u!1 &7977936994843162380
 GameObject:
   m_ObjectHideFlags: 0

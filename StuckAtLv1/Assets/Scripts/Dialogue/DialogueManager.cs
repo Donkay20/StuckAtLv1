@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text nameText;
     public float textSpeed = 0.3f;
     public Dialogue dialogue;
+    public DialogueCharacterList characters;
+    public GameObject leftCharacter;
+    public GameObject rightCharacter;
     private bool messaging;
 
     // Start is called before the first frame update
@@ -21,15 +25,20 @@ public class DialogueManager : MonoBehaviour
         storeLines();
         displayNextSentence();
         displayNextName();
+        displaySprites();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) {
-            displayNextSentence();
-            displayNextName();
+        if(!EventSystem.current.IsPointerOverGameObject()) {
+            if (Input.GetMouseButtonDown(0)) {
+                displayNextSentence();
+                displayNextName();
+                displaySprites();
+            }
         }
+
     }
 
     void storeLines() {
@@ -47,6 +56,16 @@ public class DialogueManager : MonoBehaviour
 
     void displayNextName() {
         string nextName = names.Dequeue();
+        
+        foreach (DialogueCharacter c in characters.characters) {
+            if (nextName == c.characterName) {
+                c.isSpeaking = true;
+            }
+            else {
+                c.isSpeaking = false;
+            }
+        }
+
         nameText.text = nextName;
     }
 
@@ -58,6 +77,17 @@ public class DialogueManager : MonoBehaviour
             }
         StartCoroutine(TypeLines(currentLine));
 
+    }
+
+    void displaySprites() {
+        if (characters.characters[0].isSpeaking == true) { //the first character listed will always be Jamp
+            rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
+            leftCharacter.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else {
+            leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
+            rightCharacter.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 
     IEnumerator TypeLines(string currentLine) {
