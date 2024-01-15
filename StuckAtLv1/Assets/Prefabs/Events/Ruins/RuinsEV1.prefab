@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5895167255401977555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7539675040595518367}
+  - component: {fileID: 813045591712645724}
+  m_Layer: 0
+  m_Name: RuinsEV1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7539675040595518367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5895167255401977555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &813045591712645724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5895167255401977555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Jamp and the Old Man stumble upon a grave.
+  - "\"A grave? It\u2019s too dirty to see the name\u2026\""
+  - '"This has been here for ages. Nobody comes by to leave flowers anymore."'
+  - '[CHOOSE]'
+  - "\"A grave with no flowers\u2026that\u2019s just too sad! Here, dirty tombstone,
+    take this!\""
+  - Jamp leaves a white flower at the foot of the grave.
+  - Suddenly, a ghost appears!
+  - '"Thank you..."'
+  - "\"A g-ghost?? Um\u2026well it was no trouble\u2026\""
+  - '"Take this..."'
+  - The ghost granted Jamp 10 HP.
+  - '[END]'
+  - "\"Come on Gramps, let\u2019s get going.\""
+  - Suddenly, a ghost appears!
+  - '"Huh!? Whaaa!"'
+  - '"You spoiled brat! No flowers for me? Well, take this!"'
+  - The ghost attacked, dealing 10 damage to Jamp!
+  - '[END]'
+  names:
+  - NARRATION
+  - Jamp
+  - Old Man
+  - '[CHOOSE]'
+  - Jamp
+  - NARRATION
+  - NARRATION
+  - Lonely Ghost
+  - Jamp
+  - Lonely Ghost
+  - NARRATION
+  - '[END]'
+  - Jamp
+  - NARRATION
+  - Jamp
+  - Lonely Ghost
+  - NARRATION
+  - '[END]'
+  optionsToSelect:
+  - Leave a flower.
+  - Don't leave anything.
+  skipToThisValueAfterChoices: 040000000c000000
+  outcome: 0000000001000000
