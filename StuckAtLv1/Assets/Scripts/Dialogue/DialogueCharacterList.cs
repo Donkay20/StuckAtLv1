@@ -5,5 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueCharacterList : MonoBehaviour
 {
-   public DialogueCharacter[] characters;
+   public DialogueCharacter[] charactersLeft;
+   public DialogueCharacter[] charactersRight;
 }

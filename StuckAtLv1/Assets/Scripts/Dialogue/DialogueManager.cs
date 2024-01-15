@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
 {
     private Queue<string> lines = new Queue<string>();
     private Queue<string> names = new Queue<string>();
+    private Queue<string> emotions = new Queue<string>();
     public TMP_Text lineText;
     public TMP_Text nameText;
     public float textSpeed = 0.3f;
@@ -16,16 +17,26 @@ public class DialogueManager : MonoBehaviour
     public DialogueCharacterList characters;
     public GameObject leftCharacter;
     public GameObject rightCharacter;
+    private DialogueCharacter speaker;
     private bool messaging;
+    private string currentEmotion;
 
     // Start is called before the first frame update
     void Start()
     {
         lineText.text = string.Empty;
+
         storeLines();
         displayNextSentence();
         displayNextName();
-        displaySprites();
+        displayNextEmotion();
+        displaySpriteColours();
+        if (speaker.location == "left") {
+            displaySpriteLeft();
+        }
+        else {
+            displaySpriteRight();
+        }
     }
 
     // Update is called once per frame
@@ -35,38 +46,56 @@ public class DialogueManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) {
                 displayNextSentence();
                 displayNextName();
-                displaySprites();
+                displaySpriteColours();
+                if (speaker.location == "left") {
+                    displaySpriteLeft();
+                }
+                else {
+                    displaySpriteRight();
+                }
             }
         }
 
     }
 
     void storeLines() {
-        /*string line1 = "Good day Mother! To what do I owe the pleasure?";
-        string line2 = "Jamp…I am so sorry to say, but as of right now, I am disowning you. Please pack your things and leave by tonight.";
-        lines.Enqueue(line1);
-        lines.Enqueue(line2);*/
         foreach (string s in dialogue.sentences) {
             lines.Enqueue(s);
         }
         foreach (string s in dialogue.names) {
             names.Enqueue(s);
         }
+        foreach (string s in dialogue.emotions) {
+            emotions.Enqueue(s);
+        }
     }
 
     void displayNextName() {
         string nextName = names.Dequeue();
-        
-        foreach (DialogueCharacter c in characters.characters) {
+        setSpeaker(nextName);
+        nameText.text = nextName;
+    }
+    void displayNextEmotion() {
+        string nextEmotion = emotions.Dequeue();
+        currentEmotion = nextEmotion;
+    }
+
+    void setSpeaker(string nextName) {
+        //iterates through all the right characters to see if one of them is currently speaking, 
+        //if not it will then check the left characters
+        foreach (DialogueCharacter c in characters.charactersRight) {
             if (nextName == c.characterName) {
-                c.isSpeaking = true;
-            }
-            else {
-                c.isSpeaking = false;
+                speaker = c;
+                speaker.location = "right";
             }
         }
-
-        nameText.text = nextName;
+        //checking left characters
+        foreach (DialogueCharacter c in characters.charactersLeft) {
+            if (nextName == c.characterName) {
+                speaker = c;
+                speaker.location = "left";
+            }
+        }
     }
 
     void displayNextSentence() {
@@ -79,14 +108,86 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    void displaySprites() {
-        if (characters.characters[0].isSpeaking == true) { //the first character listed will always be Jamp
+    void displaySpriteColours() {
+        if (speaker.characterName == " ") {
+            rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
+            leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
+            Debug.Log("reached this point");
+        }
+        else {
+            if (speaker.location == "right") {
+                //Debug.Log("reached here!");
+                rightCharacter.GetComponent<SpriteRenderer>().color = Color.white;
+                leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
+            }
+            else {
+                rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
+                leftCharacter.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }
+    }
+    void displaySpriteRight() {
+        /*if (speaker.characterName == " ") {
+            rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
+            leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
+        }
+        else {
+            if (speaker.location == "right") {
+            rightCharacter.GetComponent<SpriteRenderer>().color = Color.white;
+            leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
+            }
+            else {
             rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
             leftCharacter.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+        }/*/
+        
+        switch(currentEmotion) {
+            case "neutral":
+                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.neutralSprite;
+                break;
+            case "happy":
+                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.happySprite;
+                break;
+            case "sad":
+                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.sadSprite;
+                break;
+            case "thinking":
+                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.thinkingSprite;
+                break;
+            case "mad":
+                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.madSprite;
+                break;
+        }
+       
+    }
+    void displaySpriteLeft() {
+
+        /*if (speaker.location == "left") {
+            leftCharacter.GetComponent<SpriteRenderer>().color = Color.white;
+            rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
         }
         else {
             leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
             rightCharacter.GetComponent<SpriteRenderer>().color = Color.white;
+        }*/
+        
+        switch(currentEmotion) {
+            case "neutral":
+                leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.neutralSprite;
+                break;
+            case "happy":
+                leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.happySprite;
+                break;
+            case "sad":
+                leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.sadSprite;
+                break;
+            case "thinking":
+                leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.thinkingSprite;
+                break;
+            case "mad":
+                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.madSprite;
+                break;
         }
     }
 
