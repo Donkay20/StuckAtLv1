@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: A Lonely Grave
   dialogue:
   - Jamp and the Old Man stumble upon a grave.
   - "\"A grave? It\u2019s too dirty to see the name\u2026\""
