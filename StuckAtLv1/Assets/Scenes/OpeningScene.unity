@@ -806,9 +806,17 @@ PrefabInstance:
       propertyPath: rightCharacter
       value: 
       objectReference: {fileID: 1043210746}
+    - target: {fileID: 2335840663823979634, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3982435783262820412, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106712212487641702, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4613485813285767502, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
       propertyPath: m_SizeDelta.y
