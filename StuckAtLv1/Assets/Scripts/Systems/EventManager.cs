@@ -14,10 +14,9 @@ public class EventManager : MonoBehaviour
     [SerializeField] private Character player;
     //backend stuff
     [SerializeField] private Event[] ruinsEvents, forestEvents, sewerEvents, abyssEvents;
-
     [SerializeField] private TextMeshProUGUI title, dialogueText, button1, button2, button3, health, afterimages, money;
-   
     private Event selectedEvent;
+    private string[] dialogue, names;
     private int messageCounter;
      void Awake()
     {
@@ -50,6 +49,9 @@ public class EventManager : MonoBehaviour
                 //todo
                 break;
         }
+
+        dialogue = selectedEvent.getDialogue();
+        names = selectedEvent.getNames();
     }
 
     private void Exit() {
