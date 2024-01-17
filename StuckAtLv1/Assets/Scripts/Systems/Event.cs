@@ -12,7 +12,7 @@ public class Event : MonoBehaviour
     [SerializeField] private int[] skipToThisValueAfterChoices; //start at X line to grab the dialogue for each option
     [SerializeField] private int[] outcome; //the outcomes of each dialogue path; what to do afterwards
 
-    private string getTitle() {
+    public string getTitle() {
         return title;
     }
     
