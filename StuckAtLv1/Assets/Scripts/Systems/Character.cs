@@ -80,4 +80,13 @@ todo:
             StartCoroutine(DrainHealth());
         }
     }
+
+    public void DashingIFrames()
+    {
+        invincible = true;
+    }
+    public void StopDashingIFrames()
+    {
+        invincible = false;
+    }
 }

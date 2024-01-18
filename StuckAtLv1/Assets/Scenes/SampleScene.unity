@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 46.674988, y: -8.099976}
+  m_AnchoredPosition: {x: 46.67505, y: -8.099976}
   m_SizeDelta: {x: 88.45001, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &10118556
@@ -27611,7 +27611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 247.6, y: -9.200012}
+  m_AnchoredPosition: {x: 247.60004, y: -9.200012}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &483638459
@@ -60453,6 +60453,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  dashForce: 100
+  dashTimerEnd: 0.04
+  dashTimer: 0
+  dashSprite: {fileID: 8365608968351185298, guid: d8767fb1e44d83e47bbc6c691755d690, type: 3}
 --- !u!50 &1093936404
 Rigidbody2D:
   serializedVersion: 4
@@ -65601,7 +65605,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -31.14502, y: 12.600006}
+  m_AnchoredPosition: {x: -31.14502, y: 12.599976}
   m_SizeDelta: {x: -465.49, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1477912264
@@ -67274,7 +67278,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 201.6, y: 90.3}
+  m_AnchoredPosition: {x: 201.60004, y: 90.29999}
   m_SizeDelta: {x: -465.49, y: 30}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1725084343

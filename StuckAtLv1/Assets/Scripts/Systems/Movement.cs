@@ -12,12 +12,24 @@ public class Movement : MonoBehaviour
     SpriteRenderer sr;
 
     [SerializeField] float speed = 3f;
+    
+    //Dashing Mechanic
+    [SerializeField] float dashForce = 100f;
+    [SerializeField] float dashTimerEnd = 0.04f;
+    [SerializeField] float dashTimer = 0f;
+
+    private bool isDashing = false;
+    [SerializeField] GameObject dashSprite;
+
+    private Character invincibility;
 
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+
+        invincibility = GetComponent<Character>();
 
         movementVector = new Vector3();
     }
@@ -27,10 +39,45 @@ public class Movement : MonoBehaviour
         movementVector.x = Input.GetAxisRaw("Horizontal");
         movementVector.y = Input.GetAxisRaw("Vertical");
 
-        movementVector = movementVector.normalized * speed;
-        body.velocity = movementVector;
+        if(!isDashing)
+        {
+            movementVector = movementVector.normalized * speed;
+            body.velocity = movementVector;
+        }
+        
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift) && movementVector != Vector3.zero)
+        {
+            isDashing = true;
+            Dash();
+        }
 
+        if(isDashing)
+        {
+            dashTimer += Time.deltaTime;
+            Debug.Log(dashTimer);
+
+            if(dashTimer >= dashTimerEnd)
+            {
+                Instantiate(dashSprite, transform.position, transform.rotation);
+                dashTimer = 0f;
+            }
+        }
         RunAnimation();
+    }
+
+    void Dash()
+    {
+        Debug.Log("Dashing");
+        body.AddForce(movementVector * dashForce, ForceMode2D.Impulse);
+        Invoke(nameof(StopDashing), 0.2f);
+        invincibility.DashingIFrames();
+    }
+
+    void StopDashing(){
+        isDashing = false;
+        Debug.Log("Stop Dashing");
+        dashTimer = 0f;
+        invincibility.StopDashingIFrames();
     }
 
     void RunAnimation()
