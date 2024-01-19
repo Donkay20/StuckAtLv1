@@ -46,8 +46,10 @@ public class DialogueManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) {
                 displayNextSentence();
                 displayNextName();
+                displayNextEmotion();
                 displaySpriteColours();
                 if (speaker.location == "left") {
+                    //Debug.Log("hello");
                     displaySpriteLeft();
                 }
                 else {
@@ -112,7 +114,7 @@ public class DialogueManager : MonoBehaviour
         if (speaker.characterName == " ") {
             rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
             leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
-            Debug.Log("reached this point");
+            //Debug.Log("reached this point");
         }
         else {
             if (speaker.location == "right") {
@@ -127,20 +129,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
     void displaySpriteRight() {
-        /*if (speaker.characterName == " ") {
-            rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
-            leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
-        }
-        else {
-            if (speaker.location == "right") {
-            rightCharacter.GetComponent<SpriteRenderer>().color = Color.white;
-            leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
-            }
-            else {
-            rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
-            leftCharacter.GetComponent<SpriteRenderer>().color = Color.white;
-            }
-        }/*/
         
         switch(currentEmotion) {
             case "neutral":
@@ -162,18 +150,11 @@ public class DialogueManager : MonoBehaviour
        
     }
     void displaySpriteLeft() {
-
-        /*if (speaker.location == "left") {
-            leftCharacter.GetComponent<SpriteRenderer>().color = Color.white;
-            rightCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
-        }
-        else {
-            leftCharacter.GetComponent<SpriteRenderer>().color = Color.grey;
-            rightCharacter.GetComponent<SpriteRenderer>().color = Color.white;
-        }*/
         
+        //Debug.Log(currentEmotion);
         switch(currentEmotion) {
             case "neutral":
+                //Debug.Log(currentEmotion);
                 leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.neutralSprite;
                 break;
             case "happy":
