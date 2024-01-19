@@ -114,13 +114,15 @@ public class EventManager : MonoBehaviour
     }
 
     private void enableButtons() { //enables the buttons for each dialogue option, then sets them to the text that they need to be
-        if(numberOfButtons == 2) {
+        if (numberOfButtons == 1) {
             button1.gameObject.SetActive(true);
             button1Text.text = options[0];
+        }
+        if (numberOfButtons == 2) {
             button2.gameObject.SetActive(true);
             button2Text.text = options[1];
         }
-        if(numberOfButtons == 3) {
+        if (numberOfButtons == 3) {
             button3.gameObject.SetActive(true);
             button3Text.text = options[2];
         }
@@ -142,16 +144,26 @@ public class EventManager : MonoBehaviour
 
     private void ResolveOutcome() { //all of the outcomes for the events. 
         switch(outcomeDecided) {
-            case 0: //+10 HP to Jamp (event 1, ruins)
+            case 0:     //+10 HP to Jamp (event 1, ruins)
                 player.currentHp +=10;
                 break;
-            case 1: //-10 HP to Jamp (cannot kill) (event 1, ruins)
+            case 1:     //-10 HP to Jamp (cannot kill) (event 1, ruins)
                 if (player.currentHp <=10) {
                     player.currentHp -= player.currentHp-1;
                 } else {
                     player.currentHp -=10;
                 }
                 break;
+            case 2:     //skeleton swarm (event 2, ruins)
+                //todo
+                break;
+            case 3:     //-100g, +1 buff (event 3, ruins)
+                //todo
+                break;
+            case 4:     //+100g, -20% movespeed for 1 battle (event 3, ruins)
+                //todo
+                break;
+            
         }
         Exit();
     }
