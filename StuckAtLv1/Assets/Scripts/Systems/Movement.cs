@@ -20,6 +20,7 @@ public class Movement : MonoBehaviour
 
     private bool isDashing = false;
     [SerializeField] GameObject dashSprite;
+    [SerializeField] BoxCollider2D bc;
 
     private Character invincibility;
 
@@ -47,6 +48,7 @@ public class Movement : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift) && movementVector != Vector3.zero)
         {
+            bc.enabled = false;
             isDashing = true;
             Dash();
         }
@@ -78,6 +80,7 @@ public class Movement : MonoBehaviour
         Debug.Log("Stop Dashing");
         dashTimer = 0f;
         invincibility.StopDashingIFrames();
+        bc.enabled = true;
     }
 
     void RunAnimation()

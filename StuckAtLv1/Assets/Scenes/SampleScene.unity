@@ -60457,6 +60457,7 @@ MonoBehaviour:
   dashTimerEnd: 0.04
   dashTimer: 0
   dashSprite: {fileID: 8365608968351185298, guid: d8767fb1e44d83e47bbc6c691755d690, type: 3}
+  bc: {fileID: 1093936405}
 --- !u!50 &1093936404
 Rigidbody2D:
   serializedVersion: 4
