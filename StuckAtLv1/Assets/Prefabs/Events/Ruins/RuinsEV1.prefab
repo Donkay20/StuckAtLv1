@@ -66,20 +66,20 @@ MonoBehaviour:
   - The ghost attacked, dealing 10 damage to Jamp!
   - '[END]'
   names:
-  - NARRATION
+  - Old Man Shadow
   - Jamp
   - Old Man
   - '[CHOOSE]'
   - Jamp
   - NARRATION
-  - NARRATION
+  - Ghost Shadow
   - Lonely Ghost
   - Jamp
   - Lonely Ghost
   - NARRATION
   - '[END]'
   - Jamp
-  - NARRATION
+  - Ghost Shadow
   - Jamp
   - Angry Ghost
   - NARRATION

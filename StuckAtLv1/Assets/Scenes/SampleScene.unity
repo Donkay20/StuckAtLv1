@@ -68787,7 +68787,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeff3d89792e23544ba633bf154a5b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  confirm: {fileID: 1239558122}
   manager: {fileID: 995477027}
   map: {fileID: 541258214}
   player: {fileID: 1093936406}
@@ -68816,6 +68815,8 @@ MonoBehaviour:
   oldMan: {fileID: 21300000, guid: 8d3e5121e1cc33e4790b3a171a45ff5d, type: 3}
   lonelyGhost: {fileID: 21300000, guid: be6e412693d2dac40965a126fb312f7e, type: 3}
   angryGhost: {fileID: 21300000, guid: 89a572d25fa8a7a49a1967237374da44, type: 3}
+  oldShadow: {fileID: 21300000, guid: f6342855abc8a0c4c9c670949cd587ff, type: 3}
+  ghostShadow: {fileID: 21300000, guid: 0c61e7c0bae7a5b45a9c6f0c3236d511, type: 3}
   ruinsBG: {fileID: 21300000, guid: 536df80df9af38b41aa629351543826e, type: 3}
   forestBG: {fileID: 0}
   sewerBG: {fileID: 0}
