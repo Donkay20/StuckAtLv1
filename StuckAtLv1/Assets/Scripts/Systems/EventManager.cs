@@ -18,7 +18,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI title, nameText, dialogueText, button1Text, button2Text, button3Text, health, afterimages, money;
     [SerializeField] private Button button1, button2, button3, advanceButton;
     [SerializeField] private Image speaker, background;
-    [SerializeField] private Sprite def, jamp, oldMan, lonelyGhost;
+    [SerializeField] private Sprite def, jamp, oldMan, lonelyGhost, angryGhost;
     [SerializeField] private Sprite ruinsBG, forestBG, sewerBG, abyssBG;
 
     private Event selectedEvent; //chosen event
@@ -97,6 +97,9 @@ public class EventManager : MonoBehaviour
                             break;
                         case "Lonely Ghost":
                             speaker.sprite = lonelyGhost;
+                            break;
+                        case "Angry Ghost":
+                            speaker.sprite = angryGhost;
                             break;
                     }
                     messageCounter++;
