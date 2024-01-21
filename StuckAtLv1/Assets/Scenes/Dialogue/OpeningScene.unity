@@ -900,15 +900,15 @@ PrefabInstance:
       objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 1754411847513309556, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
       propertyPath: m_Color.b
-      value: 0.21960786
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1754411847513309556, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
       propertyPath: m_Color.g
-      value: 0.21960786
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1754411847513309556, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
       propertyPath: m_Color.r
-      value: 0.21960786
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1945218803498276400, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
       propertyPath: dialogue

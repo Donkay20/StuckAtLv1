@@ -12,7 +12,7 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> emotions = new Queue<string>();
     public TMP_Text lineText;
     public TMP_Text nameText;
-    public float textSpeed = 0.3f;
+    private float textSpeed = 0.03f;
     public Dialogue dialogue;
     public DialogueCharacterList characters;
     public GameObject leftCharacter;
@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueCharacter speaker;
     private bool messaging;
     private string currentEmotion;
+    private string currentLine;
 
     // Start is called before the first frame update
     void Start()
@@ -44,17 +45,26 @@ public class DialogueManager : MonoBehaviour
     {
         if(!EventSystem.current.IsPointerOverGameObject()) {
             if (Input.GetMouseButtonDown(0)) {
-                displayNextSentence();
-                displayNextName();
-                displayNextEmotion();
-                displaySpriteColours();
-                if (speaker.location == "left") {
-                    //Debug.Log("hello");
-                    displaySpriteLeft();
+
+                if (messaging) {
+                    lineText.text = currentLine;
+                    StopAllCoroutines();
+                    messaging = false;
                 }
                 else {
-                    displaySpriteRight();
+                    displayNextSentence();
+                    displayNextName();
+                    displayNextEmotion();
+                    displaySpriteColours();
+                    if (speaker.location == "left") {
+                        //Debug.Log("hello");
+                        displaySpriteLeft();
+                    }
+                    else {
+                        displaySpriteRight();
+                    }
                 }
+
             }
         }
 
@@ -102,7 +112,8 @@ public class DialogueManager : MonoBehaviour
 
     void displayNextSentence() {
 
-         string currentLine = lines.Dequeue();
+         //string currentLine = lines.Dequeue();
+         currentLine = lines.Dequeue();
          if (messaging) {
                 StopAllCoroutines();
             }
@@ -146,6 +157,12 @@ public class DialogueManager : MonoBehaviour
             case "mad":
                 rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.madSprite;
                 break;
+            case "shocked":
+                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.shockedSprite;
+                break;
+            case "scared":
+                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.scaredSprite;
+                break;
         }
        
     }
@@ -167,7 +184,13 @@ public class DialogueManager : MonoBehaviour
                 leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.thinkingSprite;
                 break;
             case "mad":
-                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.madSprite;
+                leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.madSprite;
+                break;
+            case "shocked":
+                leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.shockedSprite;
+                break;
+            case "scared":
+                leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.scaredSprite;
                 break;
         }
     }

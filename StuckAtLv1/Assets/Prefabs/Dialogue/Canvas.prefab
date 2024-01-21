@@ -907,6 +907,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2483868438765646740, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2748772377473293271, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -985,6 +989,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2748772377473293271, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246634301877108096, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4761588473196572328, guid: ca79ffdb4c957c247a828db0c467e0d8, type: 3}
