@@ -8,8 +8,6 @@ using Random = UnityEngine.Random;
 
 public class EventManager : MonoBehaviour
 {
-    [SerializeField] private Button confirm;
-    //temporary buttons
     [SerializeField] private GameManager manager;
     [SerializeField] private MapManager map;
     [SerializeField] private Character player;
@@ -68,6 +66,7 @@ public class EventManager : MonoBehaviour
         title.text = selectedEvent.GetTitle();
 
         numberOfButtons = options.Length;
+        UnityEngine.Debug.Log(options.Length);
         ProgressDialogue(messageCounter);
     }
 
@@ -117,11 +116,11 @@ public class EventManager : MonoBehaviour
     }
 
     private void enableButtons() { //enables the buttons for each dialogue option, then sets them to the text that they need to be
-        if (numberOfButtons == 1) {
+        if (numberOfButtons >= 1) {
             button1.gameObject.SetActive(true);
             button1Text.text = options[0];
         }
-        if (numberOfButtons == 2) {
+        if (numberOfButtons >= 2) {
             button2.gameObject.SetActive(true);
             button2Text.text = options[1];
         }
@@ -137,8 +136,7 @@ public class EventManager : MonoBehaviour
         button3.gameObject.SetActive(false);
     }
 
-    private void InitializeButtons() { 
-        confirm.onClick.AddListener(() => {Exit();});
+    private void InitializeButtons() {
         advanceButton.onClick.AddListener(() => {ProgressDialogue(messageCounter);});
         button1.onClick.AddListener(()=> {DialogueOption(0);});
         button2.onClick.AddListener(()=> {DialogueOption(1);});
