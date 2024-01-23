@@ -38,7 +38,7 @@ public class EventManager : MonoBehaviour
         health.text = player.currentHp.ToString();
         selecting = false;
         afterimages.text = 0.ToString(); //todo
-        money.text = 0.ToString(); //todo
+        money.text = player.money.ToString(); //todo
         
         //reset the stuff from before
 
@@ -180,7 +180,7 @@ public class EventManager : MonoBehaviour
                 }
                 break;
             case 7:     //+500 gold (event 4, ruins)
-                //todo
+                player.money += 500;
                 break;
             case 8:     //vs fight against super golem (event 5, ruins)
                 //todo

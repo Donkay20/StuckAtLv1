@@ -60543,6 +60543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHp: 10
+  money: 0
   playerAnim: {fileID: 1093936407}
   healthBarAnim: {fileID: 1865911234}
   hpBar: {fileID: 709875579}
@@ -62073,7 +62074,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -31.14502, y: 53.700012}
+  m_AnchoredPosition: {x: -31.144989, y: 53.700012}
   m_SizeDelta: {x: -465.49, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1242432334
@@ -65606,7 +65607,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -31.14502, y: 12.599976}
+  m_AnchoredPosition: {x: -31.144989, y: 12.599976}
   m_SizeDelta: {x: -465.49, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1477912264

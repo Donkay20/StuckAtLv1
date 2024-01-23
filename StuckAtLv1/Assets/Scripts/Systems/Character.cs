@@ -14,6 +14,7 @@ todo:
 {
     public readonly int maxHp = 10;
     public int currentHp = 10;
+    public int money = 0;
     private readonly float iframe = 0.3f;
     private bool invincible; //iframe check
     private bool healthDraining; //overheal drain check

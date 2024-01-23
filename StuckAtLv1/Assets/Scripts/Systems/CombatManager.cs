@@ -16,21 +16,32 @@ public class CombatManager : MonoBehaviour
     private int enemiesToKill;
     private int timeLeft;
     private string objective;
+
+    private bool specialCondition;
     
     [SerializeField] private MapManager mapProgress;
     [SerializeField]private GameManager notify;
     [SerializeField] private EnemyManager spawner;
+    
+    private void Awake() {
+        specialCondition = false;
+    }
 
     public void Setup(string format) {
         /*
         Set-up includes:
+        - checking for special event fights
         - getting which type of combat it is (combat vs survival)
         - setting fight to active
         - enabling the spawner
         - setting the # of enemies or time to survive based on the progress in the map
         - updating the UI accordingly
         */
-        switch (format) {
+
+        if (specialCondition) {
+            //todo
+        } else {
+            switch (format) {
             case "combat":
             objective = "combat";
             spawner.enabled = true;
@@ -46,6 +57,7 @@ public class CombatManager : MonoBehaviour
             uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
             StartCoroutine(SurvivalTimer());
             break;
+            }
         }
         character.Heal(0);
     }
