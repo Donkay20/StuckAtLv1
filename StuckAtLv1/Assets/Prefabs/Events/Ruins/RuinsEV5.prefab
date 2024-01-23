@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4176604996795219374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2834302111502015261}
+  - component: {fileID: 7280790515786884516}
+  m_Layer: 0
+  m_Name: RuinsEV5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2834302111502015261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4176604996795219374}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7280790515786884516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4176604996795219374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Defunct Model
+  dialogue:
+  - "\"This thing has weeds and vines all over it\u2026\""
+  - "\"It\u2019s been deactivated for ages. Its head is over there.\""
+  - "\"I feel kind of sorry for it\u2026\""
+  - '[CHOOSE]'
+  - "\"Hmmm\u2026this is the least I can do right?\""
+  - "\"Wait! You don\u2019t know what will happen-\""
+  - Before the Old Man's words could reach him, Jamp places the head on the statue.
+  - Suddenly, the statue gets up, his eyes glow red, and he lumbers forward towards
+    Jamp.
+  - "\"Ahh!! Why didn\u2019t you warn me, gramps??\""
+  - "\"\u2026Sigh.\""
+  - '"Whatever, we can take this guy!"'
+  - '[END]'
+  - "\"\u2026Ah well! We have a mission to accomplish!\""
+  - Jamp and the Old Man left.
+  - '[END]'
+  names:
+  - Jamp
+  - Old Man
+  - Jamp
+  - '[CHOOSE]'
+  - Jamp
+  - Old Man
+  - NARRATION
+  - NARRATION
+  - Jamp
+  - Old Man
+  - Jamp
+  - '[END]'
+  - Jamp
+  - NARRATION
+  - '[END]'
+  optionsToSelect:
+  - Put the head back on.
+  - Leave.
+  skipToThisValueAfterChoices: 040000000c000000
+  outcome: 0800000009000000

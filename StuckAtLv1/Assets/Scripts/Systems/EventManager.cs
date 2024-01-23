@@ -66,7 +66,6 @@ public class EventManager : MonoBehaviour
         title.text = selectedEvent.GetTitle();
 
         numberOfButtons = options.Length;
-        UnityEngine.Debug.Log(options.Length);
         ProgressDialogue(messageCounter);
     }
 
@@ -151,14 +150,14 @@ public class EventManager : MonoBehaviour
 
     private void ResolveOutcome() { //all of the outcomes for the events. 
         switch(outcomeDecided) {
-            case 0:     //+10 HP to Jamp (event 1, ruins)
-                player.currentHp +=10;
+            case 0:     //+10 HP (event 1, ruins)
+                player.currentHp += 10;
                 break;
-            case 1:     //-10 HP to Jamp (cannot kill) (event 1, ruins)
-                if (player.currentHp <=10) {
-                    player.currentHp -= player.currentHp-1;
+            case 1:     //-10 HP (cannot kill) (event 1, ruins)
+                if (player.currentHp <= 10) {
+                    player.currentHp -= player.currentHp- 1;
                 } else {
-                    player.currentHp -=10;
+                    player.currentHp -= 10;
                 }
                 break;
             case 2:     //skeleton swarm (event 2, ruins)
@@ -170,7 +169,24 @@ public class EventManager : MonoBehaviour
             case 4:     //+100g, -20% movespeed for 1 battle (event 3, ruins)
                 //todo
                 break;
-            
+            case 5:     //dash boost (event 4, ruins)
+                //todo
+                break;
+            case 6:     //-50 HP (cannot kill) (event 4, ruins)
+                if (player.currentHp <= 50) {
+                    player.currentHp -= player.currentHp - 1;
+                } else {
+                    player.currentHp -= 50;
+                }
+                break;
+            case 7:     //+500 gold (event 4, ruins)
+                //todo
+                break;
+            case 8:     //vs fight against super golem (event 5, ruins)
+                //todo
+                break;
+            case 9:     //nothing happens (event 5, ruins)
+                break;
         }
         Exit();
     }
