@@ -150,7 +150,18 @@ public class EventManager : MonoBehaviour
         button3.onClick.AddListener(()=> {DialogueOption(2);});
     }
 
-    private void ResolveOutcome() { //all of the outcomes for the events. 
+    private void ResolveOutcome() { //all of the outcomes for the events.
+
+        /*
+        Progress:
+            Ruins:
+            1. done
+            2. done
+            3. todo
+            4. todo
+            5. done
+        */
+
         switch(outcomeDecided) {
             case 0:     //+10 HP (event 1, ruins)
                 player.currentHp += 10;
@@ -169,10 +180,15 @@ public class EventManager : MonoBehaviour
                 resolve = "combat";
                 break;
             case 3:     //-100g, +1 buff (event 3, ruins)
-                //todo
+                player.money += 100;
                 resolve = "upgrade";
                 break;
             case 4:     //+100g, -20% movespeed for 1 battle (event 3, ruins)
+                if (player.money < 100) {
+                    player.money = 0;
+                } else {
+                    player.money -= 100;
+                }
                 //todo
                 resolve = "normal";
                 break;
