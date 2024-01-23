@@ -18,6 +18,8 @@ public class CombatManager : MonoBehaviour
     private string objective;
 
     private bool specialCondition;
+
+    private int condition;
     
     [SerializeField] private MapManager mapProgress;
     [SerializeField]private GameManager notify;
@@ -25,6 +27,7 @@ public class CombatManager : MonoBehaviour
     
     private void Awake() {
         specialCondition = false;
+        condition = -1;
     }
 
     public void Setup(string format) {
@@ -38,8 +41,25 @@ public class CombatManager : MonoBehaviour
         - updating the UI accordingly
         */
 
-        if (specialCondition) {
-            //todo
+        if (specialCondition) { //when adding a special condition, it needs to be mentioned here, and on the enemy manager.
+            switch(condition) {
+                case 2:
+                    spawner.SetCondition(condition);
+                    objective = "combat";
+                    spawner.enabled = true;
+                    enemiesToKill = 20;
+                    uIObjectiveNumber.text = enemiesToKill.ToString();
+                    StartCoroutine(CombatTracker());
+                    break;
+                case 8:
+                    spawner.SetCondition(condition);
+                    objective = "combat";
+                    spawner.enabled = true;
+                    enemiesToKill = 10;
+                    uIObjectiveNumber.text = enemiesToKill.ToString();
+                    StartCoroutine(CombatTracker());
+                    break;
+            }
         } else {
             switch (format) {
             case "combat":
@@ -68,6 +88,11 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void ReceiveCondition(int c) {
+        specialCondition = true;
+        condition = c;
+    }
+
     private IEnumerator SurvivalTimer() { //handles timer countdown for survival-type encounter format
         while (timeLeft > 0) {
             yield return new WaitForSeconds(1);
@@ -86,11 +111,20 @@ public class CombatManager : MonoBehaviour
         spawner.enabled = false;
 
         Enemy[] remainingEnemies = FindObjectsOfType<Enemy>();
+
         foreach (Enemy straggler in remainingEnemies) {
             straggler.TakeDamage(999999999);
         }
+
         objective = "";
         character.Interrupt();
+
+        if (specialCondition) {
+            specialCondition = false;
+            condition = -1;
+            spawner.SetCondition(-1);
+        }
+        
         notify.ReceiveCommand("upgrade");
     }
 }

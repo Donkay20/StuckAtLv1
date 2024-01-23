@@ -60261,8 +60261,8 @@ RectTransform:
   m_Children:
   - {fileID: 1512036393}
   - {fileID: 541258213}
-  - {fileID: 2027940637}
   - {fileID: 1859515014}
+  - {fileID: 2027940637}
   - {fileID: 2045488597}
   - {fileID: 598751294}
   - {fileID: 1863102722}
@@ -68790,9 +68790,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 995477027}
   map: {fileID: 541258214}
+  combat: {fileID: 828058987}
   player: {fileID: 1093936406}
   ruinsEvents:
   - {fileID: 813045591712645724, guid: 8871b4105303b9f43a06b2379e40286c, type: 3}
+  - {fileID: 2697995148366591681, guid: 95b927c8c02433e4a8905e82e58c83ec, type: 3}
+  - {fileID: 7280790515786884516, guid: 4c9dcdcc3b826b04cbe0430ad71c5ea3, type: 3}
   forestEvents: []
   sewerEvents: []
   abyssEvents: []

@@ -82,6 +82,11 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     mouseCursorUI.SetActive(true);
                     //give legendary upgrades
                 }
+                if(previousState == GameState.Event) {
+                    eventUI.SetActive(false);
+                    upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().Setup("normal");
+                    //I don't foresee any events that would give legendary upgrades, but if they do this'll need to be changed.
+                }
                 previousState = GameState.Upgrade;
                 break;
 
@@ -94,7 +99,9 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     //disable map stuff and go into combat
                 }
                 if (previousState == GameState.Event) {
-                    //disable event stuff and go into combat, TODO
+                    eventUI.SetActive(false);
+                    combat.SetActive(true); combatUI.SetActive(true);
+                    combat.GetComponent<CombatManager>().Setup("combat");
                     Debug.Log("event to combat");
                 }
                 previousState = GameState.Combat;

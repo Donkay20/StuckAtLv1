@@ -10,6 +10,7 @@ public class EventManager : MonoBehaviour
 {
     [SerializeField] private GameManager manager;
     [SerializeField] private MapManager map;
+    [SerializeField] private CombatManager combat;
     [SerializeField] private Character player;
     //backend stuff
     [SerializeField] private Event[] ruinsEvents, forestEvents, sewerEvents, abyssEvents;
@@ -22,11 +23,12 @@ public class EventManager : MonoBehaviour
     private Event selectedEvent; //chosen event
     private string[] dialogue, names, options; private int[] skip, outcome; //copy from the chosen event
     private int messageCounter, numberOfButtons, outcomeDecided; //messagecounter is to track what line we're on, where numberofbuttons is to track how many buttons to display
-    private bool selecting;
+    private bool selecting; //if this is enabled, do not allow dialogue progression, as the user needs to make a button choice
+    private string resolve; //this is for deciding what screen to go to after the event is done.
      void Awake()
     {
         InitializeButtons();
-        disableButtons();
+        DisableButtons();
     }
 
     public void InitializeEvent() { //to reset the event and determine what event to do
@@ -74,7 +76,7 @@ public class EventManager : MonoBehaviour
             switch(names[number]) {
                 case "[CHOOSE]": //the dialogue will have a choose option. when this appears, the buttons appear to make the player decide what action to take
                     selecting = true;
-                    enableButtons();
+                    EnableButtons();
                     break;
                 case "[END]":   //resolve the outcome and end the event.
                     ResolveOutcome();
@@ -116,11 +118,11 @@ public class EventManager : MonoBehaviour
         selecting = false;                  //re-enables the dialogue options
         messageCounter = skip[number];       
         ProgressDialogue(messageCounter);   //skips to the appropriate dialogue line determined by the event
-        disableButtons();                   //gets rid of the buttons
+        DisableButtons();                   //gets rid of the buttons
         outcomeDecided = outcome[number];   //sets the action to take; the result of the event
     }
 
-    private void enableButtons() { //enables the buttons for each dialogue option, then sets them to the text that they need to be
+    private void EnableButtons() { //enables the buttons for each dialogue option, then sets them to the text that they need to be
         if (numberOfButtons >= 1) {
             button1.gameObject.SetActive(true);
             button1Text.text = options[0];
@@ -135,7 +137,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    private void disableButtons() { //gets rid of all the buttons
+    private void DisableButtons() { //gets rid of all the buttons
         button1.gameObject.SetActive(false);
         button2.gameObject.SetActive(false);
         button3.gameObject.SetActive(false);
@@ -152,6 +154,7 @@ public class EventManager : MonoBehaviour
         switch(outcomeDecided) {
             case 0:     //+10 HP (event 1, ruins)
                 player.currentHp += 10;
+                resolve = "normal";
                 break;
             case 1:     //-10 HP (cannot kill) (event 1, ruins)
                 if (player.currentHp <= 10) {
@@ -159,18 +162,23 @@ public class EventManager : MonoBehaviour
                 } else {
                     player.currentHp -= 10;
                 }
+                resolve = "normal";
                 break;
             case 2:     //skeleton swarm (event 2, ruins)
-                //todo
+                combat.ReceiveCondition(2);
+                resolve = "combat";
                 break;
             case 3:     //-100g, +1 buff (event 3, ruins)
                 //todo
+                resolve = "upgrade";
                 break;
             case 4:     //+100g, -20% movespeed for 1 battle (event 3, ruins)
                 //todo
+                resolve = "normal";
                 break;
             case 5:     //dash boost (event 4, ruins)
                 //todo
+                resolve = "normal";
                 break;
             case 6:     //-50 HP (cannot kill) (event 4, ruins)
                 if (player.currentHp <= 50) {
@@ -178,20 +186,34 @@ public class EventManager : MonoBehaviour
                 } else {
                     player.currentHp -= 50;
                 }
+                resolve = "normal";
                 break;
             case 7:     //+500 gold (event 4, ruins)
                 player.money += 500;
+                resolve = "normal";
                 break;
-            case 8:     //vs fight against super golem (event 5, ruins)
-                //todo
+            case 8:     //vs fight against golem swarm (event 5, ruins)
+                combat.ReceiveCondition(8);
+                resolve = "combat";
                 break;
             case 9:     //nothing happens (event 5, ruins)
+                resolve = "normal";
                 break;
         }
         Exit();
     }
     
     private void Exit() {
-        manager.ReceiveCommand("map");
+        switch(resolve) {
+            case "combat":
+                manager.ReceiveCommand("combat");
+                break;
+            case "upgrade":
+                manager.ReceiveCommand("upgrade");
+                break;
+            case "normal":
+                manager.ReceiveCommand("map");
+                break;
+        }
     }
 }

@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float spawnTimer;
     [SerializeField] GameObject player;
     float timer;
+    int condition; bool specialCondition;
 
     private void Update() {
         timer -= Time.deltaTime;
@@ -22,7 +23,21 @@ public class EnemyManager : MonoBehaviour
     }
 
     private void SpawnEnemy() {
-        int number = Random.Range(0, enemy.Length);
+        int number = -1;
+
+        if (specialCondition) {
+            switch (condition) {
+            case 2:
+                number = 0;
+                break;
+            case 8:
+                number = 1;
+                break;
+            }
+        } else {
+            number = Random.Range(0, enemy.Length);
+        }
+
         Vector3 position = GenerateRandomPosition();
         position += player.transform.position;
         GameObject newEnemy = Instantiate(enemy[number]);
@@ -48,7 +63,16 @@ public class EnemyManager : MonoBehaviour
         }
 
         position.z = 0;
-
         return position;
+    }
+
+    public void SetCondition(int n) {
+        if (n == -1) {
+            specialCondition = false;
+            condition = n;
+        } else {
+            specialCondition = true;
+            condition = n;
+        }
     }
 }
