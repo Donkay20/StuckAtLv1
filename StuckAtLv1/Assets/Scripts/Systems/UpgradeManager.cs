@@ -39,6 +39,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private string[] legendaryUpgradeText = new string[4]; //(UPDATE TO 13 LATER ON)
     [Space]
     [SerializeField] private GameManager notify;
+    private bool fromShop;
 
     void Awake()    //initialize the buttons, and capacity for each upgrade at the beginning of the game.
     {
@@ -190,8 +191,18 @@ public class UpgradeManager : MonoBehaviour
         upgradePositionSelected = -1;
         slotSelected = -1;
 
-        //go back to the map
-        notify.ReceiveCommand("map");
+        //go back to the map, or shop
+        if (fromShop) {
+            fromShop = false;
+            notify.ReceiveCommand("shop");
+        } else {
+            notify.ReceiveCommand("map");
+        }
+        
+    }
+
+    public void Shop() {
+        fromShop = true;
     }
 
     private void InitializeButtons() {

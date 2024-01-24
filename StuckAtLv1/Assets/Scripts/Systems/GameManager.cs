@@ -87,6 +87,10 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().Setup("normal");
                     //I don't foresee any events that would give legendary upgrades, but if they do this'll need to be changed.
                 }
+                if (previousState == GameState.Shop) {
+                    upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().Shop(); upgradeUI.GetComponent<UpgradeManager>().Setup("normal"); //proc a special flag to let the upgrade manager know to go back to the shop
+                    shopUI.SetActive(false);
+                }
                 previousState = GameState.Upgrade;
                 break;
 
@@ -130,8 +134,18 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 break;
 
             case GameState.Shop:
-                shopUI.SetActive(true);
-                mapUI.SetActive(false);
+                if (previousState == GameState.Map) {
+                    shopUI.SetActive(true);
+                    mapUI.SetActive(false);
+                    Debug.Log("map to shop");
+                }
+
+                if (previousState == GameState.Upgrade) {
+                    upgradeUI.SetActive(false);
+                    shopUI.SetActive(true);
+                    Debug.Log("upgrade to shop");
+                }
+                
                 previousState = GameState.Shop;
                 Debug.Log("shop state");
                 break;

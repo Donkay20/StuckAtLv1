@@ -15,6 +15,7 @@ todo:
     public readonly int maxHp = 10;
     public int currentHp = 10;
     public int money = 0;
+    public int afterimages = 0;
     private readonly float iframe = 0.3f;
     private bool invincible; //iframe check
     private bool healthDraining; //overheal drain check
@@ -22,18 +23,29 @@ todo:
     [SerializeField] Animator healthBarAnim;
     [SerializeField] StatusBar hpBar;
     [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI afterimageText;
+
+    void OnEnable() {
+        afterimageText.text = afterimages.ToString();
+    }
 
     public void TakeDamage(int damage) { //todo; edit for buffs/dmg reduction values
         if (!invincible) {
             playerAnim.SetTrigger("Hit");
             healthBarAnim.SetTrigger("Hit");
             invincible = true;
-            currentHp -= damage; 
-            healthText.text = currentHp.ToString();
-            if (currentHp <= maxHp) {
-                healthText.color = new Color32(255, 0, 0, 255);
-                healthDraining = false;
+            if (afterimages > 0) {
+                afterimages --;
+                afterimageText.text = afterimages.ToString();
+            } else {
+                currentHp -= damage; 
+                healthText.text = currentHp.ToString();
+                if (currentHp <= maxHp) {
+                    healthText.color = new Color32(255, 0, 0, 255);
+                    healthDraining = false;
+                }
             }
+            
             StartCoroutine(InvincibilityFrame());
         }
         
@@ -80,6 +92,18 @@ todo:
             healthText.color = new Color32(166, 254, 0, 255);
             StartCoroutine(DrainHealth());
         }
+    }
+
+    public void GainAfterimage(int amount) {
+        if (afterimages + amount > 99) {
+            afterimages = 99;
+        } else {
+            afterimages += amount;
+        }
+    }
+
+    public void GainMoney(int amount) {
+        money += amount;
     }
 
     public void DashingIFrames()
