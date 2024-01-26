@@ -28289,7 +28289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -28323,7 +28323,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -50462,7 +50462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &828058986
 Transform:
   m_ObjectHideFlags: 0
@@ -61063,7 +61063,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -287.98, y: 174.6}
+  m_AnchoredPosition: {x: -292.9, y: 174.6}
   m_SizeDelta: {x: 100.4, y: 66.73}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &928726138
@@ -71534,7 +71534,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1859515014}
   - component: {fileID: 1859515017}
-  - component: {fileID: 1859515016}
   - component: {fileID: 1859515015}
   m_Layer: 5
   m_Name: Event Manager/UI
@@ -71618,36 +71617,6 @@ MonoBehaviour:
   forestBG: {fileID: 0}
   sewerBG: {fileID: 0}
   abyssBG: {fileID: 0}
---- !u!114 &1859515016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859515013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e4019b7d48e80424da44ced45fe21b81, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1859515017
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -73990,7 +73959,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2045488597}
   - component: {fileID: 2045488600}
-  - component: {fileID: 2045488599}
   - component: {fileID: 2045488598}
   m_Layer: 5
   m_Name: Shop Manager/UI
@@ -74046,36 +74014,6 @@ MonoBehaviour:
   shopkeeperText: {fileID: 296068147}
   manager: {fileID: 995477027}
   player: {fileID: 1093936406}
---- !u!114 &2045488599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2045488596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.4716981, g: 0.15752934, b: 0.15752934, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 473254d6030794f4fa308b70966f4c9b, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &2045488600
 CanvasRenderer:
   m_ObjectHideFlags: 0

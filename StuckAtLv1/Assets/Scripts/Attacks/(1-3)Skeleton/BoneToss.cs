@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoneToss : MonoBehaviour
@@ -22,11 +23,9 @@ public class BoneToss : MonoBehaviour
         Vector3 direction = mousePosition - transform.position;
         Vector3 rotation = transform.position - mousePosition;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
-        
-        //apply size bonus
-        //collide.radius *= 1 + (parent.GetCommonUpgrade(1)*0.1f + parent.GetRareUpgrade(1)*0.15f + parent.GetLegendaryUpgrade(1)*0.2f);
-        //Debug.Log(collide.radius);
-        scale.sizeDelta *= 1 + (parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f);
+
+        float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
+        transform.localScale = new Vector3(scalingFactor + scalingFactor, 1f);
         Debug.Log("size: " + scale.sizeDelta);
 
         //apply duration bonus
