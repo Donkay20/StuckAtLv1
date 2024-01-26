@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Jamp
   m_EditorClassIdentifier: 
   characterName: Jamp
-  currentEmotion: 
+  location: 
   neutralSprite: {fileID: 21300000, guid: 5edeee7850a979c4a998a4ccc4740ad7, type: 3}
   happySprite: {fileID: 0}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}
-  madSprite: {fileID: 0}
-  isSpeaking: 0
+  madSprite: {fileID: 21300000, guid: bc745d00a6cccef40859f81ab20a7b48, type: 3}
+  shockedSprite: {fileID: 0}
+  scaredSprite: {fileID: 0}
