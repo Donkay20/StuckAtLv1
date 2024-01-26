@@ -27,11 +27,11 @@ public class RockThrowV2 : MonoBehaviour
         rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
 
         float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
-        transform.localScale = new Vector3(scalingFactor + scalingFactor, 1f);
+        transform.localScale = new Vector2(scalingFactor, scalingFactor);
         Debug.Log("size: " + scale.sizeDelta);
 
         //apply duration bonus
-        timer *= 1 + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
+        timer *= 1f + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
         Debug.Log("timer: " + timer);
 
         //apply damage bonus

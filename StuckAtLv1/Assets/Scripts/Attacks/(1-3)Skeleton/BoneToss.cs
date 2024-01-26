@@ -25,7 +25,7 @@ public class BoneToss : MonoBehaviour
         rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
 
         float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
-        transform.localScale = new Vector3(scalingFactor + scalingFactor, 1f);
+        transform.localScale = new Vector2(.5f*scalingFactor, .5f*scalingFactor); //for the bone toss, 0.5f is the base size, idk why, but we will use that as the base in this case.
         Debug.Log("size: " + scale.sizeDelta);
 
         //apply duration bonus
