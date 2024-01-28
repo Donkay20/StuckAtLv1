@@ -19,5 +19,5 @@ MonoBehaviour:
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 21300000, guid: b87098d8c742cb44e874f5a2e6c8b8d0, type: 3}
   madSprite: {fileID: 21300000, guid: bc745d00a6cccef40859f81ab20a7b48, type: 3}
-  shockedSprite: {fileID: 0}
+  shockedSprite: {fileID: 21300000, guid: 7b5d836d1ee2e494895c87a9133c290d, type: 3}
   scaredSprite: {fileID: 0}
