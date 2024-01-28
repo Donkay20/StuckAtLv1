@@ -19,3 +19,5 @@ MonoBehaviour:
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}
   madSprite: {fileID: 0}
+  shockedSprite: {fileID: 0}
+  scaredSprite: {fileID: 0}

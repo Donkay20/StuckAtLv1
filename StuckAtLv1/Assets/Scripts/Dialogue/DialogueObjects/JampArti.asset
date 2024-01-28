@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e80746532ed26a44b9b3463cf4eba1a6, type: 3}
-  m_Name: Maid1
+  m_Name: JampArti
   m_EditorClassIdentifier: 
-  characterName: Maid 1
+  characterName: Jamp
   location: 
-  neutralSprite: {fileID: 21300000, guid: 603d773882c82d247921a1df96c60150, type: 3}
+  neutralSprite: {fileID: 0}
   happySprite: {fileID: 0}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}

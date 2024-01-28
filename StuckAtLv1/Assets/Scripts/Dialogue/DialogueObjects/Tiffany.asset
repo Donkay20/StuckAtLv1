@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Tiffany
   m_EditorClassIdentifier: 
   characterName: Tiffany
-  currentEmotion: 
+  location: 
   neutralSprite: {fileID: 0}
   happySprite: {fileID: 0}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}
   madSprite: {fileID: 21300000, guid: 9f39370df4381e14282c8e49ad0e5073, type: 3}
-  isSpeaking: 0
+  shockedSprite: {fileID: 0}
+  scaredSprite: {fileID: 0}

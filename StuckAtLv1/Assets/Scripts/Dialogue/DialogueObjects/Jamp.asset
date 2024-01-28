@@ -15,7 +15,7 @@ MonoBehaviour:
   characterName: Jamp
   location: 
   neutralSprite: {fileID: 21300000, guid: 5edeee7850a979c4a998a4ccc4740ad7, type: 3}
-  happySprite: {fileID: 0}
+  happySprite: {fileID: 21300000, guid: 7e424942636476947860c114b2b5a206, type: 3}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 21300000, guid: b87098d8c742cb44e874f5a2e6c8b8d0, type: 3}
   madSprite: {fileID: 21300000, guid: bc745d00a6cccef40859f81ab20a7b48, type: 3}
