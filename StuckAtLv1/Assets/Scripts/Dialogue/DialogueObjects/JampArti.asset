@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Jamp
   location: 
-  neutralSprite: {fileID: 0}
-  happySprite: {fileID: 0}
-  sadSprite: {fileID: 0}
-  thinkingSprite: {fileID: 0}
-  madSprite: {fileID: 0}
-  shockedSprite: {fileID: 0}
-  scaredSprite: {fileID: 0}
+  neutralSprite: {fileID: 21300000, guid: 3c22fd5203833ee4ebfcd3edcd741794, type: 3}
+  happySprite: {fileID: 21300000, guid: f13d05e026fdfca4eb34cd6d86b75ef6, type: 3}
+  sadSprite: {fileID: 21300000, guid: 02884371933303b4284b810f948d0be8, type: 3}
+  thinkingSprite: {fileID: 21300000, guid: cc354c987dab8be46a51f60acca25a32, type: 3}
+  madSprite: {fileID: 21300000, guid: 110c819f2570fcb4e9803020750478c8, type: 3}
+  shockedSprite: {fileID: 21300000, guid: dbf29a7f0369db34cb7ee495614b867f, type: 3}

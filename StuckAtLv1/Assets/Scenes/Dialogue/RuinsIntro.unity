@@ -986,7 +986,7 @@ PrefabInstance:
     - target: {fileID: 8126827850983673292, guid: c4f34feda12fe6d4db89ce62ac89de61, type: 3}
       propertyPath: charactersLeft.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 4635bb3c2b10bee439b3872dce709c01, type: 2}
+      objectReference: {fileID: 11400000, guid: 66ec00a074f3ef141a6afa196e5a6811, type: 2}
     - target: {fileID: 8126827850983673292, guid: c4f34feda12fe6d4db89ce62ac89de61, type: 3}
       propertyPath: charactersRight.Array.data[0]
       value: 
