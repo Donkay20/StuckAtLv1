@@ -14,9 +14,10 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     GameObject targetGameObject;
     Character targetCharacter;
     
-    [SerializeField] float speed;
+    [SerializeField] float baseSpeed;
     [SerializeField] int hp = 1000;
     [SerializeField] int damage = 1;
+    [SerializeField] private float alteredSpeed, alteredSpeedTimer;
 
     Rigidbody2D body;
     Animator anim;
@@ -38,9 +39,18 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     private void FixedUpdate() {
         //add condition here, depending on type of enemy, especially bosses
         Vector3 direction = (targetDestination.position - transform.position).normalized;
-        body.velocity = direction * speed;
-
+        if (alteredSpeedTimer > 0) {
+            body.velocity = direction * alteredSpeed;
+        } else {
+            body.velocity = direction * baseSpeed;
+        }
         Flip(direction.x);
+    }
+
+    private void Update() {
+        if (alteredSpeedTimer > 0) {
+            alteredSpeedTimer -= Time.deltaTime;
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
@@ -66,6 +76,14 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             //Debug.Log(this.transform);
             Destroy(gameObject);
         }
+    }
+
+    public void ApplySlow(float percentage, float duration) {
+        alteredSpeed = baseSpeed - (baseSpeed*percentage);
+        Debug.Log("Altered speed: " + alteredSpeed);
+        alteredSpeedTimer = duration;
+        Debug.Log("Altered speed duration: " + alteredSpeedTimer);
+        //To apply a slow, it needs to take in the severity of the slow, + the duration for how long the slow lasts.
     }
 
     private void Flip(float x)
