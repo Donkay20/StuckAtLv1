@@ -36,6 +36,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
     
     private void FixedUpdate() {
+        //add condition here, depending on type of enemy, especially bosses
         Vector3 direction = (targetDestination.position - transform.position).normalized;
         body.velocity = direction * speed;
 

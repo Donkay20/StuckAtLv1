@@ -23,7 +23,9 @@ public class Slot : MonoBehaviour
     Current Skill IDs and their correspondences:
     0 - Empty
     1 - Bone Toss (from Skeleton 1)
-    2 - Boulder Toss (from Golem 1) [ideal position: 4]
+    4 - Boulder Toss (from Golem 1)
+    5 - Ground Slam (from Golem 2)
+    6 - Temp Golem Attack (from Golem 3) //temp
     */
 
     private int identity;
@@ -34,10 +36,14 @@ public class Slot : MonoBehaviour
     private int[] rareUpgrades = new int[13];
     private int[] legendaryUpgrades = new int[13];
     [SerializeField] private Character character;
-    [SerializeField] private Image skillImage;                          //display for the skill image on the UI
-    [SerializeField] private TextMeshProUGUI uIText;                    //display for the skill usages on the UI
-    [SerializeField] private GameObject bullet;                         //exclusively for the absorption bullet
-    [SerializeField] private GameObject[] attack = new GameObject[2];   //this will expand in accordance to the # of attacks we have
+    [SerializeField] private Image skillImage;                          
+    //display for the skill image on the UI
+    [SerializeField] private TextMeshProUGUI uIText;                    
+    //display for the skill usages on the UI
+    [SerializeField] private GameObject bullet;                         
+    //exclusively for the absorption bullet
+    [SerializeField] private GameObject[] attack = new GameObject[2];   
+    //this will expand in accordance to the # of attacks we have
     [SerializeField] private Transform bulletTransform;
     
 
@@ -46,22 +52,30 @@ public class Slot : MonoBehaviour
         containsSkill = false;
     }
 
-    public int Identity { get => identity; set => identity = value; }                                           //slot number, assigned by SlotManager class
-    public bool ContainsSkill { get => containsSkill; set => containsSkill = value; }                           //determines whether absorption bullet is shot or not
-    public bool AbsorbBulletAvailable { get => absorbBulletAvailable; set => absorbBulletAvailable = value; }   //variable that prevents absorption bullet from being shot until the current shot one dissipates
+    public int Identity { get => identity; set => identity = value; }                                           
+    //slot number, assigned by SlotManager class
+    public bool ContainsSkill { get => containsSkill; set => containsSkill = value; }                           
+    //determines whether absorption bullet is shot or not
+    public bool AbsorbBulletAvailable { get => absorbBulletAvailable; set => absorbBulletAvailable = value; }   
+    //variable that prevents absorption bullet from being shot until the current shot one dissipates
 
-    public void Engage() {                                                                                      //handles slot; whether to use skill or to absorb skill
+    public void Engage() {                                                                                      
+        //handles slot; whether to use skill or to absorb skill
         if (!containsSkill && absorbBulletAvailable) {
             Instantiate(bullet, bulletTransform.position, Quaternion.identity, transform);
-            this.absorbBulletAvailable = false;                                                     //the absoption bullet class will set this value back to true when it dissipates
+            this.absorbBulletAvailable = false;                                                     
+            //the absoption bullet class will set this value back to true when it dissipates
         } else {
-            Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform); //launches the skill, positioned from the player. more checks will need to be added as the player gets more types of skills.
+            Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform); 
+            //launches the skill, positioned from the player. more checks will need to be added as the player gets more types of skills.
+
             //-beginning of slot effects-
-            //Apply overheal on cast (Upgrade 3)
             if (containsSkill) {
                 character.Heal((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3]));
             }
             Debug.Log("Heal applied: " + ((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3])));
+            //Apply overheal on cast (Upgrade 3)
+
             //-end of slot effects-
             if (skillUses > 0) {
                 skillUses--;
