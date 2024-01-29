@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Fissure : MonoBehaviour
 {
-    private readonly int BASE_DAMAGE = 3;
+    private readonly int BASE_DAMAGE = 6;
     private readonly float BASE_DURATION = 3f;
     private int damage;
     private float timer;
@@ -45,8 +45,12 @@ public class Fissure : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        //Inflict slow, todo
+    private void OnTriggerStay2D(Collider2D col) {
+        Enemy enemy = col.GetComponent<Enemy>();
+        if (enemy != null) {
+            enemy.ApplySlow(0.5f, 0.5f);  
+            //As long as the enemy is in the fissure, they will remain slowed.
+        }
     }
 
     private void FaceMouse()

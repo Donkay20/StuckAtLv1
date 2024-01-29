@@ -26,11 +26,12 @@ public class EnemyManager : MonoBehaviour
         int number = -1;
 
         if (specialCondition) {
+        //special conditions are for events.
             switch (condition) {
-            case 2:
+            case 2: //Ruins Event 2
                 number = 0;
                 break;
-            case 8:
+            case 8: //Ruins Event 5
                 number = 1;
                 break;
             }
@@ -40,7 +41,7 @@ public class EnemyManager : MonoBehaviour
 
         Vector3 position = GenerateRandomPosition();
         position += player.transform.position;
-        GameObject newEnemy = Instantiate(enemy[number]);
+        GameObject newEnemy = Instantiate(enemy[number]); //change this value to test specific enemies
         newEnemy.transform.position = position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
         newEnemy.transform.parent = transform;
