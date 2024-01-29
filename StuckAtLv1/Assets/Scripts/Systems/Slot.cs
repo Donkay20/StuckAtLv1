@@ -32,6 +32,8 @@ public class Slot : MonoBehaviour
     private bool containsSkill = false;
     private bool absorbBulletAvailable = true;
     private int skillID = 0, skillUses = 0;
+    private float cooldown, activeCD;
+    private bool coolingDown = false;
     private int[] commonUpgrades = new int[13];
     private int[] rareUpgrades = new int[13];
     private int[] legendaryUpgrades = new int[13];
@@ -44,13 +46,33 @@ public class Slot : MonoBehaviour
     //exclusively for the absorption bullet
     [SerializeField] private GameObject[] attack = new GameObject[2];   
     //this will expand in accordance to the # of attacks we have
+    [SerializeField] private Image cooldownFill;
+    [SerializeField] private TextMeshProUGUI cooldownValueText;
     [SerializeField] private Transform bulletTransform;
+
     
 
     private void Start() {
         absorbBulletAvailable = true;
         containsSkill = false;
     }
+    
+    private void Update() {
+        //for handling cooldown. precise fill means we can't really use a coroutine..
+        if (activeCD > 0) {
+            coolingDown = true; cooldownValueText.gameObject.SetActive(true);
+            activeCD -= Time.deltaTime;
+            if (activeCD > 1) {
+                cooldownValueText.text = activeCD.ToString("f0");
+            } else {
+                cooldownValueText.text = activeCD.ToString("f1");
+            }
+            cooldownFill.fillAmount = activeCD/cooldown;
+        } else {
+            coolingDown = false; cooldownValueText.gameObject.SetActive(false);
+        }
+    }
+    
 
     public int Identity { get => identity; set => identity = value; }                                           
     //slot number, assigned by SlotManager class
@@ -59,39 +81,59 @@ public class Slot : MonoBehaviour
     public bool AbsorbBulletAvailable { get => absorbBulletAvailable; set => absorbBulletAvailable = value; }   
     //variable that prevents absorption bullet from being shot until the current shot one dissipates
 
-    public void Engage() {                                                                                      
-        //handles slot; whether to use skill or to absorb skill
-        if (!containsSkill && absorbBulletAvailable) {
-            Instantiate(bullet, bulletTransform.position, Quaternion.identity, transform);
-            this.absorbBulletAvailable = false;                                                     
-            //the absoption bullet class will set this value back to true when it dissipates
-        } else {
-            Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform); 
-            //launches the skill, positioned from the player. more checks will need to be added as the player gets more types of skills.
+    public void Engage() {     
+        if (!coolingDown) {
+            //slot won't do anything if it's on cooldown.
+            if (!containsSkill && absorbBulletAvailable) {
+                //handles slot; whether to use skill or to absorb skill
+                Instantiate(bullet, bulletTransform.position, Quaternion.identity, transform);
+                this.absorbBulletAvailable = false;                                                     
+                //the absoption bullet class will set this value back to true when it dissipates
+            } else {
+                Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform); 
+                //launches the skill, positioned from the player. more checks will need to be added as the player gets more types of skills.
 
-            //-beginning of slot effects-
-            if (containsSkill) {
-                character.Heal((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3]));
-            }
-            Debug.Log("Heal applied: " + ((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3])));
-            //Apply overheal on cast (Upgrade 3)
+                //-beginning of slot effects-
+                if (containsSkill) {
+                    character.Heal((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3]));
+                }
+                Debug.Log("Heal applied: " + ((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3])));
+                //Apply overheal on cast (Upgrade 3)
 
-            //-end of slot effects-
-            if (skillUses > 0) {
-                skillUses--;
+                //-end of slot effects-
+
+                if (skillUses > 0) {
+                    skillUses--;
+                }
+                uIText.text = skillUses.ToString();
+                //drain a skill use and reflect it in the UI
+
+                activeCD = cooldown;
+                //set the cooldown when a skill is used
+
+                if (skillUses <= 0) {
+                    containsSkill = false;
+                    skillImage.sprite = attack[0].GetComponent<SpriteRenderer>().sprite;
+                    skillID = 0; skillUses = 0; cooldown = 0;
+                }
+                //if skill has run out of uses, reset everything
             }
-            uIText.text = skillUses.ToString();
-            if (skillUses <= 0) {
-                containsSkill = false;
-                skillImage.sprite = attack[0].GetComponent<SpriteRenderer>().sprite;
-                skillID = 0; skillUses = 0;
-            }
-        }
+        }                                                                                 
     }
-    public void AcquireSkill(int ID, int uses) {    //calls to this method require the ID of the skill and the amt of base uses the skill has.
+
+    public void BattleEnd() {
+        //When a stage is cleared, reset all cooldowns
+        activeCD = 0;
+        cooldownFill.fillAmount = 0; 
+        cooldownValueText.gameObject.SetActive(true); 
+        coolingDown = false;
+    }
+
+    public void AcquireSkill(int ID, int uses, float cd) {    //calls to this method require the ID of the skill and the amt of base uses the skill has.
         if(ID != 0) {
             skillID = ID;
             skillUses = uses;           //for slot buffs that add more uses, a modifier would be applied here
+            cooldown = cd;
             skillImage.sprite = attack[ID].GetComponent<SpriteRenderer>().sprite;
             uIText.text = skillUses.ToString();
             containsSkill = true;

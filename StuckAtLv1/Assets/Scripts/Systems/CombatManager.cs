@@ -24,6 +24,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private MapManager mapProgress;
     [SerializeField]private GameManager notify;
     [SerializeField] private EnemyManager spawner;
+    [SerializeField] private Slot[] slots = new Slot[5];
     
     private void Awake() {
         specialCondition = false;
@@ -118,6 +119,13 @@ public class CombatManager : MonoBehaviour
 
         objective = "";
         character.Interrupt();
+        
+        foreach (Slot slot in slots) {
+            if (slot != null) {
+                slot.BattleEnd();
+            }
+        }
+        //reset the cooldown when the battle ends.
 
         if (specialCondition) {
             specialCondition = false;

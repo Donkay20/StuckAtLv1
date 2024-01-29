@@ -43,31 +43,31 @@ public class AbsorbBullet : MonoBehaviour
             switch (enemy.tag) {                                        
                 //each enemy will have a unique tag which will identify which one the bullet is hitting. Alternatively, we can swap to their names if need be
                 //if a modifier increase skill damage, it would call back to the parent slot and acquire the modifier for calculation
-                case "Skeleton1":
+                case "Skeleton1": //Bone Toss
                 enemy.TakeDamage(1);                                    
-                GetComponentInParent<Slot>().AcquireSkill(1, 3);        
-                //case-by-case; in the terms of this enemy it would return skill 1 with 3 uses.
+                GetComponentInParent<Slot>().AcquireSkill(1, 3, 1);        
+                //case-by-case; in the terms of this enemy it would return skill 1 with 3 uses, with a 1 second cooldown. TODO: add cooldown modifiers later.
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
                 Destroy(gameObject);
                 break;
                 
-                case "Golem1":
+                case "Golem1": //Rock Throw
                 enemy.TakeDamage(1);
-                GetComponentInParent<Slot>().AcquireSkill(4, 3);
+                GetComponentInParent<Slot>().AcquireSkill(4, 3, 1);
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
                 Destroy(gameObject);
                 break;
 
-                case "Golem2":
+                case "Golem2": //Ground Slam
                 enemy.TakeDamage(1);
-                GetComponentInParent<Slot>().AcquireSkill(5, 4);
+                GetComponentInParent<Slot>().AcquireSkill(5, 3, 1);
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
                 Destroy(gameObject);
                 break;
 
-                case "Golem3":
+                case "Golem3": //Fissure
                 enemy.TakeDamage(1);
-                GetComponentInParent<Slot>().AcquireSkill(6, 1);
+                GetComponentInParent<Slot>().AcquireSkill(6, 1, 3);
                 GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
                 Destroy(gameObject);
                 break;
