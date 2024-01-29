@@ -13,6 +13,8 @@ public class Fissure : MonoBehaviour
 
     void Start()
     {
+        FaceMouse();
+
         parent = FindAnyObjectByType<AttackSpawner>().GetParent();
         //set the parent before anything else, by grabbing the parent's relation to the slot
 
@@ -45,5 +47,14 @@ public class Fissure : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         //Inflict slow, todo
+    }
+
+    private void FaceMouse()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+        transform.up = -direction;
     }
 }
