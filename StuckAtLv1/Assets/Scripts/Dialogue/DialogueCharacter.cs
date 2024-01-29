@@ -14,6 +14,5 @@ public class DialogueCharacter : ScriptableObject
     public Sprite thinkingSprite;
     public Sprite madSprite;
     public Sprite shockedSprite;
-    public Sprite scaredSprite;
 
 }

@@ -160,9 +160,6 @@ public class DialogueManager : MonoBehaviour
             case "shocked":
                 rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.shockedSprite;
                 break;
-            case "scared":
-                rightCharacter.GetComponent<SpriteRenderer>().sprite = speaker.scaredSprite;
-                break;
         }
        
     }
@@ -188,9 +185,6 @@ public class DialogueManager : MonoBehaviour
                 break;
             case "shocked":
                 leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.shockedSprite;
-                break;
-            case "scared":
-                leftCharacter.GetComponent<SpriteRenderer>().sprite = speaker.scaredSprite;
                 break;
         }
     }
