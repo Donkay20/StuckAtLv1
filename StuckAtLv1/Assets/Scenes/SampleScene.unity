@@ -26736,7 +26736,7 @@ GameObject:
   - component: {fileID: 279690013}
   - component: {fileID: 279690014}
   m_Layer: 0
-  m_Name: AttackSpawner
+  m_Name: Attack Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26777,7 +26777,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 3724843924097455087, guid: d7e80adf47aff504aaf0b6a2163a4bc4, type: 3}
-  - {fileID: 0}
+  - {fileID: 4676103909113962417, guid: f79e2d64168453e4ea312cabd5859123, type: 3}
 --- !u!1 &289893065
 GameObject:
   m_ObjectHideFlags: 0
@@ -61498,7 +61498,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 3537131524280992513, guid: e751ca34bfe115042b801b30bd27f3fe, type: 3}
   - {fileID: 4699824026151706028, guid: 1269af0b9e1b3fc4d8fff2f02c3bc2db, type: 3}
-  - {fileID: 669714618770229522, guid: 68bfb92d544fef042a0211ef74e00bb5, type: 3}
+  - {fileID: 7131467954183148682, guid: a0e6537ff79beab45a0fff9662d2be42, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -64262,7 +64262,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 3537131524280992513, guid: e751ca34bfe115042b801b30bd27f3fe, type: 3}
   - {fileID: 4699824026151706028, guid: 1269af0b9e1b3fc4d8fff2f02c3bc2db, type: 3}
-  - {fileID: 669714618770229522, guid: 68bfb92d544fef042a0211ef74e00bb5, type: 3}
+  - {fileID: 7131467954183148682, guid: a0e6537ff79beab45a0fff9662d2be42, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

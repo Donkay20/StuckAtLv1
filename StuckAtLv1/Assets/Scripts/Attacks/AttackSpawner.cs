@@ -9,13 +9,16 @@ public class AttackSpawner : MonoBehaviour
     [SerializeField] private GameObject[] attacks;
     Slot parent;
 
+    /*
+    Possible arguments to pass:
+
+    5: Ground Slam
+    6: Fissure
+    */
+    
     public void SpawnAttack(int id, Slot s) {
         parent = s;
-        switch (id) {
-            case 5: //Ground Slam
-                Instantiate(attacks[id], player.transform.position, Quaternion.identity, transform);
-            break;
-        }
+        Instantiate(attacks[id], player.transform.position, Quaternion.identity, transform);
     }
 
     public Slot GetParent() {

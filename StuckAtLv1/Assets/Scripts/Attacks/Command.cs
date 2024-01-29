@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GS_Command : MonoBehaviour
+public class Command : MonoBehaviour
 {
     private Slot parent;
     private AttackSpawner command;
-    private readonly int GROUNDSLAM_ID = 5;
+    [SerializeField] private int id;
 
     private void Start() {
         parent = GetComponentInParent<Slot>();
         command = FindAnyObjectByType<AttackSpawner>();
-        command.SpawnAttack(GROUNDSLAM_ID, parent);
+        command.SpawnAttack(id, parent);
         Destroy(gameObject);
     }
 }
