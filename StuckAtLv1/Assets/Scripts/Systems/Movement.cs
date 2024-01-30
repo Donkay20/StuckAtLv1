@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -23,16 +25,22 @@ public class Movement : MonoBehaviour
     [SerializeField] BoxCollider2D bc;
 
     private Character invincibility;
+    [SerializeField] private Image dashCooldownFill;
+    [SerializeField] private TextMeshProUGUI dashCooldownText;
+    private readonly float BASE_COOLDOWN = 3f;
+    private float dashCooldownModifier, externalModifier;
+    //todo, add conditions for cooldownmodifier
+    private float activeDashCD;
+    private bool coolingDown;
 
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-
         invincibility = GetComponent<Character>();
-
         movementVector = new Vector3();
+        coolingDown = false;
     }
 
     void Update()
@@ -40,21 +48,33 @@ public class Movement : MonoBehaviour
         movementVector.x = Input.GetAxisRaw("Horizontal");
         movementVector.y = Input.GetAxisRaw("Vertical");
 
-        if(!isDashing)
-        {
+        if (activeDashCD > 0) {
+            coolingDown = true; dashCooldownText.gameObject.SetActive(true);
+            activeDashCD -= Time.deltaTime;
+            if (activeDashCD > 1) {
+                dashCooldownText.text = activeDashCD.ToString("f0");
+            } else {
+                dashCooldownText.text = activeDashCD.ToString("f1");
+            }
+            dashCooldownFill.fillAmount = activeDashCD/(BASE_COOLDOWN + dashCooldownModifier + externalModifier);
+        } else {
+            coolingDown = false; dashCooldownText.gameObject.SetActive(false);
+        }
+
+        if(!isDashing){
             movementVector = movementVector.normalized * speed;
             body.velocity = movementVector;
         }
         
-        if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift) && movementVector != Vector3.zero)
-        {
-            bc.enabled = false;
-            isDashing = true;
-            Dash();
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift) && movementVector != Vector3.zero){
+            if (!coolingDown) {
+                bc.enabled = false;
+                isDashing = true;
+                Dash(); SetDashCooldown();
+            }
         }
 
-        if(isDashing)
-        {
+        if(isDashing){
             dashTimer += Time.deltaTime;
             Debug.Log(dashTimer);
 
@@ -102,5 +122,21 @@ public class Movement : MonoBehaviour
         {
             sr.flipX = true;
         }
+    }
+
+    public void SetDashCooldown() {
+        activeDashCD = BASE_COOLDOWN + dashCooldownModifier + externalModifier;
+    }
+
+    public void SetExternalModifier(float e) {
+        externalModifier = e;
+    }
+
+    public void CombatEnd() {
+        activeDashCD = 0;
+        dashCooldownFill.fillAmount = 0;
+        dashCooldownText.gameObject.SetActive(false);
+        externalModifier = 0;
+        coolingDown = false;
     }
 }

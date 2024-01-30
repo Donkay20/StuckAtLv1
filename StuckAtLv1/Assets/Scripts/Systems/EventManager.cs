@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private MapManager map;
     [SerializeField] private CombatManager combat;
     [SerializeField] private Character player;
+    [SerializeField] private Movement playerMove;
     //backend stuff
     [SerializeField] private Event[] ruinsEvents, forestEvents, sewerEvents, abyssEvents;
     [SerializeField] private TextMeshProUGUI title, nameText, dialogueText, button1Text, button2Text, button3Text, health, afterimages, money;
@@ -183,17 +184,18 @@ public class EventManager : MonoBehaviour
                 player.money += 100;
                 resolve = "upgrade";
                 break;
-            case 4:     //+100g, -20% movespeed for 1 battle (event 3, ruins)
+            case 4:     //+100g, increased DashCD for one battle (event 3, ruins)
                 if (player.money < 100) {
                     player.money = 0;
                 } else {
                     player.money -= 100;
                 }
-                //todo
+                playerMove.SetExternalModifier(3f);
                 resolve = "normal";
                 break;
-            case 5:     //dash boost (event 4, ruins)
-                //todo
+            case 5:     //reduced DashCD for one battle (event 4, ruins)
+                player.money -= 1;
+                playerMove.SetExternalModifier(-2f);
                 resolve = "normal";
                 break;
             case 6:     //-50 HP (cannot kill) (event 4, ruins)

@@ -69,7 +69,7 @@ MonoBehaviour:
   - '"Ugh...  I feel a bit tired."'
   - '"But look at all the gold you gained!"'
   - '"Well yeah, but this still kind of sucks!"'
-  - Movement speed decreased for the next battle. Gained 100 gold.
+  - Dash cooldown increased for the next battle. Gained 100 gold.
   - '[END]'
   names:
   - Jamp

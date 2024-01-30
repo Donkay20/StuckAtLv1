@@ -13,19 +13,25 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI uIObjective;
     [SerializeField] private TextMeshProUGUI uIObjectiveNumber;
     [SerializeField] private Character character;
-    private int enemiesToKill;
-    private int timeLeft;
-    private string objective;
-
-    private bool specialCondition;
-
-    private int condition;
-    
+    [SerializeField] private Movement charMovement;
     [SerializeField] private MapManager mapProgress;
-    [SerializeField]private GameManager notify;
+    [SerializeField] private GameManager notify;
     [SerializeField] private EnemyManager spawner;
     [SerializeField] private Slot[] slots = new Slot[5];
-    
+    [SerializeField] private GameObject[] ruinsRooms = new GameObject[5];
+    [SerializeField] private GameObject[] ruinsSpawn = new GameObject[5];
+    [SerializeField] private GameObject[] forestRooms = new GameObject[5];
+    [SerializeField] private GameObject[] forestSpawn = new GameObject[5];
+    [SerializeField] private GameObject[] sewerRooms = new GameObject[5];
+    [SerializeField] private GameObject[] sewerSpawn = new GameObject[5];
+    //todo, abyss?
+    [SerializeField] private GameObject[] minibossRooms = new GameObject[5];
+    [SerializeField] private GameObject[] bossRooms = new GameObject[5];
+    private int enemiesToKill, timeLeft, condition, roomChosen;
+    private GameObject room;
+    private string objective;
+    private bool specialCondition;
+
     private void Awake() {
         specialCondition = false;
         condition = -1;
@@ -34,6 +40,7 @@ public class CombatManager : MonoBehaviour
     public void Setup(string format) {
         /*
         Set-up includes:
+        - choosing the map and placing a character in it
         - checking for special event fights
         - getting which type of combat it is (combat vs survival)
         - setting fight to active
@@ -42,9 +49,29 @@ public class CombatManager : MonoBehaviour
         - updating the UI accordingly
         */
 
-        if (specialCondition) { //when adding a special condition, it needs to be mentioned here, and on the enemy manager.
+        switch (mapProgress.GetWorld()) {
+            //choose a room, set it to be active, position the character to the spawn point
+            case 1: //Ruins
+                roomChosen = Random.Range(0, ruinsRooms.Length);
+                ruinsRooms[roomChosen].SetActive(true); 
+                room = ruinsRooms[roomChosen];
+                character.gameObject.transform.position = ruinsSpawn[roomChosen].gameObject.transform.position;
+                Debug.Log(roomChosen);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
+
+        if (specialCondition) { 
+            //when adding a special condition, it needs to be mentioned here, and on the enemy manager.
             switch(condition) {
-                case 2:
+                case 2: //Ruins Event 2
                     spawner.SetCondition(condition);
                     objective = "combat";
                     spawner.enabled = true;
@@ -52,7 +79,7 @@ public class CombatManager : MonoBehaviour
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;
-                case 8:
+                case 8: //Ruins Event 5
                     spawner.SetCondition(condition);
                     objective = "combat";
                     spawner.enabled = true;
@@ -64,26 +91,59 @@ public class CombatManager : MonoBehaviour
         } else {
             switch (format) {
             case "combat":
-            objective = "combat";
-            spawner.enabled = true;
-            enemiesToKill = mapProgress.GetWorld()*(1 + (2 * mapProgress.GetLevel())); //orig 10
-            uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
-            StartCoroutine(CombatTracker());
-            break;
+                objective = "combat";
+                spawner.enabled = true;
+                enemiesToKill = mapProgress.GetWorld()*(1 + (2 * mapProgress.GetLevel())); //orig 10
+                uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
+                StartCoroutine(CombatTracker());
+                break;
 
             case "survival":
-            objective = "survival";
-            spawner.enabled = true;
-            timeLeft = mapProgress.GetWorld()*(2 + mapProgress.GetLevel()); //orig 20
-            uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
-            StartCoroutine(SurvivalTimer());
-            break;
+                objective = "survival";
+                spawner.enabled = true;
+                timeLeft = mapProgress.GetWorld()*(2 + mapProgress.GetLevel()); //orig 20
+                uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
+                StartCoroutine(SurvivalTimer());
+                break;
+
+            case "miniboss":
+                //todo
+                switch(mapProgress.GetWorld()) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                }
+                break;
+
+            case "boss":
+                //todo
+                switch(mapProgress.GetWorld()) {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                }
+                break;
             }
         }
         character.Heal(0);
     }
 
-    public void EnemyKilled() { //for combat-type encounter use only
+    public void EnemyKilled() { 
+        //for combat-type encounter use only
         if(objective == "combat") {
             enemiesToKill--; uIObjectiveNumber.text = enemiesToKill.ToString();
         }
@@ -94,7 +154,8 @@ public class CombatManager : MonoBehaviour
         condition = c;
     }
 
-    private IEnumerator SurvivalTimer() { //handles timer countdown for survival-type encounter format
+    private IEnumerator SurvivalTimer() { 
+        //handles timer countdown for survival-type encounter format
         while (timeLeft > 0) {
             yield return new WaitForSeconds(1);
             timeLeft--; uIObjectiveNumber.text = timeLeft.ToString();
@@ -108,31 +169,37 @@ public class CombatManager : MonoBehaviour
         Finish();
     }
 
-    private void Finish() {         //Disable the spawner, kill all remaining enemies, rend the combat manager inactive, then notify the game manager that the objective has been completed
+    private void Finish() {         
+        //Disable the spawner & kill all remaining enemies
         spawner.enabled = false;
-
         Enemy[] remainingEnemies = FindObjectsOfType<Enemy>();
-
         foreach (Enemy straggler in remainingEnemies) {
-            straggler.TakeDamage(999999999);
+            straggler.TakeDamage(99999);
         }
 
+        //Reset the objective and stop coroutines in the character script to prevent errors
         objective = "";
         character.Interrupt();
-        
+        charMovement.CombatEnd();
+
+        //reset the cooldown when the battle ends.
         foreach (Slot slot in slots) {
             if (slot != null) {
                 slot.BattleEnd();
             }
         }
-        //reset the cooldown when the battle ends.
 
+        //Get rid of any special conditions
         if (specialCondition) {
             specialCondition = false;
             condition = -1;
             spawner.SetCondition(-1);
         }
-        
+
+        //Disable the current map
+        room.SetActive(false);
+
+        //Notify the game manager.
         notify.ReceiveCommand("upgrade");
     }
 }

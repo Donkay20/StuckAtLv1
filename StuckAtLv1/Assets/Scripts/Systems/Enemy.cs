@@ -79,10 +79,11 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     public void ApplySlow(float percentage, float duration) {
-        alteredSpeed = baseSpeed - (baseSpeed*percentage);
+        alteredSpeed = baseSpeed - (baseSpeed *     percentage);
         Debug.Log("Altered speed: " + alteredSpeed);
         alteredSpeedTimer = duration;
         Debug.Log("Altered speed duration: " + alteredSpeedTimer);
+        //GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 1f, 1f);
         //To apply a slow, it needs to take in the severity of the slow, + the duration for how long the slow lasts.
     }
 

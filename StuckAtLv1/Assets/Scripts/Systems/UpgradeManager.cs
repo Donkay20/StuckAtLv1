@@ -67,7 +67,8 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    public void Setup(string type) {    //Called from the gamemanager with a type of reward, dependent on type of battle fought. Should be called every time we go into this menu.
+    public void Setup(string type) {    
+        //Called from the gamemanager with a type of reward, dependent on type of battle fought. Should be called every time we go into this menu.
         //Sets up the upgrades that are displayed in-game. This logic will need to be re-written for if the upgrades run out entirely, although idk if that'll be possible.
         for (int i = 0; i < 3; i++) {       
             if (type == "normal") {
@@ -87,8 +88,10 @@ public class UpgradeManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 3; i++) {       //checks to see if the specific upgrade is empty. if so, reroll until you get one that isn't
-            int roll = Random.Range(0,4);   //for now, only 4 possible upgrades. (UPDATE TO 13 LATER ON)
+        for (int i = 0; i < 3; i++) {       
+            //checks to see if the specific upgrade is empty. if so, reroll until you get one that isn't
+            int roll = Random.Range(0,4);   
+            //for now, only 4 possible upgrades. (UPDATE TO 13 LATER ON)
             switch (upgradeRarities[i]) {
                 case 0: //common
                     while (commonUpgradePool[roll] == 0) {
@@ -118,7 +121,8 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    public void ClickedUpgrade(int position) {      //Select an upgrade. Selected button stays depressed. Updates the upgradeSelected variable
+    public void ClickedUpgrade(int position) {      
+        //Select an upgrade. Selected button stays depressed. Updates the upgradeSelected variable
         Debug.Log("Clicked upgrade " + position);
         upgradePositionSelected = position;
         switch (position) {
@@ -140,7 +144,8 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    public void ClickedSlot(int slot) {     //select a slot, updates the slotSelected variable (UPDATE TO 5 LATER ON)
+    public void ClickedSlot(int slot) {     
+        //select a slot, updates the slotSelected variable (UPDATE TO 5 LATER ON)
         Debug.Log("Clicked slot " + slot);
         slotSelected = slot;
         switch (slot) {
@@ -155,7 +160,9 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    public void Finish() { //Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
+    public void Finish() { 
+        //Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
+
         /*
         What's happening is that it's grabbing the rarity from the rarity assigned to each upgrade shown, from upgradeRarities[0-2]. Then, populates an appropriate string based on the rarity.
         It then grabs the upgrade ID assigned to each upgrade shown, from upgradeSelection[0-3 (UPDATE TO 0-12 LATER)].
@@ -163,6 +170,7 @@ public class UpgradeManager : MonoBehaviour
 
         Because of this, the slot upgrade pool must be universal throughout the game.
         */
+        
         string rarity = "";
         //apply to slot selected
         switch(upgradeRarities[upgradePositionSelected]) {
