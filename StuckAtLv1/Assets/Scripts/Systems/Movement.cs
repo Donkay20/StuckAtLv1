@@ -41,6 +41,8 @@ public class Movement : MonoBehaviour
         invincibility = GetComponent<Character>();
         movementVector = new Vector3();
         coolingDown = false;
+
+        dashCooldownFill.fillAmount = 0f;
     }
 
     void Update()
