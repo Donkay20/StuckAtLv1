@@ -13,6 +13,7 @@ public class SlotManager : MonoBehaviour
     public KeyCode slotKey1, slotKey2;
     [SerializeField] private Slot slot1, slot2;
     private int slotNum = 1;
+    private int maxSlots;
 
     [SerializeField] private GameObject[] slots;
     [SerializeField] private Sprite[] onSpriteList;
@@ -22,20 +23,39 @@ public class SlotManager : MonoBehaviour
         //Sets the first slot as default
         slots[0].GetComponent<Animator>().SetTrigger("Hit");
         slots[0].transform.GetChild(1).GetComponent<Image>().sprite = onSpriteList[0];
-        slotNum = 1;
+        slotNum = 1; 
+        maxSlots = 2; //# of slots unlocked
         slot1.Identity = 1;
         slot2.Identity = 2;
     }
     void Update()
     {
         ToggleSlot();
-        InititateSlot();
+        InitiateSlot();
         TurnOffSlots();
     }
 
     //Select Slot Player wants to use
     private void ToggleSlot()
     {
+        if (Input.mouseScrollDelta.y > 0) {
+            if (slotNum - 1 == 0) {
+                slotNum = maxSlots;
+            } else {
+                slotNum--;
+            }
+            AnimationControl(slots[slotNum - 1], slotNum - 1);
+        }
+
+        if (Input.mouseScrollDelta.y < 0) {
+            if (slotNum + 1 > maxSlots) {
+                slotNum = 1;
+            } else {
+                slotNum++;
+            }
+            AnimationControl(slots[slotNum - 1], slotNum - 1);
+        }
+
         if (Input.GetKeyDown(slotKey1)) {
             slotNum = 1;
             AnimationControl(slots[0], 0);
@@ -51,13 +71,11 @@ public class SlotManager : MonoBehaviour
         }
     }
 
-    //Initiates slot selected
-    private void InititateSlot()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            switch(slotNum)
-            {
+    
+    private void InitiateSlot() {
+        //Initiates slot selected
+        if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)){
+            switch(slotNum){
                 case 1:
                 slot1.Engage();
                 break;
@@ -67,7 +85,6 @@ public class SlotManager : MonoBehaviour
                 break;
             }
         }
-        
     }
 
     private void AnimationControl(GameObject slot, int spriteNumOn)
