@@ -38,6 +38,7 @@ public class CombatManager : MonoBehaviour
     }
 
     public void Setup(string format) {
+        
         /*
         Set-up includes:
         - choosing the map and placing a character in it

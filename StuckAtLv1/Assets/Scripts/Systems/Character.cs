@@ -19,6 +19,7 @@ todo:
     private readonly float iframe = 0.3f;
     private bool invincible; //iframe check
     private bool healthDraining; //overheal drain check
+    private float damageModifier; public float DamageModifier { get => damageModifier; set => damageModifier = value; }
     [SerializeField] Animator playerAnim;
     [SerializeField] Animator healthBarAnim;
     [SerializeField] StatusBar hpBar;

@@ -13,27 +13,25 @@ public class Movement : MonoBehaviour
     Animator anim;
     SpriteRenderer sr;
 
-    [SerializeField] float speed = 3f;
+    private readonly float BASE_SPEED = 4f;
+    private float speedModifier; public float SpeedModifier { get => speedModifier; set => speedModifier = value; }
     
     //Dashing Mechanic
     [SerializeField] float dashForce = 100f;
     [SerializeField] float dashTimerEnd = 0.04f;
     [SerializeField] float dashTimer = 0f;
-
     private bool isDashing = false;
     [SerializeField] GameObject dashSprite;
-    [SerializeField] BoxCollider2D bc;
-
+    [SerializeField] BoxCollider2D hitbox;
     private Character invincibility;
     [SerializeField] private Image dashCooldownFill;
     [SerializeField] private TextMeshProUGUI dashCooldownText;
     private readonly float BASE_COOLDOWN = 3f;
     private float dashCooldownModifier, externalModifier;
     //todo, add conditions for cooldownmodifier
-    private float activeDashCD;
+    private float activeDashCD; public float ActiveDashCD { get => activeDashCD; set => activeDashCD = value; }
     private bool coolingDown;
-
-
+    
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -41,7 +39,6 @@ public class Movement : MonoBehaviour
         invincibility = GetComponent<Character>();
         movementVector = new Vector3();
         coolingDown = false;
-
         dashCooldownFill.fillAmount = 0f;
     }
 
@@ -63,20 +60,20 @@ public class Movement : MonoBehaviour
             coolingDown = false; dashCooldownText.gameObject.SetActive(false);
         }
 
-        if(!isDashing){
-            movementVector = movementVector.normalized * speed;
+        if (!isDashing) {
+            movementVector = movementVector.normalized * BASE_SPEED * (1 + speedModifier);
             body.velocity = movementVector;
         }
         
-        if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift) && movementVector != Vector3.zero){
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift) && movementVector != Vector3.zero) {
             if (!coolingDown) {
-                bc.enabled = false;
+                hitbox.enabled = false;
                 isDashing = true;
                 Dash(); SetDashCooldown();
             }
         }
 
-        if(isDashing){
+        if (isDashing) {
             dashTimer += Time.deltaTime;
             Debug.Log(dashTimer);
 
@@ -89,24 +86,22 @@ public class Movement : MonoBehaviour
         RunAnimation();
     }
 
-    void Dash()
-    {
+    void Dash() {
         Debug.Log("Dashing");
         body.AddForce(movementVector * dashForce, ForceMode2D.Impulse);
         Invoke(nameof(StopDashing), 0.2f);
         invincibility.DashingIFrames();
     }
 
-    void StopDashing(){
+    void StopDashing() {
         isDashing = false;
         Debug.Log("Stop Dashing");
         dashTimer = 0f;
         invincibility.StopDashingIFrames();
-        bc.enabled = true;
+        hitbox.enabled = true;
     }
 
-    void RunAnimation()
-    {
+    void RunAnimation() {
         if(movementVector.x != 0 || movementVector.y != 0)
         {
             anim.SetBool("Run", true);
