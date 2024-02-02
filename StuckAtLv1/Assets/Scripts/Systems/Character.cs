@@ -28,6 +28,7 @@ todo:
 
     void OnEnable() {
         afterimageText.text = afterimages.ToString();
+        damageModifier = 0;
     }
 
     public void TakeDamage(int damage) { //todo; edit for buffs/dmg reduction values

@@ -41,6 +41,9 @@ public class Movement : MonoBehaviour
         coolingDown = false;
         dashCooldownFill.fillAmount = 0f;
     }
+    private void OnEnable() {
+        speedModifier = 0;
+    }
 
     void Update()
     {
@@ -75,7 +78,7 @@ public class Movement : MonoBehaviour
 
         if (isDashing) {
             dashTimer += Time.deltaTime;
-            Debug.Log(dashTimer);
+            //Debug.Log(dashTimer);
 
             if(dashTimer >= dashTimerEnd)
             {
@@ -87,7 +90,7 @@ public class Movement : MonoBehaviour
     }
 
     void Dash() {
-        Debug.Log("Dashing");
+        //Debug.Log("Dashing");
         body.AddForce(movementVector * dashForce, ForceMode2D.Impulse);
         Invoke(nameof(StopDashing), 0.2f);
         invincibility.DashingIFrames();
@@ -95,7 +98,7 @@ public class Movement : MonoBehaviour
 
     void StopDashing() {
         isDashing = false;
-        Debug.Log("Stop Dashing");
+        //Debug.Log("Stop Dashing");
         dashTimer = 0f;
         invincibility.StopDashingIFrames();
         hitbox.enabled = true;
