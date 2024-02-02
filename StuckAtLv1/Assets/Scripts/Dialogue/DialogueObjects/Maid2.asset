@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Maid 2
   location: 
-  neutralSprite: {fileID: 21300000, guid: c67715b977c6bb94583741764c9df559, type: 3}
+  neutralSprite: {fileID: 21300000, guid: ef3cde0d2a037104e9e4f96933b77c97, type: 3}
   happySprite: {fileID: 0}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}
   madSprite: {fileID: 0}
   shockedSprite: {fileID: 0}
-  scaredSprite: {fileID: 0}
