@@ -9,13 +9,13 @@ public class Buff : MonoBehaviour
     [SerializeField] private TextMeshProUGUI activeDurationText;
     [SerializeField] private Image activeBuffIcon;
     [SerializeField] private Sprite[] buffIcons;
-    [SerializeField] private Character character;
-    [SerializeField] private Movement movement;
-    [SerializeField] private string buffType;
-    [SerializeField] private float efficacy;
-    [SerializeField] private float duration;
+    private Character character;
+    private Movement movement;
+    private string buffType;
+    private float efficacy;
+    private float duration;
     private bool buffActive;
-    [SerializeField] private int identity;       public int Identity { get => identity; set => identity = value; }
+    private int identity;       public int Identity { get => identity; set => identity = value; }
 
     private void Awake() {
         character = FindAnyObjectByType<Character>();
@@ -51,14 +51,15 @@ public class Buff : MonoBehaviour
         int i = 0;
         switch(buffType) {
             case "power":
+                i = 1;
                 if (x) {
                     character.DamageModifier += efficacy; 
-                    i = 1;
                 } else {
                     character.DamageModifier -= efficacy;
                 }
                 break;
             case "speed":
+                i = 2;
                 if (x) {
                     movement.SpeedModifier += efficacy; 
                     i = 2;
@@ -67,15 +68,17 @@ public class Buff : MonoBehaviour
                 }
                 break;
             case "bloodsucker": //todo
+                i = 3;
                 if (x) {
-                    i = 3;
+
                 } else {
 
                 }
                 break;
             case "bulwark": //todo
+                i = 4;
                 if (x) {
-                    i = 4;
+
                 } else {
 
                 }

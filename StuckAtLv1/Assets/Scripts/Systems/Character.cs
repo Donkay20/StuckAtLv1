@@ -20,6 +20,8 @@ todo:
     private bool invincible; //iframe check
     private bool healthDraining; //overheal drain check
     private float damageModifier; public float DamageModifier { get => damageModifier; set => damageModifier = value; }
+    private float drainTimer = 1; public float DrainTimer { get => drainTimer; set => drainTimer = value; }
+
     [SerializeField] Animator playerAnim;
     [SerializeField] Animator healthBarAnim;
     [SerializeField] StatusBar hpBar;
@@ -29,6 +31,7 @@ todo:
     void OnEnable() {
         afterimageText.text = afterimages.ToString();
         damageModifier = 0;
+        drainTimer = 1;
     }
 
     public void TakeDamage(int damage) { //todo; edit for buffs/dmg reduction values
@@ -71,7 +74,7 @@ todo:
                 healthDraining = false;
                 yield break;
             } else {
-                yield return new WaitForSeconds(1); //if there's a buff/debuff that would increase/reduce drain time, add it here.
+                yield return new WaitForSeconds(drainTimer); //Buffs or debuffs that affect drain time take effect here.
             }
         }
     }
@@ -82,14 +85,17 @@ todo:
         healthDraining = false;
     }
 
-    public void Heal(int amount) {  //needs to be changed to account for overhealing / temp HP
+    public void Heal(int amount) { 
         if (currentHp <= 0) {
             return;
         }
-        Debug.Log("Healed " + amount + " HP. Health: " + currentHp);
-        currentHp += amount;
+        if (currentHp + amount > 999) {
+            currentHp = 999;
+        } else {
+            currentHp += amount;
+        }
         healthText.text = currentHp.ToString();
-
+        Debug.Log("Healed " + amount + " HP. Health: " + currentHp);
         if (currentHp > maxHp && !healthDraining) {
             healthText.color = new Color32(166, 254, 0, 255);
             StartCoroutine(DrainHealth());
@@ -102,6 +108,7 @@ todo:
         } else {
             afterimages += amount;
         }
+        afterimageText.text = afterimages.ToString();
     }
 
     public void GainMoney(int amount) {

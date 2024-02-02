@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
 
     private readonly float BASE_SPEED = 4f;
     private float speedModifier; public float SpeedModifier { get => speedModifier; set => speedModifier = value; }
+    private float speedDebuff; public float SpeedDebuff { get => speedDebuff; set => speedDebuff = value; }
     
     //Dashing Mechanic
     [SerializeField] float dashForce = 100f;
@@ -30,6 +31,7 @@ public class Movement : MonoBehaviour
     private float dashCooldownModifier, externalModifier;
     //todo, add conditions for cooldownmodifier
     private float activeDashCD; public float ActiveDashCD { get => activeDashCD; set => activeDashCD = value; }
+
     private bool coolingDown;
     
     private void Awake() {
@@ -40,9 +42,11 @@ public class Movement : MonoBehaviour
         movementVector = new Vector3();
         coolingDown = false;
         dashCooldownFill.fillAmount = 0f;
+        speedDebuff = 1;
     }
     private void OnEnable() {
         speedModifier = 0;
+        speedDebuff = 1;
     }
 
     void Update()
@@ -64,7 +68,7 @@ public class Movement : MonoBehaviour
         }
 
         if (!isDashing) {
-            movementVector = movementVector.normalized * BASE_SPEED * (1 + speedModifier);
+            movementVector = movementVector.normalized * BASE_SPEED * (1 + speedModifier) * speedDebuff;
             body.velocity = movementVector;
         }
         

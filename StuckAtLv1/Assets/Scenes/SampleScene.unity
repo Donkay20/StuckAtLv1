@@ -741,14 +741,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdd2c209f6d05c44a86b5439dd24c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 1093936406}
   buffPrefab: {fileID: 7344494797422048518, guid: c3561094ef7043a43ac265e563b619dc, type: 3}
-  debuffPrefab: {fileID: 0}
+  debuffPrefab: {fileID: 5454529576631636563, guid: e510a3fa154ec3546a55ad11578cc35d, type: 3}
   buffPlacement:
   - {fileID: 325695775}
   - {fileID: 42141855}
   - {fileID: 506953579}
   - {fileID: 1786754725}
   - {fileID: 1235950106}
+  debuffPlacement:
+  - {fileID: 1903362276}
+  - {fileID: 1417925617}
+  - {fileID: 1802021982}
+  - {fileID: 1467447482}
+  - {fileID: 192267273}
 --- !u!1 &74530381
 GameObject:
   m_ObjectHideFlags: 0
@@ -51356,6 +51363,7 @@ MonoBehaviour:
   mapProgress: {fileID: 541258214}
   notify: {fileID: 995477027}
   spawner: {fileID: 1138831527}
+  buffManager: {fileID: 0}
   slots:
   - {fileID: 1237195275}
   - {fileID: 947085474}
@@ -70896,7 +70904,7 @@ GameObject:
   - component: {fileID: 1617114653}
   - component: {fileID: 1617114652}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Keybind Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

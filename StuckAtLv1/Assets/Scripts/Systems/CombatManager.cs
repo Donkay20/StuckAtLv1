@@ -17,6 +17,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private MapManager mapProgress;
     [SerializeField] private GameManager notify;
     [SerializeField] private EnemyManager spawner;
+    [SerializeField] private BuffManager buffManager;
     [SerializeField] private Slot[] slots = new Slot[5];
     [SerializeField] private GameObject[] ruinsRooms = new GameObject[5];
     [SerializeField] private GameObject[] ruinsSpawn = new GameObject[5];
@@ -182,6 +183,7 @@ public class CombatManager : MonoBehaviour
         objective = "";
         character.Interrupt();
         charMovement.CombatEnd();
+        buffManager.EndBattle();
 
         //reset the cooldown when the battle ends.
         foreach (Slot slot in slots) {
