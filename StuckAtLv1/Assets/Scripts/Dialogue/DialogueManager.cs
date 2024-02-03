@@ -189,6 +189,9 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public string GetCurrentLine() {
+        return currentLine;
+    }
     IEnumerator TypeLines(string currentLine) {
 
         lineText.text = "";
