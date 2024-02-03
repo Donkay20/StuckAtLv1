@@ -92,7 +92,8 @@ public class BuffManager : MonoBehaviour
         buffs[id] = null;
         for (int i = id; i < buffPosition - 1; i++) {
             buffs[i + 1].transform.position = buffPlacement[i].transform.position;
-            buffs[i] = buffs[i + 1]; 
+            buffs[i] = buffs[i + 1];
+            buffs[i].Identity--; 
         }
         buffs[buffPosition - 1] = null;
         buffPosition--;
@@ -104,6 +105,7 @@ public class BuffManager : MonoBehaviour
         for (int i = id; i < debuffPosition - 1; i++) {
             debuffs[i + 1].transform.position = debuffPlacement[i].transform.position;
             debuffs[i] = debuffs[i + 1];
+            debuffs[i].Identity--;
         }
         debuffs[debuffPosition - 1] = null;
         debuffPosition--;
