@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemy;
+    [SerializeField] GameObject[] enemyPool;
     [SerializeField] Vector2 spawnArea;
     [SerializeField] float spawnTimer;
     [SerializeField] GameObject player;
@@ -23,25 +23,25 @@ public class EnemyManager : MonoBehaviour
     }
 
     private void SpawnEnemy() {
-        int number = -1;
+        int enemyID = -1;
 
         if (specialCondition) {
         //special conditions are for events.
             switch (condition) {
             case 2: //Ruins Event 2
-                number = 0;
+                enemyID = 0;
                 break;
             case 8: //Ruins Event 5
-                number = 1;
+                enemyID = 1;
                 break;
             }
         } else {
-            number = Random.Range(0, enemy.Length);
+            enemyID = Random.Range(0, enemyPool.Length);
         }
 
         Vector3 position = GenerateRandomPosition();
         position += player.transform.position;
-        GameObject newEnemy = Instantiate(enemy[number]); //change this value to test specific enemies
+        GameObject newEnemy = Instantiate(enemyPool[enemyID]); //change this value to test specific enemies
         newEnemy.transform.position = position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
         newEnemy.transform.parent = transform;
@@ -51,18 +51,17 @@ public class EnemyManager : MonoBehaviour
 
         Vector3 position =  new Vector3();
 
-        float f = UnityEngine.Random.value > 0.5f ? -1f : 1f;
+        float f = Random.value > 0.5f ? -1f : 1f;
 
-        if(UnityEngine.Random.value > 0.5f) 
+        if(Random.value > 0.5f) 
         {
-            position.x = UnityEngine.Random.Range(-spawnArea.x, spawnArea.x);
+            position.x = Random.Range(-spawnArea.x, spawnArea.x);
             position.y = spawnArea.y * f;
         } else {
-            position.y = UnityEngine.Random.Range(-spawnArea.y, spawnArea.y);
+            position.y = Random.Range(-spawnArea.y, spawnArea.y);
             position.x = spawnArea.x * f;
 
         }
-
         position.z = 0;
         return position;
     }
@@ -70,10 +69,9 @@ public class EnemyManager : MonoBehaviour
     public void SetCondition(int n) {
         if (n == -1) {
             specialCondition = false;
-            condition = n;
         } else {
             specialCondition = true;
-            condition = n;
         }
+        condition = n;
     }
 }
