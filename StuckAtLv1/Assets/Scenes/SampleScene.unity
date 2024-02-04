@@ -27689,7 +27689,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1140305370}
   - {fileID: 279690013}
   m_Father: {fileID: 828058986}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -51363,7 +51362,7 @@ MonoBehaviour:
   mapProgress: {fileID: 541258214}
   notify: {fileID: 995477027}
   spawner: {fileID: 1138831527}
-  buffManager: {fileID: 0}
+  buffManager: {fileID: 50808387}
   slots:
   - {fileID: 1237195275}
   - {fileID: 947085474}
@@ -62358,7 +62357,7 @@ MonoBehaviour:
   attack:
   - {fileID: 1249439463100937523, guid: 8879187ed6a01314f85ffb0f4dee69e5, type: 3}
   - {fileID: 3059118022218228874, guid: bdb3b8d40a5901a4fab38292f3f1d2ff, type: 3}
-  - {fileID: 0}
+  - {fileID: 3468563386264318168, guid: 184eecefb6cfd9d40b1d2636db795da6, type: 3}
   - {fileID: 0}
   - {fileID: 3537131524280992513, guid: e751ca34bfe115042b801b30bd27f3fe, type: 3}
   - {fileID: 4699824026151706028, guid: 1269af0b9e1b3fc4d8fff2f02c3bc2db, type: 3}
@@ -64254,51 +64253,6 @@ MonoBehaviour:
   spawnArea: {x: 13, y: 8}
   spawnTimer: 1.5
   player: {fileID: 1093936400}
---- !u!1 &1140305368
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1140305370}
-  - component: {fileID: 1140305369}
-  m_Layer: 0
-  m_Name: RockWallSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1140305369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140305368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cfad23496984164192fd61ff0752976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rockWall: {fileID: 1151326303170313773, guid: d89d07960e8f04045bf7b24ce8a323bc, type: 3}
---- !u!4 &1140305370
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140305368}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 341985907}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1145136056
 GameObject:
   m_ObjectHideFlags: 0
@@ -65335,7 +65289,7 @@ MonoBehaviour:
   attack:
   - {fileID: 1249439463100937523, guid: 8879187ed6a01314f85ffb0f4dee69e5, type: 3}
   - {fileID: 3059118022218228874, guid: bdb3b8d40a5901a4fab38292f3f1d2ff, type: 3}
-  - {fileID: 0}
+  - {fileID: 3468563386264318168, guid: 184eecefb6cfd9d40b1d2636db795da6, type: 3}
   - {fileID: 0}
   - {fileID: 3537131524280992513, guid: e751ca34bfe115042b801b30bd27f3fe, type: 3}
   - {fileID: 4699824026151706028, guid: 1269af0b9e1b3fc4d8fff2f02c3bc2db, type: 3}
@@ -65774,7 +65728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1281270464
 Transform:
   m_ObjectHideFlags: 0
@@ -76131,7 +76085,7 @@ Transform:
   m_GameObject: {fileID: 2035683321}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.42, y: 2.22, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

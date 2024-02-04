@@ -39,39 +39,37 @@ public class AbsorbBullet : MonoBehaviour
         //the enemy class will need to be changed to a bare-bones calculation class as every enemy will need it, can stack other classes on different enemies for unique behavior
         
         if (enemy != null) {
-            Instantiate(spawnSiphon, transform.position, transform.rotation);
             switch (enemy.tag) {                                        
                 //each enemy will have a unique tag which will identify which one the bullet is hitting. Alternatively, we can swap to their names if need be
-                //if a modifier increase skill damage, it would call back to the parent slot and acquire the modifier for calculation
-                case "Skeleton1": //Bone Toss
-                enemy.TakeDamage(1);                                    
-                GetComponentInParent<Slot>().AcquireSkill(1, 3, 1);        
-                //case-by-case; in the terms of this enemy it would return skill 1 with 3 uses, with a 1 second cooldown. TODO: add cooldown modifiers later.
-                GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
-                Destroy(gameObject);
+                //if a modifier increases skill damage, it would call back to the parent slot and acquire the modifier for calculation
+                case "Skeleton1": //Bone Toss                                   
+                GetComponentInParent<Slot>().AcquireSkill(1, 3, 1);        //case-by-case; in the terms of this enemy it would return skill 1 with 3 uses, with a 1 second cooldown.
                 break;
-                
+
+                case "Skeleton2": //Bone Spikes
+                GetComponentInParent<Slot>().AcquireSkill(2, 5, 0.5f);
+                break;
+
+                case "Skeleton3": //Upheval
+                //todo
+                break;
+
                 case "Golem1": //Rock Throw
-                enemy.TakeDamage(1);
                 GetComponentInParent<Slot>().AcquireSkill(4, 3, 1);
-                GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
-                Destroy(gameObject);
                 break;
 
                 case "Golem2": //Ground Slam
-                enemy.TakeDamage(1);
                 GetComponentInParent<Slot>().AcquireSkill(5, 3, 1);
-                GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
-                Destroy(gameObject);
                 break;
 
                 case "Golem3": //Fissure
-                enemy.TakeDamage(1);
                 GetComponentInParent<Slot>().AcquireSkill(6, 1, 3);
-                GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
-                Destroy(gameObject);
                 break;
             }
+            Instantiate(spawnSiphon, transform.position, transform.rotation);
+            enemy.TakeDamage(1);
+            GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
+            Destroy(gameObject);
         }
     }
 }

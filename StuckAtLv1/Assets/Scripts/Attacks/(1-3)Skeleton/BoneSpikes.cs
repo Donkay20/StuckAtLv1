@@ -1,19 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class BoneToss : MonoBehaviour
+public class BoneSpikes : MonoBehaviour
 {
-    float timer = 2f;   //if a modifier increase skill time duration, it would call back to the parent slot and acquire the modifier for calculation
+    private float timer = 3f;
+    private float slowdownTime;
     Rigidbody2D rb;
     Slot parent;
     private Vector3 mousePosition;
     private Camera mainCamera;
-    public float speed;
+    private float speed = 5; private float baseSpeed = 5;
     private int damage;
-
-    void Start() {  //aim towards the mouse
+    void Start() {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
         parent = GetComponentInParent<Slot>();
@@ -26,10 +25,11 @@ public class BoneToss : MonoBehaviour
 
         //apply duration bonus
         timer *= 1 + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
+        slowdownTime = timer / 2;
         Debug.Log("timer: " + timer);
 
         //apply damage bonus
-        damage = (int)(5 * (1+(parent.GetCommonUpgrade(0)*0.2f + parent.GetRareUpgrade(0)*0.4f + parent.GetLegendaryUpgrade(0)*0.6f)));
+        damage = (int)(3 * (1+(parent.GetCommonUpgrade(0)*0.2f + parent.GetRareUpgrade(0)*0.4f + parent.GetLegendaryUpgrade(0)*0.6f)));
         Debug.Log("damage: " + damage);
     }
 
@@ -37,6 +37,10 @@ public class BoneToss : MonoBehaviour
         timer -= Time.deltaTime;
         if (timer <= 0) {
             Destroy(gameObject);
+        }
+
+        if (timer <= slowdownTime) {
+            speed = baseSpeed*(timer/slowdownTime);
         }
     }
 

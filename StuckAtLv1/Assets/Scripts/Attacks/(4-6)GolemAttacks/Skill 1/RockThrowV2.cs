@@ -6,14 +6,12 @@ public class RockThrowV2 : MonoBehaviour
 {
     float timer = 1f;   //if a modifier increase skill time duration, it would call back to the parent slot and acquire the modifier for calculation
     Rigidbody2D rb;
-    CircleCollider2D collide;
     RectTransform scale;
     Slot parent;
     private Vector3 mousePosition;
     private Camera mainCamera;
     public float speed;
     private int damage;
-
     [SerializeField] private GameObject aoeAttack;
 
     void Start() {  //aim towards the mouse
@@ -23,7 +21,6 @@ public class RockThrowV2 : MonoBehaviour
         parent = GetComponentInParent<Slot>();
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePosition - transform.position;
-        Vector3 rotation = transform.position - mousePosition;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
 
         float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
