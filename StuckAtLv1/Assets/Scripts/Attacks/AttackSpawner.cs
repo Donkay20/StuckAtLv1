@@ -12,6 +12,7 @@ public class AttackSpawner : MonoBehaviour
     /*
     Possible arguments to pass:
     2: Bone Spikes
+    3: Upheaval
     5: Ground Slam
     6: Fissure
     */

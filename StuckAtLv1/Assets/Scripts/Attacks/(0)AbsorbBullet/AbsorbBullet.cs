@@ -40,18 +40,21 @@ public class AbsorbBullet : MonoBehaviour
         
         if (enemy != null) {
             switch (enemy.tag) {                                        
-                //each enemy will have a unique tag which will identify which one the bullet is hitting. Alternatively, we can swap to their names if need be
-                //if a modifier increases skill damage, it would call back to the parent slot and acquire the modifier for calculation
+                /*
+                Each enemy will have a unique tag which will identify which one the bullet is hitting.
+                Arguments: skill ID, skill uses, skill cooldown.
+                Case-by-case for each skill; in the terms of this enemy it would return skill 1 with 3 uses, with a 1 second cooldown.
+                */
                 case "Skeleton1": //Bone Toss                                   
-                GetComponentInParent<Slot>().AcquireSkill(1, 3, 1);        //case-by-case; in the terms of this enemy it would return skill 1 with 3 uses, with a 1 second cooldown.
+                GetComponentInParent<Slot>().AcquireSkill(1, 3, 1);        
                 break;
 
                 case "Skeleton2": //Bone Spikes
                 GetComponentInParent<Slot>().AcquireSkill(2, 5, 0.5f);
                 break;
 
-                case "Skeleton3": //Upheval
-                //todo
+                case "Skeleton3": //Upheaval
+                GetComponentInParent<Slot>().AcquireSkill(3, 2, 1);
                 break;
 
                 case "Golem1": //Rock Throw
