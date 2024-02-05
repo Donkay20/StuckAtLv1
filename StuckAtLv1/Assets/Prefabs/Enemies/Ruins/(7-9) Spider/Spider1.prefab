@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3288869247441663900}
   m_Layer: 7
   m_Name: Spider1
-  m_TagString: Golem3
+  m_TagString: Spider1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

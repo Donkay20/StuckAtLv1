@@ -39,6 +39,12 @@ public class AbsorbBullet : MonoBehaviour
         //the enemy class will need to be changed to a bare-bones calculation class as every enemy will need it, can stack other classes on different enemies for unique behavior
         
         if (enemy != null) {
+            /*
+            int skillID = 0;
+            int skillUses = 0;
+            int skillCooldown = 0;
+            do this later
+            */
             switch (enemy.tag) {                                        
                 /*
                 Each enemy will have a unique tag which will identify which one the bullet is hitting.
@@ -47,27 +53,31 @@ public class AbsorbBullet : MonoBehaviour
                 */
                 case "Skeleton1": //Bone Toss                                   
                 GetComponentInParent<Slot>().AcquireSkill(1, 3, 1);        
-                break;
+                    break;
 
                 case "Skeleton2": //Bone Spikes
                 GetComponentInParent<Slot>().AcquireSkill(2, 5, 0.5f);
-                break;
+                    break;
 
                 case "Skeleton3": //Upheaval
                 GetComponentInParent<Slot>().AcquireSkill(3, 2, 1);
-                break;
+                    break;
 
                 case "Golem1": //Rock Throw
                 GetComponentInParent<Slot>().AcquireSkill(4, 3, 1);
-                break;
+                    break;
 
                 case "Golem2": //Ground Slam
                 GetComponentInParent<Slot>().AcquireSkill(5, 3, 1);
-                break;
+                    break;
 
                 case "Golem3": //Fissure
                 GetComponentInParent<Slot>().AcquireSkill(6, 1, 3);
-                break;
+                    break;
+
+                case "Spider1": //Venom Spit
+                GetComponentInParent<Slot>().AcquireSkill(7, 2, 2);
+                    break;
             }
             Instantiate(spawnSiphon, transform.position, transform.rotation);
             enemy.TakeDamage(1);
