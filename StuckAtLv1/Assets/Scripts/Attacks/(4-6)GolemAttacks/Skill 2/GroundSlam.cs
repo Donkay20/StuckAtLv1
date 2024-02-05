@@ -7,7 +7,7 @@ using UnityEngine;
 public class GroundSlam : MonoBehaviour
 {
     private readonly float BASE_DURATION = 0.3f;
-    private readonly float BASE_TARGET_MULTIPLIER = 5f;
+    private readonly float BASE_TARGET_MULTIPLIER = 3f;
     private readonly int BASE_DAMAGE = 8;
     private float timer;
     private float initialSize, targetSize, timeModifier, maxTime;
