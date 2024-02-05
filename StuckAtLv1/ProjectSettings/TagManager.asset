@@ -11,6 +11,9 @@ TagManager:
   - Skeleton1
   - Skeleton2
   - Skeleton3
+  - Spider1
+  - Spider2
+  - Spider3
   layers:
   - Default
   - TransparentFX
