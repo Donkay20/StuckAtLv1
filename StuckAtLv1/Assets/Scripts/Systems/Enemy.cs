@@ -19,7 +19,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     [SerializeField] int damage = 1;
     [SerializeField] private float alteredSpeed, alteredSpeedTimer;
     private bool anemiaApplied; private float anemiaTimer, anemiaTick; private int anemiaDamage;
-
+    private bool stunApplied; private float stunDuration;
     Rigidbody2D body;
     Animator anim;
     SpriteRenderer rend;
@@ -54,7 +54,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             alteredSpeedTimer -= Time.deltaTime;
         }
 
-        if(anemiaApplied) {
+        if (anemiaApplied) {
             anemiaTick -= Time.deltaTime;
             anemiaTimer -= Time.deltaTime;
             if (anemiaTick <= 0) {
@@ -62,7 +62,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             }
         }
 
-        if(anemiaTimer <= 0) {
+        if (anemiaTimer <= 0) {
             anemiaApplied = false;
             anemiaDamage = 0;
             anemiaTick = 1;
@@ -76,7 +76,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     private void Attack() {
-        if (targetCharacter == null) {
+        if (targetCharacter == null && !stunApplied) { //stunned enemies can't deal damage
             targetCharacter = targetGameObject.GetComponent<Character>();
         }
         targetCharacter.TakeDamage(damage);
@@ -96,17 +96,19 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
 
     public void ApplySlow(float percentage, float duration) {
         alteredSpeed = baseSpeed - (baseSpeed * percentage);
-        Debug.Log("Altered speed: " + alteredSpeed);
         alteredSpeedTimer = duration;
-        Debug.Log("Altered speed duration: " + alteredSpeedTimer);
-        //GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 1f, 1f);
-        //To apply a slow, it needs to take in the severity of the slow, + the duration for how long the slow lasts.
     }
 
     public void ApplyAnemia(int damage, float duration) {
         anemiaDamage += damage;
         anemiaTimer += duration;
         anemiaApplied = true;
+    }
+
+    public void ApplyStun(float duration) {
+        alteredSpeed = 0;
+        alteredSpeedTimer += duration;
+        stunApplied = true;
     }
 
     private void Flip(float x)

@@ -27034,6 +27034,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 3724843924097455087, guid: d7e80adf47aff504aaf0b6a2163a4bc4, type: 3}
   - {fileID: 4676103909113962417, guid: f79e2d64168453e4ea312cabd5859123, type: 3}
+  - {fileID: 0}
+  - {fileID: 7620793459977800325, guid: 6e8e14296a20bb04680ecb51346f7ae6, type: 3}
+  - {fileID: 0}
 --- !u!1 &286041431
 GameObject:
   m_ObjectHideFlags: 0
@@ -62363,7 +62366,7 @@ MonoBehaviour:
   - {fileID: 4699824026151706028, guid: 1269af0b9e1b3fc4d8fff2f02c3bc2db, type: 3}
   - {fileID: 7131467954183148682, guid: a0e6537ff79beab45a0fff9662d2be42, type: 3}
   - {fileID: 9008097832497301800, guid: adde0a6cb4b7a494fa1356977dd76225, type: 3}
-  - {fileID: 0}
+  - {fileID: 8198259574962527700, guid: 65ace93faf9e3f54796809b63c9e2c51, type: 3}
   - {fileID: 0}
   cooldownFill: {fileID: 1878591919}
   cooldownValueText: {fileID: 1324842066}
@@ -64252,6 +64255,7 @@ MonoBehaviour:
   - {fileID: 7142025147150860068, guid: 8ec56c64866dcf84d87f5e47894dbf24, type: 3}
   - {fileID: 7142025147150860068, guid: 36afc3d3071a02e439569770f565f8dd, type: 3}
   - {fileID: 6801966897594869061, guid: 2e4fed7256052154eb15e7e1ee43c5de, type: 3}
+  - {fileID: 1231657283268106319, guid: 5920855510691c74da95f4837ed29682, type: 3}
   spawnArea: {x: 13, y: 8}
   spawnTimer: 1.5
   player: {fileID: 1093936400}
@@ -65297,7 +65301,7 @@ MonoBehaviour:
   - {fileID: 4699824026151706028, guid: 1269af0b9e1b3fc4d8fff2f02c3bc2db, type: 3}
   - {fileID: 7131467954183148682, guid: a0e6537ff79beab45a0fff9662d2be42, type: 3}
   - {fileID: 9008097832497301800, guid: adde0a6cb4b7a494fa1356977dd76225, type: 3}
-  - {fileID: 0}
+  - {fileID: 8198259574962527700, guid: 65ace93faf9e3f54796809b63c9e2c51, type: 3}
   - {fileID: 0}
   cooldownFill: {fileID: 490660203}
   cooldownValueText: {fileID: 1020637054}

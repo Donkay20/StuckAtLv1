@@ -78,6 +78,10 @@ public class AbsorbBullet : MonoBehaviour
                 case "Spider1": //Venom Spit
                 GetComponentInParent<Slot>().AcquireSkill(7, 2, 2);
                     break;
+
+                case "Spider2": //Ensnaring Web
+                GetComponentInParent<Slot>().AcquireSkill(8, 1, 2);
+                    break;
             }
             Instantiate(spawnSiphon, transform.position, transform.rotation);
             enemy.TakeDamage(1);
