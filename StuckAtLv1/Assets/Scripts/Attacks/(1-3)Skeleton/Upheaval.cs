@@ -9,11 +9,13 @@ public class Upheaval : MonoBehaviour
     CircleCollider2D atkCollider;
     SpriteRenderer imgRenderer;
     Slot parent;
+    Animator anim;
     private Vector2 mousePosition;
     private float maxSize, initialSize;
     private Camera mainCamera;
     private int damage;
     private bool active;
+    
     [SerializeField] private Sprite upheavalActive;
     void Start() {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -22,6 +24,9 @@ public class Upheaval : MonoBehaviour
         transform.position = mousePosition;
         atkCollider = GetComponent<CircleCollider2D>();
         imgRenderer = GetComponent<SpriteRenderer>();
+
+        anim = GetComponent<Animator>();
+
         transform.localScale = new Vector2(0, 0);
 
         float scalingFactor = 3 * (1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f);
@@ -63,7 +68,8 @@ public class Upheaval : MonoBehaviour
 
     private void ActivateAttack() {
         atkCollider.enabled = true;
-        imgRenderer.sprite = upheavalActive;
+        anim.SetTrigger("active");
+        //imgRenderer.sprite = upheavalActive;
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
