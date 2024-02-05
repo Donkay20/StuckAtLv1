@@ -19,7 +19,8 @@ public class Reset : MonoBehaviour
         {
             Application.Quit();
         }
-
+        
+        /*
         if(Input.GetKey(KeyCode.Z) && !load) {
             SceneManager.LoadScene("ArtifactIntro", LoadSceneMode.Additive);
             load = true;
@@ -31,5 +32,6 @@ public class Reset : MonoBehaviour
                 load = false;
             }
         }
+        */
     }
 }

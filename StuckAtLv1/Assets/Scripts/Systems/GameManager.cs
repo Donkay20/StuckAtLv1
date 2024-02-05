@@ -22,6 +22,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         Event,
         Shop,
         Upgrade,
+        Dialogue,
     }
 
     [SerializeField] private GameObject combatUI;
@@ -161,6 +162,12 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 previousState = GameState.Boss;
                 Debug.Log("boss state");
                 break;
+
+            case GameState.Dialogue:
+                //TODO
+                previousState = GameState.Dialogue;
+                Debug.Log("dialogue state");
+                break;
         }
     }
 
@@ -169,30 +176,33 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             //non-map focused
             case "map":
             currentState = GameState.Map;
-            break;
+                break;
             case "upgrade":
             currentState = GameState.Upgrade;
-            break;
+                break;
+            case "dialogue":
+            currentState = GameState.Dialogue;
+                break;
 
             //map focused
             case "combat":
             currentState = GameState.Combat;
-            break;
+                break;
             case "survival":
             currentState = GameState.Survival;
-            break;
+                break;
             case "event":
             currentState = GameState.Event;
-            break;
+                break;
             case "shop":
             currentState = GameState.Shop;
-            break;
+                break;
             case "miniboss":
             currentState = GameState.Miniboss;
-            break;
+                break;
             case "boss":
             currentState = GameState.Boss;
-            break;
+                break;
         }
         UpdateState();
     }

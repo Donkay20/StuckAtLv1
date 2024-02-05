@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/TitleScreen/TitleScreen.unity
+    guid: ae8353ebcb03025428465e68830b1b6c
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/OpeningScene.unity
+    guid: 9e10e713d2e7ee5449bab7d82ecfe6ed
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/ArtifactIntro.unity
+    guid: d3faf0bf5e52c314ebfc782329f1752d
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/RuinsIntro.unity
+    guid: bc597d557ac5bf343ad2f931d3f16ac8
+  - enabled: 1
+    path: Assets/Scenes/MainGame/MainGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

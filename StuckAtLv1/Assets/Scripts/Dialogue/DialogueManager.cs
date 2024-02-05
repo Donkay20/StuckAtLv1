@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -21,12 +23,13 @@ public class DialogueManager : MonoBehaviour
     private bool messaging;
     private string currentEmotion;
     private string currentLine;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         lineText.text = string.Empty;
-
+        gameManager = FindAnyObjectByType<GameManager>();
         storeLines();
         displayNextSentence();
         displayNextName();
@@ -113,6 +116,29 @@ public class DialogueManager : MonoBehaviour
     void displayNextSentence() {
 
          //string currentLine = lines.Dequeue();
+         if (lines.Count == 0) {
+            Scene currentScene = SceneManager.GetActiveScene();
+            switch (currentScene.name) {
+                case "OpeningScene":
+                    SceneManager.LoadScene("ArtifactIntro");
+                    break;
+                case "ArtifactIntro":
+                    SceneManager.LoadScene("RuinsIntro");
+                    break;
+                case "RuinsIntro":
+                    SceneManager.LoadScene("MainGame");
+                    break;
+                case "RuinsMiniBossIntro":
+                    break;
+                case "RuinsMiniBossEnd":    
+                    break;
+                case "RuinsBossIntro":
+                    break;
+                case "RuinsBossEnd":
+                    break;
+            }
+         }
+
          currentLine = lines.Dequeue();
          if (messaging) {
                 StopAllCoroutines();
