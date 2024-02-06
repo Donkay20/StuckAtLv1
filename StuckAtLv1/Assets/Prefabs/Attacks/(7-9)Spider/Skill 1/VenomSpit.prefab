@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2427446214000584431}
   - component: {fileID: 1821743993983136956}
   - component: {fileID: 1200979109590276231}
+  - component: {fileID: 5175307790556992540}
   m_Layer: 0
   m_Name: VenomSpit
   m_TagString: Untagged
@@ -130,9 +131,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: -0.27483675, y: 0.74422383}
+      - {x: -1.4422975, y: -1.280042}
+      - {x: 1.4619286, y: -1.309489}
+      - {x: 0.2742412, y: 0.75178677}
   m_UseDelaunayMesh: 0
 --- !u!114 &1200979109590276231
 MonoBehaviour:
@@ -146,4 +148,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec1c14403af645499213c6acab5c302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triangle: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  triangle: {fileID: 1528631300, guid: 591ac3d485e79314f8a3a83b508ad2c7, type: 3}
+--- !u!95 &5175307790556992540
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9008097832497301800}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9f091c09eb665c049a2932b5c0f3af71, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
