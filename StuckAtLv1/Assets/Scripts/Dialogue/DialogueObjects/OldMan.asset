@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: OldMan
   m_EditorClassIdentifier: 
   characterName: Old Man
-  location: 
-  neutralSprite: {fileID: 0}
-  happySprite: {fileID: 0}
-  sadSprite: {fileID: 0}
-  thinkingSprite: {fileID: 0}
-  madSprite: {fileID: 0}
-  shockedSprite: {fileID: 0}
-  scaredSprite: {fileID: 0}
+  location: right
+  neutralSprite: {fileID: 21300000, guid: f806fccd9ddc46a488f830722cb2c3b7, type: 3}
+  happySprite: {fileID: 21300000, guid: c5af6db26a20fef4781969001bc445f6, type: 3}
+  sadSprite: {fileID: 21300000, guid: a160edf106c3ede4dada2ebf30178e05, type: 3}
+  thinkingSprite: {fileID: 21300000, guid: f806fccd9ddc46a488f830722cb2c3b7, type: 3}
+  madSprite: {fileID: 21300000, guid: f806fccd9ddc46a488f830722cb2c3b7, type: 3}
+  shockedSprite: {fileID: 21300000, guid: f806fccd9ddc46a488f830722cb2c3b7, type: 3}

@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Necromancer
   m_EditorClassIdentifier: 
   characterName: Necromancer
-  location: 
-  neutralSprite: {fileID: 0}
-  happySprite: {fileID: 0}
+  location: right
+  neutralSprite: {fileID: 21300000, guid: e9f97194f4decc740862bbde15790e0f, type: 3}
+  happySprite: {fileID: 21300000, guid: 8026948b35d907a4a89e289270264a62, type: 3}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}
   madSprite: {fileID: 0}
   shockedSprite: {fileID: 0}
-  scaredSprite: {fileID: 0}
