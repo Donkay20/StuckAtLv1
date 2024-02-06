@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 2
   hp: 3
-  damage: 2
+  damage: 1
   alteredSpeed: 0
   alteredSpeedTimer: 0
   particlePrefab: {fileID: 1210264596843239824, guid: 5a411476ff72944458cd122769dcdca7, type: 3}

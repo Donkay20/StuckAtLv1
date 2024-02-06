@@ -13,10 +13,11 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     Transform targetDestination;
     GameObject targetGameObject;
     Character targetCharacter;
+    [SerializeField] GameManager gameManager;
     
     [SerializeField] float baseSpeed;
-    [SerializeField] int hp = 1000;
-    [SerializeField] int damage = 1;
+    [SerializeField] int hp;
+    [SerializeField] int damage;
     [SerializeField] private float alteredSpeed, alteredSpeedTimer;
     private bool anemiaApplied; private float anemiaTimer, anemiaTick; private int anemiaDamage;
     private bool stunApplied; private float stunDuration;
@@ -36,6 +37,11 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     public void SetTarget(GameObject target) {
         targetGameObject = target;
         targetDestination = target.transform;
+    }
+
+    private void Start() {
+        gameManager = FindAnyObjectByType<GameManager>();
+        hp += gameManager.ScaleDifficulty();
     }
     
     private void FixedUpdate() {

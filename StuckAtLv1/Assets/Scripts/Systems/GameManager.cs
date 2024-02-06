@@ -38,6 +38,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     [SerializeField] private MapManager mapManager;
     private GameState currentState;
     private GameState previousState;
+    private int scaling;
     void Start() //default to the map when the game launches.
     {
         previousState = GameState.Map;
@@ -328,5 +329,13 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 break;
         }
         UpdateState();
+    }
+
+    public void AdjustScaling() {
+        scaling = mapManager.GetWorld() * mapManager.GetLevel();
+    }
+
+    public int ScaleDifficulty() {
+        return scaling;
     }
 }

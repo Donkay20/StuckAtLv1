@@ -214,6 +214,7 @@ public class MapManager : MonoBehaviour
                 report = node113.GetComponent<Room>().GetRoomType();
                 break;
             }
+            manager.AdjustScaling();
             manager.ReceiveCommand(report);
         }
     }

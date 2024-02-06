@@ -29,10 +29,10 @@ public class EnemyManager : MonoBehaviour
         //special conditions are for events.
             switch (condition) {
             case 2: //Ruins Event 2
-                enemyID = 0;
+                enemyID = Random.Range(0, 3);
                 break;
             case 8: //Ruins Event 5
-                enemyID = 1;
+                enemyID = Random.Range(3, 6);
                 break;
             }
         } else {

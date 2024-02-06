@@ -7,7 +7,7 @@ using UnityEngine;
 public class GroundSlam : MonoBehaviour
 {
     private readonly float BASE_DURATION = 0.3f;
-    private readonly float BASE_TARGET_MULTIPLIER = 3f;
+    private readonly float BASE_TARGET_MULTIPLIER = 2f;
     private readonly int BASE_DAMAGE = 8;
     private float timer;
     private float initialSize, targetSize, timeModifier, maxTime;
@@ -18,6 +18,7 @@ public class GroundSlam : MonoBehaviour
     Ground slam's initial AoE is affected by Size modifiers. The time it expands for is based off of Duration modifiers.
     Its damage based affected by damage modifiers.
     */
+    
     void Start()
     {
         parent = FindAnyObjectByType<AttackSpawner>().GetParent();
