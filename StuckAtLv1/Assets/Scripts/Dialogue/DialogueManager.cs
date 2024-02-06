@@ -24,10 +24,12 @@ public class DialogueManager : MonoBehaviour
     private string currentEmotion;
     private string currentLine;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private Button skipButton;
 
     // Start is called before the first frame update
     void Start()
     {
+        InitializeButtons();
         lineText.text = string.Empty;
         gameManager = FindAnyObjectByType<GameManager>();
         storeLines();
@@ -231,5 +233,36 @@ public class DialogueManager : MonoBehaviour
         }
         
         messaging = false;
+    }
+
+    private void SkipDialogue() {
+        Scene currentScene = gameObject.scene;
+        switch (currentScene.name) {
+                case "OpeningScene":
+                    SceneManager.LoadScene("ArtifactIntro");
+                    break;
+                case "ArtifactIntro":
+                    SceneManager.LoadScene("RuinsIntro");
+                    break;
+                case "RuinsIntro":
+                    SceneManager.LoadScene("MainGame");
+                    break;
+                case "RuinsMiniBossIntro":
+                    gameManager.ReceiveCommand("miniboss");
+                    break;
+                case "RuinsMiniBossEnd":
+                    gameManager.ReceiveCommand("map");    
+                    break;
+                case "RuinsBossIntro":
+                    gameManager.ReceiveCommand("boss");
+                    break;
+                case "RuinsBossEnd":
+                    gameManager.ReceiveCommand("map");
+                    break;
+            }
+    }
+
+    private void InitializeButtons() {
+        skipButton.onClick.AddListener(() => SkipDialogue());
     }
 }

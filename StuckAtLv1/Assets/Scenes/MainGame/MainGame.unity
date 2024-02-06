@@ -64388,7 +64388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHp: 10
-  money: 500
+  money: 300
   afterimages: 0
   playerAnim: {fileID: 1093936407}
   healthBarAnim: {fileID: 1865911234}

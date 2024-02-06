@@ -42,6 +42,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     private void Start() {
         gameManager = FindAnyObjectByType<GameManager>();
         hp += gameManager.ScaleDifficulty();
+        baseSpeed += gameManager.ScaleDifficulty()/10;
     }
     
     private void FixedUpdate() {
@@ -96,6 +97,8 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             FindAnyObjectByType<CombatManager>().EnemyKilled();
             Instantiate(particlePrefab, this.transform.position, this.transform.rotation);
             //Debug.Log(this.transform);
+            Character character = FindAnyObjectByType<Character>();
+            character.money += 5;
             Destroy(gameObject);
         }
     }

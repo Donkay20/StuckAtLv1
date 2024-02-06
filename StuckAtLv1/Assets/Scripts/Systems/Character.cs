@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 /*
@@ -55,7 +56,7 @@ todo:
         }
         
         if (currentHp <= 0) {
-            //Debug.Log("Jamp is dead.");
+            SceneManager.LoadScene("TitleScreen");
         }
         hpBar.SetState(currentHp, maxHp);
     }
