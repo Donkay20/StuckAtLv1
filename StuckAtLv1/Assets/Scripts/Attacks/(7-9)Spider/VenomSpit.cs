@@ -11,12 +11,12 @@ public class VenomSpit : MonoBehaviour
     [SerializeField] private Sprite triangle;
 
     void Start() {
-        GetComponent<SpriteRenderer>().sprite = triangle;
+        //GetComponent<SpriteRenderer>().sprite = triangle;
         FaceMouse();
         parent = GetComponentInParent<Slot>();
 
         float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
-        transform.localScale = new Vector2(3 * scalingFactor, 3 * scalingFactor);
+        transform.localScale = new Vector2(2 * scalingFactor, 2 * scalingFactor);
 
         damage = (int)(1 * (1+(parent.GetCommonUpgrade(0)*0.2f + parent.GetRareUpgrade(0)*0.4f + parent.GetLegendaryUpgrade(0)*0.6f)));
         Debug.Log("damage: " + damage);
