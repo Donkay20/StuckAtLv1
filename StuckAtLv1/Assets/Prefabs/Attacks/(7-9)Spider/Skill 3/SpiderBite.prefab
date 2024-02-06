@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3831576d3c1094aa64ab5600184911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderBite: {fileID: 21300000, guid: bc09950d028df6b4689a58745905dad2, type: 3}
+  spiderBite: {fileID: 21300000, guid: 9f5240638ace3ba42a4116a0749a1209, type: 3}
 --- !u!61 &2449983423216510564
 BoxCollider2D:
   m_ObjectHideFlags: 0
