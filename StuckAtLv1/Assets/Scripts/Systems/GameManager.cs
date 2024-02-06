@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 /*
@@ -32,6 +33,9 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     [SerializeField] private GameObject mouseCursorUI;
     [SerializeField] private GameObject eventUI;
     [SerializeField] private GameObject shopUI;
+    [SerializeField] private GameObject minibossTempUI;
+    [SerializeField] private GameObject bossTempUI;
+    [SerializeField] private MapManager mapManager;
     private GameState currentState;
     private GameState previousState;
     void Start() //default to the map when the game launches.
@@ -65,6 +69,33 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 }
                 if (previousState == GameState.Shop) {
                     shopUI.SetActive(false);
+                    mapUI.SetActive(true);
+                }
+                if (previousState == GameState.Miniboss) {
+                    minibossTempUI.SetActive(false);
+                    mapUI.SetActive(true);
+                }
+                if (previousState == GameState.Boss) {
+                    bossTempUI.SetActive(false);
+                    mapUI.SetActive(true);
+                }
+                if (previousState == GameState.Dialogue) {
+                    //unload dialogue scene
+                    switch(mapManager.GetWorld()) {
+                        case 1:
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.UnloadSceneAsync("RuinsMiniBossEnd");
+                            }
+
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.UnloadSceneAsync("RuinsBossEnd");
+                            }
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                    }
                     mapUI.SetActive(true);
                 }
                 previousState = GameState.Map;
@@ -152,19 +183,111 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 break;
 
             case GameState.Miniboss:
-                //TODO
-                previousState = GameState.Miniboss;
+                if (previousState == GameState.Dialogue) {
+                    switch (mapManager.GetWorld()) {
+                        case 1:
+                            previousState = GameState.Miniboss;
+                            minibossTempUI.SetActive(true);
+                            SceneManager.UnloadSceneAsync("RuinsMiniBossIntro");
+                            break;
+                        case 2:
+                            //todo 
+                            break;
+                        case 3:
+                            //todo
+                            break;
+                    }
+                }
+                
+                if (previousState == GameState.Map) {
+                    mapUI.SetActive(false);
+                    ReceiveCommand("dialogue");
+                }
+                
                 Debug.Log("miniboss state");
                 break;
 
             case GameState.Boss:
-                //TODO
-                previousState = GameState.Boss;
+                if (previousState == GameState.Dialogue) {
+                    switch (mapManager.GetWorld()) {
+                        case 1:
+                            previousState = GameState.Boss;
+                            bossTempUI.SetActive(true);
+                            SceneManager.UnloadSceneAsync("RuinsBossIntro");
+                            break;
+                        case 2:
+                            //todo 
+                            break;
+                        case 3:
+                            //todo
+                            break;
+                    }
+                    //unload dialogue scene
+                }
+
+                if (previousState == GameState.Map) {
+                    mapUI.SetActive(false);
+                    ReceiveCommand("dialogue");
+                }
+                
                 Debug.Log("boss state");
                 break;
 
             case GameState.Dialogue:
-                //TODO
+                //From the map, we play the boss' intro scene. To determine which one to play, we grab the level and world.
+                if (previousState == GameState.Map) {
+                    //load dialogue scene
+                    switch (mapManager.GetWorld()) {
+                        case 1:
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.LoadScene("RuinsMiniBossIntro", LoadSceneMode.Additive);
+                            }
+
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.LoadScene("RuinsBossIntro", LoadSceneMode.Additive);
+                            }
+                            break;
+                        case 2:
+                            //todo
+                            break;
+                        case 3:
+                            //todo
+                            break;
+                    }
+                    mapUI.SetActive(false);
+                }
+
+                //From the miniboss/boss, we play the boss' outro scene
+                if (previousState == GameState.Miniboss) {
+                    //load dialogue scene
+                    switch(mapManager.GetWorld()) {
+                        case 1:
+                                SceneManager.LoadScene("RuinsMiniBossEnd", LoadSceneMode.Additive);
+                            break;
+                        case 2:
+                            //todo
+                            break;
+                        case 3:
+                            //todo
+                            break;
+                    }
+                    minibossTempUI.SetActive(false);
+                }
+                if (previousState == GameState.Boss) {
+                    //load dialogue scene
+                    switch(mapManager.GetWorld()) {
+                        case 1:
+                            SceneManager.LoadScene("RuinsBossEnd", LoadSceneMode.Additive);
+                            break;
+                        case 2:
+                            //todo
+                            break;
+                        case 3:
+                            //todo
+                            break;
+                    }
+                    bossTempUI.SetActive(false);
+                }
                 previousState = GameState.Dialogue;
                 Debug.Log("dialogue state");
                 break;

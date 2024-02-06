@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     private bool messaging;
     private string currentEmotion;
     private string currentLine;
-    private GameManager gameManager;
+    [SerializeField] private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -67,10 +67,8 @@ public class DialogueManager : MonoBehaviour
                         displaySpriteRight();
                     }
                 }
-
             }
         }
-
     }
 
     void storeLines() {
@@ -115,9 +113,8 @@ public class DialogueManager : MonoBehaviour
 
     void displayNextSentence() {
 
-         //string currentLine = lines.Dequeue();
          if (lines.Count == 0) {
-            Scene currentScene = SceneManager.GetActiveScene();
+            Scene currentScene = gameObject.scene;
             switch (currentScene.name) {
                 case "OpeningScene":
                     SceneManager.LoadScene("ArtifactIntro");
@@ -129,17 +126,21 @@ public class DialogueManager : MonoBehaviour
                     SceneManager.LoadScene("MainGame");
                     break;
                 case "RuinsMiniBossIntro":
+                    gameManager.ReceiveCommand("miniboss");
                     break;
-                case "RuinsMiniBossEnd":    
+                case "RuinsMiniBossEnd":
+                    gameManager.ReceiveCommand("map");    
                     break;
                 case "RuinsBossIntro":
+                    gameManager.ReceiveCommand("boss");
                     break;
                 case "RuinsBossEnd":
+                    gameManager.ReceiveCommand("map");
                     break;
             }
          }
 
-         currentLine = lines.Dequeue();
+        currentLine = lines.Dequeue();
          if (messaging) {
                 StopAllCoroutines();
             }

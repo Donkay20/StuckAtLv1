@@ -19,8 +19,11 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Sprite miniBossImage;
     [SerializeField] private Sprite bossImage;
     [SerializeField] private GameManager manager;
-    private int world; private int level; private int section;
-    private String report;
+    [SerializeField] private int world; 
+    [SerializeField] private int level; 
+    [SerializeField] private int section;
+    private string report;
+    private bool miniboss1Cleared, boss1Cleared;
 
     void Awake()
     {
