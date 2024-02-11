@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     Animator anim;
     SpriteRenderer sr;
 
-    private readonly float BASE_SPEED = 4f;
+    private readonly float BASE_SPEED = 6f;
     private float speedModifier; public float SpeedModifier { get => speedModifier; set => speedModifier = value; }
     private float speedDebuff; public float SpeedDebuff { get => speedDebuff; set => speedDebuff = value; }
     
@@ -96,7 +96,7 @@ public class Movement : MonoBehaviour
     void Dash() {
         //Debug.Log("Dashing");
         body.AddForce(movementVector * dashForce, ForceMode2D.Impulse);
-        Invoke(nameof(StopDashing), 0.2f);
+        Invoke(nameof(StopDashing), 0.3f);
         invincibility.DashingIFrames();
     }
 
