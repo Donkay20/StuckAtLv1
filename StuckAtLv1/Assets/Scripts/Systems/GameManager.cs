@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -39,10 +40,15 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private GameState currentState;
     private GameState previousState;
     private int scaling;
+
+    private int[] slotUpgrades = new int[5];
+    private int[] weight = new int[5];
+    private int maxSlots;
     void Start() //default to the map when the game launches.
     {
         previousState = GameState.Map;
         currentState = GameState.Map;
+        maxSlots = 2; //default amt of slots
         UpdateState();
     }
 
@@ -337,5 +343,31 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
     public int ScaleDifficulty() {
         return scaling;
+    }
+
+    public void AddMaxSlots() {
+        maxSlots++;
+    }
+
+    public void AdjustSlotUpgradeCounter(int identity) {
+        //gamemanager holds the amt of upgrades for each slot.
+        slotUpgrades[identity-1]++;
+        CalculateWeight();
+    }
+
+    private void CalculateWeight() {
+        int minValue = slotUpgrades[0];
+        for (int i = 0; i < maxSlots-1; i++) {
+            Debug.Log(i);
+            if (slotUpgrades[i] < minValue) {minValue = slotUpgrades[i];}
+        }
+        for (int i = 0; i < maxSlots-1; i++) {
+            Debug.Log(i);
+            weight[i] = slotUpgrades[i] - minValue;
+        }
+    }
+
+    public int GetWeight(int identity) {
+        return weight[identity-1];
     }
 }

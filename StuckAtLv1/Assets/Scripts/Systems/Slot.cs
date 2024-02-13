@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -32,7 +33,7 @@ public class Slot : MonoBehaviour
     private bool containsSkill = false;
     private bool absorbBulletAvailable = true;
     private int skillID = 0, skillUses = 0;
-    private float cooldown, activeCD;
+    private float cooldown, activeCD, cooldownModifier;
     private bool coolingDown = false;
     private int[] commonUpgrades = new int[13];
     private int[] rareUpgrades = new int[13];
@@ -49,12 +50,16 @@ public class Slot : MonoBehaviour
     [SerializeField] private Image cooldownFill;
     [SerializeField] private TextMeshProUGUI cooldownValueText;
     [SerializeField] private Transform bulletTransform;
+    [SerializeField] private GameManager gameManager;
 
     
-
     private void Start() {
         absorbBulletAvailable = true;
         containsSkill = false;
+    }
+
+    void OnEnable() {
+        CalculateWeightPenalty();
     }
     
     private void Update() {
@@ -67,7 +72,7 @@ public class Slot : MonoBehaviour
             } else {
                 cooldownValueText.text = activeCD.ToString("f1");
             }
-            cooldownFill.fillAmount = activeCD/cooldown;
+            cooldownFill.fillAmount = activeCD/cooldown*cooldownModifier;
         } else {
             coolingDown = false; cooldownValueText.gameObject.SetActive(false);
         }
@@ -108,7 +113,7 @@ public class Slot : MonoBehaviour
                 uIText.text = skillUses.ToString();
                 //drain a skill use and reflect it in the UI
 
-                activeCD = cooldown;
+                activeCD = cooldown * cooldownModifier;
                 //set the cooldown when a skill is used
 
                 if (skillUses <= 0) {
@@ -154,6 +159,26 @@ public class Slot : MonoBehaviour
                 legendaryUpgrades[upgrade]++;
                 Debug.Log("Legendary upgrade applied.");
                 break;
+        }
+        gameManager.AdjustSlotUpgradeCounter(identity);
+    }
+
+    private void CalculateWeightPenalty() {
+        int weight = gameManager.GetWeight(identity);
+        if (weight == 0) {
+            cooldownModifier = 0.9f;
+        }
+        if (weight >= 1 && weight <= 3) {
+            cooldownModifier = 1 + 0.1f * weight;
+        }
+        if (weight >= 4 && weight <= 7) {
+            cooldownModifier = 1 + 0.2f * weight;
+        }
+        if (weight >=8 && weight <= 10) {
+            cooldownModifier = 1 + 0.3f * weight;
+        }
+        if (weight >= 11) {
+            cooldownModifier = 1 + 0.5f * weight;
         }
     }
 

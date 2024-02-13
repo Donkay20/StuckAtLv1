@@ -67,6 +67,10 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    private void OnEnable() {
+        DisplayWeight();
+    }
+
     public void Setup(string type) {    
         //Called from the gamemanager with a type of reward, dependent on type of battle fought. Should be called every time we go into this menu.
         //Sets up the upgrades that are displayed in-game. This logic will need to be re-written for if the upgrades run out entirely, although idk if that'll be possible.
@@ -160,6 +164,10 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    public void DisplayWeight() {
+        //todo
+    }
+
     public void Finish() { 
         //Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
 
@@ -180,6 +188,7 @@ public class UpgradeManager : MonoBehaviour
         }
 
         slots[slotSelected].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
+        notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
 
         //subtract from the available upgrades
         switch(upgradeRarities[upgradePositionSelected]) {
@@ -206,7 +215,6 @@ public class UpgradeManager : MonoBehaviour
         } else {
             notify.ReceiveCommand("map");
         }
-        
     }
 
     public void Shop() {

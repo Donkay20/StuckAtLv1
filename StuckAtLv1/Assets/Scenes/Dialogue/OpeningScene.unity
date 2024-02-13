@@ -937,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[0]
-      value: muahaha! On this most auspicious day, I cast off the shackles of childhood
+      value: Muahaha! On this most auspicious day, I cast off the shackles of childhood
         and metamorphose into a fully fledged adult vampire!
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
