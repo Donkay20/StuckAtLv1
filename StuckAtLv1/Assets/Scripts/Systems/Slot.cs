@@ -59,7 +59,7 @@ public class Slot : MonoBehaviour
     }
 
     void OnEnable() {
-        CalculateWeightPenalty();
+        //CalculateWeightPenalty();
     }
     
     private void Update() {
@@ -160,7 +160,7 @@ public class Slot : MonoBehaviour
                 Debug.Log("Legendary upgrade applied.");
                 break;
         }
-        gameManager.AdjustSlotUpgradeCounter(identity);
+        //gameManager.AdjustSlotUpgradeCounter(identity);
     }
 
     private void CalculateWeightPenalty() {

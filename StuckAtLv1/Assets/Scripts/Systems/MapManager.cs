@@ -25,6 +25,11 @@ public class MapManager : MonoBehaviour
     private string report;
     private bool miniboss1Cleared, boss1Cleared;
 
+    //Map Highlights
+    [SerializeField] private Sprite combatImageHighlight, survivalImageHighlight, eventImageHighlight, shopImageHighlight, miniBossImageHighlight, bossImageHighlight;
+    [SerializeField] private GameObject[] lines;
+    private List<Vector2> nodeList = new List<Vector2>();
+
     void Awake()
     {
         world = 1;
@@ -41,35 +46,48 @@ public class MapManager : MonoBehaviour
         minibossRoom.AssignRoomType("miniboss"); minibossRoom.GetComponent<Image>().sprite = miniBossImage;
         bossRoom.AssignRoomType("boss"); bossRoom.GetComponent<Image>().sprite = bossImage;
         //hard code the first room to be combat, and hard code the positions of miniboss room & boss room
+
+        HighlightRoom(startingRoom);
     }
 
     public void clickedNode(int clickedLevel, int clickedSection) {
+        
         /*  First, check if the node that was clicked is one level ahead, and one that connects to a path that the user can go to.
             For example, you can't go from a 3-layer bottom room to a 2-layer top room as the paths do not connect.
             Then, 
         */
         if (level + 1 == clickedLevel && (section + 1 == clickedSection || section - 1 == clickedSection)) { //check if the button clicked is a valid one
+
+            
+            Vector2 currentNode = new Vector2(clickedLevel, clickedSection);
+            nodeList.Add(currentNode);
+            AssignLine(currentNode);
+
             level++; //the level should always be advancing
             switch (clickedLevel, clickedSection) { //there's probably a better way to do this too, but whatever
             case (1,3):
                 section++;
                 node13.interactable = false;
                 report = node13.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node13.GetComponent<Room>());
                 break;
             case (2,2):
                 section--;
                 node22.interactable = false; node24.interactable = false;
                 report = node22.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node22.GetComponent<Room>());
                 break;
             case (2,4):
                 section++;
                 node22.interactable = false; node24.interactable = false;
                 report = node24.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node24.GetComponent<Room>());
                 break;
             case (3,1):
                 section--;
                 node31.interactable = false; node33.interactable = false; node35.interactable = false;
                 report = node31.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node31.GetComponent<Room>());
                 break;
             case (3,3):
                 if (clickedSection > section) {
@@ -79,11 +97,13 @@ public class MapManager : MonoBehaviour
                 }
                 node31.interactable = false; node33.interactable = false; node35.interactable = false;
                 report = node33.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node33.GetComponent<Room>());
                 break;
             case (3,5):
                 section++;
                 node31.interactable = false; node33.interactable = false; node35.interactable = false;
                 report = node35.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node35.GetComponent<Room>());
                 break;
             case (4,2):
                 if (clickedSection > section) {
@@ -93,6 +113,7 @@ public class MapManager : MonoBehaviour
                 }
                 node42.interactable = false; node44.interactable = false;
                 report = node42.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node42.GetComponent<Room>());
                 break;
             case (4,4):
                 if (clickedSection > section) {
@@ -102,6 +123,7 @@ public class MapManager : MonoBehaviour
                 }
                 node42.interactable = false; node44.interactable = false;
                 report = node44.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node44.GetComponent<Room>());
                 break;
             case (5,3):
                 if (clickedSection > section) {
@@ -111,6 +133,7 @@ public class MapManager : MonoBehaviour
                 }
                 node53.interactable = false;
                 report = node53.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node53.GetComponent<Room>());
                 break;
             case (6,2):
                 if (clickedSection > section) {
@@ -120,6 +143,7 @@ public class MapManager : MonoBehaviour
                 }
                 node62.interactable = false; node64.interactable = false;
                 report = node62.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node62.GetComponent<Room>());
                 break;
             case (6,4):
                 if (clickedSection > section) {
@@ -129,11 +153,13 @@ public class MapManager : MonoBehaviour
                 }
                 node62.interactable = false; node64.interactable = false;
                 report = node64.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node64.GetComponent<Room>());
                 break;
             case (7,1):
                 section--;
                 node71.interactable = false; node73.interactable = false; node75.interactable = false;
                 report = node71.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node71.GetComponent<Room>());
                 break;
             case (7,3):
                 if (clickedSection > section) {
@@ -143,11 +169,13 @@ public class MapManager : MonoBehaviour
                 }
                 node71.interactable = false; node73.interactable = false; node75.interactable = false;
                 report = node73.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node73.GetComponent<Room>());
                 break;
             case (7,5):
                 section++;
                 node71.interactable = false; node73.interactable = false; node75.interactable = false;
                 report = node75.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node75.GetComponent<Room>());
                 break;
             case (8,2): 
                 if (clickedSection > section) {
@@ -157,6 +185,7 @@ public class MapManager : MonoBehaviour
                 }
                 node82.interactable = false; node84.interactable = false;
                 report = node82.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node82.GetComponent<Room>());
                 break;
             case (8,4):
                 if (clickedSection > section) {
@@ -166,11 +195,13 @@ public class MapManager : MonoBehaviour
                 }
                 node82.interactable = false; node84.interactable = false;
                 report = node84.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node84.GetComponent<Room>());
                 break;
             case (9,1):
                 section--;
                 node91.interactable = false; node93.interactable = false; node95.interactable = false;
                 report = node91.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node91.GetComponent<Room>());
                 break;
             case (9,3):
                 if (clickedSection > section) {
@@ -180,11 +211,13 @@ public class MapManager : MonoBehaviour
                 }
                 node91.interactable = false; node93.interactable = false; node95.interactable = false;
                 report = node93.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node93.GetComponent<Room>());
                 break;
             case (9,5):
                 section++;
                 node91.interactable = false; node93.interactable = false; node95.interactable = false;
                 report = node95.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node95.GetComponent<Room>());
                 break;
             case (10,2):
                 if (clickedSection > section) {
@@ -194,6 +227,7 @@ public class MapManager : MonoBehaviour
                 }
                 node102.interactable = false; node104.interactable = false;
                 report = node102.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node102.GetComponent<Room>());
                 break;
             case (10,4):
                 if (clickedSection > section) {
@@ -203,6 +237,7 @@ public class MapManager : MonoBehaviour
                 }
                 node102.interactable = false; node104.interactable = false;
                 report = node104.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node104.GetComponent<Room>());
                 break;
             case (11,3):
                 if (clickedSection > section) {
@@ -212,6 +247,7 @@ public class MapManager : MonoBehaviour
                 }
                 node113.interactable = false;
                 report = node113.GetComponent<Room>().GetRoomType();
+                HighlightRoom(node113.GetComponent<Room>());
                 break;
             }
             manager.AdjustScaling();
@@ -239,6 +275,96 @@ public class MapManager : MonoBehaviour
                 r.GetComponent<Image>().sprite = shopImage;
                 break;
         }
+    }
+
+    //Highlights given room
+    private void HighlightRoom(Room r)
+    {
+        if(r.GetRoomType() == "combat")
+        {
+            r.GetComponent<Image>().sprite = combatImageHighlight;
+        }
+        if(r.GetRoomType() == "survival")
+        {
+            r.GetComponent<Image>().sprite = survivalImageHighlight;
+        }
+        if(r.GetRoomType() == "event")
+        {
+            r.GetComponent<Image>().sprite = eventImageHighlight;
+        }
+        if(r.GetRoomType() == "shop")
+        {
+            r.GetComponent<Image>().sprite = shopImageHighlight;
+        }
+        if(r.GetRoomType() == "miniboss")
+        {
+            r.GetComponent<Image>().sprite = miniBossImageHighlight;
+        }
+        if(r.GetRoomType() == "boss")
+        {
+            r.GetComponent<Image>().sprite = bossImageHighlight;
+        }
+    }
+
+    //Adds Line to see where traveled
+    private void AssignLine(Vector2 newNode)
+    {
+        Vector2 previousNode;
+        for(int i = 0; i < nodeList.Count; i++)
+        {
+            if(nodeList[i] == newNode && nodeList.Count > 1)
+            {
+                Debug.Log("find previous Node");
+                previousNode = nodeList[i - 1];
+                Debug.Log("find newNode");
+                Debug.Log(newNode);
+                
+                //Checks previous node and selected node to determine where to place line
+                SetLinesActive(previousNode, newNode, 0, new Vector2(1,3), new Vector2(2,2));
+                SetLinesActive(previousNode, newNode, 1, new Vector2(2,2), new Vector2(3,1));
+                SetLinesActive(previousNode, newNode, 2, new Vector2(3,1), new Vector2(4,2));
+                SetLinesActive(previousNode, newNode, 3, new Vector2(4,2), new Vector2(5,3));
+                SetLinesActive(previousNode, newNode, 4, new Vector2(5,3), new Vector2(6,2));
+                SetLinesActive(previousNode, newNode, 5, new Vector2(6,2), new Vector2(7,1));
+                SetLinesActive(previousNode, newNode, 6, new Vector2(7,1), new Vector2(8,2));
+                SetLinesActive(previousNode, newNode, 7, new Vector2(8,2), new Vector2(9,1));
+                SetLinesActive(previousNode, newNode, 8, new Vector2(9,1), new Vector2(10,2));
+                SetLinesActive(previousNode, newNode, 9, new Vector2(10,2), new Vector2(11,3));
+                
+                SetLinesActive(previousNode, newNode, 10, new Vector2(1,3), new Vector2(2,4));
+                SetLinesActive(previousNode, newNode, 11, new Vector2(2,4), new Vector2(3,5));
+                SetLinesActive(previousNode, newNode, 12, new Vector2(3,5), new Vector2(4,4));
+                SetLinesActive(previousNode, newNode, 13, new Vector2(4,4), new Vector2(5,3));
+                SetLinesActive(previousNode, newNode, 14, new Vector2(5,3), new Vector2(6,4));
+                SetLinesActive(previousNode, newNode, 15, new Vector2(6,4), new Vector2(7,5));
+                SetLinesActive(previousNode, newNode, 16, new Vector2(7,5), new Vector2(8,4));
+                SetLinesActive(previousNode, newNode, 17, new Vector2(8,4), new Vector2(9,5));
+                SetLinesActive(previousNode, newNode, 18, new Vector2(9,5), new Vector2(10,4));
+                SetLinesActive(previousNode, newNode, 19, new Vector2(10,4), new Vector2(11,3));
+
+                SetLinesActive(previousNode, newNode, 20, new Vector2(2,2), new Vector2(3,3));
+                SetLinesActive(previousNode, newNode, 21, new Vector2(3,3), new Vector2(4,2));
+                SetLinesActive(previousNode, newNode, 22, new Vector2(6,2), new Vector2(7,3));
+                SetLinesActive(previousNode, newNode, 23, new Vector2(7,3), new Vector2(8,2));
+                SetLinesActive(previousNode, newNode, 24, new Vector2(8,2), new Vector2(9,3));
+                SetLinesActive(previousNode, newNode, 25, new Vector2(9,3), new Vector2(10,2));
+
+                SetLinesActive(previousNode, newNode, 26, new Vector2(2,4), new Vector2(3,3));
+                SetLinesActive(previousNode, newNode, 27, new Vector2(3,3), new Vector2(4,4));
+                SetLinesActive(previousNode, newNode, 28, new Vector2(6,4), new Vector2(7,3));
+                SetLinesActive(previousNode, newNode, 29, new Vector2(7,3), new Vector2(8,4));
+                SetLinesActive(previousNode, newNode, 30, new Vector2(8,4), new Vector2(9,3));
+                SetLinesActive(previousNode, newNode, 31, new Vector2(9,3), new Vector2(10,4));
+            }   
+        }
+    }
+
+    private void SetLinesActive(Vector2 prevNode, Vector2 currentNode, int lineNum, Vector2 checkPrev, Vector2 CheckCurrent)
+    {
+        if(prevNode == checkPrev && currentNode == CheckCurrent)
+                {
+                    lines[lineNum].SetActive(true);
+                }
     }
 
     private void InitializeButtons() {
