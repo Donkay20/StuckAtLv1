@@ -25,11 +25,8 @@ public class SlotManager : MonoBehaviour
         slots[0].transform.GetChild(1).GetComponent<Image>().sprite = onSpriteList[0];
         slotNum = 1; 
         maxSlots = 2; //# of slots unlocked
-        slot1.Identity = 1;
-        slot2.Identity = 2;
     }
-    void Update()
-    {
+    void Update() {
         ToggleSlot();
         InitiateSlot();
         TurnOffSlots();

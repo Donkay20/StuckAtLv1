@@ -40,10 +40,10 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private GameState currentState;
     private GameState previousState;
     private int scaling;
-
     private int[] slotUpgrades = new int[5];
     private int[] weight = new int[5];
     private int maxSlots;
+    private bool slotEquilibrium;
     void Start() //default to the map when the game launches.
     {
         previousState = GameState.Map;
@@ -351,23 +351,41 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
     public void AdjustSlotUpgradeCounter(int identity) {
         //gamemanager holds the amt of upgrades for each slot.
-        slotUpgrades[identity-1]++;
+        slotUpgrades[identity-1] += 1;
+        Debug.Log("Identity: " + slotUpgrades[identity-1]);
         CalculateWeight();
     }
 
     private void CalculateWeight() {
         int minValue = slotUpgrades[0];
-        for (int i = 0; i < maxSlots-1; i++) {
-            Debug.Log(i);
+        int maxValue = slotUpgrades[0];
+
+        for (int i = 0; i < maxSlots; i++) {
             if (slotUpgrades[i] < minValue) {minValue = slotUpgrades[i];}
+            if (slotUpgrades[i] > maxValue) {maxValue = slotUpgrades[i];}
         }
-        for (int i = 0; i < maxSlots-1; i++) {
-            Debug.Log(i);
+
+        for (int i = 0; i < maxSlots; i++) {
             weight[i] = slotUpgrades[i] - minValue;
+            Debug.Log("Slot " + (i+1) + " weight: " + weight[i]);
+        }
+
+        if (minValue == maxValue) {
+            slotEquilibrium = true;
+        } else {
+            slotEquilibrium = false;
         }
     }
 
     public int GetWeight(int identity) {
         return weight[identity-1];
+    }
+
+    public int GetMaxSlots() {
+        return maxSlots;
+    }
+
+    public bool GetEquilibriumCheck() {
+        return slotEquilibrium;
     }
 }

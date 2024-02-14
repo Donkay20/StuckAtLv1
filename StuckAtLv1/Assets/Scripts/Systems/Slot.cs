@@ -29,7 +29,7 @@ public class Slot : MonoBehaviour
     6 - Temp Golem Attack (from Golem 3) //temp
     */
 
-    private int identity;
+    [SerializeField] private int identity;
     private bool containsSkill = false;
     private bool absorbBulletAvailable = true;
     private int skillID = 0, skillUses = 0;
@@ -51,15 +51,15 @@ public class Slot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cooldownValueText;
     [SerializeField] private Transform bulletTransform;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private SlotManager slotManager;
 
-    
     private void Start() {
         absorbBulletAvailable = true;
         containsSkill = false;
     }
 
     void OnEnable() {
-        //CalculateWeightPenalty();
+        CalculateWeightPenalty();
     }
     
     private void Update() {
@@ -160,10 +160,11 @@ public class Slot : MonoBehaviour
                 Debug.Log("Legendary upgrade applied.");
                 break;
         }
-        //gameManager.AdjustSlotUpgradeCounter(identity);
     }
 
     private void CalculateWeightPenalty() {
+        Debug.Log("Identity: " + identity + ". Identity-1: " + (identity-1));
+        Debug.Log(gameManager.GetWeight(identity));
         int weight = gameManager.GetWeight(identity);
         if (weight == 0) {
             cooldownModifier = 0.9f;
@@ -171,13 +172,13 @@ public class Slot : MonoBehaviour
         if (weight >= 1 && weight <= 3) {
             cooldownModifier = 1 + 0.1f * weight;
         }
-        if (weight >= 4 && weight <= 7) {
+        if (weight >= 4 && weight <= 6) {
             cooldownModifier = 1 + 0.2f * weight;
         }
-        if (weight >=8 && weight <= 10) {
+        if (weight >= 7 && weight <= 9) {
             cooldownModifier = 1 + 0.3f * weight;
         }
-        if (weight >= 11) {
+        if (weight >= 10) {
             cooldownModifier = 1 + 0.5f * weight;
         }
     }

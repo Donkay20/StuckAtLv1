@@ -28,6 +28,8 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Image[] upgradeRarityBG = new Image[3];        //background of the actual clickable upgrade image that you select
     [SerializeField] private Image[] upgradeIcon = new Image[3];            //the image associated with each upgrade (eg. sword for dmg boost)
     [SerializeField] private TextMeshProUGUI[] upgradeText = new TextMeshProUGUI[3]; //the text that describes what the upgrade does
+    [SerializeField] private TextMeshProUGUI[] weightText = new TextMeshProUGUI[5]; //text that shows slot weight (UPDATE TO 5 LATER ON)
+    [SerializeField] private TextMeshProUGUI equilibriumText;
     [Space]
     //the following are to be held for storage
     [SerializeField] private Sprite[] upgradeRarityImage = new Sprite[3];   //background image for different rarities
@@ -38,6 +40,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private string[] rareUpgradeText = new string[4];      //(UPDATE TO 13 LATER ON)
     [SerializeField] private string[] legendaryUpgradeText = new string[4]; //(UPDATE TO 13 LATER ON)
     [Space]
+    //other
     [SerializeField] private GameManager notify;
     private bool fromShop;
 
@@ -165,7 +168,21 @@ public class UpgradeManager : MonoBehaviour
     }
 
     public void DisplayWeight() {
-        //todo
+        for (int i = 0; i < notify.GetMaxSlots(); i++) {
+            weightText[i].text = notify.GetWeight(i+1).ToString();
+
+            if (notify.GetWeight(i+1) == 0) {weightText[i].color = Color.white;}
+            if (notify.GetWeight(i+1) >= 1 && notify.GetWeight(i+1) <= 3) {weightText[i].color = new Color32(102, 175, 255, 255);} //lightblue
+            if (notify.GetWeight(i+1) >= 4 && notify.GetWeight(i+1) <= 6) {weightText[i].color = new Color32(51, 255, 51, 255);} //green
+            if (notify.GetWeight(i+1) >= 7 && notify.GetWeight(i+1) <= 9) {weightText[i].color = new Color32(255, 255, 51, 255);} //yellow
+            if (notify.GetWeight(i+1) >= 10) {weightText[i].color = new Color32(255, 0, 0, 255);} //red
+
+            if (notify.GetEquilibriumCheck()) {
+                equilibriumText.gameObject.SetActive(true);
+            } else {
+                equilibriumText.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Finish() { 
