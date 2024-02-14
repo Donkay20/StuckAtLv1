@@ -23,8 +23,18 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Button[] upgradeButtons = new Button[3];       //buttons to click to select desired upgrade
     [SerializeField] private Button[] slotButtons = new Button[2];          //buttons to click to select desired slot (UPDATE TO 5 LATER ON)
     [SerializeField] private Button confirmationButton;                     //click this after upgrade and slot to apply are selected
-    [Space]
     //the following are for the interactable, visual stuff
+    [SerializeField] private Button helpButton;                             //guide button to explain upgrade menu
+    [SerializeField] private GameObject helpMenu;                           //help menu gameobject
+    [SerializeField] private Image helpMenuImage;
+    [SerializeField] private TextMeshProUGUI helpMenuText;                  //help menu image and text fields contained within the help menu gameobject
+    [SerializeField] private Sprite[] helpMenuSprites;
+    [TextArea(5,5)]
+    [SerializeField] private string[] helpMenuStrings;                      //help menu image and text population stored for the help menu
+    [SerializeField] private Button closeHelpMenu, advanceHelpMenu, backHelpMenu; //button stuff for the help menu
+    [Space]
+    private int helpMenuValue; private bool helpMenuSeen;
+    //help menu stuff
     [SerializeField] private Image[] upgradeRarityBG = new Image[3];        //background of the actual clickable upgrade image that you select
     [SerializeField] private Image[] upgradeIcon = new Image[3];            //the image associated with each upgrade (eg. sword for dmg boost)
     [SerializeField] private TextMeshProUGUI[] upgradeText = new TextMeshProUGUI[3]; //the text that describes what the upgrade does
@@ -72,6 +82,11 @@ public class UpgradeManager : MonoBehaviour
 
     private void OnEnable() {
         DisplayWeight();
+
+        if (!helpMenuSeen) {
+            OpenHelpMenu();
+            helpMenuSeen = true;
+        }
     }
 
     public void Setup(string type) {    
@@ -185,6 +200,51 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
+    public void Shop() {
+        fromShop = true;
+    }
+
+    private void UpdateHelpMenu(string command) {
+        switch(command) {
+            case "advance":
+                helpMenuValue++;
+                break;
+            case "back":
+                helpMenuValue--;
+                break;
+        }
+
+        helpMenuImage.sprite = helpMenuSprites[helpMenuValue];
+        helpMenuText.text = helpMenuStrings[helpMenuValue];
+
+        if (helpMenuValue == 0) {
+            backHelpMenu.gameObject.SetActive(false);
+        } else {
+            backHelpMenu.gameObject.SetActive(true);
+        }
+
+        if (helpMenuValue == 6) {
+            advanceHelpMenu.gameObject.SetActive(false);
+            closeHelpMenu.gameObject.SetActive(true);
+        } else {
+            advanceHelpMenu.gameObject.SetActive(true);
+            closeHelpMenu.gameObject.SetActive(false);
+        }
+    }
+    
+    private void OpenHelpMenu() {
+        helpMenu.SetActive(true);
+    }
+
+    private void CloseHelpMenu() {
+        helpMenuImage.sprite = helpMenuSprites[0];
+        helpMenuText.text = helpMenuStrings[0];
+        helpMenuValue = 0;
+        backHelpMenu.gameObject.SetActive(false);
+        advanceHelpMenu.gameObject.SetActive(true);
+        helpMenu.SetActive(false);
+    }
+
     public void Finish() { 
         //Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
 
@@ -234,10 +294,6 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    public void Shop() {
-        fromShop = true;
-    }
-
     private void InitializeButtons() {
         upgradeButtons[0].onClick.AddListener(() => ClickedUpgrade(0));
         upgradeButtons[1].onClick.AddListener(() => ClickedUpgrade(1));
@@ -245,6 +301,10 @@ public class UpgradeManager : MonoBehaviour
         slotButtons[0].onClick.AddListener(() => ClickedSlot(0));
         slotButtons[1].onClick.AddListener(() => ClickedSlot(1));
         confirmationButton.onClick.AddListener(() => Finish());
+        helpButton.onClick.AddListener(() => OpenHelpMenu());
+        closeHelpMenu.onClick.AddListener(() => CloseHelpMenu());
+        advanceHelpMenu.onClick.AddListener(() => UpdateHelpMenu("advance"));
+        backHelpMenu.onClick.AddListener(() => UpdateHelpMenu("back"));
     }
 
     /*
