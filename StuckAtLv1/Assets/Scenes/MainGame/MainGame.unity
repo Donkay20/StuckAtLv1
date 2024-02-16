@@ -74936,7 +74936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.099976, y: 1.0250244}
+  m_AnchoredPosition: {x: -9.099976, y: 1.0250397}
   m_SizeDelta: {x: 387.4, y: 44.73}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &241716110
@@ -79153,7 +79153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &541258213
 RectTransform:
   m_ObjectHideFlags: 0
@@ -80260,7 +80260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 995477027}
-  baseSpeed: 2
+  baseSpeed: 1
   hp: 100
   damage: 2
   alteredSpeed: 0
@@ -80280,11 +80280,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sword: {fileID: 283762009}
   enemyScript: {fileID: 589791772}
+  swordScript: {fileID: 283762013}
   bossHPBar: {fileID: 1794179300}
   bossHPBarFill: {fileID: 1359966722}
   bossName: {fileID: 2076592376}
-  swordScript: {fileID: 283762013}
+  swordBeamPrefab: {fileID: 1546170598746243261, guid: 47f9bcd071cdae6449bbd11ca324d671, type: 3}
+  lateralSlashPrefab: {fileID: 1546170598746243261, guid: 47f9bcd071cdae6449bbd11ca324d671, type: 3}
+  prefabParent: {fileID: 689161979}
   swordCooldown: 0
+  attackCooldown: 0
 --- !u!50 &589791774
 Rigidbody2D:
   serializedVersion: 4
@@ -82446,7 +82450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &689161980
 Transform:
   m_ObjectHideFlags: 0
@@ -101216,7 +101220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &828058986
 Transform:
   m_ObjectHideFlags: 0
@@ -121558,7 +121562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1512036393
 RectTransform:
   m_ObjectHideFlags: 0
@@ -124939,7 +124943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1794179301
 RectTransform:
   m_ObjectHideFlags: 0
