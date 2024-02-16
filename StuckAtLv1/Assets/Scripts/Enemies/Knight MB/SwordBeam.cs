@@ -7,16 +7,17 @@ using UnityEngine;
 public class SwordBeam : MonoBehaviour
 {
     private readonly int SWORD_BEAM_DMG = 2;
-    private readonly float SWORD_BEAM_SPD = 1f;
+    private readonly float SWORD_BEAM_SPD = 2f;
     private float lifetime = 5f;
     [SerializeField] private Character targetCharacter;
     [SerializeField] private GameObject targetGameObject;
     private Rigidbody2D rb;
-    private UnityEngine.Vector3 direction;
+    private UnityEngine.Vector2 direction;
+    private GameObject swordPos;
     void Start()
     {
-        GameObject startingPos = FindAnyObjectByType<Knight>().gameObject;
-        transform.position = startingPos.transform.position + transform.forward*3;
+        swordPos = GameObject.FindWithTag("KnightSword");
+        transform.position = swordPos.transform.position;
 
         targetGameObject = FindAnyObjectByType<Character>().gameObject;
         targetCharacter = targetGameObject.GetComponent<Character>();
@@ -41,7 +42,7 @@ public class SwordBeam : MonoBehaviour
     }
 
     private void OnCollisionStay2D(Collision2D col) {
-        if (col.gameObject == targetGameObject) {
+        if (col.gameObject.layer == LayerMask.NameToLayer("Player")) {
             Attack();
             Destroy(gameObject);
         }

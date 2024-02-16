@@ -45,11 +45,11 @@ public class Knight : MonoBehaviour
             sword.SetActive(true);
         }
 
-        if (attackCooldown > 0) {
+        if (attackCooldown > 0 && !vulnerable) {
             attackCooldown -= Time.deltaTime;
         }
 
-        if (attackCooldown <= 0 && !attackCheck) {
+        if (attackCooldown <= 0 && !attackCheck && !vulnerable) {
             attackCheck = true;
             Attack();
         }
@@ -62,6 +62,7 @@ public class Knight : MonoBehaviour
     public void SwordDied() {
         vulnerable = true;
         swordCooldown = 5;
+        enemyScript.ApplyStun(5f);
     }
 
     public void Attack() {

@@ -2783,7 +2783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 160496245}
   - component: {fileID: 160496246}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RotatePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74679,7 +74679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 232938390}
   - component: {fileID: 232938391}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74936,7 +74936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.099976, y: 1.0250397}
+  m_AnchoredPosition: {x: -9.099976, y: 1.0250549}
   m_SizeDelta: {x: 387.4, y: 44.73}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &241716110
@@ -75618,7 +75618,7 @@ GameObject:
   - component: {fileID: 283762012}
   - component: {fileID: 283762013}
   - component: {fileID: 283762014}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sword
   m_TagString: KnightSword
   m_Icon: {fileID: 0}
@@ -77176,7 +77176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 404655336}
   - component: {fileID: 404655337}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Slot Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80122,7 +80122,7 @@ GameObject:
   - component: {fileID: 589791774}
   - component: {fileID: 589791775}
   - component: {fileID: 589791776}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MidBoss
   m_TagString: Knight
   m_Icon: {fileID: 0}
@@ -82816,7 +82816,7 @@ GameObject:
   - component: {fileID: 709875577}
   - component: {fileID: 709875578}
   - component: {fileID: 709875579}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthBarBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83994,7 +83994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 780668000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthBarContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112407,7 +112407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 947085473}
   - component: {fileID: 947085474}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Slot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114235,7 +114235,7 @@ GameObject:
   - component: {fileID: 1093936404}
   - component: {fileID: 1093936405}
   - component: {fileID: 1093936407}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -116042,7 +116042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1237195274}
   - component: {fileID: 1237195275}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Slot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122221,7 +122221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1557979497}
   - component: {fileID: 1557979496}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerLIght
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126324,7 +126324,7 @@ GameObject:
   - component: {fileID: 1865911232}
   - component: {fileID: 1865911233}
   - component: {fileID: 1865911234}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

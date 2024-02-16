@@ -27,8 +27,8 @@ TagManager:
   - Enemy
   - PostProcessing
   - RockWall
-  - 
-  - 
+  - Player
+  - EnemyAttack
   - 
   - 
   - 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8085685382192112499}
   - component: {fileID: 86280364455097276}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 3476557347489923493}
   - component: {fileID: 1756800203666084576}
   - component: {fileID: 8727006660135521470}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Skeleton3
   m_TagString: Skeleton3
   m_Icon: {fileID: 0}
@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ae85e3d3b5e4242bfdf3abb38e7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   baseSpeed: 1.5
   hp: 5
   damage: 2
