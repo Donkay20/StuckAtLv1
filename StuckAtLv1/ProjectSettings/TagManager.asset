@@ -14,6 +14,8 @@ TagManager:
   - Spider1
   - Spider2
   - Spider3
+  - Knight
+  - KnightSword
   layers:
   - Default
   - TransparentFX

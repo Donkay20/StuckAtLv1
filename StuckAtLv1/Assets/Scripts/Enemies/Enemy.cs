@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -14,7 +15,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     GameObject targetGameObject;
     Character targetCharacter;
     [SerializeField] GameManager gameManager;
-    
     [SerializeField] float baseSpeed;
     [SerializeField] int hp;
     [SerializeField] int damage;
@@ -28,7 +28,9 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     public GameObject particlePrefab;
 
     private void Awake() {
-        body = GetComponent<Rigidbody2D>();
+        if (baseSpeed > 0) {
+            body = GetComponent<Rigidbody2D>();
+        }
         anim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
         anemiaTick = 1;
@@ -49,9 +51,13 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         //add condition here, depending on type of enemy, especially bosses
         Vector3 direction = (targetDestination.position - transform.position).normalized;
         if (alteredSpeedTimer > 0) {
-            body.velocity = direction * alteredSpeed;
+            if (baseSpeed > 0) {
+                body.velocity = direction * alteredSpeed;
+            }
         } else {
-            body.velocity = direction * baseSpeed;
+            if (baseSpeed > 0) {
+                body.velocity = direction * baseSpeed;
+            }    
         }
         Flip(direction.x);
     }
@@ -91,7 +97,19 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
 
     public void TakeDamage(int damage) {
         Debug.Log("damage taken: " + damage);
-        hp -= damage;
+        switch (this.gameObject.tag) {
+            case "Knight": //special rules for the knight enemy
+                Knight knight = FindAnyObjectByType<Knight>();
+                if (!knight.IsVulnerable()) {
+                    hp -= 0;
+                } else {
+                    hp -= damage;
+                }
+                break;
+            default:
+                hp -= damage;
+                break;
+        }
         anim.SetTrigger("Hit");
         if (hp < 1) {
             FindAnyObjectByType<CombatManager>().EnemyKilled();
@@ -99,7 +117,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             //Debug.Log(this.transform);
             Character character = FindAnyObjectByType<Character>();
             character.money += 5;
-            Destroy(gameObject);
+            ResolveEnemy();
         }
     }
 
@@ -130,5 +148,30 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         {
             rend.flipX = true;
         }
+    }
+
+    private void ResolveEnemy() {
+        switch (this.gameObject.tag) {
+            case "KnightSword": //special rules for the knight's sword; set it to disable instead of destroy so it can be spawned again. then, alert the knight that its sword has died.
+                Knight knight = FindAnyObjectByType<Knight>();
+                knight.SwordDied();
+                gameObject.SetActive(false);
+                break;
+            case "Knight":
+                //do something here to alert the game that the stage is over
+                Destroy(gameObject);
+                break;
+            default:
+                Destroy(gameObject);
+                break;
+        }
+    }
+
+    public int GetHealth() {
+        return hp;
+    }
+
+    public void SetHealth(int health) {
+        hp = health;
     }
 }
