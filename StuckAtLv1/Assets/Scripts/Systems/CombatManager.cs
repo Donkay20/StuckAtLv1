@@ -155,6 +155,10 @@ public class CombatManager : MonoBehaviour
         specialCondition = true;
         condition = c;
     }
+    
+    public void BossDied() {
+        Finish();
+    }
 
     private IEnumerator SurvivalTimer() { 
         //handles timer countdown for survival-type encounter format

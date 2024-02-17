@@ -86,6 +86,11 @@ public class AbsorbBullet : MonoBehaviour
                 case "Spider3": //Spider Bite
                 GetComponentInParent<Slot>().AcquireSkill(9, 1, 2);
                     break;
+                    
+                case "Knight": //Knight
+                Knight knight = FindAnyObjectByType<Knight>();
+                if (knight.IsVulnerable()) {GetComponentInParent<Slot>().AcquireSkill(10, 1, 10);}
+                    break;
             }
             Instantiate(spawnSiphon, transform.position, transform.rotation);
             enemy.TakeDamage(1);

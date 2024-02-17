@@ -72,6 +72,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             anemiaTimer -= Time.deltaTime;
             if (anemiaTick <= 0) {
                 TakeDamage(anemiaDamage);
+                anemiaTick = 1;
             }
         }
 
@@ -105,6 +106,9 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 } else {
                     hp -= damage;
                 }
+                break;
+            case "KnightSword": //sword resists absorb bullet
+                hp -= damage - 1;
                 break;
             default:
                 hp -= damage;

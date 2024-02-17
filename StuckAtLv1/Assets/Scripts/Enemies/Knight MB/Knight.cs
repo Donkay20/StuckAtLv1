@@ -15,7 +15,7 @@ public class Knight : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bossName;
     //UI stuff
     [SerializeField] private GameObject swordBeamPrefab, lateralSlashPrefab; 
-    [SerializeField] private GameObject prefabParent;
+    [SerializeField] private GameObject swordBeamParent, lateralSlashParent;
     //knight attacks 
     private bool vulnerable, attackCheck, swapAttack;
     [SerializeField] private float swordCooldown, attackCooldown;
@@ -31,6 +31,11 @@ public class Knight : MonoBehaviour
         bossName.text = "The Knight.";
         bossHPBar.SetActive(true);
         bossHPBarFill.fillAmount = 1;
+    }
+
+    private void OnDestroy() {
+        CombatManager c = FindAnyObjectByType<CombatManager>();
+        c.BossDied();
     }
 
     void Update() {
@@ -66,16 +71,18 @@ public class Knight : MonoBehaviour
     }
 
     public void Attack() {
+        //Swaps between the sword beam and the lateral slash.
         switch (swapAttack) {
-            case true:
-                Instantiate(swordBeamPrefab, prefabParent.transform);
+            case true: //Sword Beam
+                Instantiate(swordBeamPrefab, lateralSlashParent.transform);
                 swapAttack = false;
                 break;
-            case false:
-                Instantiate(lateralSlashPrefab, prefabParent.transform);
+            case false: //Lateral Slash
+                Instantiate(lateralSlashPrefab, lateralSlashParent.transform);
                 swapAttack = true;
                 break;
         }
+        
         attackCooldown = 3f + (2f *((float) enemyScript.GetHealth() / KNIGHT_MAX_HP)); //cd between attacks decreases as hp decreases
         attackCheck = false;
     }

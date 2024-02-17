@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4236829441554464694}
   - component: {fileID: -9016772854906432996}
   m_Layer: 11
-  m_Name: Sword Beam (Knight)
+  m_Name: Sword Beam (Knight) Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

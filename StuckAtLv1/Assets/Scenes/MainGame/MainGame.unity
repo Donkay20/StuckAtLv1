@@ -2784,7 +2784,7 @@ GameObject:
   - component: {fileID: 160496245}
   - component: {fileID: 160496246}
   m_Layer: 7
-  m_Name: RotatePoint
+  m_Name: SwordRotatePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80123,7 +80123,7 @@ GameObject:
   - component: {fileID: 589791775}
   - component: {fileID: 589791776}
   m_Layer: 7
-  m_Name: MidBoss
+  m_Name: The Knight (Ruins Miniboss)
   m_TagString: Knight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80285,8 +80285,9 @@ MonoBehaviour:
   bossHPBarFill: {fileID: 1359966722}
   bossName: {fileID: 2076592376}
   swordBeamPrefab: {fileID: 1546170598746243261, guid: 47f9bcd071cdae6449bbd11ca324d671, type: 3}
-  lateralSlashPrefab: {fileID: 1546170598746243261, guid: 47f9bcd071cdae6449bbd11ca324d671, type: 3}
-  prefabParent: {fileID: 689161979}
+  lateralSlashPrefab: {fileID: 178865500528206908, guid: 5d48bf484055c464a99f8c8a857ce374, type: 3}
+  swordBeamParent: {fileID: 689161979}
+  lateralSlashParent: {fileID: 589791768}
   swordCooldown: 0
   attackCooldown: 0
 --- !u!50 &589791774
