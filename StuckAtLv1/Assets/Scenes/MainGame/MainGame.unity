@@ -79153,7 +79153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &541258213
 RectTransform:
   m_ObjectHideFlags: 0
@@ -82451,7 +82451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &689161980
 Transform:
   m_ObjectHideFlags: 0
@@ -82465,6 +82465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1051488967}
   - {fileID: 94592673}
   - {fileID: 1225784485}
   - {fileID: 476796695}
@@ -101221,7 +101222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &828058986
 Transform:
   m_ObjectHideFlags: 0
@@ -101261,6 +101262,7 @@ MonoBehaviour:
   notify: {fileID: 995477027}
   spawner: {fileID: 1138831527}
   buffManager: {fileID: 50808387}
+  bossUI: {fileID: 1794179300}
   slots:
   - {fileID: 1237195275}
   - {fileID: 947085474}
@@ -101272,11 +101274,13 @@ MonoBehaviour:
   - {fileID: 328800805}
   - {fileID: 15738760}
   - {fileID: 907017829}
+  - {fileID: 689161979}
   ruinsSpawn:
   - {fileID: 662169956}
   - {fileID: 1681762735}
   - {fileID: 322343545}
   - {fileID: 2081946069}
+  - {fileID: 1051488966}
   forestRooms:
   - {fileID: 0}
   - {fileID: 0}
@@ -101293,18 +101297,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   sewerSpawn:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  minibossRooms:
-  - {fileID: 689161979}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  bossRooms:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -112458,6 +112450,7 @@ MonoBehaviour:
   - {fileID: 9008097832497301800, guid: adde0a6cb4b7a494fa1356977dd76225, type: 3}
   - {fileID: 8198259574962527700, guid: 65ace93faf9e3f54796809b63c9e2c51, type: 3}
   - {fileID: 8642465222339663766, guid: 8ce66b9f1aa5f8941908c9c2874a2971, type: 3}
+  - {fileID: 8642465222339663766, guid: 8ce66b9f1aa5f8941908c9c2874a2971, type: 3}
   cooldownFill: {fileID: 1878591919}
   cooldownValueText: {fileID: 1324842066}
   bulletTransform: {fileID: 947085473}
@@ -112972,7 +112965,6 @@ MonoBehaviour:
   mouseCursorUI: {fileID: 1863102721}
   eventUI: {fileID: 1859515013}
   shopUI: {fileID: 2045488596}
-  minibossTempUI: {fileID: 151866751}
   bossTempUI: {fileID: 72637316}
   mapManager: {fileID: 541258214}
 --- !u!4 &1013039371 stripped
@@ -113532,6 +113524,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2972147345045745059, guid: 7ed4f0e2d1463ec49916f95b6691834b, type: 3}
   m_PrefabInstance: {fileID: 965422239}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1051488966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1051488967}
+  m_Layer: 0
+  m_Name: Spawn_Ruins5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1051488967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051488966}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 689161980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1054420624
 GameObject:
   m_ObjectHideFlags: 0
@@ -114417,7 +114440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHp: 10
-  money: 300
+  money: 1000
   afterimages: 0
   playerAnim: {fileID: 1093936407}
   healthBarAnim: {fileID: 1865911234}
@@ -114965,7 +114988,7 @@ MonoBehaviour:
   - {fileID: 1231657283268106319, guid: 5920855510691c74da95f4837ed29682, type: 3}
   - {fileID: 5537523031278363792, guid: 5934388f7c5cdc949a4d2adb89f40848, type: 3}
   spawnArea: {x: 13, y: 8}
-  spawnTimer: 0.5
+  spawnTimer: 0.7
   player: {fileID: 1093936400}
 --- !u!1 &1139826028
 GameObject:
@@ -116092,6 +116115,7 @@ MonoBehaviour:
   - {fileID: 7131467954183148682, guid: a0e6537ff79beab45a0fff9662d2be42, type: 3}
   - {fileID: 9008097832497301800, guid: adde0a6cb4b7a494fa1356977dd76225, type: 3}
   - {fileID: 8198259574962527700, guid: 65ace93faf9e3f54796809b63c9e2c51, type: 3}
+  - {fileID: 8642465222339663766, guid: 8ce66b9f1aa5f8941908c9c2874a2971, type: 3}
   - {fileID: 8642465222339663766, guid: 8ce66b9f1aa5f8941908c9c2874a2971, type: 3}
   cooldownFill: {fileID: 490660203}
   cooldownValueText: {fileID: 1020637054}
@@ -121563,7 +121587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1512036393
 RectTransform:
   m_ObjectHideFlags: 0
@@ -129818,7 +129842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2081946070
 Transform:
   m_ObjectHideFlags: 0

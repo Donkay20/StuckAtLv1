@@ -16,6 +16,7 @@ public class Room : MonoBehaviour
         Shop,
         Miniboss,
         Boss,
+        Dialogue,
     }
 
     private RoomType room = RoomType.Unassigned; //to check if a room was somehow never initialized
@@ -51,6 +52,11 @@ public class Room : MonoBehaviour
                 room = RoomType.Boss;
                 Debug.Log("roomtype_boss");
                 break;
+                
+            case "dialogue":
+                room = RoomType.Dialogue;
+                Debug.Log("roomtype_dialogue");
+                break;
         }
     }
 
@@ -79,6 +85,10 @@ public class Room : MonoBehaviour
 
             case RoomType.Boss:
                 answer = "boss";
+                return answer;
+
+            case RoomType.Dialogue:
+                answer = "dialogue";
                 return answer;
 
             case RoomType.Unassigned:

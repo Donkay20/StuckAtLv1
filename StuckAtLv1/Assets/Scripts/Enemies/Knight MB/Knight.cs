@@ -8,7 +8,7 @@ public class Knight : MonoBehaviour
 {
     private readonly int KNIGHT_MAX_HP = 100;
     [SerializeField] private GameObject sword; 
-    [SerializeField] private Enemy enemyScript, swordScript; 
+    [SerializeField] private Enemy enemyScript, swordScript;
     //handles scripts and objects
     [SerializeField] private GameObject bossHPBar;
     [SerializeField] private Image bossHPBarFill;
@@ -31,11 +31,6 @@ public class Knight : MonoBehaviour
         bossName.text = "The Knight.";
         bossHPBar.SetActive(true);
         bossHPBarFill.fillAmount = 1;
-    }
-
-    private void OnDestroy() {
-        CombatManager c = FindAnyObjectByType<CombatManager>();
-        c.BossDied();
     }
 
     void Update() {

@@ -43,8 +43,8 @@ public class MapManager : MonoBehaviour
         InitializeButtons();
 
         startingRoom.AssignRoomType("combat"); startingRoom.GetComponent<Image>().sprite = combatImage;
-        minibossRoom.AssignRoomType("miniboss"); minibossRoom.GetComponent<Image>().sprite = miniBossImage;
-        bossRoom.AssignRoomType("boss"); bossRoom.GetComponent<Image>().sprite = bossImage;
+        minibossRoom.AssignRoomType("dialogue"); minibossRoom.GetComponent<Image>().sprite = miniBossImage;
+        bossRoom.AssignRoomType("dialogue"); bossRoom.GetComponent<Image>().sprite = bossImage;
         //hard code the first room to be combat, and hard code the positions of miniboss room & boss room
 
         HighlightRoom(startingRoom);

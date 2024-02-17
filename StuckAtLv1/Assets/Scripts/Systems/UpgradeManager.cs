@@ -52,7 +52,7 @@ public class UpgradeManager : MonoBehaviour
     [Space]
     //other
     [SerializeField] private GameManager notify;
-    private bool fromShop;
+    private bool fromShop; private bool fromBoss;
 
     void Awake()    //initialize the buttons, and capacity for each upgrade at the beginning of the game.
     {
@@ -204,6 +204,10 @@ public class UpgradeManager : MonoBehaviour
         fromShop = true;
     }
 
+    public void FromBoss() {
+        fromBoss = true;
+    }
+
     private void UpdateHelpMenu(string command) {
         switch(command) {
             case "advance":
@@ -289,6 +293,9 @@ public class UpgradeManager : MonoBehaviour
         if (fromShop) {
             fromShop = false;
             notify.ReceiveCommand("shop");
+        }  else if (fromBoss) {
+            fromBoss = false;
+            notify.ReceiveCommand("dialogue");
         } else {
             notify.ReceiveCommand("map");
         }

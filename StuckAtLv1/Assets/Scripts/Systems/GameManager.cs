@@ -34,7 +34,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     [SerializeField] private GameObject mouseCursorUI;
     [SerializeField] private GameObject eventUI;
     [SerializeField] private GameObject shopUI;
-    [SerializeField] private GameObject minibossTempUI;
     [SerializeField] private GameObject bossTempUI;
     [SerializeField] private MapManager mapManager;
     private GameState currentState;
@@ -78,10 +77,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     shopUI.SetActive(false);
                     mapUI.SetActive(true);
                 }
-                if (previousState == GameState.Miniboss) {
-                    minibossTempUI.SetActive(false);
-                    mapUI.SetActive(true);
-                }
                 if (previousState == GameState.Boss) {
                     bossTempUI.SetActive(false);
                     mapUI.SetActive(true);
@@ -117,7 +112,8 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 }
                 if (previousState == GameState.Miniboss || previousState == GameState.Boss) {
                     combat.SetActive(false); combatUI.SetActive(false);
-                    upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().Setup("legendary");
+                    upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().FromBoss(); upgradeUI.GetComponent<UpgradeManager>().Setup("legendary");
+                    //proc a special flag to let the upgrade manager know to go to the dialogue
                     mouseCursorUI.SetActive(true);
                     //give legendary upgrades
                 }
@@ -127,7 +123,8 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     //I don't foresee any events that would give legendary upgrades, but if they do this'll need to be changed.
                 }
                 if (previousState == GameState.Shop) {
-                    upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().Shop(); upgradeUI.GetComponent<UpgradeManager>().Setup("normal"); //proc a special flag to let the upgrade manager know to go back to the shop
+                    upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().Shop(); upgradeUI.GetComponent<UpgradeManager>().Setup("normal"); 
+                    //proc a special flag to let the upgrade manager know to go back to the shop
                     shopUI.SetActive(false);
                 }
                 previousState = GameState.Upgrade;
@@ -193,8 +190,8 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 if (previousState == GameState.Dialogue) {
                     switch (mapManager.GetWorld()) {
                         case 1:
-                            previousState = GameState.Miniboss;
-                            minibossTempUI.SetActive(true);
+                            combat.SetActive(true); combatUI.SetActive(true);
+                            combat.GetComponent<CombatManager>().Setup("miniboss");
                             SceneManager.UnloadSceneAsync("RuinsMiniBossIntro");
                             break;
                         case 2:
@@ -205,12 +202,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             break;
                     }
                 }
-                
-                if (previousState == GameState.Map) {
-                    mapUI.SetActive(false);
-                    ReceiveCommand("dialogue");
-                }
-                
+                previousState = GameState.Miniboss;
                 Debug.Log("miniboss state");
                 break;
 
@@ -243,6 +235,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
             case GameState.Dialogue:
                 //From the map, we play the boss' intro scene. To determine which one to play, we grab the level and world.
                 if (previousState == GameState.Map) {
+                    mapUI.SetActive(false);
                     //load dialogue scene
                     switch (mapManager.GetWorld()) {
                         case 1:
@@ -261,15 +254,13 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             //todo
                             break;
                     }
-                    mapUI.SetActive(false);
                 }
 
-                //From the miniboss/boss, we play the boss' outro scene
-                if (previousState == GameState.Miniboss) {
-                    //load dialogue scene
+                if (previousState == GameState.Upgrade) {
+                    upgradeUI.SetActive(false);
                     switch(mapManager.GetWorld()) {
                         case 1:
-                                SceneManager.LoadScene("RuinsMiniBossEnd", LoadSceneMode.Additive);
+                            SceneManager.LoadScene("RuinsMiniBossEnd", LoadSceneMode.Additive);
                             break;
                         case 2:
                             //todo
@@ -278,23 +269,8 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             //todo
                             break;
                     }
-                    minibossTempUI.SetActive(false);
                 }
-                if (previousState == GameState.Boss) {
-                    //load dialogue scene
-                    switch(mapManager.GetWorld()) {
-                        case 1:
-                            SceneManager.LoadScene("RuinsBossEnd", LoadSceneMode.Additive);
-                            break;
-                        case 2:
-                            //todo
-                            break;
-                        case 3:
-                            //todo
-                            break;
-                    }
-                    bossTempUI.SetActive(false);
-                }
+
                 previousState = GameState.Dialogue;
                 Debug.Log("dialogue state");
                 break;

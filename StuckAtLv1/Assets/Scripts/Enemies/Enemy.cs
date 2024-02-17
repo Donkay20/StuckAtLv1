@@ -116,7 +116,12 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         }
         anim.SetTrigger("Hit");
         if (hp < 1) {
-            FindAnyObjectByType<CombatManager>().EnemyKilled();
+            CombatManager c = FindAnyObjectByType<CombatManager>();
+            if (c.GetObjective() == "miniboss" && this.gameObject.CompareTag("Knight")) {
+                c.EnemyKilled();
+            } else if (c.GetObjective() == "combat") {
+                c.EnemyKilled();
+            }
             Instantiate(particlePrefab, this.transform.position, this.transform.rotation);
             //Debug.Log(this.transform);
             Character character = FindAnyObjectByType<Character>();
@@ -162,7 +167,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 gameObject.SetActive(false);
                 break;
             case "Knight":
-                //do something here to alert the game that the stage is over
                 Destroy(gameObject);
                 break;
             default:

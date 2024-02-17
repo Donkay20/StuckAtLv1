@@ -114,9 +114,10 @@ public class DialogueManager : MonoBehaviour
     }
 
     void displayNextSentence() {
-
-         if (lines.Count == 0) {
+         if (lines.Count <= 0) {
+            Debug.Log("Ran out of lines.");
             Scene currentScene = gameObject.scene;
+            Debug.Log("Current scene: " + currentScene.name);
             switch (currentScene.name) {
                 case "OpeningScene":
                     SceneManager.LoadScene("ArtifactIntro");
@@ -140,12 +141,13 @@ public class DialogueManager : MonoBehaviour
                     gameManager.ReceiveCommand("map");
                     break;
             }
-         }
-
-        currentLine = lines.Dequeue();
-         if (messaging) {
+        }
+        if (lines.Count > 0) {
+            currentLine = lines.Dequeue();
+        }
+        if (messaging) {
                 StopAllCoroutines();
-            }
+        }
         StartCoroutine(TypeLines(currentLine));
 
     }
