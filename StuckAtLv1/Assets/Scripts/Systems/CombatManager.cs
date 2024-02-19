@@ -39,7 +39,6 @@ public class CombatManager : MonoBehaviour
     }
 
     public void Setup(string format) {
-        bossUI.SetActive(false);
         /*
         Set-up includes:
         - choosing the map and placing a character in it
@@ -50,6 +49,9 @@ public class CombatManager : MonoBehaviour
         - setting the # of enemies or time to survive based on the progress in the map
         - updating the UI accordingly
         */
+
+        bossUI.SetActive(false);
+        bossSecondaryUI.SetActive(false);
 
         switch (mapProgress.GetWorld()) {
             //choose a room, set it to be active, position the character to the spawn point
@@ -86,6 +88,7 @@ public class CombatManager : MonoBehaviour
             switch(condition) {
                 case 2: //Ruins Event 2
                     spawner.SetCondition(condition);
+                    uIObjective.text = "Defeat!";
                     objective = "combat";
                     spawner.enabled = true;
                     enemiesToKill = 20;
@@ -94,6 +97,7 @@ public class CombatManager : MonoBehaviour
                     break;
                 case 8: //Ruins Event 5
                     spawner.SetCondition(condition);
+                    uIObjective.text = "Defeat!";
                     objective = "combat";
                     spawner.enabled = true;
                     enemiesToKill = 10;
@@ -134,6 +138,7 @@ public class CombatManager : MonoBehaviour
                 spawner.enabled = true;
                 uIObjective.text = "Defeat boss!!";
                 uIObjectiveNumber.text = "∞";
+                StartCoroutine(BossTracker());
                 break;
             }
         }
@@ -145,7 +150,7 @@ public class CombatManager : MonoBehaviour
         if(objective == "combat") {
             enemiesToKill--; uIObjectiveNumber.text = enemiesToKill.ToString();
         }
-        if(objective == "miniboss") {
+        if(objective == "miniboss" || objective == "boss") {
             bossIsAlive = false;
         }
     }

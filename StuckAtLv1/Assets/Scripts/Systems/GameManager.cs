@@ -34,7 +34,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     [SerializeField] private GameObject mouseCursorUI;
     [SerializeField] private GameObject eventUI;
     [SerializeField] private GameObject shopUI;
-    [SerializeField] private GameObject bossTempUI;
     [SerializeField] private MapManager mapManager;
     private GameState currentState;
     private GameState previousState;
@@ -59,7 +58,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         
         switch(currentState) {
             //non map focused
-            case GameState.Map:
+            case GameState.Map: //MAP STATE
                 //do stuff
                 if (previousState == GameState.Combat || previousState == GameState.Survival) { //Not sure if this is needed anymore?
                     combat.SetActive(false);
@@ -75,10 +74,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 }
                 if (previousState == GameState.Shop) {
                     shopUI.SetActive(false);
-                    mapUI.SetActive(true);
-                }
-                if (previousState == GameState.Boss) {
-                    bossTempUI.SetActive(false);
                     mapUI.SetActive(true);
                 }
                 if (previousState == GameState.Dialogue) {
@@ -103,7 +98,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 previousState = GameState.Map;
                 break;
 
-            case GameState.Upgrade:
+            case GameState.Upgrade: //UPGRADE STATE
                 if (previousState == GameState.Combat || previousState == GameState.Survival) {
                     combat.SetActive(false); combatUI.SetActive(false);
                     upgradeUI.SetActive(true); upgradeUI.GetComponent<UpgradeManager>().Setup("normal");
@@ -131,7 +126,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 break;
 
             //map focused
-            case GameState.Combat:
+            case GameState.Combat: //COMBAT STATE
                 if (previousState == GameState.Map) {
                     mapUI.SetActive(false); mouseCursorUI.SetActive(false);
                     combat.SetActive(true); combatUI.SetActive(true);
@@ -147,7 +142,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 previousState = GameState.Combat;
                 break;
 
-            case GameState.Survival:
+            case GameState.Survival: //SURVIVAL STATE
                 if (previousState == GameState.Map) {
                     mapUI.SetActive(false); mouseCursorUI.SetActive(false);
                     combat.SetActive(true); combatUI.SetActive(true);
@@ -162,14 +157,14 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 previousState = GameState.Survival;
                 break;
 
-            case GameState.Event:
+            case GameState.Event: //EVENT STATE
                 eventUI.SetActive(true); eventUI.GetComponent<EventManager>().InitializeEvent();
                 mapUI.SetActive(false);
                 previousState = GameState.Event;
                 Debug.Log("event state");
                 break;
 
-            case GameState.Shop:
+            case GameState.Shop: //SHOP STATE
                 if (previousState == GameState.Map) {
                     shopUI.SetActive(true);
                     mapUI.SetActive(false);
@@ -186,7 +181,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 Debug.Log("shop state");
                 break;
 
-            case GameState.Miniboss:
+            case GameState.Miniboss: //MINIBOSS STATE
                 if (previousState == GameState.Dialogue) {
                     switch (mapManager.GetWorld()) {
                         case 1:
@@ -206,12 +201,12 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 Debug.Log("miniboss state");
                 break;
 
-            case GameState.Boss:
+            case GameState.Boss: //BOSS STATE
                 if (previousState == GameState.Dialogue) {
                     switch (mapManager.GetWorld()) {
                         case 1:
-                            previousState = GameState.Boss;
-                            bossTempUI.SetActive(true);
+                            combat.SetActive(true); combatUI.SetActive(true);
+                            combat.GetComponent<CombatManager>().Setup("boss");
                             SceneManager.UnloadSceneAsync("RuinsBossIntro");
                             break;
                         case 2:
@@ -222,17 +217,12 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             break;
                     }
                     //unload dialogue scene
-                }
-
-                if (previousState == GameState.Map) {
-                    mapUI.SetActive(false);
-                    ReceiveCommand("dialogue");
-                }
-                
+                }   
+                previousState = GameState.Boss;
                 Debug.Log("boss state");
                 break;
 
-            case GameState.Dialogue:
+            case GameState.Dialogue: //DIALOGUE STATE
                 //From the map, we play the boss' intro scene. To determine which one to play, we grab the level and world.
                 if (previousState == GameState.Map) {
                     mapUI.SetActive(false);
@@ -242,7 +232,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             if (mapManager.GetLevel() == 5) {
                                 SceneManager.LoadScene("RuinsMiniBossIntro", LoadSceneMode.Additive);
                             }
-
                             if (mapManager.GetLevel() == 11) {
                                 SceneManager.LoadScene("RuinsBossIntro", LoadSceneMode.Additive);
                             }
@@ -260,7 +249,12 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     upgradeUI.SetActive(false);
                     switch(mapManager.GetWorld()) {
                         case 1:
-                            SceneManager.LoadScene("RuinsMiniBossEnd", LoadSceneMode.Additive);
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.LoadScene("RuinsMiniBossEnd", LoadSceneMode.Additive);
+                            }
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.LoadScene("RuinsBossEnd", LoadSceneMode.Additive);
+                            }
                             break;
                         case 2:
                             //todo

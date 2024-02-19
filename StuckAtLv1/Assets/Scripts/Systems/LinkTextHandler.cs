@@ -11,26 +11,24 @@ public class LinkTextHandler : MonoBehaviour, IPointerClickHandler
     private Camera cameraToUse;
     [SerializeField] private KeywordDetail keywordDetail;
 
-
-
     private void Awake() {
         linkedText = GetComponent<TMP_Text>();
-        //canvas = GetComponentInParent<Canvas>();
         cameraToUse = null; //because we're using screen space overlay
+    }
+
+    private void OnEnable() {
+        linkedText = GetComponent<TMP_Text>();
+        linkedText.ForceMeshUpdate();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         Vector3 mousePosition = new Vector3(eventData.position.x, eventData.position.y, z:0);
-        Debug.Log(mousePosition);
         var linkTaggedText = TMP_TextUtilities.FindNearestLink(linkedText, mousePosition, cameraToUse);
-        Debug.Log(linkTaggedText);
         if (linkTaggedText != -1) {
+            Debug.Log(linkTaggedText);
             TMP_LinkInfo linkInfo = linkedText.textInfo.linkInfo[linkTaggedText];
             keywordDetail.Enable(linkInfo.GetLinkID());
-            Debug.Log(linkInfo.GetLinkID());
-            Debug.Log(linkInfo.GetLinkText());
         }
-        //throw new System.NotImplementedException();
     }
 }

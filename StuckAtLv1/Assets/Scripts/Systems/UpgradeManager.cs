@@ -183,6 +183,7 @@ public class UpgradeManager : MonoBehaviour
     }
 
     public void DisplayWeight() {
+        //slot weight calculation here
         for (int i = 0; i < notify.GetMaxSlots(); i++) {
             weightText[i].text = notify.GetWeight(i+1).ToString();
 
@@ -204,7 +205,7 @@ public class UpgradeManager : MonoBehaviour
         fromShop = true;
     }
 
-    public void FromBoss() {
+    public void FromBoss() { //boss or miniboss
         fromBoss = true;
     }
 
