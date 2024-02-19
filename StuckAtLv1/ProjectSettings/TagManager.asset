@@ -16,6 +16,8 @@ TagManager:
   - Spider3
   - Knight
   - KnightSword
+  - Lich
+  - LichEffigy
   layers:
   - Default
   - TransparentFX

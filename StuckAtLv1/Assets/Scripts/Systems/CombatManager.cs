@@ -18,7 +18,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameManager notify;
     [SerializeField] private EnemyManager spawner;
     [SerializeField] private BuffManager buffManager;
-    [SerializeField] private GameObject bossUI;
+    [SerializeField] private GameObject bossUI, bossSecondaryUI;
     [SerializeField] private Slot[] slots = new Slot[5];
     [SerializeField] private GameObject[] ruinsRooms = new GameObject[5];
     [SerializeField] private GameObject[] ruinsSpawn = new GameObject[5];
@@ -190,6 +190,12 @@ public class CombatManager : MonoBehaviour
         Enemy[] remainingEnemies = FindObjectsOfType<Enemy>();
         foreach (Enemy straggler in remainingEnemies) {
             straggler.TakeDamage(999);
+        }
+
+        //Disable any unnecessary UI
+        if (objective == "miniboss" || objective == "boss") {
+            bossSecondaryUI.SetActive(false);
+            bossUI.SetActive(false);
         }
 
         //Reset the objective and stop coroutines in the character script to prevent errors

@@ -24,6 +24,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     Rigidbody2D body;
     Animator anim;
     SpriteRenderer rend;
+    private BuffManager buffManager;
 
     public GameObject particlePrefab;
 
@@ -42,6 +43,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     private void Start() {
+        buffManager = FindAnyObjectByType<BuffManager>();
         gameManager = FindAnyObjectByType<GameManager>();
         hp += gameManager.ScaleDifficulty();
         baseSpeed += gameManager.ScaleDifficulty()/10;
@@ -90,10 +92,19 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     private void Attack() {
-        if (targetCharacter == null && !stunApplied) { //stunned enemies can't deal damage
+
+        if (targetCharacter == null && !stunApplied) { 
+            //stunned enemies can't deal damage
             targetCharacter = targetGameObject.GetComponent<Character>();
         }
+        
         targetCharacter.TakeDamage(damage);
+
+        switch (this.gameObject.tag) {
+            case "LichEffigy":
+                buffManager.AddDebuff("slow", 0.9f, 3f);
+                break;
+        }
     }
 
     public void TakeDamage(int damage) {
@@ -110,6 +121,14 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             case "KnightSword": //sword resists absorb bullet
                 hp -= damage - 1;
                 break;
+            case "Lich":
+                Lich lich  = FindAnyObjectByType<Lich>();
+                if (!lich.IsVulnerable()) {
+                    hp -= 0;
+                } else {
+                    hp -= damage;
+                }
+                break;
             default:
                 hp -= damage;
                 break;
@@ -118,6 +137,8 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         if (hp < 1) {
             CombatManager c = FindAnyObjectByType<CombatManager>();
             if (c.GetObjective() == "miniboss" && this.gameObject.CompareTag("Knight")) {
+                c.EnemyKilled();
+            } else if (c.GetObjective() == "boss" && this.gameObject.CompareTag("Lich")) {
                 c.EnemyKilled();
             } else if (c.GetObjective() == "combat") {
                 c.EnemyKilled();
@@ -166,8 +187,10 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 knight.SwordDied();
                 gameObject.SetActive(false);
                 break;
-            case "Knight":
-                Destroy(gameObject);
+            case "LichEffigy":
+                Lich lich = FindAnyObjectByType<Lich>();
+                lich.EffigyDied();
+                gameObject.SetActive(false);
                 break;
             default:
                 Destroy(gameObject);
