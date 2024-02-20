@@ -80768,7 +80768,7 @@ GameObject:
   - component: {fileID: 598751295}
   - component: {fileID: 598751298}
   m_Layer: 5
-  m_Name: Keyword Detail/UI
+  m_Name: Keyword Detail 1/UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119477,7 +119477,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 000
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fde344880cc6d3c40bdabf878456668c, type: 2}
   m_sharedMaterial: {fileID: 5625604642881427077, guid: fde344880cc6d3c40bdabf878456668c, type: 2}
@@ -131480,6 +131480,7 @@ MonoBehaviour:
   enemyScript: {fileID: 1615624146}
   forceField: {fileID: 2103544371}
   skullWaveAttackPrefab: {fileID: 1601588314654219455, guid: cb4fc8429f9ef1748b46856e62855dfe, type: 3}
+  HomingSkullPrefab: {fileID: 6477259643138642287, guid: 05f69ca7e5934d74c9e9f68941686dd9, type: 3}
   attackParent: {fileID: 1079513706}
   bossHPBar: {fileID: 1794179300}
   bossHPBarFill: {fileID: 1359966722}
@@ -136834,7 +136835,7 @@ GameObject:
   - component: {fileID: 1933423401}
   - component: {fileID: 1933423400}
   m_Layer: 5
-  m_Name: OutOf
+  m_Name: Divisor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

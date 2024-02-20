@@ -12,6 +12,7 @@ public class Lich : MonoBehaviour
     [SerializeField] private Enemy enemyScript;
     [SerializeField] private GameObject forceField;
     [SerializeField] private GameObject skullWaveAttackPrefab;
+    [SerializeField] private GameObject HomingSkullPrefab;
     [SerializeField] private GameObject attackParent;
     //stuff
     [SerializeField] private GameObject bossHPBar;
@@ -21,7 +22,7 @@ public class Lich : MonoBehaviour
     [SerializeField] private Image effigyHPBarFill;
     [SerializeField] private TextMeshProUGUI effigyName;
     //UI stuff
-    private bool vulnerable, attackCheck; 
+    private bool vulnerable, attackCheck, attackSwitch; 
     private float attackTimer;
     private int effigyHP;
     //variables
@@ -34,6 +35,7 @@ public class Lich : MonoBehaviour
         effigyHP = 100;
         attackTimer = 7;
         vulnerable = false;
+        attackSwitch = false;
     }
 
     void OnEnable() {
@@ -90,9 +92,15 @@ public class Lich : MonoBehaviour
     }
 
     public void Attack() {
-        Instantiate(skullWaveAttackPrefab, attackParent.transform);
-        //todo
-        attackTimer = 4f + (3f * ((float) enemyScript.GetHealth() / LICH_MAX_HP)); //cd between attacks decreases as hp decreases
+        if (attackSwitch) {
+            Instantiate(skullWaveAttackPrefab, attackParent.transform);
+            attackSwitch = false;
+        } else {
+            Instantiate(HomingSkullPrefab, attackParent.transform);
+            attackSwitch = true;
+        }
+        
+        attackTimer = 5f + (2f * ((float) enemyScript.GetHealth() / LICH_MAX_HP)); //cd between attacks decreases as hp decreases
         attackCheck = false;
     }
 
