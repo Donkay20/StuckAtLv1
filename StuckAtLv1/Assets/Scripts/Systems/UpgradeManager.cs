@@ -89,7 +89,11 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    public void Setup(string type) {    
+    public void Setup(string type) {
+        upgradeText[0].gameObject.SetActive(false); upgradeText[0].text = "";
+        upgradeText[1].gameObject.SetActive(false); upgradeText[1].text = "";
+        upgradeText[2].gameObject.SetActive(false); upgradeText[2].text = "";
+          
         //Called from the gamemanager with a type of reward, dependent on type of battle fought. Should be called every time we go into this menu.
         //Sets up the upgrades that are displayed in-game. This logic will need to be re-written for if the upgrades run out entirely, although idk if that'll be possible.
         for (int i = 0; i < 3; i++) {       
@@ -121,7 +125,8 @@ public class UpgradeManager : MonoBehaviour
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = commonIconPool[roll];
-                    upgradeText[i].text = commonUpgradeText[roll];
+                    //upgradeText[i].text = commonUpgradeText[roll];
+                    upgradeText[i].SetText(commonUpgradeText[roll]);
                     break;
                 case 1: //rare
                     while (rareUpgradePool[roll] == 0) {
@@ -129,7 +134,8 @@ public class UpgradeManager : MonoBehaviour
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = rareIconPool[roll];
-                    upgradeText[i].text = rareUpgradeText[roll];
+                    //upgradeText[i].text = rareUpgradeText[roll];
+                    upgradeText[i].SetText(rareUpgradeText[roll]);
                     break;
                 case 2: //legendary
                     while (legendaryUpgradePool[roll] == 0) {
@@ -137,10 +143,15 @@ public class UpgradeManager : MonoBehaviour
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = legendaryIconPool[roll];
-                    upgradeText[i].text = legendaryUpgradeText[roll];
+                    //upgradeText[i].text = legendaryUpgradeText[roll];
+                    upgradeText[i].SetText(legendaryUpgradeText[roll]);
                     break;
             }
         }
+        upgradeText[0].ForceMeshUpdate(); upgradeText[1].ForceMeshUpdate(); upgradeText[2].ForceMeshUpdate();
+        upgradeText[0].gameObject.SetActive(true);
+        upgradeText[1].gameObject.SetActive(true);
+        upgradeText[2].gameObject.SetActive(true);
     }
 
     public void ClickedUpgrade(int position) {      

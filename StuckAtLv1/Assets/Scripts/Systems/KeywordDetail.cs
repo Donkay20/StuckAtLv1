@@ -21,7 +21,11 @@ public class KeywordDetail : MonoBehaviour
     }
 
     public void Enable(string keyword) {
+        
         gameObject.SetActive(true);
+        keywordTitle.text = "";
+        keywordDetail.text = "";
+
         switch(keyword) {
             case "overheal":
                 keywordTitle.text = titlePool[0];
