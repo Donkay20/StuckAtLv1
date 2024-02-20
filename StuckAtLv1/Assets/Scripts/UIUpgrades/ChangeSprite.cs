@@ -11,6 +11,8 @@ public class ChangeSprite : MonoBehaviour
 
     public Sprite common1, uncommon1, rare1;
     public Sprite common2, uncommon2, rare2;
+    public Sprite common3, uncommon3, rare3;
+    //public Sprite common4, uncommon4, rare4;
 
     // Start is called before the first frame update
     void Awake()
@@ -34,7 +36,7 @@ public class ChangeSprite : MonoBehaviour
     {
         if(image.sprite == common1)
         {
-            st.pressedSprite = common2;
+            st.pressedSprite = common3;
             st.highlightedSprite = common2;
             st.selectedSprite = common2;
             st.disabledSprite = common2;
@@ -42,7 +44,7 @@ public class ChangeSprite : MonoBehaviour
         }
         else if(image.sprite == uncommon1)
         {
-            st.pressedSprite = uncommon2;
+            st.pressedSprite = uncommon3;
             st.highlightedSprite = uncommon2;
             st.selectedSprite = uncommon2;
             st.disabledSprite = uncommon2;
@@ -50,7 +52,7 @@ public class ChangeSprite : MonoBehaviour
         }
         else if(image.sprite == rare1)
         {
-            st.pressedSprite = rare2;
+            st.pressedSprite = rare3;
             st.highlightedSprite = rare2;
             st.selectedSprite = rare2;
             st.disabledSprite = rare2;
