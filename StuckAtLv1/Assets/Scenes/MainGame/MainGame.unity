@@ -831,7 +831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -74980,7 +74980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -75089,7 +75089,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.099976, y: 1.0250549}
+  m_AnchoredPosition: {x: -9.099976, y: 1.0250854}
   m_SizeDelta: {x: 387.4, y: 44.73}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &241716110
@@ -79102,7 +79102,7 @@ GameObject:
   - component: {fileID: 511076037}
   - component: {fileID: 511076036}
   m_Layer: 5
-  m_Name: Text (3)
+  m_Name: Button Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79147,7 +79147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Comfirm
+  m_text: Confirm
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fde344880cc6d3c40bdabf878456668c, type: 2}
   m_sharedMaterial: {fileID: 5625604642881427077, guid: fde344880cc6d3c40bdabf878456668c, type: 2}
@@ -124003,7 +124003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -138914,9 +138914,9 @@ MonoBehaviour:
   - {fileID: 1509083735}
   equilibriumText: {fileID: 595118726}
   upgradeRarityImage:
-  - {fileID: 21300000, guid: 9a8eac61d2342864d81376e026f5d125, type: 3}
-  - {fileID: 21300000, guid: 96468d33344c64249a10b0410b32443d, type: 3}
-  - {fileID: 21300000, guid: 2bcad24823dbbb749af6e8ab52369de5, type: 3}
+  - {fileID: 21300000, guid: 1a420ab1fe6f9eb4d880cb889af610ca, type: 3}
+  - {fileID: 21300000, guid: 4b4e18abb21047441b1110dd2c0517bb, type: 3}
+  - {fileID: 21300000, guid: e62022a5afe97bd498f0754297db182a, type: 3}
   commonIconPool:
   - {fileID: 21300000, guid: da4d3b30919c1f94988979465ca7fabe, type: 3}
   - {fileID: 21300000, guid: 56bfcece331a8684abcd4fe90a3f72ea, type: 3}
