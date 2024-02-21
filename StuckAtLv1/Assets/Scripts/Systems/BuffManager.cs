@@ -30,14 +30,6 @@ public class BuffManager : MonoBehaviour
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.T)) {
-            AddBuff("speed", 0.3f, 5f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y)) {
-            AddBuff("power", 0.3f, 4f);
-        }
-
         if (Input.GetKeyDown(KeyCode.U)) {
             AddBuff("bloodsucker", 0.5f, 6f);
         }
@@ -46,21 +38,6 @@ public class BuffManager : MonoBehaviour
             AddBuff("bulwark", 0.5f, 30f);
         }
         //Manual buffs for testing purposes
-
-        if (Input.GetKeyDown(KeyCode.G)) {
-            AddDebuff("slow", 0.8f, 5f);    //20% slow
-        }
-
-        if (Input.GetKeyDown(KeyCode.H)) {
-            character.Heal(200);
-            AddDebuff("bleed", 0.5f, 10f);  //double drain speed
-        }
-
-        if (Input.GetKeyDown(KeyCode.J)) {
-            character.Heal(500);
-            AddDebuff("anemia", 0.3f, 5f);  //30% current health dmg per tick
-        }
-        //Manual debuffs for testing purposes
     }
 
     public void AddBuff(string buff, float efficacy, float duration) {

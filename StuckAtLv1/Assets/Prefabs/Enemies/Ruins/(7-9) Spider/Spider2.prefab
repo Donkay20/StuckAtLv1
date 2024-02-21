@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5196264875138554836}
   - component: {fileID: 6922076046577377639}
   - component: {fileID: 8535626518446121401}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spider2
   m_TagString: Spider2
   m_Icon: {fileID: 0}
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ae85e3d3b5e4242bfdf3abb38e7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   baseSpeed: 2
   hp: 3
   damage: 1

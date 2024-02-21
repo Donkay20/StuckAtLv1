@@ -21,7 +21,11 @@ public class KeywordDetail : MonoBehaviour
     }
 
     public void Enable(string keyword) {
+        
         gameObject.SetActive(true);
+        keywordTitle.text = "";
+        keywordDetail.text = "";
+
         switch(keyword) {
             case "overheal":
                 keywordTitle.text = titlePool[0];
@@ -30,6 +34,12 @@ public class KeywordDetail : MonoBehaviour
             case "anemia":
                 keywordTitle.text = titlePool[1];
                 keywordDetail.text = detailPool[1];
+                break;
+            default:
+                Debug.LogWarning($"Keyword '{keyword}' not recognized.");
+                // Display a default message or handle the unrecognized keyword case
+                keywordTitle.text = "Unknown Keyword";
+                keywordDetail.text = "No information available.";
                 break;
         }
     }

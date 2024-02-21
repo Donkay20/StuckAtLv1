@@ -14,6 +14,10 @@ TagManager:
   - Spider1
   - Spider2
   - Spider3
+  - Knight
+  - KnightSword
+  - Lich
+  - LichEffigy
   layers:
   - Default
   - TransparentFX
@@ -25,8 +29,8 @@ TagManager:
   - Enemy
   - PostProcessing
   - RockWall
-  - 
-  - 
+  - Player
+  - EnemyAttack
   - 
   - 
   - 

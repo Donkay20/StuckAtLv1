@@ -43,7 +43,6 @@ public class AbsorbBullet : MonoBehaviour
             int skillID = 0;
             int skillUses = 0;
             int skillCooldown = 0;
-            do this later
             */
             switch (enemy.tag) {                                        
                 /*
@@ -51,40 +50,54 @@ public class AbsorbBullet : MonoBehaviour
                 Arguments: skill ID, skill uses, skill cooldown.
                 Case-by-case for each skill; in the terms of this enemy it would return skill 1 with 3 uses, with a 1 second cooldown.
                 */
-                case "Skeleton1": //Bone Toss                                   
-                GetComponentInParent<Slot>().AcquireSkill(1, 3, 1);        
+                case "Skeleton1":   //Bone Toss                                   
+                    GetComponentInParent<Slot>().AcquireSkill(1, 3, 1);        
                     break;
 
-                case "Skeleton2": //Bone Spikes
-                GetComponentInParent<Slot>().AcquireSkill(2, 5, 0.5f);
+                case "Skeleton2":   //Bone Spikes
+                    GetComponentInParent<Slot>().AcquireSkill(2, 5, 0.5f);
                     break;
 
-                case "Skeleton3": //Upheaval
-                GetComponentInParent<Slot>().AcquireSkill(3, 2, 1);
+                case "Skeleton3":   //Upheaval
+                    GetComponentInParent<Slot>().AcquireSkill(3, 2, 1);
                     break;
 
-                case "Golem1": //Rock Throw
-                GetComponentInParent<Slot>().AcquireSkill(4, 3, 1);
+                case "Golem1":      //Rock Throw
+                    GetComponentInParent<Slot>().AcquireSkill(4, 3, 1);
                     break;
 
-                case "Golem2": //Ground Slam
-                GetComponentInParent<Slot>().AcquireSkill(5, 3, 1);
+                case "Golem2":      //Ground Slam
+                    GetComponentInParent<Slot>().AcquireSkill(5, 3, 1);
                     break;
 
-                case "Golem3": //Fissure
-                GetComponentInParent<Slot>().AcquireSkill(6, 1, 3);
+                case "Golem3":      //Fissure
+                    GetComponentInParent<Slot>().AcquireSkill(6, 1, 3);
                     break;
 
-                case "Spider1": //Venom Spit
-                GetComponentInParent<Slot>().AcquireSkill(7, 2, 2);
+                case "Spider1":     //Venom Spit
+                    GetComponentInParent<Slot>().AcquireSkill(7, 2, 2);
                     break;
 
-                case "Spider2": //Ensnaring Web
-                GetComponentInParent<Slot>().AcquireSkill(8, 1, 2);
+                case "Spider2":     //Ensnaring Web
+                    GetComponentInParent<Slot>().AcquireSkill(8, 1, 2);
                     break;
 
-                case "Spider3": //Spider Bite
-                GetComponentInParent<Slot>().AcquireSkill(9, 1, 2);
+                case "Spider3":     //Spider Bite
+                    GetComponentInParent<Slot>().AcquireSkill(9, 1, 2);
+                    break;
+                    
+                case "Knight":      //Spinning Sword
+                    Knight knight = FindAnyObjectByType<Knight>();
+                    if (knight.IsVulnerable()) {
+                        GetComponentInParent<Slot>().AcquireSkill(10, 1, 10);
+                    }
+                    break;
+
+                case "Lich":        //Souls of the Damned
+                    Lich lich = FindAnyObjectByType<Lich>();
+                    if (lich.IsVulnerable()) {
+                        GetComponentInParent<Slot>().AcquireSkill(11, 1, 10);
+                    }
                     break;
             }
             Instantiate(spawnSiphon, transform.position, transform.rotation);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -14,7 +15,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     GameObject targetGameObject;
     Character targetCharacter;
     [SerializeField] GameManager gameManager;
-    
     [SerializeField] float baseSpeed;
     [SerializeField] int hp;
     [SerializeField] int damage;
@@ -24,11 +24,14 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     Rigidbody2D body;
     Animator anim;
     SpriteRenderer rend;
+    private BuffManager buffManager;
 
     public GameObject particlePrefab;
 
     private void Awake() {
-        body = GetComponent<Rigidbody2D>();
+        if (baseSpeed > 0) {
+            body = GetComponent<Rigidbody2D>();
+        }
         anim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
         anemiaTick = 1;
@@ -40,6 +43,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     private void Start() {
+        buffManager = FindAnyObjectByType<BuffManager>();
         gameManager = FindAnyObjectByType<GameManager>();
         hp += gameManager.ScaleDifficulty();
         baseSpeed += gameManager.ScaleDifficulty()/10;
@@ -49,9 +53,13 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         //add condition here, depending on type of enemy, especially bosses
         Vector3 direction = (targetDestination.position - transform.position).normalized;
         if (alteredSpeedTimer > 0) {
-            body.velocity = direction * alteredSpeed;
+            if (baseSpeed > 0) {
+                body.velocity = direction * alteredSpeed;
+            }
         } else {
-            body.velocity = direction * baseSpeed;
+            if (baseSpeed > 0) {
+                body.velocity = direction * baseSpeed;
+            }    
         }
         Flip(direction.x);
     }
@@ -66,6 +74,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             anemiaTimer -= Time.deltaTime;
             if (anemiaTick <= 0) {
                 TakeDamage(anemiaDamage);
+                anemiaTick = 1;
             }
         }
 
@@ -83,23 +92,62 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     private void Attack() {
-        if (targetCharacter == null && !stunApplied) { //stunned enemies can't deal damage
+
+        if (targetCharacter == null && !stunApplied) { 
+            //stunned enemies can't deal damage
             targetCharacter = targetGameObject.GetComponent<Character>();
         }
+        
         targetCharacter.TakeDamage(damage);
+
+        switch (this.gameObject.tag) {
+            case "LichEffigy":
+                buffManager.AddDebuff("slow", 0.9f, 3f);
+                break;
+        }
     }
 
     public void TakeDamage(int damage) {
         Debug.Log("damage taken: " + damage);
-        hp -= damage;
+        switch (this.gameObject.tag) {
+            case "Knight": //special rules for the knight enemy
+                Knight knight = FindAnyObjectByType<Knight>();
+                if (!knight.IsVulnerable()) {
+                    hp -= 0;
+                } else {
+                    hp -= damage;
+                }
+                break;
+            case "KnightSword": //sword resists absorb bullet
+                hp -= damage - 1;
+                break;
+            case "Lich":
+                Lich lich  = FindAnyObjectByType<Lich>();
+                if (!lich.IsVulnerable()) {
+                    hp -= 0;
+                } else {
+                    hp -= damage;
+                }
+                break;
+            default:
+                hp -= damage;
+                break;
+        }
         anim.SetTrigger("Hit");
         if (hp < 1) {
-            FindAnyObjectByType<CombatManager>().EnemyKilled();
+            CombatManager c = FindAnyObjectByType<CombatManager>();
+            if (c.GetObjective() == "miniboss" && this.gameObject.CompareTag("Knight")) {
+                c.EnemyKilled();
+            } else if (c.GetObjective() == "boss" && this.gameObject.CompareTag("Lich")) {
+                c.EnemyKilled();
+            } else if (c.GetObjective() == "combat") {
+                c.EnemyKilled();
+            }
             Instantiate(particlePrefab, this.transform.position, this.transform.rotation);
             //Debug.Log(this.transform);
             Character character = FindAnyObjectByType<Character>();
             character.money += 5;
-            Destroy(gameObject);
+            ResolveEnemy();
         }
     }
 
@@ -130,5 +178,31 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         {
             rend.flipX = true;
         }
+    }
+
+    private void ResolveEnemy() {
+        switch (this.gameObject.tag) {
+            case "KnightSword": //special rules for the knight's sword; set it to disable instead of destroy so it can be spawned again. then, alert the knight that its sword has died.
+                Knight knight = FindAnyObjectByType<Knight>();
+                knight.SwordDied();
+                gameObject.SetActive(false);
+                break;
+            case "LichEffigy":
+                Lich lich = FindAnyObjectByType<Lich>();
+                lich.EffigyDied();
+                gameObject.SetActive(false);
+                break;
+            default:
+                Destroy(gameObject);
+                break;
+        }
+    }
+
+    public int GetHealth() {
+        return hp;
+    }
+
+    public void SetHealth(int health) {
+        hp = health;
     }
 }
