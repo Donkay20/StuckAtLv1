@@ -14,6 +14,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     Transform targetDestination;
     GameObject targetGameObject;
     Character targetCharacter;
+    [SerializeField] private GameObject damageTextPrefab;
     [SerializeField] GameManager gameManager;
     [SerializeField] float baseSpeed;
     [SerializeField] int hp;
@@ -21,6 +22,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     [SerializeField] private float alteredSpeed, alteredSpeedTimer;
     private bool anemiaApplied; private float anemiaTimer, anemiaTick; private int anemiaDamage;
     private bool stunApplied; private float stunDuration;
+    private bool anemiaCheck, critCheck;
     Rigidbody2D body;
     Animator anim;
     SpriteRenderer rend;
@@ -73,6 +75,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             anemiaTick -= Time.deltaTime;
             anemiaTimer -= Time.deltaTime;
             if (anemiaTick <= 0) {
+                anemiaCheck = true;
                 TakeDamage(anemiaDamage);
                 anemiaTick = 1;
             }
@@ -108,29 +111,32 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     public void TakeDamage(int damage) {
+        int actualDamage = 0; 
+        string additionalText = "";
+
         Debug.Log("damage taken: " + damage);
         switch (this.gameObject.tag) {
             case "Knight": //special rules for the knight enemy
                 Knight knight = FindAnyObjectByType<Knight>();
                 if (!knight.IsVulnerable()) {
-                    hp -= 0;
+                    hp -= 0; actualDamage = 0; additionalText = "RESIST";
                 } else {
-                    hp -= damage;
+                    hp -= damage; actualDamage = damage;
                 }
                 break;
             case "KnightSword": //sword resists absorb bullet
-                hp -= damage - 1;
+                hp -= damage - 1; actualDamage = damage - 1; additionalText = "RESIST";
                 break;
             case "Lich":
                 Lich lich  = FindAnyObjectByType<Lich>();
                 if (!lich.IsVulnerable()) {
-                    hp -= 0;
+                    hp -= 0; actualDamage = 0; additionalText = "RESIST";
                 } else {
-                    hp -= damage;
+                    hp -= damage; actualDamage = damage;
                 }
                 break;
             default:
-                hp -= damage;
+                hp -= damage; actualDamage = damage;
                 break;
         }
         anim.SetTrigger("Hit");
@@ -149,6 +155,14 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             character.money += 5;
             ResolveEnemy();
         }
+
+        if (damageTextPrefab) {
+            var dmg = Instantiate(damageTextPrefab, transform.position, Quaternion.identity, transform);
+            dmg.GetComponent<DamageNumber>().Setup(actualDamage, additionalText, critCheck, anemiaCheck);
+            if (anemiaCheck) {anemiaCheck = false;}
+            if (critCheck) {critCheck = false;}
+        }
+        
     }
 
     public void ApplySlow(float percentage, float duration) {
@@ -200,6 +214,10 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
 
     public int GetHealth() {
         return hp;
+    }
+
+    public void CriticalHit() {
+        critCheck = true;
     }
 
     public void SetHealth(int health) {

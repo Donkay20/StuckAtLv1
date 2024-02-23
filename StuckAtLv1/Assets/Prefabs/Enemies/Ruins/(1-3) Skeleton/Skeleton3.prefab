@@ -114,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 5232610310856765501}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5846252, y: -1.3769443, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ae85e3d3b5e4242bfdf3abb38e7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageTextPrefab: {fileID: 1898392616700741821, guid: d2379f80de3d0d8479363c9bb94fd2b7, type: 3}
   gameManager: {fileID: 0}
   baseSpeed: 1.5
   hp: 5
