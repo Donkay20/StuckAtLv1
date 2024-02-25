@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ae85e3d3b5e4242bfdf3abb38e7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyDropPrefab: {fileID: 4269447868980704985, guid: 365e70c495b6f53488d62faa2315be3d, type: 3}
   damageTextPrefab: {fileID: 1898392616700741821, guid: d2379f80de3d0d8479363c9bb94fd2b7, type: 3}
   gameManager: {fileID: 0}
   baseSpeed: 1.5
@@ -187,8 +188,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
-  m_LinearDrag: 0
+  m_Mass: 1
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

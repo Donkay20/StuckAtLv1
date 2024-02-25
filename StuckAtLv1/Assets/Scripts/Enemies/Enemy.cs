@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -14,6 +13,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     Transform targetDestination;
     GameObject targetGameObject;
     Character targetCharacter;
+    [SerializeField] private GameObject moneyDropPrefab;
     [SerializeField] private GameObject damageTextPrefab;
     [SerializeField] GameManager gameManager;
     [SerializeField] float baseSpeed;
@@ -27,8 +27,8 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     Animator anim;
     SpriteRenderer rend;
     private BuffManager buffManager;
-
     public GameObject particlePrefab;
+    private Vector3 force;
 
     private void Awake() {
         if (baseSpeed > 0) {
@@ -53,17 +53,17 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     
     private void FixedUpdate() {
         //add condition here, depending on type of enemy, especially bosses
-        Vector3 direction = (targetDestination.position - transform.position).normalized;
+        force = (targetDestination.position - transform.position).normalized;
         if (alteredSpeedTimer > 0) {
             if (baseSpeed > 0) {
-                body.velocity = direction * alteredSpeed;
+                body.velocity = force * alteredSpeed;
             }
         } else {
             if (baseSpeed > 0) {
-                body.velocity = direction * baseSpeed;
+                body.velocity = force * baseSpeed;
             }    
         }
-        Flip(direction.x);
+        Flip(force.x);
     }
 
     private void Update() {
@@ -139,6 +139,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 hp -= damage; actualDamage = damage;
                 break;
         }
+
         anim.SetTrigger("Hit");
         if (hp < 1) {
             CombatManager c = FindAnyObjectByType<CombatManager>();
@@ -150,9 +151,8 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 c.EnemyKilled();
             }
             Instantiate(particlePrefab, this.transform.position, this.transform.rotation);
-            //Debug.Log(this.transform);
             Character character = FindAnyObjectByType<Character>();
-            character.money += 5;
+            character.GainMoney(5);
             ResolveEnemy();
         }
 
@@ -182,14 +182,10 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         stunApplied = true;
     }
 
-    private void Flip(float x)
-    {
-        if(x > 0)
-        {
+    private void Flip(float x) {
+        if(x > 0) {
             rend.flipX = false;
-        }
-        else if(x < 0)
-        {
+        } else if(x < 0) {
             rend.flipX = true;
         }
     }
@@ -222,5 +218,17 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
 
     public void SetHealth(int health) {
         hp = health;
+    }
+
+    public void DropMoney() {
+        if (moneyDropPrefab) {
+            Instantiate(moneyDropPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
+    public void Knockback(int force) {
+        Vector2 kbForce = (targetDestination.transform.position - body.transform.position).normalized;
+        Vector2 finalForce = -kbForce * force;
+        body.AddForce(finalForce);
     }
 }

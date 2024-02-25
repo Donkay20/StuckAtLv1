@@ -195,6 +195,13 @@ public class CombatManager : MonoBehaviour
         Enemy[] remainingEnemies = FindObjectsOfType<Enemy>();
         foreach (Enemy straggler in remainingEnemies) {
             straggler.TakeDamage(999);
+            //Destroy(straggler); <- doesn't work
+        }
+
+        ExtraMoney[] remainingMoneyDrops = FindObjectsOfType<ExtraMoney>();
+        foreach (ExtraMoney moneybags in remainingMoneyDrops) {
+            moneybags.DestroyExtraMoney();
+            //Destroy(moneybags); <- I don't know if this doesn't work but the other one doesn't work so I'm just gonna do the same here
         }
 
         //Disable any unnecessary UI

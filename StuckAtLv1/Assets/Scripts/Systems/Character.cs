@@ -28,9 +28,11 @@ todo:
     [SerializeField] StatusBar hpBar;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI afterimageText;
+    [SerializeField] private TextMeshProUGUI moneyText;
 
     void OnEnable() {
         afterimageText.text = afterimages.ToString();
+        moneyText.text = money.ToString();
         damageModifier = 0;
         drainTimer = 1;
     }
@@ -114,14 +116,21 @@ todo:
 
     public void GainMoney(int amount) {
         money += amount;
+        moneyText.text = money.ToString();
     }
 
-    public void DashingIFrames()
-    {
+    public void DashingIFrames() {
         invincible = true;
     }
-    public void StopDashingIFrames()
-    {
+
+    public void StopDashingIFrames() {
         invincible = false;
+    }
+
+    public bool CriticalHit(Slot slot) {
+        bool isCrit = false; int critChance = 5;
+        //apply crit bonuses here, todo
+        if (Random.Range(1,101) <= critChance) {isCrit = true;}
+        return isCrit;
     }
 }
