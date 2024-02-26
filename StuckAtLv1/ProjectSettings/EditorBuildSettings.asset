@@ -15,21 +15,24 @@ EditorBuildSettings:
     path: Assets/Scenes/Dialogue/ArtifactIntro.unity
     guid: d3faf0bf5e52c314ebfc782329f1752d
   - enabled: 1
-    path: Assets/Scenes/Dialogue/RuinsIntro.unity
+    path: Assets/Scenes/Dialogue/Ruins/RuinsIntro.unity
     guid: bc597d557ac5bf343ad2f931d3f16ac8
   - enabled: 1
     path: Assets/Scenes/MainGame/MainGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Dialogue/RuinsMiniBossIntro.unity
+    path: Assets/Scenes/Dialogue/Ruins/RuinsMiniBossIntro.unity
     guid: 5b5bb01d065f3da40a904df2e7c81707
   - enabled: 1
-    path: Assets/Scenes/Dialogue/RuinsMiniBossEnd.unity
+    path: Assets/Scenes/Dialogue/Ruins/RuinsMiniBossEnd.unity
     guid: 279fc85dbb85ac4468c6131871dca204
   - enabled: 1
-    path: Assets/Scenes/Dialogue/RuinsBossIntro.unity
+    path: Assets/Scenes/Dialogue/Ruins/RuinsBossIntro.unity
     guid: 926ad0eacb16558419287af93a180277
   - enabled: 1
-    path: Assets/Scenes/Dialogue/RuinsBossEnd.unity
+    path: Assets/Scenes/Dialogue/Ruins/RuinsBossEnd.unity
     guid: 5d839246aac8f7c43beb62e8f4653563
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Ruins/RuinsEnd.unity
+    guid: f8b8ddd6ec6dcfe40993862a02220746
   m_configObjects: {}

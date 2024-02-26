@@ -138,6 +138,9 @@ public class DialogueManager : MonoBehaviour
                     gameManager.ReceiveCommand("boss");
                     break;
                 case "RuinsBossEnd":
+                    SceneManager.LoadScene("RuinsEnd");
+                    break;
+                case "RuinsEnd":
                     gameManager.ReceiveCommand("map");
                     break;
             }
