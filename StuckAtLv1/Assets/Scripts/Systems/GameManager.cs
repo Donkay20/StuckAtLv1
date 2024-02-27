@@ -360,12 +360,15 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
     private void updateSlotProtocol() {
         maxSlots++;
-        upgradeUI.SetActive(true);
-        upgradeUI.GetComponent<UpgradeManager>().IncreaseMaxSlots();
+
+        upgradeUI.SetActive(true); 
+        upgradeUI.GetComponent<UpgradeManager>().IncreaseMaxSlots(); 
         upgradeUI.SetActive(false);
-        combat.SetActive(true); combatUI.SetActive(true);
-        slotManager.IncreaseMaxSlots();
+
+        combat.SetActive(true); combatUI.SetActive(true); 
+        slotManager.IncreaseMaxSlots(); 
         combat.SetActive(false); combatUI.SetActive(false);
+
         mapUI.SetActive(true);
         mapManager.NewWorld();
         mapUI.SetActive(false);

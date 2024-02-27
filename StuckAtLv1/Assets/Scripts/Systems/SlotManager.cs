@@ -14,7 +14,6 @@ public class SlotManager : MonoBehaviour
     [SerializeField] private Slot slot1, slot2, slot3, slot4, slot5;
     private int slotNum = 1;
     [SerializeField] private int maxSlots;
-
     [SerializeField] private GameObject[] slots;
     [SerializeField] private GameObject[] threeSlotPosition = new GameObject[2];
     [SerializeField] private GameObject[] fourSlotPosition = new GameObject[3];
@@ -34,10 +33,6 @@ public class SlotManager : MonoBehaviour
         ToggleSlot();
         InitiateSlot();
         TurnOffSlots();
-
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            IncreaseMaxSlots();
-        }
     }
 
     //Select Slot Player wants to use
@@ -154,19 +149,22 @@ public class SlotManager : MonoBehaviour
             slots[maxSlots-1].SetActive(true);
             switch (maxSlots) {
                 case 3:
-                    slots[0].transform.position = threeSlotPosition[0].transform.position;
-                    slots[1].transform.position = threeSlotPosition[1].transform.position;
+                    slot3.gameObject.SetActive(true);
+                    slots[0].transform.Translate(-1.3f, 0, 0);
+                    slots[1].transform.Translate(-1.3f, 0, 0);
                     break;
                 case 4:
-                    slots[0].transform.position = fourSlotPosition[0].transform.position;
-                    slots[1].transform.position = fourSlotPosition[1].transform.position;
-                    slots[2].transform.position = fourSlotPosition[2].transform.position;
+                    slot4.gameObject.SetActive(true);
+                    slots[0].transform.Translate(-1.3f, 0, 0);
+                    slots[1].transform.Translate(-1.3f, 0, 0);
+                    slots[2].transform.Translate(-1.3f, 0, 0);
                     break;
                 case 5:
-                    slots[0].transform.position = fiveSlotPosition[0].transform.position;
-                    slots[1].transform.position = fiveSlotPosition[1].transform.position;
-                    slots[2].transform.position = fiveSlotPosition[2].transform.position;
-                    slots[3].transform.position = fiveSlotPosition[3].transform.position;
+                    slot5.gameObject.SetActive(true);
+                    slots[0].transform.Translate(-1.3f, 0, 0);
+                    slots[1].transform.Translate(-1.3f, 0, 0);
+                    slots[2].transform.Translate(-1.3f, 0, 0);
+                    slots[3].transform.Translate(-1.3f, 0, 0);
                     break;
             }
         }

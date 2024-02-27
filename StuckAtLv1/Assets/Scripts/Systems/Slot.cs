@@ -68,7 +68,6 @@ public class Slot : MonoBehaviour
             coolingDown = false; cooldownValueText.gameObject.SetActive(false);
         }
     }
-    
 
     public int Identity { get => identity; set => identity = value; }                                           
     //slot number, assigned by SlotManager class

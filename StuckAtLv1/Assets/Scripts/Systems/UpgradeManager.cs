@@ -16,9 +16,8 @@ public class UpgradeManager : MonoBehaviour
     private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 4 upgrades that are available. (goes from 0-2 now but should be updated for 0-12 later)
     //private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use
     private int upgradePositionSelected, slotSelected;                              //determined which one that is clicked on in the game menu (goes from 0-2 for upgradeselected and 0-4 for slot selected)
-    [SerializeField] private Slot[] slots = new Slot[2];                    //UPDATE TO 5 LATER ON
+    [SerializeField] private Slot[] slots = new Slot[5];                    //UPDATE TO 5 LATER ON
     //in-game buttons
-    [SerializeField] private GameObject upgrade1, upgrade2, upgrade3;       //unsure if using this later or not, just grabs the whole gameobject
     [Space]
     [SerializeField] private Button[] upgradeButtons = new Button[3];       //buttons to click to select desired upgrade
     [SerializeField] private Button[] slotButtons = new Button[2];          //buttons to click to select desired slot (UPDATE TO 5 LATER ON)
@@ -43,15 +42,15 @@ public class UpgradeManager : MonoBehaviour
     [Space]
     //the following are to be held for storage
     [SerializeField] private Sprite[] upgradeRarityImage = new Sprite[3];   //background image for different rarities
-    [SerializeField] private Sprite[] commonIconPool = new Sprite[15];       //image associated w/ upgrades(UPDATE TO 13 LATER ON)
-    [SerializeField] private Sprite[] rareIconPool = new Sprite[15];         //(UPDATE TO 13 LATER ON)
-    [SerializeField] private Sprite[] legendaryIconPool = new Sprite[15];    //(UPDATE TO 13 LATER ON)
+    [SerializeField] private Sprite[] commonIconPool = new Sprite[15];       //image associated w/ upgrades(UPDATE TO 15 LATER ON)
+    [SerializeField] private Sprite[] rareIconPool = new Sprite[15];         //(UPDATE TO 15 LATER ON)
+    [SerializeField] private Sprite[] legendaryIconPool = new Sprite[15];    //(UPDATE TO 15 LATER ON)
     [TextArea(5,5)]
-    [SerializeField] private string[] commonUpgradeText = new string[15];    //text that describes what the upgrade does(UPDATE TO 13 LATER ON)
+    [SerializeField] private string[] commonUpgradeText = new string[15];    //text that describes what the upgrade does (UPDATE TO 15 LATER ON)
     [TextArea(5,5)]
-    [SerializeField] private string[] rareUpgradeText = new string[15];      //(UPDATE TO 13 LATER ON)
+    [SerializeField] private string[] rareUpgradeText = new string[15];      //(UPDATE TO 15 LATER ON)
     [TextArea(5,5)]
-    [SerializeField] private string[] legendaryUpgradeText = new string[15]; //(UPDATE TO 13 LATER ON)
+    [SerializeField] private string[] legendaryUpgradeText = new string[15]; //(UPDATE TO 15 LATER ON)
     [Space]
     //other
     [SerializeField] private GameManager notify;
@@ -190,7 +189,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void DisplayWeight() {
         //slot weight calculation here
-        for (int i = 0; i < notify.GetMaxSlots(); i++) {
+        for (int i = 0; i < maxSlots; i++) {
             weightText[i].text = notify.GetWeight(i+1).ToString();
 
             if (notify.GetWeight(i+1) == 0) {weightText[i].color = Color.white;}
@@ -325,7 +324,8 @@ public class UpgradeManager : MonoBehaviour
         maxSlots++;
         slotButtons[maxSlots-1].gameObject.SetActive(true);
         slotButtons[maxSlots-1].onClick.AddListener(() => ClickedSlot(maxSlots-1));
-        //add something here to reorganize the button position
+        //add something here to reorganize the slot button position
+        DisplayWeight();
         Debug.Log("Upgrade Manager: Maximum slots increased to " + maxSlots + ". Process successful.");
     }
 
