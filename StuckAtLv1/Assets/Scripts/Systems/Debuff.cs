@@ -17,14 +17,13 @@ public class Debuff : MonoBehaviour
     private float duration;
     private bool debuffActive;
     private float tickRate;
-    private int identity;      public int Identity { get => identity; set => identity = value; }
+    private int identity;   public int Identity { get => identity; set => identity = value; }
     
     void Awake() {
         character = FindAnyObjectByType<Character>();
         movement = FindAnyObjectByType<Movement>(); 
     }
 
-    
     void Update() {
         if (debuffActive) {
             duration -= Time.deltaTime;
@@ -58,7 +57,7 @@ public class Debuff : MonoBehaviour
         duration = dur;
         Debug.Log("Debuff inflicted. Type: "+ debuffType + ", Efficacy: "+ severity + ", Duration: " + duration);
         debuffActive = true;
-        AdjustDebuff(true);
+        AdjustDebuff(debuffActive);
     }
 
     public void AdjustDebuff(bool x) {
@@ -73,7 +72,6 @@ public class Debuff : MonoBehaviour
                     movement.SpeedDebuff /= severity;
                 }
                 break;
-
             case "bleed": //If the character has overhealing, the drain rate is increased.
                 i = 2;
                 if (x) {
@@ -82,8 +80,7 @@ public class Debuff : MonoBehaviour
                     character.DrainTimer /= severity;
                 }
                 break;
-            case "anemia": //Deals [efficacy]% of the character's current health per second. Always deals at least 1 damage.
-                //Anemia handled in Update method.
+            case "anemia": //Deals [efficacy]% of the character's current health per second. Always deals at least 1 damage. Anemia handled in Update method.
                 i = 3;
                 tickRate = 1;
                 break;
@@ -94,7 +91,7 @@ public class Debuff : MonoBehaviour
 
     public void EndDebuff() {
         debuffActive = false;
-        AdjustDebuff(false);
+        AdjustDebuff(debuffActive);
         FindAnyObjectByType<BuffManager>().DebuffExpired(identity);
         Destroy(gameObject);
     }

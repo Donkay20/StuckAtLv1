@@ -9,7 +9,6 @@ public class CombatManager : MonoBehaviour
     /*
     Handles both combat and survival modes.
     */
-
     [SerializeField] private TextMeshProUGUI uIObjective;
     [SerializeField] private TextMeshProUGUI uIObjectiveNumber;
     [SerializeField] private Character character;

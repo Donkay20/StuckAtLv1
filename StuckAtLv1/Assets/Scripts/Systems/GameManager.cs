@@ -35,13 +35,14 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     [SerializeField] private GameObject eventUI;
     [SerializeField] private GameObject shopUI;
     [SerializeField] private MapManager mapManager;
+    [SerializeField] private SlotManager slotManager;
     private GameState currentState;
     private GameState previousState;
     private int scaling;
     private int[] slotUpgrades = new int[5];
     private int[] weight = new int[5];
     private int maxSlots;
-    private bool slotEquilibrium;
+    private bool slotEquilibrium, updateSlotProtocol;
     void Start() //default to the map when the game launches.
     {
         previousState = GameState.Map;
@@ -140,6 +141,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     Debug.Log("event to combat");
                 }
                 previousState = GameState.Combat;
+
                 break;
 
             case GameState.Survival: //SURVIVAL STATE
@@ -316,6 +318,8 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     }
 
     public void AddMaxSlots() {
+        updateSlotProtocol = true;
+        //todo, make all scenes active and update all of them here
         maxSlots++;
     }
 

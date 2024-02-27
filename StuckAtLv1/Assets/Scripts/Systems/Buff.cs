@@ -15,7 +15,7 @@ public class Buff : MonoBehaviour
     private float efficacy;
     private float duration;
     private bool buffActive;
-    private int identity;       public int Identity { get => identity; set => identity = value; }
+    private int identity;   public int Identity { get => identity; set => identity = value; }
 
     private void Awake() {
         character = FindAnyObjectByType<Character>();
@@ -38,16 +38,15 @@ public class Buff : MonoBehaviour
     }
 
     public void Initialize(string b, float e, float d) {
-        buffType = b;
-        efficacy = e;
-        duration = d;
+        buffType = b; efficacy = e; duration = d;
         Debug.Log("Buff granted. Type: "+ buffType + ", Efficacy: "+ efficacy + ", Duration: " + duration);
         buffActive = true;
-        AdjustBuff(true);   
+        AdjustBuff(buffActive);   
     }
 
     public void AdjustBuff(bool x) {
-    //If true: add buff. If false: remove buff.
+    //If true: add buff. 
+    //If false: remove buff.
         int i = 0;
         switch(buffType) {
             case "power":
@@ -70,17 +69,25 @@ public class Buff : MonoBehaviour
             case "bloodsucker": //todo
                 i = 3;
                 if (x) {
-
+                    //plus
                 } else {
-
+                    //minus
                 }
                 break;
             case "bulwark": //todo
                 i = 4;
                 if (x) {
-
+                    //plus
                 } else {
-
+                    //minus
+                }
+                break;
+            case "critdmg": //todo
+                i = 5;
+                if (x) {
+                    //plus
+                } else {
+                    //minus
                 }
                 break;
         }
@@ -90,7 +97,7 @@ public class Buff : MonoBehaviour
     public void EndBuff() {
         //Communicate to the buff manager that this buff should be deleted, and reorganize the buffs.
         buffActive = false;
-        AdjustBuff(false);
+        AdjustBuff(buffActive);
         FindAnyObjectByType<BuffManager>().BuffExpired(identity);
         Destroy(gameObject);
     }
@@ -103,4 +110,5 @@ Icon directory:
 2 - speed
 3 - bloodsucker
 4 - bulwark
+5 - crit dmg
 */

@@ -54,6 +54,7 @@ public class BuffManager : MonoBehaviour
     }
 
     public void AddDebuff(string debuff, float severity, float duration) {
+        //Add a debuff to the list. Instantiate a new debuff object and populate it.
         if (debuffPosition < 5) {
             GameObject newDebuff = Instantiate(debuffPrefab, transform);
             Debuff d = newDebuff.GetComponent<Debuff>();
@@ -66,6 +67,7 @@ public class BuffManager : MonoBehaviour
     }
 
     public void BuffExpired(int id) {
+        //Remove a buff from the list. Rearranges the positions of the existing buffs and changes their identities accordingly.
         buffs[id] = null;
         for (int i = id; i < buffPosition - 1; i++) {
             buffs[i + 1].transform.position = buffPlacement[i].transform.position;
@@ -78,6 +80,7 @@ public class BuffManager : MonoBehaviour
     }
 
     public void DebuffExpired(int id) {
+        //Remove a debuff from the list. Rearranges the positions of the existing debuffs and changes their identities accordingly.
         debuffs[id] = null;
         for (int i = id; i < debuffPosition - 1; i++) {
             debuffs[i + 1].transform.position = debuffPlacement[i].transform.position;
@@ -90,6 +93,7 @@ public class BuffManager : MonoBehaviour
     }
 
     public void EndBattle() {
+        //Clear all buffs and debuffs.
         Buff[] buffsToDelete = FindObjectsOfType<Buff>();
         foreach(Buff b in buffsToDelete) {
             b.EndBuff();
@@ -100,10 +104,3 @@ public class BuffManager : MonoBehaviour
         }
     }
 }
-
-/*
-Buff Icon directory:
-0 - nothing/blank
-1 - speed
-2 - damage
-*/

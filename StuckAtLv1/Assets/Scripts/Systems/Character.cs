@@ -7,10 +7,6 @@ using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 /*
 Handles main character's active stats in combat, their buffs, and their damage handling.
-
-todo: 
-> implement variables and conditions for buffs and debuffs
-> implement temp hp
 */
 {
     public readonly int maxHp = 10;
@@ -37,7 +33,7 @@ todo:
         drainTimer = 1;
     }
 
-    public void TakeDamage(int damage) { //todo; edit for buffs/dmg reduction values
+    public void TakeDamage(int damage) {
         if (!invincible) {
             playerAnim.SetTrigger("Hit");
             healthBarAnim.SetTrigger("Hit");
@@ -53,7 +49,6 @@ todo:
                     healthDraining = false;
                 }
             }
-            
             StartCoroutine(InvincibilityFrame());
         }
         
@@ -115,7 +110,11 @@ todo:
     }
 
     public void GainMoney(int amount) {
-        money += amount;
+        if (amount + money > 999999) {
+            money = 999999;
+        } else {
+            money += amount;
+        }
         moneyText.text = money.ToString();
     }
 

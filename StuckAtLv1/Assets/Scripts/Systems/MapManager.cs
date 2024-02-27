@@ -23,15 +23,13 @@ public class MapManager : MonoBehaviour
     [SerializeField] private int level; 
     [SerializeField] private int section;
     private string report;
-    private bool miniboss1Cleared, boss1Cleared;
 
     //Map Highlights
     [SerializeField] private Sprite combatImageHighlight, survivalImageHighlight, eventImageHighlight, shopImageHighlight, miniBossImageHighlight, bossImageHighlight;
     [SerializeField] private GameObject[] lines;
     private List<Vector2> nodeList = new List<Vector2>();
 
-    void Awake()
-    {
+    void Awake() {
         world = 1;
         level = 0;
         section = 2;
@@ -50,7 +48,7 @@ public class MapManager : MonoBehaviour
         HighlightRoom(startingRoom);
     }
 
-    public void clickedNode(int clickedLevel, int clickedSection) {
+    public void ClickedNode(int clickedLevel, int clickedSection) {
         
         /*  First, check if the node that was clicked is one level ahead, and one that connects to a path that the user can go to.
             For example, you can't go from a 3-layer bottom room to a 2-layer top room as the paths do not connect.
@@ -256,6 +254,7 @@ public class MapManager : MonoBehaviour
     }
     
     private void GiveRoom(Room r) {
+        r.GetComponent<Button>().interactable = true;
         int number = Random.Range(1,5);
         switch(number) {
             case 1:
@@ -278,8 +277,7 @@ public class MapManager : MonoBehaviour
     }
 
     //Highlights given room
-    private void HighlightRoom(Room r)
-    {
+    private void HighlightRoom(Room r) {
         if(r.GetRoomType() == "combat")
         {
             r.GetComponent<Image>().sprite = combatImageHighlight;
@@ -307,8 +305,7 @@ public class MapManager : MonoBehaviour
     }
 
     //Adds Line to see where traveled
-    private void AssignLine(Vector2 newNode)
-    {
+    private void AssignLine(Vector2 newNode) {
         Vector2 previousNode;
         for(int i = 0; i < nodeList.Count; i++)
         {
@@ -359,8 +356,7 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    private void SetLinesActive(Vector2 prevNode, Vector2 currentNode, int lineNum, Vector2 checkPrev, Vector2 CheckCurrent)
-    {
+    private void SetLinesActive(Vector2 prevNode, Vector2 currentNode, int lineNum, Vector2 checkPrev, Vector2 CheckCurrent) {
         if(prevNode == checkPrev && currentNode == CheckCurrent)
                 {
                     lines[lineNum].SetActive(true);
@@ -369,28 +365,28 @@ public class MapManager : MonoBehaviour
 
     private void InitializeButtons() {
         //initializes the connection between the rooms and their buttons
-        node13.onClick.AddListener(() => {clickedNode(1,3);});  //surely there's a better way to do this
-        node22.onClick.AddListener(() => {clickedNode(2,2);});
-        node24.onClick.AddListener(() => {clickedNode(2,4);});
-        node31.onClick.AddListener(() => {clickedNode(3,1);});
-        node33.onClick.AddListener(() => {clickedNode(3,3);});
-        node35.onClick.AddListener(() => {clickedNode(3,5);});
-        node42.onClick.AddListener(() => {clickedNode(4,2);});
-        node44.onClick.AddListener(() => {clickedNode(4,4);});
-        node53.onClick.AddListener(() => {clickedNode(5,3);});
-        node62.onClick.AddListener(() => {clickedNode(6,2);});
-        node64.onClick.AddListener(() => {clickedNode(6,4);});
-        node71.onClick.AddListener(() => {clickedNode(7,1);});
-        node73.onClick.AddListener(() => {clickedNode(7,3);});
-        node75.onClick.AddListener(() => {clickedNode(7,5);});
-        node82.onClick.AddListener(() => {clickedNode(8,2);});
-        node84.onClick.AddListener(() => {clickedNode(8,4);});
-        node91.onClick.AddListener(() => {clickedNode(9,1);});
-        node93.onClick.AddListener(() => {clickedNode(9,3);});
-        node95.onClick.AddListener(() => {clickedNode(9,5);});
-        node102.onClick.AddListener(() => {clickedNode(10,2);});
-        node104.onClick.AddListener(() => {clickedNode(10,4);});
-        node113.onClick.AddListener(() => {clickedNode(11,3);});
+        node13.onClick.AddListener(() => {ClickedNode(1,3);});  //surely there's a better way to do this
+        node22.onClick.AddListener(() => {ClickedNode(2,2);});
+        node24.onClick.AddListener(() => {ClickedNode(2,4);});
+        node31.onClick.AddListener(() => {ClickedNode(3,1);});
+        node33.onClick.AddListener(() => {ClickedNode(3,3);});
+        node35.onClick.AddListener(() => {ClickedNode(3,5);});
+        node42.onClick.AddListener(() => {ClickedNode(4,2);});
+        node44.onClick.AddListener(() => {ClickedNode(4,4);});
+        node53.onClick.AddListener(() => {ClickedNode(5,3);});
+        node62.onClick.AddListener(() => {ClickedNode(6,2);});
+        node64.onClick.AddListener(() => {ClickedNode(6,4);});
+        node71.onClick.AddListener(() => {ClickedNode(7,1);});
+        node73.onClick.AddListener(() => {ClickedNode(7,3);});
+        node75.onClick.AddListener(() => {ClickedNode(7,5);});
+        node82.onClick.AddListener(() => {ClickedNode(8,2);});
+        node84.onClick.AddListener(() => {ClickedNode(8,4);});
+        node91.onClick.AddListener(() => {ClickedNode(9,1);});
+        node93.onClick.AddListener(() => {ClickedNode(9,3);});
+        node95.onClick.AddListener(() => {ClickedNode(9,5);});
+        node102.onClick.AddListener(() => {ClickedNode(10,2);});
+        node104.onClick.AddListener(() => {ClickedNode(10,4);});
+        node113.onClick.AddListener(() => {ClickedNode(11,3);});
     }
 
     public int GetWorld() {
@@ -399,5 +395,24 @@ public class MapManager : MonoBehaviour
 
     public int GetLevel() {
         return level;
+    }
+
+    public void NewWorld() {
+        world++;
+        level = 0;
+        section = 2;
+        manager.AddMaxSlots();
+
+        foreach (Room r in rooms) {
+            GiveRoom(r);
+        }
+
+        startingRoom.AssignRoomType("combat"); startingRoom.GetComponent<Image>().sprite = combatImage;
+        minibossRoom.AssignRoomType("dialogue"); minibossRoom.GetComponent<Image>().sprite = miniBossImage;
+        bossRoom.AssignRoomType("dialogue"); bossRoom.GetComponent<Image>().sprite = bossImage;
+
+        HighlightRoom(startingRoom);
+
+        //Philip: add more code here to reset the highlights and lines.
     }
 }
