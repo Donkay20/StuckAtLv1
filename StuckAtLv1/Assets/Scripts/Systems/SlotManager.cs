@@ -129,17 +129,17 @@ public class SlotManager : MonoBehaviour
             slots[1].transform.Find("Slot 2_Border").GetComponent<Image>().sprite = offSpriteList[1];
         }
 
-        if(slotNum != 3) {
+        if(slotNum != 3 && maxSlots >= 3) {
             slots[2].GetComponent<Animator>().SetTrigger("Hit2");
             slots[2].transform.Find("Slot 3_Border").GetComponent<Image>().sprite = offSpriteList[2];
         }
 
-        if(slotNum != 4) {
+        if(slotNum != 4 && maxSlots >= 4) {
             slots[3].GetComponent<Animator>().SetTrigger("Hit2");
             slots[3].transform.Find("Slot 4_Border").GetComponent<Image>().sprite = offSpriteList[3];
         }
 
-        if(slotNum != 5) {
+        if(slotNum != 5 && maxSlots >= 5) {
             slots[4].GetComponent<Animator>().SetTrigger("Hit2");
             slots[4].transform.Find("Slot 5_Border").GetComponent<Image>().sprite = offSpriteList[4];
         }

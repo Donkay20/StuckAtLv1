@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,13 +18,6 @@ public class Slot : MonoBehaviour
         > variables to alter values of skill dependent on bonuses acquired
         > more conditions for Engage(); not every skill will be a projectile attack and Engage() currently doesn't cover that
         > if necessary, pooling will need to be used over instantiation if performance suffers because of it
-
-    Current Skill IDs and their correspondences:
-    0 - Empty
-    1 - Bone Toss (from Skeleton 1)
-    4 - Boulder Toss (from Golem 1)
-    5 - Ground Slam (from Golem 2)
-    6 - Temp Golem Attack (from Golem 3) //temp
     */
 
     [SerializeField] private int identity;
@@ -35,9 +26,9 @@ public class Slot : MonoBehaviour
     private int skillID = 0, skillUses = 0;
     private float cooldown, activeCD, cooldownModifier;
     private bool coolingDown = false;
-    private int[] commonUpgrades = new int[13];
-    private int[] rareUpgrades = new int[13];
-    private int[] legendaryUpgrades = new int[13];
+    private int[] commonUpgrades = new int[15];
+    private int[] rareUpgrades = new int[15];
+    private int[] legendaryUpgrades = new int[15];
     [SerializeField] private Character character;
     [SerializeField] private Image skillImage;                          
     //display for the skill image on the UI
@@ -195,6 +186,13 @@ public class Slot : MonoBehaviour
         return legendaryUpgrades[upgrade];
     }
 
+    public bool CriticalHit(Slot slot) {
+        bool isCrit = false; int critChance = 5;
+        //apply crit bonuses here, todo
+        if (Random.Range(1,101) <= critChance) {isCrit = true;}
+        return isCrit;
+    }
+
     /*
     List of upgrades (demo):
     Common: 
@@ -214,5 +212,24 @@ public class Slot : MonoBehaviour
     1. Size +40%
     2. Duration +60%
     3. Overheal +10
+    */
+
+    /*
+    List of real upgrades:
+    0. Attacks [from this slot] increase in size by 5%.
+    1. Attacks [from this slot] increase in damage by 10%.
+    2. Attacks [from this slot] result in a critical hit 10% more often.
+    3. Attacks [from this slot] grant a buff that boosts damage by 5%, lasting for 3 seconds.
+    4. Attacks [from this slot] do 20% more critical damage.
+    5. Attacks [from this slot] slow enemies by 20% for 5 seconds.
+    6. Attacks [from this slot] boost movement speed by 10% for 5 seconds.
+    7. Skills acquired [to this slot] have +1 skill usage.
+    8. Skills [from this slot] have a 50% chance of inflicting anemia.
+    9. Skills [from this slot] last 20% longer.
+    10. Skills [from this slot] pushes away all nearby enemies.
+    11. Skills [from this slot] grant 3 (over)healing.
+    12. Kills [from this slot] grant a 5% increased chance to spawn a Treasure Chest.
+    13. Kills from this slot grant increased gold.
+    14. Kills from this slot clear the most recent de-buff.
     */
 }

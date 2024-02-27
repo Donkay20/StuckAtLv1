@@ -9,9 +9,9 @@ using Random = UnityEngine.Random;
 public class UpgradeManager : MonoBehaviour
 {
     //back-end stuff
-    private int[] commonUpgradePool = new int[13];
-    private int[] rareUpgradePool = new int[13];
-    private int[] legendaryUpgradePool = new int[13];
+    private int[] commonUpgradePool = new int[15];
+    private int[] rareUpgradePool = new int[15];
+    private int[] legendaryUpgradePool = new int[15];
     private int[] upgradeRarities = new int[3];         //rarity storage for the 4 upgrades that are available. (rarity: 0-common, 1-rare, 2-legendary)
     private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 4 upgrades that are available. (goes from 0-2 now but should be updated for 0-12 later)
     //private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use
@@ -38,27 +38,31 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Image[] upgradeRarityBG = new Image[3];        //background of the actual clickable upgrade image that you select
     [SerializeField] private Image[] upgradeIcon = new Image[3];            //the image associated with each upgrade (eg. sword for dmg boost)
     [SerializeField] private TextMeshProUGUI[] upgradeText = new TextMeshProUGUI[3]; //the text that describes what the upgrade does
-    [SerializeField] private TextMeshProUGUI[] weightText = new TextMeshProUGUI[5]; //text that shows slot weight (UPDATE TO 5 LATER ON)
+    [SerializeField] private TextMeshProUGUI[] weightText = new TextMeshProUGUI[5]; //text that shows slot weight
     [SerializeField] private TextMeshProUGUI equilibriumText;
     [Space]
     //the following are to be held for storage
     [SerializeField] private Sprite[] upgradeRarityImage = new Sprite[3];   //background image for different rarities
-    [SerializeField] private Sprite[] commonIconPool = new Sprite[4];       //image associated w/ upgrades(UPDATE TO 13 LATER ON)
-    [SerializeField] private Sprite[] rareIconPool = new Sprite[4];         //(UPDATE TO 13 LATER ON)
-    [SerializeField] private Sprite[] legendaryIconPool = new Sprite[4];    //(UPDATE TO 13 LATER ON)
-    [SerializeField] private string[] commonUpgradeText = new string[4];    //text that describes what the upgrade does(UPDATE TO 13 LATER ON)
-    [SerializeField] private string[] rareUpgradeText = new string[4];      //(UPDATE TO 13 LATER ON)
-    [SerializeField] private string[] legendaryUpgradeText = new string[4]; //(UPDATE TO 13 LATER ON)
+    [SerializeField] private Sprite[] commonIconPool = new Sprite[15];       //image associated w/ upgrades(UPDATE TO 13 LATER ON)
+    [SerializeField] private Sprite[] rareIconPool = new Sprite[15];         //(UPDATE TO 13 LATER ON)
+    [SerializeField] private Sprite[] legendaryIconPool = new Sprite[15];    //(UPDATE TO 13 LATER ON)
+    [TextArea(5,5)]
+    [SerializeField] private string[] commonUpgradeText = new string[15];    //text that describes what the upgrade does(UPDATE TO 13 LATER ON)
+    [TextArea(5,5)]
+    [SerializeField] private string[] rareUpgradeText = new string[15];      //(UPDATE TO 13 LATER ON)
+    [TextArea(5,5)]
+    [SerializeField] private string[] legendaryUpgradeText = new string[15]; //(UPDATE TO 13 LATER ON)
     [Space]
     //other
     [SerializeField] private GameManager notify;
-    private bool fromShop; private bool fromBoss;
+    private bool fromShop; private bool fromBoss; private int maxSlots;
 
     void Awake()    //initialize the buttons, and capacity for each upgrade at the beginning of the game.
     {
+        maxSlots = 2;
         InitializeButtons();
 
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 15; i++) {
             commonUpgradePool[i] = 5;
             rareUpgradePool[i] = 3;
             legendaryUpgradePool[i] = 1;
@@ -117,33 +121,30 @@ public class UpgradeManager : MonoBehaviour
         for (int i = 0; i < 3; i++) {       
             //checks to see if the specific upgrade is empty. if so, reroll until you get one that isn't
             int roll = Random.Range(0,4);   
-            //for now, only 4 possible upgrades. (UPDATE TO 13 LATER ON)
+            //for now, only 4 possible upgrades. (UPDATE TO 15 LATER ON)
             switch (upgradeRarities[i]) {
                 case 0: //common
                     while (commonUpgradePool[roll] == 0) {
-                        roll = Random.Range(0,4);   //UPDATE TO 13 LATER ON
+                        roll = Random.Range(0,4);   //UPDATE TO 15 LATER ON
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = commonIconPool[roll];
-                    //upgradeText[i].text = commonUpgradeText[roll];
                     upgradeText[i].SetText(commonUpgradeText[roll]);
                     break;
                 case 1: //rare
                     while (rareUpgradePool[roll] == 0) {
-                        roll = Random.Range(0,4);   //UPDATE TO 13 LATER ON
+                        roll = Random.Range(0,4);   //UPDATE TO 15 LATER ON
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = rareIconPool[roll];
-                    //upgradeText[i].text = rareUpgradeText[roll];
                     upgradeText[i].SetText(rareUpgradeText[roll]);
                     break;
                 case 2: //legendary
                     while (legendaryUpgradePool[roll] == 0) {
-                        roll = Random.Range(0,4);   //UPDATE TO 13 LATER ON
+                        roll = Random.Range(0,4);   //UPDATE TO 15 LATER ON
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = legendaryIconPool[roll];
-                    //upgradeText[i].text = legendaryUpgradeText[roll];
                     upgradeText[i].SetText(legendaryUpgradeText[roll]);
                     break;
             }
@@ -178,19 +179,13 @@ public class UpgradeManager : MonoBehaviour
     }
 
     public void ClickedSlot(int slot) {     
-        //select a slot, updates the slotSelected variable (UPDATE TO 5 LATER ON)
+        //select a slot, updates the slotSelected variable
         Debug.Log("Clicked slot " + slot);
         slotSelected = slot;
-        switch (slot) {
-            case 0:
-                slotButtons[0].interactable = false;
-                slotButtons[1].interactable = true;
-                break;
-            case 1:
-                slotButtons[0].interactable = true;
-                slotButtons[1].interactable = false;
-                break;
+        for (int i = 0; i < maxSlots; i++) {
+            slotButtons[i].interactable = true;
         }
+        slotButtons[slot].interactable = false;
     }
 
     public void DisplayWeight() {
@@ -324,6 +319,14 @@ public class UpgradeManager : MonoBehaviour
         closeHelpMenu.onClick.AddListener(() => CloseHelpMenu());
         advanceHelpMenu.onClick.AddListener(() => UpdateHelpMenu("advance"));
         backHelpMenu.onClick.AddListener(() => UpdateHelpMenu("back"));
+    }
+
+    private void AddMaxSlots(int slots) {
+        maxSlots++;
+        slotButtons[slots-1].gameObject.SetActive(true);
+        slotButtons[slots-1].onClick.AddListener(() => ClickedSlot(slots-1));
+        //add something here to reorganize the button position
+        Debug.Log("Upgrade Manager: Max Slots Increased.");
     }
 
     /*
