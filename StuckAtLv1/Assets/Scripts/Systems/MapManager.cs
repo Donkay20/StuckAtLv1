@@ -401,7 +401,6 @@ public class MapManager : MonoBehaviour
         world++;
         level = 0;
         section = 2;
-        manager.AddMaxSlots();
 
         foreach (Room r in rooms) {
             GiveRoom(r);

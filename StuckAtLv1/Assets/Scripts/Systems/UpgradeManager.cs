@@ -321,12 +321,12 @@ public class UpgradeManager : MonoBehaviour
         backHelpMenu.onClick.AddListener(() => UpdateHelpMenu("back"));
     }
 
-    private void AddMaxSlots(int slots) {
+    public void IncreaseMaxSlots() {
         maxSlots++;
-        slotButtons[slots-1].gameObject.SetActive(true);
-        slotButtons[slots-1].onClick.AddListener(() => ClickedSlot(slots-1));
+        slotButtons[maxSlots-1].gameObject.SetActive(true);
+        slotButtons[maxSlots-1].onClick.AddListener(() => ClickedSlot(maxSlots-1));
         //add something here to reorganize the button position
-        Debug.Log("Upgrade Manager: Max Slots Increased.");
+        Debug.Log("Upgrade Manager: Maximum slots increased to " + maxSlots + ". Process successful.");
     }
 
     /*

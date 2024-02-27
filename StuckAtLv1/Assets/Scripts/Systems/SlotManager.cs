@@ -13,9 +13,12 @@ public class SlotManager : MonoBehaviour
     public KeyCode slotKey1, slotKey2, slotKey3, slotKey4, slotKey5;
     [SerializeField] private Slot slot1, slot2, slot3, slot4, slot5;
     private int slotNum = 1;
-    private int maxSlots;
+    [SerializeField] private int maxSlots;
 
     [SerializeField] private GameObject[] slots;
+    [SerializeField] private GameObject[] threeSlotPosition = new GameObject[2];
+    [SerializeField] private GameObject[] fourSlotPosition = new GameObject[3];
+    [SerializeField] private GameObject[] fiveSlotPosition = new GameObject[4];
     [SerializeField] private Sprite[] onSpriteList;
     [SerializeField] private Sprite[] offSpriteList;
 
@@ -31,6 +34,10 @@ public class SlotManager : MonoBehaviour
         ToggleSlot();
         InitiateSlot();
         TurnOffSlots();
+
+        if (Input.GetKeyDown(KeyCode.Z)) {
+            IncreaseMaxSlots();
+        }
     }
 
     //Select Slot Player wants to use
@@ -56,36 +63,32 @@ public class SlotManager : MonoBehaviour
         if (Input.GetKeyDown(slotKey1)) {
             slotNum = 1;
             AnimationControl(slots[0], 0);
-            //Debug.Log("Slot 1 pressed.");
-            //slot1.Engage();
         }
 
         if (Input.GetKeyDown(slotKey2)) {
             slotNum = 2;
             AnimationControl(slots[1], 1);
-            //Debug.Log("Slot 2 pressed.");
-            //slot2.Engage();
         }
 
-        if (Input.GetKeyDown(slotKey3)) {
+        if (maxSlots >= 3) {
+            if (Input.GetKeyDown(slotKey3)) {
             slotNum = 3;
             AnimationControl(slots[2], 2);
-            //Debug.Log("Slot 2 pressed.");
-            //slot2.Engage();
+            }
         }
-
-        if (Input.GetKeyDown(slotKey4)) {
+        
+        if (maxSlots >= 4) {
+            if (Input.GetKeyDown(slotKey4)) {
             slotNum = 4;
             AnimationControl(slots[3], 3);
-            //Debug.Log("Slot 2 pressed.");
-            //slot2.Engage();
+            }
         }
-
-        if (Input.GetKeyDown(slotKey5)) {
+        
+        if (maxSlots == 5) {
+            if (Input.GetKeyDown(slotKey5)) {
             slotNum = 5;
             AnimationControl(slots[4], 4);
-            //Debug.Log("Slot 2 pressed.");
-            //slot2.Engage();
+            }
         }
     }
     
@@ -145,8 +148,28 @@ public class SlotManager : MonoBehaviour
         }
     }
 
-    private void IncreaseMaxSlots() {
-        maxSlots++;
-        slots[maxSlots].SetActive(true);
+    public void IncreaseMaxSlots() {
+        if (maxSlots < 5) {
+            maxSlots++;
+            slots[maxSlots-1].SetActive(true);
+            switch (maxSlots) {
+                case 3:
+                    slots[0].transform.position = threeSlotPosition[0].transform.position;
+                    slots[1].transform.position = threeSlotPosition[1].transform.position;
+                    break;
+                case 4:
+                    slots[0].transform.position = fourSlotPosition[0].transform.position;
+                    slots[1].transform.position = fourSlotPosition[1].transform.position;
+                    slots[2].transform.position = fourSlotPosition[2].transform.position;
+                    break;
+                case 5:
+                    slots[0].transform.position = fiveSlotPosition[0].transform.position;
+                    slots[1].transform.position = fiveSlotPosition[1].transform.position;
+                    slots[2].transform.position = fiveSlotPosition[2].transform.position;
+                    slots[3].transform.position = fiveSlotPosition[3].transform.position;
+                    break;
+            }
+        }
+        Debug.Log("Slot Manager: Maximum slots increased to " + maxSlots + ". Process successful.");
     }
 }
