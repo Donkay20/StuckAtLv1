@@ -89,6 +89,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
         }
         if (currentHp + amount > 999) {
             currentHp = 999;
+            Debug.Log("Health capped!");
         } else {
             currentHp += amount;
         }
@@ -103,6 +104,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
     public void GainAfterimage(int amount) {
         if (afterimages + amount > 99) {
             afterimages = 99;
+            Debug.Log("Afterimages capped!");
         } else {
             afterimages += amount;
         }
@@ -112,6 +114,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
     public void GainMoney(int amount) {
         if (amount + money > 999999) {
             money = 999999;
+            Debug.Log("Money capped!");
         } else {
             money += amount;
         }
@@ -124,12 +127,5 @@ Handles main character's active stats in combat, their buffs, and their damage h
 
     public void StopDashingIFrames() {
         invincible = false;
-    }
-
-    public bool CriticalHit(Slot slot) {
-        bool isCrit = false; int critChance = 5;
-        //apply crit bonuses here, todo
-        if (Random.Range(1,101) <= critChance) {isCrit = true;}
-        return isCrit;
     }
 }
