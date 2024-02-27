@@ -45,7 +45,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
                 currentHp -= damage; 
                 healthText.text = currentHp.ToString();
                 if (currentHp <= maxHp) {
-                    healthText.color = new Color32(255, 0, 0, 255);
+                    healthText.color = new Color32(255, 240, 240, 255);
                     healthDraining = false;
                 }
             }
@@ -68,7 +68,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
         while (currentHp > maxHp) {
             currentHp--; healthText.text = currentHp.ToString();
             if (currentHp <= maxHp) {
-                healthText.color = new Color32(255, 0, 0, 255);
+                healthText.color = new Color32(255, 240, 240, 255);
                 healthDraining = false;
                 yield break;
             } else {
