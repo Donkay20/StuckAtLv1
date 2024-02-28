@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +28,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     private BuffManager buffManager;
     public GameObject particlePrefab;
     private Vector3 force;
+    private int moneyOnKill;
 
     private void Awake() {
         if (baseSpeed > 0) {
@@ -49,6 +49,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         gameManager = FindAnyObjectByType<GameManager>();
         hp += gameManager.ScaleDifficulty();
         baseSpeed += gameManager.ScaleDifficulty()/10;
+        moneyOnKill = 5;
     }
     
     private void FixedUpdate() {
@@ -152,7 +153,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             }
             Instantiate(particlePrefab, this.transform.position, this.transform.rotation);
             Character character = FindAnyObjectByType<Character>();
-            character.GainMoney(5);
+            character.GainMoney(moneyOnKill);
             ResolveEnemy();
         }
 
@@ -162,7 +163,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             if (anemiaCheck) {anemiaCheck = false;}
             if (critCheck) {critCheck = false;}
         }
-        
     }
 
     public void ApplySlow(float percentage, float duration) {
@@ -220,9 +220,12 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         hp = health;
     }
 
-    public void DropMoney() {
-        if (moneyDropPrefab) {
-            Instantiate(moneyDropPrefab, transform.position, Quaternion.identity);
+    public void DropMoney(int additionalChance) {
+        int chance = 5 + additionalChance;
+        if (Random.Range(0, 101) < chance) {
+            if (moneyDropPrefab) {
+                Instantiate(moneyDropPrefab, transform.position, Quaternion.identity);
+            }
         }
     }
 
@@ -230,5 +233,9 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         Vector2 kbForce = (targetDestination.transform.position - body.transform.position).normalized;
         Vector2 finalForce = -kbForce * force;
         body.AddForce(finalForce);
+    }
+
+    public void RaiseReward(int bonusMoney) {
+        moneyOnKill += bonusMoney;
     }
 }

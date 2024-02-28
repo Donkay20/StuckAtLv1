@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 /*
 This class manages gameflow. We go from state to state to connect each portion of the game to each other.
 Ideally, we should only need these eight states, plus any cutscenes in the middle we need to play for lore purposes.
-
 All UI is in the canvas.
 There are separate combat, map, event, and upgrade scripts that manage each event individually and report back to this script.
 */
@@ -39,6 +38,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private GameState currentState;
     private GameState previousState;
     private int scaling;
+    private float shopDamageBonus;
     private int[] slotUpgrades = new int[5];
     private int[] weight = new int[5];
     private int maxSlots;
@@ -47,6 +47,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         previousState = GameState.Map;
         currentState = GameState.Map;
         maxSlots = 2;   //default amt of slots
+        shopDamageBonus = 1;
         UpdateState();
     }
 
@@ -353,6 +354,14 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
     public bool GetEquilibriumCheck() {
         return slotEquilibrium;
+    }
+
+    public float GetShopDamageBonus() {
+        return shopDamageBonus;
+    }
+
+    public void UpgradeShopDamageBonus() {
+        shopDamageBonus += 0.01f;
     }
 
     private void UpdateSlotProtocol() {

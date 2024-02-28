@@ -92,6 +92,12 @@ public class BuffManager : MonoBehaviour
         Debug.Log("Debuff Position: " + debuffPosition);
     }
 
+    public void DispelDebuff() {
+        if (debuffPosition > 0) {
+            debuffs[0].EndDebuff();
+        }
+    }
+
     public void EndBattle() {
         //Clear all buffs and debuffs.
         Buff[] buffsToDelete = FindObjectsOfType<Buff>();

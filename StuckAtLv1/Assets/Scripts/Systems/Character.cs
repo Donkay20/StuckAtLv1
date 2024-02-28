@@ -29,7 +29,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
     void OnEnable() {
         afterimageText.text = afterimages.ToString();
         moneyText.text = money.ToString();
-        damageModifier = 0;
+        damageModifier = 1;
         drainTimer = 1;
     }
 

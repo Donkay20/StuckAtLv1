@@ -357,25 +357,4 @@ public class UpgradeManager : MonoBehaviour
         DisplayWeight();
         Debug.Log("Upgrade Manager: Maximum slots increased to " + maxSlots + ". Process successful.");
     }
-
-    /*
-    List of upgrades (demo):
-    Common: 
-    0. Damage +20%
-    1. Size +20%
-    2. Duration +20%
-    3. Overheal +5
-
-    Rare:
-    0. Damage +40%
-    1. Size +30%
-    2. Duration +40%
-    3. Overheal +7
-
-    Legendary:
-    0. Damage +60%
-    1. Size +40%
-    2. Duration +60%
-    3. Overheal +10
-    */
 }

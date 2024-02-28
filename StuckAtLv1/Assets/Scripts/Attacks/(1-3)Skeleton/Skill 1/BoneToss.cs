@@ -5,6 +5,7 @@ using UnityEngine;
 public class BoneToss : MonoBehaviour
 {
     float timer = 2f;   //if a modifier increase skill time duration, it would call back to the parent slot and acquire the modifier for calculation
+    private readonly int BONETOSS_BASE_DMG = 5;
     Rigidbody2D rb;
     Slot parent;
     private Vector3 mousePosition;
@@ -12,7 +13,8 @@ public class BoneToss : MonoBehaviour
     public float speed;
     private int damage;
 
-    void Start() {  //aim towards the mouse
+    void Start() {  
+        //Aim towards the mouse
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
         parent = GetComponentInParent<Slot>();
@@ -20,16 +22,21 @@ public class BoneToss : MonoBehaviour
         Vector3 direction = mousePosition - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
 
-        float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
-        transform.localScale = new Vector2(.5f*scalingFactor, .5f*scalingFactor); //for the bone toss, 0.5f is the base size, idk why, but we will use that as the base in this case.
+        //start of dmg bonuses
+        damage += BONETOSS_BASE_DMG;                                                //base damage
+        damage *= (int) (1 + (parent.GetCommonUpgrade(0) * 0.1f));                  //common 0, 10% damage
+        damage *= (int) FindAnyObjectByType<Character>().DamageModifier;            //buffs
+        damage *= (int) FindAnyObjectByType<GameManager>().GetShopDamageBonus();    //should be the last multiplier
+        //end of dmg bonuses
 
-        //apply duration bonus
-        timer *= 1 + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
-        Debug.Log("timer: " + timer);
+        //start of size bonuses
+        float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.05f;                 //common 1, size
+        transform.localScale = new Vector2(.5f*scalingFactor, .5f*scalingFactor);   //for the bone toss, 0.5f is the base size (this shit's too big).
+        //end of size bonuses
 
-        //apply damage bonus
-        damage = (int)(5 * (1+(parent.GetCommonUpgrade(0)*0.2f + parent.GetRareUpgrade(0)*0.4f + parent.GetLegendaryUpgrade(0)*0.6f)));
-        Debug.Log("damage: " + damage);
+        //start of duration bonuses
+        timer *= 1 + (parent.GetCommonUpgrade(2)*0.2f);                             //common 2, duration
+        //end of duration bonuses
     }
 
     void Update() {
@@ -42,7 +49,35 @@ public class BoneToss : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         Enemy enemy = col.GetComponent<Enemy>();
         if (enemy != null) {
-            enemy.TakeDamage(damage);   //if a modifier increases damage, it would call back to the parent slot and acquire the modifier for calculation
+            
+            //begin on-kill slot bonuses here
+            if (damage > enemy.GetHealth()) {
+                int bonusDropChance = 0;
+                bonusDropChance += 5 * parent.GetCommonUpgrade(12);     //common 12, bonus treasure chest drop chance
+
+                if (parent.GetCommonUpgrade(13) > 0) {                  //common 13, bonus gold
+                    enemy.RaiseReward(parent.GetCommonUpgrade(13) * 5);
+                }
+
+                if (parent.GetCommonUpgrade(14) > 0) {                  //common 14, dispel debuff
+                    BuffManager b = FindAnyObjectByType<BuffManager>();
+                    for (int i = 0; i < parent.GetCommonUpgrade(14); i++) {
+                        b.DispelDebuff();
+                    }
+                }
+                enemy.DropMoney(bonusDropChance);
+            }
+            //end on-kill slot bonuses here
+
+            if (parent.GetCommonUpgrade(7) > 0) {                   //common 7, slow
+                enemy.ApplySlow(1 - (parent.GetCommonUpgrade(7) * 0.2f), 3);
+            }
+            if (parent.GetCommonUpgrade(10) > 0) {                  //common 8, anemia
+                if (Random.Range(0, 2) == 1) {
+                    enemy.ApplyAnemia(parent.GetCommonUpgrade(10), parent.GetCommonUpgrade(10) * 3);
+                }
+            } 
+            enemy.TakeDamage(damage);
         }
     }
 }
