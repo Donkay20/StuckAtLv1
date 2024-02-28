@@ -20,7 +20,7 @@ public class UpgradeManager : MonoBehaviour
     //in-game buttons
     [Space]
     [SerializeField] private Button[] upgradeButtons = new Button[3];       //buttons to click to select desired upgrade
-    [SerializeField] private Button[] slotButtons = new Button[2];          //buttons to click to select desired slot (UPDATE TO 5 LATER ON)
+    [SerializeField] private Button[] slotButtons = new Button[5];          //buttons to click to select desired slot (UPDATE TO 5 LATER ON)
     [SerializeField] private Button confirmationButton;                     //click this after upgrade and slot to apply are selected
     //the following are for the interactable, visual stuff
     [SerializeField] private Button helpButton;                             //guide button to explain upgrade menu
@@ -66,16 +66,12 @@ public class UpgradeManager : MonoBehaviour
             rareUpgradePool[i] = 3;
             legendaryUpgradePool[i] = 1;
         }
-        //commonUpgradesAvailable = true;
-        //rareUpgradesAvailable = true;
-        //legendaryUpgradeAvailable = true;
-        //allUpgradesTaken = false;
 
         upgradePositionSelected = -1;
         slotSelected = -1;
     }
 
-    private void Update() { //todo: move this out of the update method (later)
+    private void Update() {
         if (upgradePositionSelected != -1 && slotSelected != -1) {
             confirmationButton.interactable = true;
         } else {
@@ -102,7 +98,7 @@ public class UpgradeManager : MonoBehaviour
         for (int i = 0; i < 3; i++) {       
             if (type == "normal") {
                 int rarity = Random.Range(0,101);
-                if (rarity > 70) {          //for now, 30% chance to get a rare upgrade, can be tweaked
+                if (rarity > 65) {          //for now, 30% chance to get a rare upgrade, can be tweaked
                     upgradeRarities[i] = 1; //give rare upgrade
                     upgradeRarityBG[i].sprite = upgradeRarityImage[1];  //Update the background for the appropriate rarity
                 } else {
@@ -256,9 +252,9 @@ public class UpgradeManager : MonoBehaviour
     }
 
     public void Finish() { 
-        //Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
-
         /*
+        Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
+
         What's happening is that it's grabbing the rarity from the rarity assigned to each upgrade shown, from upgradeRarities[0-2]. Then, populates an appropriate string based on the rarity.
         It then grabs the upgrade ID assigned to each upgrade shown, from upgradeSelection[0-3 (UPDATE TO 0-12 LATER)].
         Then, using the slot selected from slotSelected, it calls the respective slot's ApplySlotUpgrade() and lets it assign itself the upgrade using the rarity strng and upgrade selected previously.
@@ -288,8 +284,10 @@ public class UpgradeManager : MonoBehaviour
         upgradeButtons[0].interactable = true;
         upgradeButtons[1].interactable = true;
         upgradeButtons[2].interactable = true;
-        slotButtons[0].interactable = true;
-        slotButtons[1].interactable = true;
+
+        for (int i = 0; i < maxSlots; i++) {
+            slotButtons[i].interactable = true;
+        }
 
         //reset both the slots and the upgrades to be unselected
         upgradePositionSelected = -1;
@@ -311,8 +309,21 @@ public class UpgradeManager : MonoBehaviour
         upgradeButtons[0].onClick.AddListener(() => ClickedUpgrade(0));
         upgradeButtons[1].onClick.AddListener(() => ClickedUpgrade(1));
         upgradeButtons[2].onClick.AddListener(() => ClickedUpgrade(2));
+
+        slotButtons[2].gameObject.SetActive(true);
+        slotButtons[3].gameObject.SetActive(true);
+        slotButtons[4].gameObject.SetActive(true);
+
         slotButtons[0].onClick.AddListener(() => ClickedSlot(0));
         slotButtons[1].onClick.AddListener(() => ClickedSlot(1));
+        slotButtons[2].onClick.AddListener(() => ClickedSlot(2));
+        slotButtons[3].onClick.AddListener(() => ClickedSlot(3));
+        slotButtons[4].onClick.AddListener(() => ClickedSlot(4));
+
+        slotButtons[2].gameObject.SetActive(false);
+        slotButtons[3].gameObject.SetActive(false);
+        slotButtons[4].gameObject.SetActive(false);
+
         confirmationButton.onClick.AddListener(() => Finish());
         helpButton.onClick.AddListener(() => OpenHelpMenu());
         closeHelpMenu.onClick.AddListener(() => CloseHelpMenu());
@@ -323,8 +334,26 @@ public class UpgradeManager : MonoBehaviour
     public void IncreaseMaxSlots() {
         maxSlots++;
         slotButtons[maxSlots-1].gameObject.SetActive(true);
-        slotButtons[maxSlots-1].onClick.AddListener(() => ClickedSlot(maxSlots-1));
-        //add something here to reorganize the slot button position
+
+        switch (maxSlots) {
+            //temp method
+            case 3:
+                slotButtons[0].gameObject.transform.Translate(-1.5f, 0, 0);
+                slotButtons[1].gameObject.transform.Translate(-1.5f, 0, 0);
+                break;
+            case 4:
+                slotButtons[0].gameObject.transform.Translate(-1.5f, 0, 0);
+                slotButtons[1].gameObject.transform.Translate(-1.5f, 0, 0);
+                slotButtons[2].gameObject.transform.Translate(-1.5f, 0, 0); 
+                break;
+            case 5:
+                slotButtons[0].gameObject.transform.Translate(-1.5f, 0, 0);
+                slotButtons[1].gameObject.transform.Translate(-1.5f, 0, 0);
+                slotButtons[2].gameObject.transform.Translate(-1.5f, 0, 0);
+                slotButtons[3].gameObject.transform.Translate(-1.5f, 0, 0);
+                break;
+        }
+        notify.CalculateWeight();
         DisplayWeight();
         Debug.Log("Upgrade Manager: Maximum slots increased to " + maxSlots + ". Process successful.");
     }

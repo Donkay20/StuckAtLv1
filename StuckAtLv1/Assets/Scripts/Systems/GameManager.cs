@@ -43,11 +43,10 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private int[] weight = new int[5];
     private int maxSlots;
     private bool slotEquilibrium;
-    void Start() //default to the map when the game launches.
-    {
+    void Start() {      //default to the map when the game launches.
         previousState = GameState.Map;
         currentState = GameState.Map;
-        maxSlots = 2; //default amt of slots
+        maxSlots = 2;   //default amt of slots
         UpdateState();
     }
 
@@ -56,7 +55,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         Updates the game's state, aptly named. 
         The last line before the break for each state change switches the previous state to the current state to reference for the next one after that.
         */
-        
         switch(currentState) {
             //non map focused
             case GameState.Map: //MAP STATE
@@ -256,7 +254,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             if (mapManager.GetLevel() == 11) {
                                 SceneManager.LoadScene("RuinsBossEnd", LoadSceneMode.Additive);
-                                updateSlotProtocol(); //+1 max slots, total 3.
+                                UpdateSlotProtocol(); //+1 max slots, total 3.
                             }
                             break;
                         case 2:
@@ -267,7 +265,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             break;
                     }
                 }
-
                 previousState = GameState.Dialogue;
                 Debug.Log("dialogue state");
                 break;
@@ -325,7 +322,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         CalculateWeight();
     }
 
-    private void CalculateWeight() {
+    public void CalculateWeight() {
         int minValue = slotUpgrades[0];
         int maxValue = slotUpgrades[0];
 
@@ -358,7 +355,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         return slotEquilibrium;
     }
 
-    private void updateSlotProtocol() {
+    private void UpdateSlotProtocol() {
         maxSlots++;
 
         upgradeUI.SetActive(true); 
