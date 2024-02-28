@@ -16,8 +16,10 @@ Handles main character's active stats in combat, their buffs, and their damage h
     private readonly float iframe = 0.3f;
     private bool invincible; //iframe check
     private bool healthDraining; //overheal drain check
-    private float damageModifier; public float DamageModifier { get => damageModifier; set => damageModifier = value; }
-    private float drainTimer = 1; public float DrainTimer { get => drainTimer; set => drainTimer = value; }
+    private float damageModifier; public float DamageModifier { get => damageModifier; set => damageModifier = value; } //from buffs/debuffs
+    private float criticalDamageModifier; public float CriticalDamageModifier { get => criticalDamageModifier; set => criticalDamageModifier = value; } //from buffs
+    private float drainTimer = 1; public float DrainTimer { get => drainTimer; set => drainTimer = value; } //from buffs/debuffs
+    
 
     [SerializeField] Animator playerAnim;
     [SerializeField] Animator healthBarAnim;

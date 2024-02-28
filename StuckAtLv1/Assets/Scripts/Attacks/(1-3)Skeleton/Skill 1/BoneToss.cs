@@ -12,6 +12,7 @@ public class BoneToss : MonoBehaviour
     private Camera mainCamera;
     public float speed;
     private int damage;
+    private bool criticalHit;
 
     void Start() {  
         //Aim towards the mouse
@@ -25,17 +26,18 @@ public class BoneToss : MonoBehaviour
         //start of dmg bonuses
         damage += BONETOSS_BASE_DMG;                                                //base damage
         damage *= (int) (1 + (parent.GetCommonUpgrade(0) * 0.1f));                  //common 0, 10% damage
+        damage *= (int) (1 + (parent.GetRareUpgrade(1) * 0.1f));                    //rare 1, 10% damage
         damage *= (int) FindAnyObjectByType<Character>().DamageModifier;            //buffs
         damage *= (int) FindAnyObjectByType<GameManager>().GetShopDamageBonus();    //should be the last multiplier
         //end of dmg bonuses
 
         //start of size bonuses
-        float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.05f;                 //common 1, size
-        transform.localScale = new Vector2(.5f*scalingFactor, .5f*scalingFactor);   //for the bone toss, 0.5f is the base size (this shit's too big).
+        float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.05f + parent.GetRareUpgrade(1)*0.05f;                 //common 1, size | rare 1, size
+        transform.localScale = new Vector2(.5f*scalingFactor, .5f*scalingFactor);       //for the bone toss, 0.5f is the base size (this shit's too big).
         //end of size bonuses
 
         //start of duration bonuses
-        timer *= 1 + (parent.GetCommonUpgrade(2)*0.2f);                             //common 2, duration
+        timer *= 1 + parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(1)*0.2f;   //common 2, duration | rare 1, duration
         //end of duration bonuses
     }
 
@@ -49,6 +51,7 @@ public class BoneToss : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         Enemy enemy = col.GetComponent<Enemy>();
         if (enemy != null) {
+            criticalHit = parent.CriticalHit();
             
             //begin on-kill slot bonuses here
             if (damage > enemy.GetHealth()) {
@@ -69,6 +72,7 @@ public class BoneToss : MonoBehaviour
             }
             //end on-kill slot bonuses here
 
+            //begin on-hit slot bonuses here
             if (parent.GetCommonUpgrade(7) > 0) {                   //common 7, slow
                 enemy.ApplySlow(1 - (parent.GetCommonUpgrade(7) * 0.2f), 3);
             }
@@ -76,6 +80,12 @@ public class BoneToss : MonoBehaviour
                 if (Random.Range(0, 2) == 1) {
                     enemy.ApplyAnemia(parent.GetCommonUpgrade(10), parent.GetCommonUpgrade(10) * 3);
                 }
+            }
+            //end on-hit slot bonuses here
+
+            if (criticalHit) {
+                damage *= (int) parent.CriticalDamage();
+                enemy.CriticalHit();
             } 
             enemy.TakeDamage(damage);
         }

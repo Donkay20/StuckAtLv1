@@ -30,6 +30,7 @@ public class Slot : MonoBehaviour
     private int[] rareUpgrades = new int[15];
     private int[] legendaryUpgrades = new int[15];
     [SerializeField] private Character character;
+    [SerializeField] private Movement movement;
     [SerializeField] private Image skillImage;                          
     //display for the skill image on the UI
     [SerializeField] private TextMeshProUGUI uIText;                    
@@ -91,16 +92,28 @@ public class Slot : MonoBehaviour
                 //-beginning of slot effects-
                 if (containsSkill) {
                     if (commonUpgrades[3] > 0) {
-                        character.Heal(commonUpgrades[3] * 3); //common 3
+                        character.Heal(commonUpgrades[3] * 3);                          //common 3
                     }
-                    if (commonUpgrades[5] > 0) {
+                    if (commonUpgrades[5] > 0) {                                        //common 5
                         buffManager.AddBuff("power", commonUpgrades[5] * 0.05f, 3f);
                     }
-                    if (commonUpgrades[8] > 0) {
-                        buffManager.AddBuff("speed",commonUpgrades[8] * 0.1f, 3f);
+                    if (commonUpgrades[8] > 0) {                                        //common 8
+                        buffManager.AddBuff("speed", commonUpgrades[8] * 0.1f, 3f);
+                    }
+                    if (rareUpgrades[0] > 0) {                                          //rare 0
+                        movement.ActiveDashCD -= movement.ActiveDashCD * rareUpgrades[0] * 0.1f;
+                    }
+                    if (rareUpgrades[5] > 0 && character.afterimages > 0) {             //rare 5
+                        buffManager.AddBuff("speed", rareUpgrades[5] * (0.05f * character.afterimages), 5f);
+                    }
+                    if (rareUpgrades[6] > 0) {                                          //rare 6
+                        if (character.currentHp > 10) {
+                            int goldGain = character.currentHp - 10;
+                            character.TakeDamage(goldGain);
+                            character.GainMoney(goldGain * rareUpgrades[6]);
+                        }
                     }
                 }
-
                 //-end of slot effects-
 
                 if (skillUses > 0) {
@@ -196,26 +209,42 @@ public class Slot : MonoBehaviour
     }
 
     public bool CriticalHit() {
-        //base crit chance is 5%
-        bool isCrit = false; int critChance = 5; 
-        //critical hit bonuses start here
-        critChance += commonUpgrades[4] * 10; //common 4
-        //critical hit bonuses end here
-        if (Random.Range(1,101) <= critChance) {isCrit = true;}
-        //calculate crit odds
+        bool isCrit = false; int critChance = 5;        //base crit chance is 5%
+
+        //critical hit chance bonuses start here
+        critChance += commonUpgrades[4] * 10;           //common 4
+        if (rareUpgrades[3] > 0) {                      //rare 3
+            if (character.currentHp <= 10) {
+                critChance += 50 * rareUpgrades[3];
+            }
+        }
+        //critical hit chance bonuses end here
+
+        if (Random.Range(1,101) <= critChance) {isCrit = true;} //calculate crit odds
+
+        //bonuses upon crit begin here
+        if (rareUpgrades[4] > 0) {                      //rare 4
+            if (character.currentHp <= 10) {
+                character.GainAfterimage(1);
+            }
+        }
+        //bonuses upon crit end here
         return isCrit;
     }
 
     public float CriticalDamage() {
-        //critical strikes do 200% dmg at base
-        float critDmg = 2; 
+        float critDmg = 2;                              //critical strikes do 200% dmg at base
+
         //crit damage bonuses start here
-        critDmg += commonUpgrades[6] * 0.2f; //common 6
+        critDmg += commonUpgrades[6] * 0.2f;            //common 6
+        critDmg += character.CriticalDamageModifier;    //buffs
         //crit damage bonuses end here
+
         return critDmg;
     }
 
     /*
+
     List of upgrades:
     Common: 
     0.  Damage +10%                                     - atk1 done
@@ -235,37 +264,39 @@ public class Slot : MonoBehaviour
     14. Debuff cleanse ON KILL +1                       - atk1 done
 
     Rare: 
-    0.
-    1.
-    2.
-    3.
-    4.
-    5.
-    6.
-    7.
-    8.
-    9.
-    10.
-    11.
-    12.
-    13.
-    14.
+    0.  -10% Dash cooldown                              - OK
+    1.  Size +5%, Damage +10%, Duration +20%            - atk1 done
+    2.  Cooldown of other slots -10%                    - todo
+    3.  No overheal = +50% crit chance                  - OK
+    4.  No overheal = crit = +1 afterimage              - OK
+    5.  Movement speed +5% * afterimages                - OK
+    6.  Turn overheal to gold                           - OK
+    7.  x2 overhealing                                  - todo
+    8.  Overheal for 10% of dmg dealt                   - todo
+    9.  Bonus dmg = 10% of HP                           - todo
+    10. Overheal = +size%                               - todo
+    11. Inflict Anemia on-hit, 10s                      - todo
+    12. Hitting anemic enemy = +gold                    - todo
+    13. Anemia spread                                   - todo
+    14. Anemia inflict = +20% dmg boost                 - todo
 
     Legendary:
-    0.
-    1.
-    2.
-    3.
-    4.
-    5.
-    6.
-    7.
-    8.
-    9.
-    10.
-    11.
-    12.
-    13.
-    14.
+    0.  Enemy explodes on-kill                          - todo
+    1.  +1 skill usage on-kill                          - todo
+    2.  Skill upgrade spread                            - todo
+    3.  +Gold = afterimages on-hit (2x for crit)        - todo
+    4.  Crit = cd refund                                - todo
+    5.  Crit = +gold, kill = ++gold                     - todo
+    6.  Crit = +crit dmg buff                           - todo
+    7.  Damage all anemic enemies on use or on kill     - todo
+    8.  Anemia on anemic enemy = burst dmg              - todo
+    9.  Attack = bloodsucker (anemia dmg = overheal)    - todo
+    10. Execute anemic enemies at <10% hp (<5% boss)    - todo
+    11. if gold>hp, gold=hp and hp += goldlost*2        - todo
+    12. dmg = stun (scales with overhealth)             - todo
+    13. kill = bulwark buff (drain reversed)            - todo
+    14. if hp>gold, hp=gold and gold += hplost*10       - todo
+
+    //todo: make a buff resolver class lmao
     */
 }
