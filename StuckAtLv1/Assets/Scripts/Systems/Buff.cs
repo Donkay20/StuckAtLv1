@@ -69,25 +69,27 @@ public class Buff : MonoBehaviour
             case "bloodsucker": //todo
                 i = 3;
                 if (x) {
-                    //plus
+                    FindAnyObjectByType<BuffManager>().SetBloodsuckerStatus(true);
                 } else {
-                    //minus
+                    FindAnyObjectByType<BuffManager>().SetBloodsuckerStatus(false);
                 }
                 break;
             case "bulwark": //todo
                 i = 4;
                 if (x) {
-                    //plus
+                    character.ActivateBulwark();
+                    FindAnyObjectByType<BuffManager>().SetBulwarkStatus(true);
                 } else {
-                    //minus
+                    character.DeactivateBulwark();
+                    FindAnyObjectByType<BuffManager>().SetBulwarkStatus(false);
                 }
                 break;
             case "critdmg": //todo
                 i = 5;
                 if (x) {
-                    //plus
+                    character.CriticalDamageModifier += efficacy;
                 } else {
-                    //minus
+                    character.CriticalDamageModifier -= efficacy;
                 }
                 break;
         }

@@ -193,12 +193,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c39c01dc5f7114c43bf8874b52781a56, type: 3}
   - {fileID: 21300000, guid: 3dec43e1ccef8c349a1ab4558b95fd54, type: 3}
   - {fileID: 21300000, guid: 3939e5336bd0ef34b91346d960140f3a, type: 3}
-  character: {fileID: 0}
-  movement: {fileID: 0}
-  buffType: 
-  efficacy: 0
-  duration: 0
-  identity: 0
+  - {fileID: 21300000, guid: aaddd904ea13dbe428766c15cc9286ce, type: 3}
 --- !u!222 &4328037570631330291
 CanvasRenderer:
   m_ObjectHideFlags: 0

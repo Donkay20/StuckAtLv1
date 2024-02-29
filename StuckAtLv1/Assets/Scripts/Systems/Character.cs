@@ -19,6 +19,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
     private float damageModifier; public float DamageModifier { get => damageModifier; set => damageModifier = value; } //from buffs/debuffs
     private float criticalDamageModifier; public float CriticalDamageModifier { get => criticalDamageModifier; set => criticalDamageModifier = value; } //from buffs
     private float drainTimer = 1; public float DrainTimer { get => drainTimer; set => drainTimer = value; } //from buffs/debuffs
+    private int drainValue;
     
 
     [SerializeField] Animator playerAnim;
@@ -33,6 +34,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
         moneyText.text = money.ToString();
         damageModifier = 1;
         drainTimer = 1;
+        drainValue = 1;
     }
 
     public void TakeDamage(int damage) {
@@ -68,7 +70,8 @@ Handles main character's active stats in combat, their buffs, and their damage h
     IEnumerator DrainHealth() {
         healthDraining = true;
         while (currentHp > maxHp) {
-            currentHp--; healthText.text = currentHp.ToString();
+            currentHp -= drainValue; 
+            healthText.text = currentHp.ToString();
             if (currentHp <= maxHp) {
                 healthText.color = new Color32(255, 240, 240, 255);
                 healthDraining = false;
@@ -121,6 +124,18 @@ Handles main character's active stats in combat, their buffs, and their damage h
             money += amount;
         }
         moneyText.text = money.ToString();
+    }
+
+    public void ActivateBloodsucker(int hpToRestore) {
+        Heal(hpToRestore);
+    }
+
+    public void ActivateBulwark() {
+        drainValue = -1;
+    }
+
+    public void DeactivateBulwark() {
+        drainValue = 1;
     }
 
     public void DashingIFrames() {

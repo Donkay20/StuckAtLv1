@@ -17,6 +17,7 @@ public class BuffManager : MonoBehaviour
     private Debuff[] debuffs = new Debuff[5];
     //Back-end
     private int buffPosition, debuffPosition;
+    private bool bloodsuckerActive, bulwarkActive;
     //Variables
 
     private void Awake() {
@@ -96,6 +97,22 @@ public class BuffManager : MonoBehaviour
         if (debuffPosition > 0) {
             debuffs[0].EndDebuff();
         }
+    }
+
+    public bool IsBloodsuckerActive() {
+        return bloodsuckerActive;
+    }
+
+    public void SetBloodsuckerStatus(bool x) {
+        bloodsuckerActive = x;
+    }
+
+    public bool IsBulwarkActive() {
+        return bulwarkActive;
+    }
+
+    public void SetBulwarkStatus(bool x) {
+        bulwarkActive = x;
     }
 
     public void EndBattle() {

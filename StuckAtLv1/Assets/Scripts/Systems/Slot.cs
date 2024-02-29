@@ -65,7 +65,7 @@ public class Slot : MonoBehaviour
             } else {
                 cooldownValueText.text = activeCD.ToString("f1");
             }
-            cooldownFill.fillAmount = activeCD/cooldown*cooldownModifier;
+            cooldownFill.fillAmount = activeCD / cooldown * cooldownModifier;
         } else {
             coolingDown = false; cooldownValueText.gameObject.SetActive(false);
         }
@@ -111,6 +111,18 @@ public class Slot : MonoBehaviour
                             int goldGain = character.currentHp - 10;
                             character.TakeDamage(goldGain);
                             character.GainMoney(goldGain * rareUpgrades[6]);
+                        }
+                    }                                                                   
+                    if (legendaryUpgrades[9] > 0) {                                     //legendary 9
+                        if (!buffManager.IsBloodsuckerActive()) {
+                            buffManager.AddBuff("bloodsucker", 0, 3);
+                        }
+                    }
+                    if (legendaryUpgrades[14] > 0) {                                    //legendary 14
+                        if (character.currentHp - 10 > character.money) {
+                            int goldGain = (character.currentHp - 10) - character.money;
+                            character.TakeDamage(goldGain);
+                            character.GainMoney((goldGain*10) * legendaryUpgrades[14]);
                         }
                     }
                 }
@@ -158,18 +170,30 @@ public class Slot : MonoBehaviour
         }
     }
 
-    public void ApplySlotUpgrade(string rarity, int upgrade) {
+    public int SkillUses() {
+        return skillUses;
+    }
+
+    public void GetSkillUses() {
+        skillUses++;
+    }
+
+    public void RefundCooldown() {
+        activeCD = 0.01f;
+    }
+
+    public void ApplySlotUpgrade(string rarity, int ID) {
         switch(rarity) {
             case "common":
-                commonUpgrades[upgrade]++;
+                commonUpgrades[ID]++;
                 Debug.Log("Common upgrade applied." );
                 break;
             case "rare":
-                rareUpgrades[upgrade]++;
+                rareUpgrades[ID]++;
                 Debug.Log("Rare upgrade applied.");;
                 break;
             case "legendary":
-                legendaryUpgrades[upgrade]++;
+                legendaryUpgrades[ID]++;
                 Debug.Log("Legendary upgrade applied.");
                 break;
         }
@@ -220,7 +244,7 @@ public class Slot : MonoBehaviour
         }
         //critical hit chance bonuses end here
 
-        if (Random.Range(1,101) <= critChance) {isCrit = true;} //calculate crit odds
+        if (Random.Range(1,101) <= critChance) {isCrit = true;}     //calculate crit odds
 
         //bonuses upon crit begin here
         if (rareUpgrades[4] > 0) {                      //rare 4
@@ -247,9 +271,9 @@ public class Slot : MonoBehaviour
 
     List of upgrades:
     Common: 
-    0.  Damage +10%                                     - atk1 done
-    1.  Size +5%                                        - atk1 done
-    2.  Duration +20%                                   - atk1 done
+    0.  Damage +10%                                     - OK
+    1.  Size +5%                                        - OK
+    2.  Duration +20%                                   - OK
     3.  Overheal +3                                     - OK
     4.  Critical chance +10%                            - OK
     5.  Damage buff +5%, 3s duration                    - OK
@@ -265,38 +289,37 @@ public class Slot : MonoBehaviour
 
     Rare: 
     0.  -10% Dash cooldown                              - OK
-    1.  Size +5%, Damage +10%, Duration +20%            - atk1 done
+    1.  Size +5%, Damage +10%, Duration +20%            - OK
     2.  Cooldown of other slots -10%                    - todo
     3.  No overheal = +50% crit chance                  - OK
     4.  No overheal = crit = +1 afterimage              - OK
     5.  Movement speed +5% * afterimages                - OK
     6.  Turn overheal to gold                           - OK
     7.  x2 overhealing                                  - todo
-    8.  Overheal for 10% of dmg dealt                   - todo
-    9.  Bonus dmg = 10% of HP                           - todo
-    10. Overheal = +size%                               - todo
-    11. Inflict Anemia on-hit, 10s                      - todo
-    12. Hitting anemic enemy = +gold                    - todo
+    8.  Overheal for 10% of dmg dealt                   - atk1 done
+    9.  Bonus dmg = 10% of HP                           - OK
+    10. Overheal = +size%                               - OK
+    11. Inflict Anemia on-hit, 10s                      - atk1 done
+    12. Hitting anemic enemy = +gold                    - atk1 done
     13. Anemia spread                                   - todo
-    14. Anemia inflict = +20% dmg boost                 - todo
+    14. Anemia inflict = +20% dmg boost                 - atk1 done
 
     Legendary:
     0.  Enemy explodes on-kill                          - todo
-    1.  +1 skill usage on-kill                          - todo
+    1.  +1 skill usage on-kill                          - atk1 done
     2.  Skill upgrade spread                            - todo
-    3.  +Gold = afterimages on-hit (2x for crit)        - todo
-    4.  Crit = cd refund                                - todo
-    5.  Crit = +gold, kill = ++gold                     - todo
-    6.  Crit = +crit dmg buff                           - todo
+    3.  +Gold = afterimages on-hit (2x for crit)        - atk1 done
+    4.  Crit = cd refund                                - atk1 done
+    5.  Crit = +gold, kill = ++gold                     - atk1 done
+    6.  Crit = +crit dmg buff                           - atk1 done
     7.  Damage all anemic enemies on use or on kill     - todo
-    8.  Anemia on anemic enemy = burst dmg              - todo
-    9.  Attack = bloodsucker (anemia dmg = overheal)    - todo
-    10. Execute anemic enemies at <10% hp (<5% boss)    - todo
-    11. if gold>hp, gold=hp and hp += goldlost*2        - todo
-    12. dmg = stun (scales with overhealth)             - todo
-    13. kill = bulwark buff (drain reversed)            - todo
-    14. if hp>gold, hp=gold and gold += hplost*10       - todo
+    8.  Anemia on anemic enemy = anemic shock           - atk1 done
+    9.  Attack = bloodsucker (anemia dmg = overheal)    - OK
+    10. Doubles anemic duration if anemic               - atk1 done
+    11. kill = treasure chest spawn chance% * overheal% - atk1 done
+    12. dmg = slow (scales with overhealth)             - atk1 done
+    13. kill = bulwark buff (drain reversed)            - atk1 done
+    14. if hp>gold, hp=gold and gold += hplost*10       - OK
 
-    //todo: make a buff resolver class lmao
     */
 }

@@ -29,6 +29,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     public GameObject particlePrefab;
     private Vector3 force;
     private int moneyOnKill;
+    public int maxHP;
 
     private void Awake() {
         if (baseSpeed > 0) {
@@ -50,6 +51,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         hp += gameManager.ScaleDifficulty();
         baseSpeed += gameManager.ScaleDifficulty()/10;
         moneyOnKill = 5;
+        maxHP = hp;
     }
     
     private void FixedUpdate() {
@@ -78,6 +80,11 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             if (anemiaTick <= 0) {
                 anemiaCheck = true;
                 TakeDamage(anemiaDamage);
+
+                if (buffManager.IsBloodsuckerActive()) {        //legendary 9
+                    FindAnyObjectByType<Character>().ActivateBloodsucker((int) Mathf.Floor(anemiaDamage * 0.01f));
+                }
+
                 anemiaTick = 1;
             }
         }
@@ -218,6 +225,38 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
 
     public void SetHealth(int health) {
         hp = health;
+    }
+
+    public bool IsAnemic() {
+        return anemiaApplied;
+    }
+
+    public int AnemiaSeverity() {
+        return anemiaDamage;
+    }
+
+    public float AnemiaDuration() {
+        return anemiaTimer;
+    }
+
+    public void ResetAnemia() {
+        anemiaTimer = 0.01f;
+    }
+
+    public void AnemicShock() {
+        if (anemiaApplied) {
+            anemiaCheck = true;
+            TakeDamage((int) (anemiaDamage * anemiaTimer));
+        }
+    }
+
+    public void AnemicTorture() {
+        //add clause so that it doesn't work on bosses
+        if (this.gameObject.CompareTag("Knight") || this.gameObject.CompareTag("Lich")) {
+            Debug.Log("Anemic Torture doesn't work on bosses!");
+        } else {
+            anemiaTimer *= 2;
+        }
     }
 
     public void DropMoney(int additionalChance) {
