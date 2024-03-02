@@ -29,7 +29,7 @@ public class Upheaval : MonoBehaviour
 
         transform.localScale = new Vector2(0, 0);
 
-        maxSize = asb.GetSizeBonus(slot);
+        maxSize = asb.GetSizeBonus(slot) * 3;
         timer = asb.GetDurationBonus(slot, UPHEAVAL_BASE_TIMER);
         damage = asb.GetDamageBonus(slot, UPHEAVAL_BASE_DMG);
     }

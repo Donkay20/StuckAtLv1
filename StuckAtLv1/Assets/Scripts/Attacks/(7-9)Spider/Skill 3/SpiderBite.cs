@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpiderBite : MonoBehaviour
 {
     [SerializeField] private Sprite spiderBite;
-    private readonly int SPIDERBITE_BASE_DMG = 1;
+    private readonly int SPIDERBITE_BASE_DMG = 2;
     private readonly float SPIDERBITE_BASE_ANEMIA_DURATION = 5f; //duration will ALSO increase the duration of the anemic effect
     private readonly float SPIDERBITE_BASE_DURATION = 1f;
     private int damage; //damage will also affect the poison dmg
@@ -50,7 +50,7 @@ public class SpiderBite : MonoBehaviour
         Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = direction;
         float offsetDistance = 0.2f;
-        Vector3 offsetPosition = transform.position + (Vector3)direction * offsetDistance;
+        Vector3 offsetPosition = transform.position + (Vector3) direction * offsetDistance;
         transform.position = offsetPosition;
     }
 }

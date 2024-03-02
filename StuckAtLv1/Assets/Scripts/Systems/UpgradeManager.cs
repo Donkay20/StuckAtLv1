@@ -15,7 +15,7 @@ public class UpgradeManager : MonoBehaviour
     private int[] upgradeRarities = new int[3];         //rarity storage for the 4 upgrades that are available. (rarity: 0-common, 1-rare, 2-legendary)
     private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 4 upgrades that are available. (goes from 0-2 now but should be updated for 0-12 later)
     //private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use
-    private int upgradePositionSelected, slotSelected;                              //determined which one that is clicked on in the game menu (goes from 0-2 for upgradeselected and 0-4 for slot selected)
+    private int upgradePositionSelected, slotSelected;                      //determined which one that is clicked on in the game menu (goes from 0-2 for upgradeselected and 0-4 for slot selected)
     [SerializeField] private Slot[] slots = new Slot[5];                    //UPDATE TO 5 LATER ON
     //in-game buttons
     [Space]
@@ -270,7 +270,13 @@ public class UpgradeManager : MonoBehaviour
             case 2: rarity = "legendary"; break;
         }
 
-        slots[slotSelected].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
+        if (slots[slotSelected].GetLegendaryUpgrade(2) > 0) {       //legendary 2
+            if (slotSelected >= 1) {slots[slotSelected - 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);}
+            if (slotSelected <= 3) {slots[slotSelected + 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);}
+            slots[slotSelected].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
+        } else {
+            slots[slotSelected].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
+        }
         notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
 
         //subtract from the available upgrades

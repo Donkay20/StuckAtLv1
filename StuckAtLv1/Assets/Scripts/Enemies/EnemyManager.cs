@@ -41,7 +41,7 @@ public class EnemyManager : MonoBehaviour
 
         Vector3 position = GenerateRandomPosition();
         position += player.transform.position;
-        GameObject newEnemy = Instantiate(enemyPool[0]); //change this value to test specific enemies
+        GameObject newEnemy = Instantiate(enemyPool[enemyID]); //change this value to test specific enemies
         newEnemy.transform.position = position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
         newEnemy.transform.parent = transform;

@@ -45,6 +45,8 @@ public class Slot : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private SlotManager slotManager;
     [SerializeField] private BuffManager buffManager;
+    [SerializeField] private GameObject anemiaScreenBlastPrefab;
+    [SerializeField] private GameObject knockbackCirclePrefab;
 
     private void Start() {
         absorbBulletAvailable = true;
@@ -89,44 +91,84 @@ public class Slot : MonoBehaviour
             } else {
                 Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform); 
 
-                //-beginning of slot effects-
+                //-BEGIN slot effects-
                 if (containsSkill) {
-                    if (commonUpgrades[3] > 0) {
-                        character.Heal(commonUpgrades[3] * 3);                          //common 3
+                    if (commonUpgrades[3] > 0) {                                        //common 3 (rare 7)
+                        if (rareUpgrades[7] > 0) {
+                            character.Heal(commonUpgrades[3] * 3 * (rareUpgrades[7] * 2));  
+                        } else {
+                            character.Heal(commonUpgrades[3] * 3);
+                        }
+                        Debug.Log("Common | 3");
                     }
+
                     if (commonUpgrades[5] > 0) {                                        //common 5
                         buffManager.AddBuff("power", commonUpgrades[5] * 0.05f, 3f);
+                        Debug.Log("Common | 5");
                     }
+
                     if (commonUpgrades[8] > 0) {                                        //common 8
                         buffManager.AddBuff("speed", commonUpgrades[8] * 0.1f, 3f);
+                        Debug.Log("Common | 8");
                     }
+
+                    if (commonUpgrades[11] > 0) {                                       //common 11
+                        Instantiate(knockbackCirclePrefab, this.transform);
+                        Debug.Log("Common | 11");
+                    }
+
                     if (rareUpgrades[0] > 0) {                                          //rare 0
                         movement.ActiveDashCD -= movement.ActiveDashCD * rareUpgrades[0] * 0.1f;
+                        Debug.Log("Rare | 0");
                     }
+
+                    if (rareUpgrades[2] > 0) {                                          //rare 2
+                        FindAnyObjectByType<SlotManager>().RareTwoCooldownCut(identity, rareUpgrades[2]);
+                        Debug.Log("Rare | 2");
+                    }
+
                     if (rareUpgrades[5] > 0 && character.afterimages > 0) {             //rare 5
                         buffManager.AddBuff("speed", rareUpgrades[5] * (0.05f * character.afterimages), 5f);
+                        Debug.Log("Rare | 5");
                     }
+
                     if (rareUpgrades[6] > 0) {                                          //rare 6
                         if (character.currentHp > 10) {
                             int goldGain = character.currentHp - 10;
                             character.TakeDamage(goldGain);
                             character.GainMoney(goldGain * rareUpgrades[6]);
+                            Debug.Log("Rare | 6, success");
+                        } else {
+                            Debug.Log("Rare | 6, failure");
                         }
-                    }                                                                   
+                    }  
+
+                    if (legendaryUpgrades[7] > 0) {                                     //legendary 7
+                        Instantiate(anemiaScreenBlastPrefab, this.transform);
+                        Debug.Log("Legendary | 7 (on-cast)");
+                    }
+
                     if (legendaryUpgrades[9] > 0) {                                     //legendary 9
                         if (!buffManager.IsBloodsuckerActive()) {
                             buffManager.AddBuff("bloodsucker", 0, 3);
+                            Debug.Log("Legendary | 9, success");
+                        } else {
+                            Debug.Log("Legendary | 9, fail");
                         }
                     }
+
                     if (legendaryUpgrades[14] > 0) {                                    //legendary 14
                         if (character.currentHp - 10 > character.money) {
-                            int goldGain = (character.currentHp - 10) - character.money;
+                            int goldGain = character.currentHp - 10 - character.money;
                             character.TakeDamage(goldGain);
                             character.GainMoney((goldGain*10) * legendaryUpgrades[14]);
+                            Debug.Log("Legendary | 14, success");
+                        } else {
+                            Debug.Log("Legendary | 14, fail");
                         }
                     }
                 }
-                //-end of slot effects-
+                //-END slot effects-
 
                 if (skillUses > 0) {
                     skillUses--;
@@ -141,8 +183,8 @@ public class Slot : MonoBehaviour
                     containsSkill = false;
                     skillImage.sprite = attack[0].GetComponent<SpriteRenderer>().sprite;
                     skillID = 0; skillUses = 0; cooldown = 0;
+                    //if skill has run out of uses, reset everything
                 }
-                //if skill has run out of uses, reset everything
             }
         }                                                                                 
     }
@@ -178,8 +220,12 @@ public class Slot : MonoBehaviour
         skillUses++;
     }
 
-    public void RefundCooldown() {
+    public void RefundCooldown() {                      //legendary 4
         activeCD = 0.01f;
+    }
+
+    public void CutCooldown(int intensity) {            //rare 2
+        activeCD -= cooldown * (0.1f * intensity);
     }
 
     public void ApplySlotUpgrade(string rarity, int ID) {
@@ -282,7 +328,7 @@ public class Slot : MonoBehaviour
     8.  Movement speed buff (+10%), 3s duration         - OK
     9.  +1 max skill usage                              - OK
     10. 50% chance of inflicting Anemia                 - OK
-    11. Knockback nearby enemies                        - todo
+    11. Knockback nearby enemies                        - OK
     12. Treasure Chest spawn chance ON KILL + 5%        - OK
     13. Gold ON KILL +5                                 - OK
     14. Debuff cleanse ON KILL +1                       - OK
@@ -290,29 +336,29 @@ public class Slot : MonoBehaviour
     Rare: 
     0.  -10% Dash cooldown                              - OK
     1.  Size +5%, Damage +10%, Duration +20%            - OK
-    2.  Cooldown of other slots -10%                    - todo
+    2.  Cooldown of other slots -10%                    - OK
     3.  No overheal = +50% crit chance                  - OK
     4.  No overheal = crit = +1 afterimage              - OK
     5.  Movement speed +5% * afterimages                - OK
     6.  Turn overheal to gold                           - OK
-    7.  x2 overhealing                                  - todo
+    7.  x2 overhealing                                  - OK
     8.  Overheal for 10% of dmg dealt                   - OK
     9.  Bonus dmg = 10% of HP                           - OK
     10. Overheal = +size%                               - OK
     11. Inflict Anemia on-hit, 10s                      - OK
     12. Hitting anemic enemy = +gold                    - OK
-    13. Anemia spread                                   - todo
+    13. Anemia spread                                   - OK
     14. Anemia inflict = +20% dmg boost                 - OK
 
     Legendary:
-    0.  Enemy explodes on-kill                          - todo
+    0.  Enemy explodes on-kill                          - OK
     1.  +1 skill usage on-kill                          - OK
-    2.  Skill upgrade spread                            - todo
+    2.  Skill upgrade spread                            - OK
     3.  +Gold = afterimages on-hit (2x for crit)        - OK
     4.  Crit = cd refund                                - OK
     5.  Crit = +gold, kill = ++gold                     - OK
     6.  Crit = +crit dmg buff                           - OK
-    7.  Damage all anemic enemies on use or on kill     - todo
+    7.  Damage all anemic enemies on use or on kill     - OK
     8.  Anemia on anemic enemy = anemic shock           - OK
     9.  Attack = bloodsucker (anemia dmg = overheal)    - OK
     10. Doubles anemic duration if anemic               - OK

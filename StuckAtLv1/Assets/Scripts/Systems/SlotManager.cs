@@ -15,9 +15,6 @@ public class SlotManager : MonoBehaviour
     private int slotNum = 1;
     [SerializeField] private int maxSlots;
     [SerializeField] private GameObject[] slots;
-    [SerializeField] private GameObject[] threeSlotPosition = new GameObject[2];
-    [SerializeField] private GameObject[] fourSlotPosition = new GameObject[3];
-    [SerializeField] private GameObject[] fiveSlotPosition = new GameObject[4];
     [SerializeField] private Sprite[] onSpriteList;
     [SerializeField] private Sprite[] offSpriteList;
 
@@ -114,6 +111,38 @@ public class SlotManager : MonoBehaviour
         slot.GetComponent<Animator>().ResetTrigger("Hit2");
         slot.GetComponent<Animator>().SetTrigger("Hit");
         slot.transform.GetChild(1).GetComponent<Image>().sprite = onSpriteList[spriteNumOn];
+    }
+
+    public void RareTwoCooldownCut(int identity, int intensity) {       //rare 2
+        for (int i = 0; i < maxSlots; i++) {
+            switch (i) {
+                case 0:
+                    if (identity != i) {
+                        slot1.CutCooldown(intensity);
+                    }
+                    break;
+                case 1:
+                    if (identity != i) {
+                        slot2.CutCooldown(intensity);
+                    }
+                    break;
+                case 2:
+                    if (identity != i) {
+                        slot3.CutCooldown(intensity);
+                    }
+                    break;
+                case 3:
+                    if (identity != i) {
+                        slot4.CutCooldown(intensity);
+                    }
+                    break;
+                case 4:
+                    if (identity != i) {
+                        slot5.CutCooldown(intensity);
+                    }
+                    break;
+            }
+        }
     }
 
     private void TurnOffSlots() {

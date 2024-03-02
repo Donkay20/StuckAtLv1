@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OnHitBonus : MonoBehaviour
 {
+    [SerializeField] private GameObject anemiaScreenBlastPrefab;
+    [SerializeField] private GameObject anemiaSpreadPrefab;
+    [SerializeField] private GameObject explosionPrefab;
     public void ApplyDamageBonus(Slot slot, Enemy enemy, int damage) {
         if (enemy != null) {
 
@@ -15,8 +16,8 @@ public class OnHitBonus : MonoBehaviour
                     enemy.CriticalHit();
             }
 
-            //begin on-kill slot bonuses here
-            if (damage > enemy.GetHealth()) {                                       //if the attack kills
+            //ON-KILL slot bonuses BEGIN here
+            if (damage >= enemy.GetHealth()) {                                      //if the attack kills:
                 int bonusDropChance = 0;
 
                 if (slot.GetCommonUpgrade(12) > 0) {                                //common 12
@@ -36,33 +37,61 @@ public class OnHitBonus : MonoBehaviour
                     Debug.Log("Common | 14");
                 }
 
+                if (slot.GetRareUpgrade(13) > 0) {                                  //rare 13 (on-kill version)
+                    GameObject c = Instantiate(anemiaSpreadPrefab, enemy.transform.position, Quaternion.identity);
+                    c.transform.localScale *= slot.GetRareUpgrade(13);
+                }
+
+                if (slot.GetLegendaryUpgrade(0) > 0) {                              //legendary 0
+                    GameObject e = Instantiate(explosionPrefab, enemy.transform.position, Quaternion.identity);
+                    Explosion g = e.GetComponent<Explosion>();
+                    g.Activate(slot);
+                }
+
                 if (slot.GetLegendaryUpgrade(1) > 0 && slot.SkillUses() > 0) {      //legendary 1
                     slot.GetSkillUses();
+                    Debug.Log("Legendary | 1");
                 }
 
                 if (slot.GetLegendaryUpgrade(4) > 0 && criticalHit) {               //legendary 4 (on-kill version)
                     slot.RefundCooldown();
+                    Debug.Log("Legendary | 4 (on-kill)");
                 }
 
                 if (slot.GetLegendaryUpgrade(5) > 0 && criticalHit) {               //legendary 5 (on-kill version)
                     FindAnyObjectByType<Character>().GainMoney(damage / 10);
+                    Debug.Log("Legendary | 5 (on-kill)");
+                }
+
+                if (slot.GetLegendaryUpgrade(6) > 0 && criticalHit) {               //legendary 6 (on-kill version)
+                    FindAnyObjectByType<BuffManager>().AddBuff("critdmg", 0.5f * slot.GetLegendaryUpgrade(6), 3);
+                    FindAnyObjectByType<BuffManager>().DispelDebuff();
+                    Debug.Log("Legendary | 6 (on-kill)");
+                }
+
+                if (slot.GetLegendaryUpgrade(7) > 0) {
+                    Instantiate(anemiaScreenBlastPrefab, slot.transform);           //legendary 7
+                    Debug.Log("Legendary | 7");
                 }
 
                 if (slot.GetLegendaryUpgrade(11) > 0) {                             //legendary 11
                     if (FindAnyObjectByType<Character>().currentHp > 10) {
                         bonusDropChance += (int) ((FindAnyObjectByType<Character>().currentHp - 10) * (0.05f * slot.GetLegendaryUpgrade(11)));
+                        Debug.Log("Legendary | 11, success");
                     }
+                    Debug.Log("Legendary | 11, failure");
                 }
                 
                 if (slot.GetLegendaryUpgrade(13) > 0) {                             //legendary 13
                     if (!FindAnyObjectByType<BuffManager>().IsBulwarkActive()) {
                         FindAnyObjectByType<BuffManager>().AddBuff("bulwark", 0, 5);
+                        Debug.Log("Legendary | 13");
                     }
                 }
                 enemy.DropMoney(bonusDropChance);
-                //end on-kill slot bonuses here
-            } else {                                                                //if the attack doesn't kill (do on-hit stuff instead)
-                //begin on-hit slot bonuses here
+                //ON-KILL slot bonuses END here
+            } else {                                                                //if the attack doesn't kill (do on-hit stuff instead):
+                //ON-HIT slot bonuses BEGIN here
                 if (slot.GetRareUpgrade(12) > 0 && enemy.IsAnemic()) {              //rare 12
                     FindAnyObjectByType<Character>().GainMoney(enemy.AnemiaSeverity());
                     Debug.Log("Rare | 12");
@@ -81,12 +110,20 @@ public class OnHitBonus : MonoBehaviour
                     }
                 }
 
-                if (slot.GetRareUpgrade(8) > 0) {                                   //rare 8
+                if (slot.GetRareUpgrade(8) > 0) {                                   //rare 8 (rare 7)
                     Character c = FindAnyObjectByType<Character>();
                     if (criticalHit) {
-                        c.Heal(damage *= (int) slot.CriticalDamage() / 10);
+                        if (slot.GetRareUpgrade(7) > 0) {
+                            c.Heal(damage *= ((int) slot.CriticalDamage() / 10) * (slot.GetRareUpgrade(7) * 2));
+                        } else {
+                            c.Heal(damage *= (int) slot.CriticalDamage() / 10);
+                        }
                     } else {
-                        c.Heal(damage / 10);
+                        if (slot.GetRareUpgrade(7) > 0) {
+                            c.Heal((damage / 10) * (slot.GetRareUpgrade(7) * 2));
+                        } else {
+                            c.Heal(damage / 10);
+                        }
                     }
                     Debug.Log("Rare | 8");
                 }
@@ -97,6 +134,11 @@ public class OnHitBonus : MonoBehaviour
                     Debug.Log("Rare | 11");
                 }
 
+                if (slot.GetRareUpgrade(13) > 0) {                                  //rare 13 (on-hit version)
+                    GameObject c = Instantiate(anemiaSpreadPrefab, enemy.transform.position, Quaternion.identity);
+                    c.transform.localScale *= slot.GetRareUpgrade(13);
+                }
+
                 if (slot.GetRareUpgrade(14) > 0 && appliedAnemia) {                 //rare 14
                     FindAnyObjectByType<BuffManager>().AddBuff("power", 0.2f * slot.GetRareUpgrade(14), 5f);
                     Debug.Log("Rare | 14");
@@ -105,41 +147,52 @@ public class OnHitBonus : MonoBehaviour
                 if (slot.GetLegendaryUpgrade(3) > 0) {                              //legendary 3
                     if (criticalHit) {
                         FindAnyObjectByType<Character>().GainMoney(FindAnyObjectByType<Character>().afterimages * 2);
+                        Debug.Log("Legendary | 3, crit");
                     } else {
                         FindAnyObjectByType<Character>().GainMoney(FindAnyObjectByType<Character>().afterimages);
+                        Debug.Log("Legendary | 4, normal");
                     }
                 }
                 
                 if (slot.GetLegendaryUpgrade(4) > 0 && criticalHit) {               //legendary 4 (on-hit version)
                     slot.RefundCooldown();
+                    Debug.Log("Legendary | 4 (on-hit)");
                 }
 
                 if (slot.GetLegendaryUpgrade(5) > 0 && criticalHit) {               //legendary 5 (on-hit version)
                     FindAnyObjectByType<Character>().GainMoney(damage / 20);
+                    Debug.Log("Legendary | 5 (on-hit)");
                 }
 
                 if (slot.GetLegendaryUpgrade(6) > 0 && criticalHit) {               //legendary 6 (on-hit version)
                     FindAnyObjectByType<BuffManager>().AddBuff("critdmg", 0.5f * slot.GetLegendaryUpgrade(6), 3);
+                    FindAnyObjectByType<BuffManager>().DispelDebuff();
+                    Debug.Log("Legendary | 6 (on-hit)");
                 }
 
                 if (slot.GetLegendaryUpgrade(8) > 0 && appliedAnemia) {             //legendary 8
                     enemy.AnemicShock();
+                    Debug.Log("Legendary | 8");
                 }
 
                 if (slot.GetLegendaryUpgrade(10) > 0 && enemy.IsAnemic()) {         //legendary 10
                     if (enemy.GetHealth() <= (enemy.maxHP / 2)) {
                         enemy.AnemicTorture();
+                        Debug.Log("Legendary | 10");
                     }
                 }
 
                 if (slot.GetLegendaryUpgrade(12) > 0) {                             //legendary 12
                     if (FindAnyObjectByType<Character>().currentHp > 10) {
                         enemy.ApplySlow((float) ((FindAnyObjectByType<Character>().currentHp - 10) * 0.01f), 3);
+                        Debug.Log("Legendary | 12");
                     }
                 }
-                //end on-hit slot bonuses here
+                //ON-HIT slot bonuses END here
             }
-            enemy.TakeDamage(damage);
+            if (enemy != null) {
+                enemy.TakeDamage(damage);
+            }
         }
     }
 }

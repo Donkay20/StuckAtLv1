@@ -16,8 +16,13 @@ public class DamageNumber : MonoBehaviour
 
     public void Setup(int damage, string additionalStatus, bool crit, bool anemic) {
         damageNumber.text = damage.ToString();
-        if (crit) {damageNumber.text += "!";}
         additionalText.text = additionalStatus;
-        if (anemic) {damageNumber.color = Color.green;}
+        if (crit) {
+            damageNumber.text += "!";
+            damageNumber.color = Color.yellow;
+        }
+        if (anemic) {
+            damageNumber.color = Color.green;
+        }
     }
 }
