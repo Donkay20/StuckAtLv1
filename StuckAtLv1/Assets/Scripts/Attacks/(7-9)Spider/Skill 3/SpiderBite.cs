@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class SpiderBite : MonoBehaviour
 {
-    private int damage; //damage will also affect the poison dmg
-    private readonly float BASE_DURATION = 5; //duration will increase the duration of the anemic effect
-    private float timer = 1f;
-    private Slot parent;
-    private BuffManager buffManager;
     [SerializeField] private Sprite spiderBite;
+    private readonly int SPIDERBITE_BASE_DMG = 1;
+    private readonly float SPIDERBITE_BASE_ANEMIA_DURATION = 5f; //duration will ALSO increase the duration of the anemic effect
+    private readonly float SPIDERBITE_BASE_DURATION = 1f;
+    private int damage; //damage will also affect the poison dmg
+    private float timer;
+    private float size;
+    private Slot slot;
+    private BuffManager buffManager;
+    AttackSlotBonus asb;
+    
     void Start() {
-        GetComponent<SpriteRenderer>().sprite = spiderBite;
         FaceMouse();
-        parent = GetComponentInParent<Slot>();
+        GetComponent<SpriteRenderer>().sprite = spiderBite;
+        slot = GetComponentInParent<Slot>();
         buffManager = FindAnyObjectByType<BuffManager>();
-        buffManager.AddBuff("speed", 0.9f, 1f * (1 + parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f)); //duration of spd buff affected by duration
+        asb = FindAnyObjectByType<AttackSlotBonus>();
 
-        float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
-        transform.localScale = new Vector2(0.5f * scalingFactor, 0.5f * scalingFactor);
+        buffManager.AddBuff("speed", 0.9f, asb.GetDurationBonus(slot, SPIDERBITE_BASE_DURATION)); //duration of spd buff affected by duration
 
-        //apply duration bonus
-        timer *= 1 + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
-        Debug.Log("timer: " + timer);
-
-        damage = (int)(1 * (5+(parent.GetCommonUpgrade(0)*0.2f + parent.GetRareUpgrade(0)*0.4f + parent.GetLegendaryUpgrade(0)*0.6f)));
-        Debug.Log("damage: " + damage);
+        size = asb.GetSizeBonus(slot); transform.localScale = new Vector2(0.5f * size, 0.5f * size);
+        timer = asb.GetDurationBonus(slot, SPIDERBITE_BASE_DURATION);
+        damage = asb.GetDamageBonus(slot, SPIDERBITE_BASE_DMG);
     }
 
     void Update() {
@@ -35,12 +36,12 @@ public class SpiderBite : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col) {
+    private void OnTriggerEnter2D(Collider2D col) { //applies anemia by default
         Enemy enemy = col.GetComponent<Enemy>();
         if (enemy != null) {
-            enemy.ApplyAnemia(damage / 2, BASE_DURATION + parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
-            enemy.TakeDamage(damage);   
+            enemy.ApplyAnemia(damage / 2, asb.GetDurationBonus(slot, SPIDERBITE_BASE_ANEMIA_DURATION));
         }
+        FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);
     }
 
     private void FaceMouse() {

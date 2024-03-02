@@ -26,8 +26,8 @@ public class AttackSlotBonus : MonoBehaviour
 
     public float GetDurationBonus(Slot s, float baseDuration) {
         float duration = baseDuration;
-        duration *= 1 + s.GetCommonUpgrade(2)*0.2f;         //common 2
-        duration += 1 + s.GetRareUpgrade(1)*0.2f;           //rare 1
+        duration *= 1 + s.GetCommonUpgrade(2)*0.2f;                 //common 2
+        duration *= 1 + s.GetRareUpgrade(1)*0.2f;                   //rare 1
         return duration;
     }
 }

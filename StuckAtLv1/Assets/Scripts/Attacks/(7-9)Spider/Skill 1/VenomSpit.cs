@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class VenomSpit : MonoBehaviour
 {
-    private int damage; //damage will also affect the poison dmg
-    private readonly float BASE_DURATION = 5; //duration will increase the duration of the anemic effect, rather than the attack's staying power itself.
-    private float timer = 0.5f;
-    private Slot parent;
     [SerializeField] private Sprite triangle;
+    AttackSlotBonus asb;
+    private Slot slot;
+    private readonly int VENOMSPIT_BASE_DAMAGE = 1;
+    private readonly float VENOMSPIT_BASE_DURATION = 5; //duration will increase the duration of the anemic effect, rather than the attack's staying power itself.
+    private float timer = 0.5f; //this is a constant that needs to be mutable
+    private int damage; //damage will also affect the poison dmg
+    private float size;
 
     void Start() {
-        //GetComponent<SpriteRenderer>().sprite = triangle;
         FaceMouse();
-        parent = GetComponentInParent<Slot>();
+        slot = GetComponentInParent<Slot>();
+        asb = FindAnyObjectByType<AttackSlotBonus>();
 
-        float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
-        transform.localScale = new Vector2(2 * scalingFactor, 2 * scalingFactor);
-
-        damage = (int)(1 * (1+(parent.GetCommonUpgrade(0)*0.2f + parent.GetRareUpgrade(0)*0.4f + parent.GetLegendaryUpgrade(0)*0.6f)));
-        Debug.Log("damage: " + damage);
+        size = asb.GetSizeBonus(slot);
+        transform.localScale = new Vector2(2 * size, 2 * size); //base size is 200%
+        damage = asb.GetDamageBonus(slot, VENOMSPIT_BASE_DAMAGE);
     }
 
     
@@ -30,12 +31,12 @@ public class VenomSpit : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col) {
+    private void OnTriggerEnter2D(Collider2D col) { //applies anemia by default
         Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null) {
-            enemy.ApplyAnemia(damage, BASE_DURATION + parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
-            enemy.TakeDamage(damage);   
+        if (enemy != null) {                        
+            enemy.ApplyAnemia(damage, asb.GetDurationBonus(slot, VENOMSPIT_BASE_DURATION));  
         }
+        FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);
     }
 
     private void FaceMouse() {
@@ -44,7 +45,7 @@ public class VenomSpit : MonoBehaviour
         Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         transform.up = -direction;
         float offsetDistance = 0.5f;
-        Vector3 offsetPosition = transform.position + (Vector3)direction * offsetDistance;
+        Vector3 offsetPosition = transform.position + (Vector3) direction * offsetDistance;
         transform.position = offsetPosition;
     }
 }

@@ -4,35 +4,36 @@ using UnityEngine;
 
 public class BoneSpikes : MonoBehaviour
 {
-    private float timer = 0.4f; private float baseTime = 0.4f;
+    private float timer; private float baseTime;
     Rigidbody2D rb;
     Vector2 baseVelocity;
-    Slot parent;
+    Slot slot;
     private Vector3 mousePosition;
     private Camera mainCamera;
     private float speed = 10;
     private int damage;
+    private readonly int BONESPIKES_BASE_DMG = 5;
+    private readonly float BONESPIKES_BASE_TIMER = 0.4f;
+
+    private float size;
     void Start() {
         FaceMouse();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
-        parent = FindAnyObjectByType<AttackSpawner>().GetParent();
+        slot = FindAnyObjectByType<AttackSpawner>().GetParent();
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePosition - transform.position;
         rb.velocity = direction.normalized * speed;
         baseVelocity = rb.velocity;
+        AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
 
-        float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
-        transform.localScale = new Vector2(scalingFactor, scalingFactor);
+        damage = asb.GetDamageBonus(slot, BONESPIKES_BASE_DMG);
 
-        //apply duration bonus
-        timer *= 1 + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
+        size = asb.GetSizeBonus(slot);
+        transform.localScale = new Vector2(size, size);
+
+        timer = asb.GetDurationBonus(slot, BONESPIKES_BASE_TIMER);
         baseTime = timer;
-        Debug.Log("timer: " + timer);
-
-        //apply damage bonus
-        damage = (int)(5 * (1+(parent.GetCommonUpgrade(0)*0.2f + parent.GetRareUpgrade(0)*0.4f + parent.GetLegendaryUpgrade(0)*0.6f)));
-        Debug.Log("damage: " + damage);
     }
 
     void Update() {
@@ -42,8 +43,8 @@ public class BoneSpikes : MonoBehaviour
         }
         rb.velocity = baseVelocity * (timer/baseTime);
     }
-    private void FaceMouse()
-    {
+    
+    private void FaceMouse() {
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
@@ -53,8 +54,6 @@ public class BoneSpikes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col) {
         Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null) {
-            enemy.TakeDamage(damage);   //if a modifier increases damage, it would call back to the parent slot and acquire the modifier for calculation
-        }
+        FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);
     }
 }

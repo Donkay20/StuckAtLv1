@@ -278,14 +278,14 @@ public class Slot : MonoBehaviour
     4.  Critical chance +10%                            - OK
     5.  Damage buff +5%, 3s duration                    - OK
     6.  Critical damage +20%                            - OK
-    7.  Inflict slow -20%, 3s duration                  - atk1 done
+    7.  Inflict slow -20%, 3s duration                  - OK
     8.  Movement speed buff (+10%), 3s duration         - OK
     9.  +1 max skill usage                              - OK
-    10. 50% chance of inflicting Anemia                 - atk1 done
+    10. 50% chance of inflicting Anemia                 - OK
     11. Knockback nearby enemies                        - todo
-    12. Treasure Chest spawn chance ON KILL + 5%        - atk1 done
-    13. Gold ON KILL +5                                 - atk1 done
-    14. Debuff cleanse ON KILL +1                       - atk1 done
+    12. Treasure Chest spawn chance ON KILL + 5%        - OK
+    13. Gold ON KILL +5                                 - OK
+    14. Debuff cleanse ON KILL +1                       - OK
 
     Rare: 
     0.  -10% Dash cooldown                              - OK
@@ -296,29 +296,29 @@ public class Slot : MonoBehaviour
     5.  Movement speed +5% * afterimages                - OK
     6.  Turn overheal to gold                           - OK
     7.  x2 overhealing                                  - todo
-    8.  Overheal for 10% of dmg dealt                   - atk1 done
+    8.  Overheal for 10% of dmg dealt                   - OK
     9.  Bonus dmg = 10% of HP                           - OK
     10. Overheal = +size%                               - OK
-    11. Inflict Anemia on-hit, 10s                      - atk1 done
-    12. Hitting anemic enemy = +gold                    - atk1 done
+    11. Inflict Anemia on-hit, 10s                      - OK
+    12. Hitting anemic enemy = +gold                    - OK
     13. Anemia spread                                   - todo
-    14. Anemia inflict = +20% dmg boost                 - atk1 done
+    14. Anemia inflict = +20% dmg boost                 - OK
 
     Legendary:
     0.  Enemy explodes on-kill                          - todo
-    1.  +1 skill usage on-kill                          - atk1 done
+    1.  +1 skill usage on-kill                          - OK
     2.  Skill upgrade spread                            - todo
-    3.  +Gold = afterimages on-hit (2x for crit)        - atk1 done
-    4.  Crit = cd refund                                - atk1 done
-    5.  Crit = +gold, kill = ++gold                     - atk1 done
-    6.  Crit = +crit dmg buff                           - atk1 done
+    3.  +Gold = afterimages on-hit (2x for crit)        - OK
+    4.  Crit = cd refund                                - OK
+    5.  Crit = +gold, kill = ++gold                     - OK
+    6.  Crit = +crit dmg buff                           - OK
     7.  Damage all anemic enemies on use or on kill     - todo
-    8.  Anemia on anemic enemy = anemic shock           - atk1 done
+    8.  Anemia on anemic enemy = anemic shock           - OK
     9.  Attack = bloodsucker (anemia dmg = overheal)    - OK
-    10. Doubles anemic duration if anemic               - atk1 done
-    11. kill = treasure chest spawn chance% * overheal% - atk1 done
-    12. dmg = slow (scales with overhealth)             - atk1 done
-    13. kill = bulwark buff (drain reversed)            - atk1 done
+    10. Doubles anemic duration if anemic               - OK
+    11. kill = treasure chest spawn chance% * overheal% - OK
+    12. dmg = slow (scales with overhealth)             - OK
+    13. kill = bulwark buff (drain reversed)            - OK
     14. if hp>gold, hp=gold and gold += hplost*10       - OK
 
     */

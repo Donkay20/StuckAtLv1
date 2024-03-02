@@ -5,19 +5,20 @@ using UnityEngine;
 public class SpinningSlashSword : MonoBehaviour
 {
     private Slot slot;
+    private readonly int KNIGHTSWORD_BASE_DAMAGE = 25;
     private int damage;
+    private float size;
 
     public void Activate(Slot s) {
         slot = s;
-        damage = (int) (25 * (1+(slot.GetCommonUpgrade(0)*0.2f + slot.GetRareUpgrade(0)*0.4f + slot.GetLegendaryUpgrade(0)*0.6f)));
-        float scalingFactor = 1 + slot.GetCommonUpgrade(1)*0.2f + slot.GetRareUpgrade(1)*0.3f + slot.GetLegendaryUpgrade(1)*0.4f;
-        transform.localScale = new Vector2(scalingFactor, scalingFactor);
+        AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
+
+        damage = asb.GetDamageBonus(slot, KNIGHTSWORD_BASE_DAMAGE);
+        size = asb.GetSizeBonus(slot); transform.localScale = new Vector2(size, size);
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
         Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null) {
-            enemy.TakeDamage(damage);   //if a modifier increases damage, it would call back to the parent slot and acquire the modifier for calculation
-        }
+        FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);
     }
 }
