@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class SoulsOfTheDamned : MonoBehaviour
 {
-    private Slot parent;
-    private float duration = 5f;
+    private Slot slot;
+    private readonly float SOULS_BASE_DURATION = 5f;
+    private float duration;
     private float refreshTimer = 0.05f;
     [SerializeField] private GameObject miniGhost;
 
     void Start() {
-        parent = GetComponentInParent<Slot>();
-        duration *= 1 + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
+        slot = GetComponentInParent<Slot>();
+        AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
+
+        duration = asb.GetDurationBonus(slot, SOULS_BASE_DURATION);
     }
 
     void Update()
@@ -23,12 +26,8 @@ public class SoulsOfTheDamned : MonoBehaviour
 
         refreshTimer -= Time.deltaTime;
         if (refreshTimer <= 0) {
-            Instantiate(miniGhost, parent.transform);
+            Instantiate(miniGhost, slot.transform);
             refreshTimer = 0.05f;
         }
-    }
-
-    public Slot GetSlot() {
-        return parent;
     }
 }

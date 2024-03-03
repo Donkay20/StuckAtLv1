@@ -13,8 +13,7 @@ public class SlotManager : MonoBehaviour
     public KeyCode slotKey1, slotKey2, slotKey3, slotKey4, slotKey5;
     [SerializeField] private Slot slot1, slot2, slot3, slot4, slot5;
     private int slotNum = 1;
-    private int maxSlots;
-
+    [SerializeField] private int maxSlots;
     [SerializeField] private GameObject[] slots;
     [SerializeField] private Sprite[] onSpriteList;
     [SerializeField] private Sprite[] offSpriteList;
@@ -56,36 +55,32 @@ public class SlotManager : MonoBehaviour
         if (Input.GetKeyDown(slotKey1)) {
             slotNum = 1;
             AnimationControl(slots[0], 0);
-            //Debug.Log("Slot 1 pressed.");
-            //slot1.Engage();
         }
 
         if (Input.GetKeyDown(slotKey2)) {
             slotNum = 2;
             AnimationControl(slots[1], 1);
-            //Debug.Log("Slot 2 pressed.");
-            //slot2.Engage();
         }
 
-        if (Input.GetKeyDown(slotKey3)) {
+        if (maxSlots >= 3) {
+            if (Input.GetKeyDown(slotKey3)) {
             slotNum = 3;
             AnimationControl(slots[2], 2);
-            //Debug.Log("Slot 2 pressed.");
-            //slot2.Engage();
+            }
         }
-
-        if (Input.GetKeyDown(slotKey4)) {
+        
+        if (maxSlots >= 4) {
+            if (Input.GetKeyDown(slotKey4)) {
             slotNum = 4;
             AnimationControl(slots[3], 3);
-            //Debug.Log("Slot 2 pressed.");
-            //slot2.Engage();
+            }
         }
-
-        if (Input.GetKeyDown(slotKey5)) {
+        
+        if (maxSlots == 5) {
+            if (Input.GetKeyDown(slotKey5)) {
             slotNum = 5;
             AnimationControl(slots[4], 4);
-            //Debug.Log("Slot 2 pressed.");
-            //slot2.Engage();
+            }
         }
     }
     
@@ -118,6 +113,38 @@ public class SlotManager : MonoBehaviour
         slot.transform.GetChild(1).GetComponent<Image>().sprite = onSpriteList[spriteNumOn];
     }
 
+    public void RareTwoCooldownCut(int identity, int intensity) {       //rare 2
+        for (int i = 0; i < maxSlots; i++) {
+            switch (i) {
+                case 0:
+                    if (identity != i) {
+                        slot1.CutCooldown(intensity);
+                    }
+                    break;
+                case 1:
+                    if (identity != i) {
+                        slot2.CutCooldown(intensity);
+                    }
+                    break;
+                case 2:
+                    if (identity != i) {
+                        slot3.CutCooldown(intensity);
+                    }
+                    break;
+                case 3:
+                    if (identity != i) {
+                        slot4.CutCooldown(intensity);
+                    }
+                    break;
+                case 4:
+                    if (identity != i) {
+                        slot5.CutCooldown(intensity);
+                    }
+                    break;
+            }
+        }
+    }
+
     private void TurnOffSlots() {
         if(slotNum != 1) {
             slots[0].GetComponent<Animator>().SetTrigger("Hit2");
@@ -145,8 +172,31 @@ public class SlotManager : MonoBehaviour
         }
     }
 
-    private void IncreaseMaxSlots() {
-        maxSlots++;
-        slots[maxSlots].SetActive(true);
+    public void IncreaseMaxSlots() {
+        if (maxSlots < 5) {
+            maxSlots++;
+            slots[maxSlots-1].SetActive(true);
+            switch (maxSlots) {
+                case 3:
+                    slot3.gameObject.SetActive(true);
+                    slots[0].transform.Translate(-1.3f, 0, 0);
+                    slots[1].transform.Translate(-1.3f, 0, 0);
+                    break;
+                case 4:
+                    slot4.gameObject.SetActive(true);
+                    slots[0].transform.Translate(-1.3f, 0, 0);
+                    slots[1].transform.Translate(-1.3f, 0, 0);
+                    slots[2].transform.Translate(-1.3f, 0, 0);
+                    break;
+                case 5:
+                    slot5.gameObject.SetActive(true);
+                    slots[0].transform.Translate(-1.3f, 0, 0);
+                    slots[1].transform.Translate(-1.3f, 0, 0);
+                    slots[2].transform.Translate(-1.3f, 0, 0);
+                    slots[3].transform.Translate(-1.3f, 0, 0);
+                    break;
+            }
+        }
+        Debug.Log("Slot Manager: Maximum slots increased to " + maxSlots + ". Process successful.");
     }
 }

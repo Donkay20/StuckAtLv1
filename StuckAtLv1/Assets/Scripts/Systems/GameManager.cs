@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +6,6 @@ public class GameManager : MonoBehaviour
 /*
 This class manages gameflow. We go from state to state to connect each portion of the game to each other.
 Ideally, we should only need these eight states, plus any cutscenes in the middle we need to play for lore purposes.
-
 All UI is in the canvas.
 There are separate combat, map, event, and upgrade scripts that manage each event individually and report back to this script.
 */
@@ -39,15 +34,16 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private GameState currentState;
     private GameState previousState;
     private int scaling;
+    private float shopDamageBonus;
     private int[] slotUpgrades = new int[5];
     private int[] weight = new int[5];
     private int maxSlots;
-    private bool slotEquilibrium, updateSlotProtocol;
-    void Start() //default to the map when the game launches.
-    {
+    private bool slotEquilibrium;
+    void Start() {      //default to the map when the game launches.
         previousState = GameState.Map;
         currentState = GameState.Map;
-        maxSlots = 2; //default amt of slots
+        maxSlots = 2;   //default amt of slots
+        shopDamageBonus = 1;
         UpdateState();
     }
 
@@ -56,7 +52,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         Updates the game's state, aptly named. 
         The last line before the break for each state change switches the previous state to the current state to reference for the next one after that.
         */
-        
         switch(currentState) {
             //non map focused
             case GameState.Map: //MAP STATE
@@ -256,6 +251,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             if (mapManager.GetLevel() == 11) {
                                 SceneManager.LoadScene("RuinsBossEnd", LoadSceneMode.Additive);
+                                UpdateSlotProtocol(); //+1 max slots, total 3.
                             }
                             break;
                         case 2:
@@ -266,7 +262,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             break;
                     }
                 }
-
                 previousState = GameState.Dialogue;
                 Debug.Log("dialogue state");
                 break;
@@ -317,12 +312,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         return scaling;
     }
 
-    public void AddMaxSlots() {
-        updateSlotProtocol = true;
-        //todo, make all scenes active and update all of them here
-        maxSlots++;
-    }
-
     public void AdjustSlotUpgradeCounter(int identity) {
         //gamemanager holds the amt of upgrades for each slot.
         slotUpgrades[identity-1] += 1;
@@ -330,7 +319,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         CalculateWeight();
     }
 
-    private void CalculateWeight() {
+    public void CalculateWeight() {
         int minValue = slotUpgrades[0];
         int maxValue = slotUpgrades[0];
 
@@ -361,5 +350,29 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
     public bool GetEquilibriumCheck() {
         return slotEquilibrium;
+    }
+
+    public float GetShopDamageBonus() {
+        return shopDamageBonus;
+    }
+
+    public void UpgradeShopDamageBonus() {
+        shopDamageBonus += 0.01f;
+    }
+
+    private void UpdateSlotProtocol() {
+        maxSlots++;
+
+        upgradeUI.SetActive(true); 
+        upgradeUI.GetComponent<UpgradeManager>().IncreaseMaxSlots(); 
+        upgradeUI.SetActive(false);
+
+        combat.SetActive(true); combatUI.SetActive(true); 
+        slotManager.IncreaseMaxSlots(); 
+        combat.SetActive(false); combatUI.SetActive(false);
+
+        mapUI.SetActive(true);
+        mapManager.NewWorld();
+        mapUI.SetActive(false);
     }
 }

@@ -34,9 +34,7 @@ public class MapManager : MonoBehaviour
         level = 0;
         section = 2;
 
-        foreach (Room r in rooms) {
-            GiveRoom(r);
-        }
+        foreach (Room r in rooms) {GiveRoom(r);}
 
         InitializeButtons();
 
@@ -401,11 +399,8 @@ public class MapManager : MonoBehaviour
         world++;
         level = 0;
         section = 2;
-        manager.AddMaxSlots();
 
-        foreach (Room r in rooms) {
-            GiveRoom(r);
-        }
+        foreach (Room r in rooms) {GiveRoom(r);}
 
         startingRoom.AssignRoomType("combat"); startingRoom.GetComponent<Image>().sprite = combatImage;
         minibossRoom.AssignRoomType("dialogue"); minibossRoom.GetComponent<Image>().sprite = miniBossImage;

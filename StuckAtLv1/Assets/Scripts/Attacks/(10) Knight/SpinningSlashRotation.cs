@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpinningSlashRotation : MonoBehaviour
 {
     [SerializeField] private SpinningSlashSword sword;
-    private float duration = 2f;
+    private float KNIGHTSWORD_BASE_DURATION = 2f;
+    private float duration;
     private Slot slot;
     void Start() {
         slot = GetComponentInParent<Slot>();
+        AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
         sword.Activate(slot);
-        duration *= 1 + (slot.GetCommonUpgrade(2)*0.2f + slot.GetRareUpgrade(2)*0.4f + slot.GetLegendaryUpgrade(2)*0.6f);
+        duration = asb.GetDurationBonus(slot, KNIGHTSWORD_BASE_DURATION);
     }
 
     void Update() {

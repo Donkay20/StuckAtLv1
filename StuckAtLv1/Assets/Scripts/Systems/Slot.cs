@@ -30,6 +30,7 @@ public class Slot : MonoBehaviour
     private int[] rareUpgrades = new int[15];
     private int[] legendaryUpgrades = new int[15];
     [SerializeField] private Character character;
+    [SerializeField] private Movement movement;
     [SerializeField] private Image skillImage;                          
     //display for the skill image on the UI
     [SerializeField] private TextMeshProUGUI uIText;                    
@@ -43,6 +44,9 @@ public class Slot : MonoBehaviour
     [SerializeField] private Transform bulletTransform;
     [SerializeField] private GameManager gameManager;
     [SerializeField] private SlotManager slotManager;
+    [SerializeField] private BuffManager buffManager;
+    [SerializeField] private GameObject anemiaScreenBlastPrefab;
+    [SerializeField] private GameObject knockbackCirclePrefab;
 
     private void Start() {
         absorbBulletAvailable = true;
@@ -63,12 +67,11 @@ public class Slot : MonoBehaviour
             } else {
                 cooldownValueText.text = activeCD.ToString("f1");
             }
-            cooldownFill.fillAmount = activeCD/cooldown*cooldownModifier;
+            cooldownFill.fillAmount = activeCD / cooldown * cooldownModifier;
         } else {
             coolingDown = false; cooldownValueText.gameObject.SetActive(false);
         }
     }
-    
 
     public int Identity { get => identity; set => identity = value; }                                           
     //slot number, assigned by SlotManager class
@@ -87,16 +90,85 @@ public class Slot : MonoBehaviour
                 //the absoption bullet class will set this value back to true when it dissipates
             } else {
                 Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform); 
-                //launches the skill, positioned from the player. more checks will need to be added as the player gets more types of skills.
 
-                //-beginning of slot effects-
+                //-BEGIN slot effects-
                 if (containsSkill) {
-                    character.Heal((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3]));
-                }
-                Debug.Log("Heal applied: " + ((5 * commonUpgrades[3]) + (7 * rareUpgrades[3]) + (10 * legendaryUpgrades[3])));
-                //Apply overheal on cast (Upgrade 3)
+                    if (commonUpgrades[3] > 0) {                                        //common 3 (rare 7)
+                        if (rareUpgrades[7] > 0) {
+                            character.Heal(commonUpgrades[3] * 3 * (rareUpgrades[7] * 2));  
+                        } else {
+                            character.Heal(commonUpgrades[3] * 3);
+                        }
+                        Debug.Log("Common | 3");
+                    }
 
-                //-end of slot effects-
+                    if (commonUpgrades[5] > 0) {                                        //common 5
+                        buffManager.AddBuff("power", commonUpgrades[5] * 0.05f, 3f);
+                        Debug.Log("Common | 5");
+                    }
+
+                    if (commonUpgrades[8] > 0) {                                        //common 8
+                        buffManager.AddBuff("speed", commonUpgrades[8] * 0.1f, 3f);
+                        Debug.Log("Common | 8");
+                    }
+
+                    if (commonUpgrades[11] > 0) {                                       //common 11
+                        Instantiate(knockbackCirclePrefab, this.transform);
+                        Debug.Log("Common | 11");
+                    }
+
+                    if (rareUpgrades[0] > 0) {                                          //rare 0
+                        movement.ActiveDashCD -= movement.ActiveDashCD * rareUpgrades[0] * 0.1f;
+                        Debug.Log("Rare | 0");
+                    }
+
+                    if (rareUpgrades[2] > 0) {                                          //rare 2
+                        FindAnyObjectByType<SlotManager>().RareTwoCooldownCut(identity, rareUpgrades[2]);
+                        Debug.Log("Rare | 2");
+                    }
+
+                    if (rareUpgrades[5] > 0 && character.afterimages > 0) {             //rare 5
+                        buffManager.AddBuff("speed", rareUpgrades[5] * (0.05f * character.afterimages), 5f);
+                        Debug.Log("Rare | 5");
+                    }
+
+                    if (rareUpgrades[6] > 0) {                                          //rare 6
+                        if (character.currentHp > 10) {
+                            int goldGain = character.currentHp - 10;
+                            character.TakeDamage(goldGain);
+                            character.GainMoney(goldGain * rareUpgrades[6]);
+                            Debug.Log("Rare | 6, success");
+                        } else {
+                            Debug.Log("Rare | 6, failure");
+                        }
+                    }  
+
+                    if (legendaryUpgrades[7] > 0) {                                     //legendary 7
+                        Instantiate(anemiaScreenBlastPrefab, this.transform);
+                        Debug.Log("Legendary | 7 (on-cast)");
+                    }
+
+                    if (legendaryUpgrades[9] > 0) {                                     //legendary 9
+                        if (!buffManager.IsBloodsuckerActive()) {
+                            buffManager.AddBuff("bloodsucker", 0, 3);
+                            Debug.Log("Legendary | 9, success");
+                        } else {
+                            Debug.Log("Legendary | 9, fail");
+                        }
+                    }
+
+                    if (legendaryUpgrades[14] > 0) {                                    //legendary 14
+                        if (character.currentHp - 10 > character.money) {
+                            int goldGain = character.currentHp - 10 - character.money;
+                            character.TakeDamage(goldGain);
+                            character.GainMoney((goldGain*10) * legendaryUpgrades[14]);
+                            Debug.Log("Legendary | 14, success");
+                        } else {
+                            Debug.Log("Legendary | 14, fail");
+                        }
+                    }
+                }
+                //-END slot effects-
 
                 if (skillUses > 0) {
                     skillUses--;
@@ -111,8 +183,8 @@ public class Slot : MonoBehaviour
                     containsSkill = false;
                     skillImage.sprite = attack[0].GetComponent<SpriteRenderer>().sprite;
                     skillID = 0; skillUses = 0; cooldown = 0;
+                    //if skill has run out of uses, reset everything
                 }
-                //if skill has run out of uses, reset everything
             }
         }                                                                                 
     }
@@ -128,26 +200,46 @@ public class Slot : MonoBehaviour
     public void AcquireSkill(int ID, int uses, float cd) {    //calls to this method require the ID of the skill and the amt of base uses the skill has.
         if(ID != 0) {
             skillID = ID;
-            skillUses = uses;           //for slot buffs that add more uses, a modifier would be applied here
+            skillUses = uses;
             cooldown = cd;
             skillImage.sprite = attack[ID].GetComponent<SpriteRenderer>().sprite;
             uIText.text = skillUses.ToString();
             containsSkill = true;
+
+            //start of slot bonuses
+            skillUses += commonUpgrades[9];
+            //end of slot bonuses
         }
     }
 
-    public void ApplySlotUpgrade(string rarity, int upgrade) {
+    public int SkillUses() {
+        return skillUses;
+    }
+
+    public void GetSkillUses() {
+        skillUses++;
+    }
+
+    public void RefundCooldown() {                      //legendary 4
+        activeCD = 0.01f;
+    }
+
+    public void CutCooldown(int intensity) {            //rare 2
+        activeCD -= cooldown * (0.1f * intensity);
+    }
+
+    public void ApplySlotUpgrade(string rarity, int ID) {
         switch(rarity) {
             case "common":
-                commonUpgrades[upgrade]++;
+                commonUpgrades[ID]++;
                 Debug.Log("Common upgrade applied." );
                 break;
             case "rare":
-                rareUpgrades[upgrade]++;
+                rareUpgrades[ID]++;
                 Debug.Log("Rare upgrade applied.");;
                 break;
             case "legendary":
-                legendaryUpgrades[upgrade]++;
+                legendaryUpgrades[ID]++;
                 Debug.Log("Legendary upgrade applied.");
                 break;
         }
@@ -186,50 +278,94 @@ public class Slot : MonoBehaviour
         return legendaryUpgrades[upgrade];
     }
 
-    public bool CriticalHit(Slot slot) {
-        bool isCrit = false; int critChance = 5;
-        //apply crit bonuses here, todo
-        if (Random.Range(1,101) <= critChance) {isCrit = true;}
+    public bool CriticalHit() {
+        bool isCrit = false; int critChance = 5;        //base crit chance is 5%
+
+        //critical hit chance bonuses start here
+        critChance += commonUpgrades[4] * 10;           //common 4
+        if (rareUpgrades[3] > 0) {                      //rare 3
+            if (character.currentHp <= 10) {
+                critChance += 50 * rareUpgrades[3];
+            }
+        }
+        //critical hit chance bonuses end here
+
+        if (Random.Range(1,101) <= critChance) {isCrit = true;}     //calculate crit odds
+
+        //bonuses upon crit begin here
+        if (rareUpgrades[4] > 0) {                      //rare 4
+            if (character.currentHp <= 10) {
+                character.GainAfterimage(1);
+            }
+        }
+        //bonuses upon crit end here
         return isCrit;
     }
 
-    /*
-    List of upgrades (demo):
-    Common: 
-    0. Damage +20%
-    1. Size +20%
-    2. Duration +20%
-    3. Overheal +5
+    public float CriticalDamage() {
+        float critDmg = 2;                              //critical strikes do 200% dmg at base
 
-    Rare:
-    0. Damage +40%
-    1. Size +30%
-    2. Duration +40%
-    3. Overheal +7
+        //crit damage bonuses start here
+        critDmg += commonUpgrades[6] * 0.2f;            //common 6
+        critDmg += character.CriticalDamageModifier;    //buffs
+        //crit damage bonuses end here
+
+        return critDmg;
+    }
+
+    /*
+
+    List of upgrades:
+    Common: 
+    0.  Damage +10%                                     - OK
+    1.  Size +5%                                        - OK
+    2.  Duration +20%                                   - OK
+    3.  Overheal +3                                     - OK
+    4.  Critical chance +10%                            - OK
+    5.  Damage buff +5%, 3s duration                    - OK
+    6.  Critical damage +20%                            - OK
+    7.  Inflict slow -20%, 3s duration                  - OK
+    8.  Movement speed buff (+10%), 3s duration         - OK
+    9.  +1 max skill usage                              - OK
+    10. 50% chance of inflicting Anemia                 - OK
+    11. Knockback nearby enemies                        - OK
+    12. Treasure Chest spawn chance ON KILL + 5%        - OK
+    13. Gold ON KILL +5                                 - OK
+    14. Debuff cleanse ON KILL +1                       - OK
+
+    Rare: 
+    0.  -10% Dash cooldown                              - OK
+    1.  Size +5%, Damage +10%, Duration +20%            - OK
+    2.  Cooldown of other slots -10%                    - OK
+    3.  No overheal = +50% crit chance                  - OK
+    4.  No overheal = crit = +1 afterimage              - OK
+    5.  Movement speed +5% * afterimages                - OK
+    6.  Turn overheal to gold                           - OK
+    7.  x2 overhealing                                  - OK
+    8.  Overheal for 10% of dmg dealt                   - OK
+    9.  Bonus dmg = 10% of HP                           - OK
+    10. Overheal = +size%                               - OK
+    11. Inflict Anemia on-hit, 10s                      - OK
+    12. Hitting anemic enemy = +gold                    - OK
+    13. Anemia spread                                   - OK
+    14. Anemia inflict = +20% dmg boost                 - OK
 
     Legendary:
-    0. Damage +60%
-    1. Size +40%
-    2. Duration +60%
-    3. Overheal +10
-    */
+    0.  Enemy explodes on-kill                          - OK
+    1.  +1 skill usage on-kill                          - OK
+    2.  Skill upgrade spread                            - OK
+    3.  +Gold = afterimages on-hit (2x for crit)        - OK
+    4.  Crit = cd refund                                - OK
+    5.  Crit = +gold, kill = ++gold                     - OK
+    6.  Crit = +crit dmg buff                           - OK
+    7.  Damage all anemic enemies on use or on kill     - OK
+    8.  Anemia on anemic enemy = anemic shock           - OK
+    9.  Attack = bloodsucker (anemia dmg = overheal)    - OK
+    10. Doubles anemic duration if anemic               - OK
+    11. kill = treasure chest spawn chance% * overheal% - OK
+    12. dmg = slow (scales with overhealth)             - OK
+    13. kill = bulwark buff (drain reversed)            - OK
+    14. if hp>gold, hp=gold and gold += hplost*10       - OK
 
-    /*
-    List of real upgrades:
-    0. Attacks [from this slot] increase in size by 5%.
-    1. Attacks [from this slot] increase in damage by 10%.
-    2. Attacks [from this slot] result in a critical hit 10% more often.
-    3. Attacks [from this slot] grant a buff that boosts damage by 5%, lasting for 3 seconds.
-    4. Attacks [from this slot] do 20% more critical damage.
-    5. Attacks [from this slot] slow enemies by 20% for 5 seconds.
-    6. Attacks [from this slot] boost movement speed by 10% for 5 seconds.
-    7. Skills acquired [to this slot] have +1 skill usage.
-    8. Skills [from this slot] have a 50% chance of inflicting anemia.
-    9. Skills [from this slot] last 20% longer.
-    10. Skills [from this slot] pushes away all nearby enemies.
-    11. Skills [from this slot] grant 3 (over)healing.
-    12. Kills [from this slot] grant a 5% increased chance to spawn a Treasure Chest.
-    13. Kills from this slot grant increased gold.
-    14. Kills from this slot clear the most recent de-buff.
     */
 }

@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class BoneToss : MonoBehaviour
 {
-    float timer = 2f;   //if a modifier increase skill time duration, it would call back to the parent slot and acquire the modifier for calculation
+    float BONETOSS_BASE_TIMER = 2f;   //if a modifier increase skill time duration, it would call back to the parent slot and acquire the modifier for calculation
+    private readonly int BONETOSS_BASE_DMG = 5;
     Rigidbody2D rb;
-    Slot parent;
+    Slot slot;
     private Vector3 mousePosition;
     private Camera mainCamera;
+    public float timer;
     public float speed;
     private int damage;
+    private float size;
 
-    void Start() {  //aim towards the mouse
+    void Start() {  
+        //Aim towards the mouse
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
-        parent = GetComponentInParent<Slot>();
+        slot = GetComponentInParent<Slot>();
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePosition - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
+        AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
 
-        float scalingFactor = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
-        transform.localScale = new Vector2(.5f*scalingFactor, .5f*scalingFactor); //for the bone toss, 0.5f is the base size, idk why, but we will use that as the base in this case.
+        damage = asb.GetDamageBonus(slot, BONETOSS_BASE_DMG);
 
-        //apply duration bonus
-        timer *= 1 + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
-        Debug.Log("timer: " + timer);
+        size = asb.GetSizeBonus(slot);
+        transform.localScale = new Vector2(.5f * size, .5f * size);       //for the bone toss, 0.5f is the base size.
 
-        //apply damage bonus
-        damage = (int)(5 * (1+(parent.GetCommonUpgrade(0)*0.2f + parent.GetRareUpgrade(0)*0.4f + parent.GetLegendaryUpgrade(0)*0.6f)));
-        Debug.Log("damage: " + damage);
+        timer = asb.GetDurationBonus(slot, BONETOSS_BASE_TIMER);
     }
 
     void Update() {
@@ -41,8 +42,6 @@ public class BoneToss : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col) {
         Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null) {
-            enemy.TakeDamage(damage);   //if a modifier increases damage, it would call back to the parent slot and acquire the modifier for calculation
-        }
+        FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);
     }
 }

@@ -5,37 +5,37 @@ using UnityEngine;
 
 public class Web : MonoBehaviour
 {
-    private Slot parent;
-    private float ballTimer = 1f; private float webTimer = 2f;
-    private float initialSize; private float expandedSize;
-    private bool skillHit;
+    [SerializeField] private Sprite fullWeb;
     Rigidbody2D rb;
     private Vector3 mousePosition;
     private Camera mainCamera;
+    private Slot slot;
+    private readonly float WEB_BALL_BASE_TIMER = 1f;
+    private readonly float WEB_ACTIVE_BASE_TIMER = 2f;
+    private readonly int WEB_BASE_DAMAGE = 2;
     private float speed = 5;
+    private float ballTimer; private float webTimer;
+    private float initialSize; private float expandedSize;
+    private bool skillHit;
     private int damage;
-    [SerializeField] private Sprite fullWeb;
     void Start() {
         skillHit = false;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         rb = GetComponent<Rigidbody2D>();
-        parent = FindAnyObjectByType<AttackSpawner>().GetParent();
+        slot = FindAnyObjectByType<AttackSpawner>().GetParent();
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePosition - transform.position;
         rb.velocity = direction.normalized * speed;
+        AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
 
-        initialSize = 1 + parent.GetCommonUpgrade(1)*0.2f + parent.GetRareUpgrade(1)*0.3f + parent.GetLegendaryUpgrade(1)*0.4f;
-        expandedSize = initialSize * 5;
+        initialSize = asb.GetSizeBonus(slot);
+        expandedSize = initialSize * 5; 
         transform.localScale = new Vector2(initialSize, initialSize);
 
-        //apply duration bonus
-        ballTimer *= 1 + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
-        webTimer *= 1 + (parent.GetCommonUpgrade(2)*0.2f + parent.GetRareUpgrade(2)*0.4f + parent.GetLegendaryUpgrade(2)*0.6f);
-        Debug.Log("ball timer: " + ballTimer + ", webtimer: " + webTimer);
+        ballTimer = asb.GetDurationBonus(slot, WEB_BALL_BASE_TIMER);
+        webTimer = asb.GetDurationBonus(slot, WEB_ACTIVE_BASE_TIMER);
 
-        //apply damage bonus
-        damage = (int)(1 * (1+(parent.GetCommonUpgrade(0)*0.2f + parent.GetRareUpgrade(0)*0.4f + parent.GetLegendaryUpgrade(0)*0.6f)));
-        Debug.Log("damage: " + damage);
+        damage = asb.GetDamageBonus(slot, WEB_BASE_DAMAGE);
     }
 
     void Update() {
@@ -65,11 +65,9 @@ public class Web : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         Enemy enemy = col.GetComponent<Enemy>();
         if (enemy != null) {
-            if(!skillHit) {
-            TransformIntoWeb();
-            }
+            if(!skillHit) {TransformIntoWeb();}
             enemy.ApplyStun(1f);
-            enemy.TakeDamage(damage);   //if a modifier increases damage, it would call back to the parent slot and acquire the modifier for calculation
         }
+        FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);
     }
 }
