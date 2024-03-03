@@ -13,14 +13,15 @@ public class UpgradeManager : MonoBehaviour
     private int[] rareUpgradePool = new int[15];
     private int[] legendaryUpgradePool = new int[15];
     private int[] upgradeRarities = new int[3];         //rarity storage for the 4 upgrades that are available. (rarity: 0-common, 1-rare, 2-legendary)
-    private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 4 upgrades that are available. (goes from 0-2 now but should be updated for 0-12 later)
-    //private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use
+    private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 4 upgrades that are available.
+
+    //private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use (maybe?)
     private int upgradePositionSelected, slotSelected;                      //determined which one that is clicked on in the game menu (goes from 0-2 for upgradeselected and 0-4 for slot selected)
-    [SerializeField] private Slot[] slots = new Slot[5];                    //UPDATE TO 5 LATER ON
+    [SerializeField] private Slot[] slots = new Slot[5];                    //slots
     //in-game buttons
     [Space]
     [SerializeField] private Button[] upgradeButtons = new Button[3];       //buttons to click to select desired upgrade
-    [SerializeField] private Button[] slotButtons = new Button[5];          //buttons to click to select desired slot (UPDATE TO 5 LATER ON)
+    [SerializeField] private Button[] slotButtons = new Button[5];          //buttons to click to select desired slot
     [SerializeField] private Button confirmationButton;                     //click this after upgrade and slot to apply are selected
     //the following are for the interactable, visual stuff
     [SerializeField] private Button helpButton;                             //guide button to explain upgrade menu
@@ -42,15 +43,15 @@ public class UpgradeManager : MonoBehaviour
     [Space]
     //the following are to be held for storage
     [SerializeField] private Sprite[] upgradeRarityImage = new Sprite[3];   //background image for different rarities
-    [SerializeField] private Sprite[] commonIconPool = new Sprite[15];       //image associated w/ upgrades(UPDATE TO 15 LATER ON)
-    [SerializeField] private Sprite[] rareIconPool = new Sprite[15];         //(UPDATE TO 15 LATER ON)
-    [SerializeField] private Sprite[] legendaryIconPool = new Sprite[15];    //(UPDATE TO 15 LATER ON)
+    [SerializeField] private Sprite[] commonIconPool = new Sprite[15];       //image associated w/ upgrades
+    [SerializeField] private Sprite[] rareIconPool = new Sprite[15];         
+    [SerializeField] private Sprite[] legendaryIconPool = new Sprite[15];   
     [TextArea(5,5)]
-    [SerializeField] private string[] commonUpgradeText = new string[15];    //text that describes what the upgrade does (UPDATE TO 15 LATER ON)
+    [SerializeField] private string[] commonUpgradeText = new string[15];    //text that describes what the upgrade does 
     [TextArea(5,5)]
-    [SerializeField] private string[] rareUpgradeText = new string[15];      //(UPDATE TO 15 LATER ON)
+    [SerializeField] private string[] rareUpgradeText = new string[15];      
     [TextArea(5,5)]
-    [SerializeField] private string[] legendaryUpgradeText = new string[15]; //(UPDATE TO 15 LATER ON)
+    [SerializeField] private string[] legendaryUpgradeText = new string[15]; 
     [Space]
     //other
     [SerializeField] private GameManager notify;
@@ -97,7 +98,7 @@ public class UpgradeManager : MonoBehaviour
         //Sets up the upgrades that are displayed in-game. This logic will need to be re-written for if the upgrades run out entirely, although idk if that'll be possible.
         for (int i = 0; i < 3; i++) {       
             if (type == "normal") {
-                int rarity = Random.Range(0,101);
+                int rarity = Random.Range(0, 101);
                 if (rarity > 65) {          //for now, 30% chance to get a rare upgrade, can be tweaked
                     upgradeRarities[i] = 1; //give rare upgrade
                     upgradeRarityBG[i].sprite = upgradeRarityImage[1];  //Update the background for the appropriate rarity
@@ -115,12 +116,11 @@ public class UpgradeManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++) {       
             //checks to see if the specific upgrade is empty. if so, reroll until you get one that isn't
-            int roll = Random.Range(0,4);   
-            //for now, only 4 possible upgrades. (UPDATE TO 15 LATER ON)
+            int roll = Random.Range(0, 15);   
             switch (upgradeRarities[i]) {
                 case 0: //common
                     while (commonUpgradePool[roll] == 0) {
-                        roll = Random.Range(0,4);   //UPDATE TO 15 LATER ON
+                        roll = Random.Range(0, 15);   
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = commonIconPool[roll];
@@ -128,7 +128,7 @@ public class UpgradeManager : MonoBehaviour
                     break;
                 case 1: //rare
                     while (rareUpgradePool[roll] == 0) {
-                        roll = Random.Range(0,4);   //UPDATE TO 15 LATER ON
+                        roll = Random.Range(0, 15);   
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = rareIconPool[roll];
@@ -136,7 +136,7 @@ public class UpgradeManager : MonoBehaviour
                     break;
                 case 2: //legendary
                     while (legendaryUpgradePool[roll] == 0) {
-                        roll = Random.Range(0,4);   //UPDATE TO 15 LATER ON
+                        roll = Random.Range(0, 15);   
                     }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = legendaryIconPool[roll];
@@ -256,7 +256,7 @@ public class UpgradeManager : MonoBehaviour
         Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
 
         What's happening is that it's grabbing the rarity from the rarity assigned to each upgrade shown, from upgradeRarities[0-2]. Then, populates an appropriate string based on the rarity.
-        It then grabs the upgrade ID assigned to each upgrade shown, from upgradeSelection[0-3 (UPDATE TO 0-12 LATER)].
+        It then grabs the upgrade ID assigned to each upgrade shown, from upgradeSelection[0-3 (UPDATE TO 0-15 LATER)].
         Then, using the slot selected from slotSelected, it calls the respective slot's ApplySlotUpgrade() and lets it assign itself the upgrade using the rarity strng and upgrade selected previously.
 
         Because of this, the slot upgrade pool must be universal throughout the game.
@@ -271,13 +271,24 @@ public class UpgradeManager : MonoBehaviour
         }
 
         if (slots[slotSelected].GetLegendaryUpgrade(2) > 0) {       //legendary 2
-            if (slotSelected >= 1) {slots[slotSelected - 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);}
-            if (slotSelected <= 3) {slots[slotSelected + 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);}
+            if (slotSelected >= 1 ) {
+                slots[slotSelected - 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
+                notify.AdjustSlotUpgradeCounter(slots[slotSelected - 1].Identity);
+            }
+
+            if (slotSelected <= 3) {
+                if (slots[slotSelected + 1].isActiveAndEnabled) {
+                    slots[slotSelected + 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
+                    notify.AdjustSlotUpgradeCounter(slots[slotSelected + 1].Identity);
+                }
+            }
+
             slots[slotSelected].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
+            notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
         } else {
             slots[slotSelected].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
+            notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
         }
-        notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
 
         //subtract from the available upgrades
         switch(upgradeRarities[upgradePositionSelected]) {
