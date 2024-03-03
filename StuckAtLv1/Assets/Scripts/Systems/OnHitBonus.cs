@@ -37,7 +37,7 @@ public class OnHitBonus : MonoBehaviour
                     Debug.Log("Common | 14");
                 }
 
-                if (slot.GetRareUpgrade(13) > 0) {                                  //rare 13 (on-kill version)
+                if (slot.GetRareUpgrade(13) > 0 && enemy.IsAnemic()) {              //rare 13 (on-kill version)
                     GameObject c = Instantiate(anemiaSpreadPrefab, enemy.transform.position, Quaternion.identity);
                     c.transform.localScale *= slot.GetRareUpgrade(13);
                 }
@@ -134,7 +134,7 @@ public class OnHitBonus : MonoBehaviour
                     Debug.Log("Rare | 11");
                 }
 
-                if (slot.GetRareUpgrade(13) > 0) {                                  //rare 13 (on-hit version)
+                if (slot.GetRareUpgrade(13) > 0 && enemy.IsAnemic()) {              //rare 13 (on-hit version)
                     GameObject c = Instantiate(anemiaSpreadPrefab, enemy.transform.position, Quaternion.identity);
                     c.transform.localScale *= slot.GetRareUpgrade(13);
                 }

@@ -16,6 +16,7 @@ public class UpgradeManager : MonoBehaviour
     private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 4 upgrades that are available.
 
     //private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use (maybe?)
+
     private int upgradePositionSelected, slotSelected;                      //determined which one that is clicked on in the game menu (goes from 0-2 for upgradeselected and 0-4 for slot selected)
     [SerializeField] private Slot[] slots = new Slot[5];                    //slots
     //in-game buttons
@@ -108,43 +109,76 @@ public class UpgradeManager : MonoBehaviour
                 }
             }
 
-            if (type == "legendary") {      //legendary upgrades are given after minibosses and bosses, sets all upgrades to legendary
+            if (type == "legendary") {          //legendary upgrades are given after minibosses and bosses, sets all upgrades to legendary
             upgradeRarities[0] = 2; upgradeRarities[1] = 2; upgradeRarities[2] = 2;
             upgradeRarityBG[i].sprite = upgradeRarityImage[2];
             }
         }
 
-        for (int i = 0; i < 3; i++) {       
-            //checks to see if the specific upgrade is empty. if so, reroll until you get one that isn't
-            int roll = Random.Range(0, 15);   
+        for (int i = 0; i < 3; i++) {           //checks to see if the specific upgrade is empty. if so, reroll until you get one that isn't
+            int roll = Random.Range(0, 15);
             switch (upgradeRarities[i]) {
-                case 0: //common
-                    while (commonUpgradePool[roll] == 0) {
-                        roll = Random.Range(0, 15);   
-                    }
+                case 0:     //common
+                     do {
+                        if (i == 1 && upgradeRarities[0] == 0) {                                //reroll if you get dupes
+                            while (roll == upgradeSelection[0]) {
+                                roll = Random.Range(0, 15);
+                            }
+                        }
+
+                        if (i == 2 && (upgradeRarities[0] == 0 || upgradeRarities[1] == 0)) {   //reroll if you get dupes
+                            while ((upgradeRarities[0] == 0 && roll == upgradeSelection[0]) || (upgradeRarities[1] == 0 && roll == upgradeSelection[1])) {
+                                roll = Random.Range(0, 15);
+                            }
+                        }
+                    } while (commonUpgradePool[roll] == 0);
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = commonIconPool[roll];
                     upgradeText[i].SetText(commonUpgradeText[roll]);
                     break;
-                case 1: //rare
-                    while (rareUpgradePool[roll] == 0) {
-                        roll = Random.Range(0, 15);   
-                    }
+
+                case 1:     //rare
+                    do {
+                        if (i == 1 && upgradeRarities[0] == 1) {                                //reroll if you get dupes
+                            while (roll == upgradeSelection[0]) {
+                                roll = Random.Range(0, 15);
+                            }
+                        }
+
+                        if (i == 2 && (upgradeRarities[0] == 1 || upgradeRarities[1] == 1)) {   //reroll if you get dupes
+                            while ((upgradeRarities[0] == 1 && roll == upgradeSelection[0]) || (upgradeRarities[1] == 1 && roll == upgradeSelection[1])) {
+                                roll = Random.Range(0, 15);
+                            }
+                        }
+                    } while (rareUpgradePool[roll] == 0);
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = rareIconPool[roll];
                     upgradeText[i].SetText(rareUpgradeText[roll]);
                     break;
-                case 2: //legendary
-                    while (legendaryUpgradePool[roll] == 0) {
-                        roll = Random.Range(0, 15);   
-                    }
+
+                case 2:     //legendary
+                    do {
+                        if (i == 1) { 
+                            while (roll == upgradeSelection[0]) {                                   //reroll if you get dupes
+                                roll = Random.Range(0, 15);
+                            }
+                        }
+                        
+                        if (i == 2) {
+                            while (roll == upgradeSelection[0] || roll == upgradeSelection[1]) {    //reroll if you get dupes
+                                roll = Random.Range(0, 15);
+                            }
+                        }
+                    } while (legendaryUpgradePool[roll] == 0);
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = legendaryIconPool[roll];
                     upgradeText[i].SetText(legendaryUpgradeText[roll]);
                     break;
             }
         }
-        upgradeText[0].ForceMeshUpdate(); upgradeText[1].ForceMeshUpdate(); upgradeText[2].ForceMeshUpdate();
+        upgradeText[0].ForceMeshUpdate(); 
+        upgradeText[1].ForceMeshUpdate(); 
+        upgradeText[2].ForceMeshUpdate();
         upgradeText[0].gameObject.SetActive(true);
         upgradeText[1].gameObject.SetActive(true);
         upgradeText[2].gameObject.SetActive(true);
@@ -255,11 +289,12 @@ public class UpgradeManager : MonoBehaviour
         /*
         Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
 
-        What's happening is that it's grabbing the rarity from the rarity assigned to each upgrade shown, from upgradeRarities[0-2]. Then, populates an appropriate string based on the rarity.
-        It then grabs the upgrade ID assigned to each upgrade shown, from upgradeSelection[0-3 (UPDATE TO 0-15 LATER)].
+        This method will grab the rarity from the rarity assigned to each upgrade shown, from upgradeRarities[0-2]. 
+        Then, populates an appropriate string based on the rarity.
+        Then, grabs the upgrade ID assigned to each upgrade shown, from upgradeSelection[0-2].
         Then, using the slot selected from slotSelected, it calls the respective slot's ApplySlotUpgrade() and lets it assign itself the upgrade using the rarity strng and upgrade selected previously.
 
-        Because of this, the slot upgrade pool must be universal throughout the game.
+        As such, the slot upgrade pool is universal throughout the game.
         */
         
         string rarity = "";
