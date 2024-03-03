@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyDropPrefab: {fileID: 4269447868980704985, guid: 365e70c495b6f53488d62faa2315be3d, type: 3}
-  damageTextPrefab: {fileID: 1898392616700741821, guid: d2379f80de3d0d8479363c9bb94fd2b7, type: 3}
+  damageTextPrefab: {fileID: 1713743412437274532, guid: 9e69095aeeb4b1e49840c8d74d107da6, type: 3}
   gameManager: {fileID: 0}
   baseSpeed: 1.5
   hp: 5

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -149,6 +150,14 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         }
 
         anim.SetTrigger("Hit");
+
+        if (damageTextPrefab) {
+            var dmg = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
+            dmg.GetComponentInChildren<DamageNumber>().Setup(actualDamage, additionalText, critCheck, anemiaCheck);
+            if (anemiaCheck) {anemiaCheck = false;}
+            if (critCheck) {critCheck = false;}
+        }
+
         if (hp < 1) {
             CombatManager c = FindAnyObjectByType<CombatManager>();
             if (c.GetObjective() == "miniboss" && this.gameObject.CompareTag("Knight")) {
@@ -162,13 +171,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             Character character = FindAnyObjectByType<Character>();
             character.GainMoney(moneyOnKill);
             ResolveEnemy();
-        }
-
-        if (damageTextPrefab) {
-            var dmg = Instantiate(damageTextPrefab, transform.position, Quaternion.identity, transform);
-            dmg.GetComponent<DamageNumber>().Setup(actualDamage, additionalText, critCheck, anemiaCheck);
-            if (anemiaCheck) {anemiaCheck = false;}
-            if (critCheck) {critCheck = false;}
         }
     }
 

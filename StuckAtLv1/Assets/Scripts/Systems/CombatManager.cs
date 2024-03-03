@@ -197,6 +197,11 @@ public class CombatManager : MonoBehaviour
             //Destroy(straggler); <- doesn't work
         }
 
+        DamageNumberParent[] remainingDamageNumbers = FindObjectsByType<DamageNumberParent>(FindObjectsSortMode.None);
+        foreach (DamageNumberParent d in remainingDamageNumbers) {
+            d.BattleOver();
+        }
+
         ExtraMoney[] remainingMoneyDrops = FindObjectsByType<ExtraMoney>(FindObjectsSortMode.None);
         foreach (ExtraMoney moneybags in remainingMoneyDrops) {
             moneybags.DestroyExtraMoney();
