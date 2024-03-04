@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpinningSlashSword : MonoBehaviour
 {
     private Slot slot;
-    private readonly int KNIGHTSWORD_BASE_DAMAGE = 25;
+    private readonly int KNIGHTSWORD_BASE_DAMAGE = 50;
     private int damage;
     private float size;
 

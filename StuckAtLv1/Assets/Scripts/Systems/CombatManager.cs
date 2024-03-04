@@ -9,6 +9,7 @@ public class CombatManager : MonoBehaviour
     /*
     Handles both combat and survival modes.
     */
+
     [SerializeField] private TextMeshProUGUI uIObjective;
     [SerializeField] private TextMeshProUGUI uIObjectiveNumber;
     [SerializeField] private Character character;
@@ -67,7 +68,7 @@ public class CombatManager : MonoBehaviour
                         roomChosen = 5; //todo
                         break;
                 }
-                ruinsRooms[roomChosen].SetActive(true); 
+                ruinsRooms[roomChosen].SetActive(true);
                 room = ruinsRooms[roomChosen];
                 character.gameObject.transform.position = ruinsSpawn[roomChosen].gameObject.transform.position;
                 Debug.Log(roomChosen);
@@ -82,7 +83,7 @@ public class CombatManager : MonoBehaviour
                 break;
         }
 
-        if (specialCondition) { 
+        if (specialCondition) {
             //when adding a special condition, it needs to be mentioned here, and on the enemy manager.
             switch(condition) {
                 case 2: //Ruins Event 2
@@ -109,7 +110,8 @@ public class CombatManager : MonoBehaviour
             case "combat":
                 objective = "combat";
                 spawner.enabled = true;
-                enemiesToKill = mapProgress.GetWorld()*(1 + (2 * mapProgress.GetLevel())); //orig 10
+                spawner.SetSpawnTimer(0.7f);
+                enemiesToKill = mapProgress.GetWorld()*(10 + (2 * mapProgress.GetLevel())); //orig 10
                 uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
                 StartCoroutine(CombatTracker());
                 break;
@@ -117,7 +119,8 @@ public class CombatManager : MonoBehaviour
             case "survival":
                 objective = "survival";
                 spawner.enabled = true;
-                timeLeft = mapProgress.GetWorld()*(2 + mapProgress.GetLevel()); //orig 20
+                spawner.SetSpawnTimer(0.7f);
+                timeLeft = mapProgress.GetWorld()*(20 + mapProgress.GetLevel()); //orig 20
                 uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
                 StartCoroutine(SurvivalTimer());
                 break;
@@ -126,6 +129,7 @@ public class CombatManager : MonoBehaviour
                 objective = "miniboss";
                 bossIsAlive = true;
                 spawner.enabled = true;
+                spawner.SetSpawnTimer(2f);
                 uIObjective.text = "Defeat miniboss!!";
                 uIObjectiveNumber.text = "∞";
                 StartCoroutine(BossTracker());
@@ -135,6 +139,7 @@ public class CombatManager : MonoBehaviour
                 objective = "boss";
                 bossIsAlive = true;
                 spawner.enabled = true;
+                spawner.SetSpawnTimer(2f);
                 uIObjective.text = "Defeat boss!!";
                 uIObjectiveNumber.text = "∞";
                 StartCoroutine(BossTracker());
@@ -144,7 +149,7 @@ public class CombatManager : MonoBehaviour
         character.Heal(0);
     }
 
-    public void EnemyKilled() { 
+    public void EnemyKilled() {
         //for combat-type encounter use only
         if(objective == "combat") {
             enemiesToKill--; uIObjectiveNumber.text = enemiesToKill.ToString();
@@ -158,13 +163,13 @@ public class CombatManager : MonoBehaviour
         specialCondition = true;
         condition = c;
     }
-    
+
     public void BossDied() {
         bossUI.SetActive(false);
         bossIsAlive = false;
     }
 
-    private IEnumerator SurvivalTimer() { 
+    private IEnumerator SurvivalTimer() {
         //handles timer countdown for survival-type encounter format
         while (timeLeft > 0) {
             yield return new WaitForSeconds(1);
@@ -188,7 +193,7 @@ public class CombatManager : MonoBehaviour
         return objective;
     }
 
-    private void Finish() {         
+    private void Finish() {
         //Disable the spawner & kill all remaining enemies
         spawner.enabled = false;
         Enemy[] remainingEnemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);

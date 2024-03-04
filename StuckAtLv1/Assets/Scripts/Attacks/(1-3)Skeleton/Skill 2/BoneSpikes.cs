@@ -12,7 +12,7 @@ public class BoneSpikes : MonoBehaviour
     private Camera mainCamera;
     private float speed = 10;
     private int damage;
-    private readonly int BONESPIKES_BASE_DMG = 5;
+    private readonly int BONESPIKES_BASE_DMG = 15;
     private readonly float BONESPIKES_BASE_TIMER = 0.4f;
 
     private float size;

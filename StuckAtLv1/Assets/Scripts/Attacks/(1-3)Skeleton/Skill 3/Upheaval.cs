@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Upheaval : MonoBehaviour
 {
-    private readonly int UPHEAVAL_BASE_DMG = 5;
+    private readonly int UPHEAVAL_BASE_DMG = 30;
     private readonly float UPHEAVAL_BASE_TIMER = 1.5f;
     CircleCollider2D atkCollider;
     Slot slot;

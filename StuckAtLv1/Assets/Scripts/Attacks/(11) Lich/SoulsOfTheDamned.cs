@@ -13,7 +13,6 @@ public class SoulsOfTheDamned : MonoBehaviour
     void Start() {
         slot = GetComponentInParent<Slot>();
         AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
-
         duration = asb.GetDurationBonus(slot, SOULS_BASE_DURATION);
     }
 

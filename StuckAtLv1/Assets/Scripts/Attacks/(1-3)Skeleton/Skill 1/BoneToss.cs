@@ -5,7 +5,7 @@ using UnityEngine;
 public class BoneToss : MonoBehaviour
 {
     float BONETOSS_BASE_TIMER = 2f;   //if a modifier increase skill time duration, it would call back to the parent slot and acquire the modifier for calculation
-    private readonly int BONETOSS_BASE_DMG = 5;
+    private readonly int BONETOSS_BASE_DMG = 20;
     Rigidbody2D rb;
     Slot slot;
     private Vector3 mousePosition;

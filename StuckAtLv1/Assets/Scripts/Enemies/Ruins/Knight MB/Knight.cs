@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Knight : MonoBehaviour
 {
-    private readonly int KNIGHT_MAX_HP = 100;
+    private readonly int KNIGHT_MAX_HP = 250;
     [SerializeField] private GameObject sword; 
     [SerializeField] private Enemy enemyScript, swordScript;
     //handles scripts and objects

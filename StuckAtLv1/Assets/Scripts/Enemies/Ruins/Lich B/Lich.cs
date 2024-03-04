@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Lich : MonoBehaviour
 {
-    private readonly int LICH_MAX_HP = 20;
+    private readonly int LICH_MAX_HP = 500;
     private readonly int EFFIGY_MAX_HP = 100;
     [SerializeField] private Enemy[] effigies;
     [SerializeField] private Enemy enemyScript;
@@ -26,8 +26,7 @@ public class Lich : MonoBehaviour
     private float attackTimer;
     private int effigyHP;
     //variables
-    void Start()
-    {
+    void Start() {
         enemyScript.SetTarget(FindAnyObjectByType<Character>().gameObject);
         foreach (Enemy effigy in effigies) {
             effigy.SetTarget(FindAnyObjectByType<Character>().gameObject);
@@ -49,8 +48,7 @@ public class Lich : MonoBehaviour
         //secondary hp bar
     }
 
-    void Update()
-    {
+    void Update() {
         bossHPBarFill.fillAmount = (float) enemyScript.GetHealth() / LICH_MAX_HP;
         effigyHPBarFill.fillAmount = (float) effigyHP / EFFIGY_MAX_HP;
 

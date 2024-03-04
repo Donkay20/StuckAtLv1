@@ -161,7 +161,7 @@ public class Slot : MonoBehaviour
                         if (character.currentHp - 10 > character.money) {
                             int goldGain = character.currentHp - 10 - character.money;
                             character.TakeDamage(goldGain);
-                            character.GainMoney((goldGain*10) * legendaryUpgrades[14]);
+                            character.GainMoney((goldGain * 10) * legendaryUpgrades[14]);
                             Debug.Log("Legendary | 14, success");
                         } else {
                             Debug.Log("Legendary | 14, fail");
@@ -314,7 +314,6 @@ public class Slot : MonoBehaviour
     }
 
     /*
-
     List of upgrades:
     Common: 
     0.  Damage +10%                                     - OK
@@ -366,6 +365,5 @@ public class Slot : MonoBehaviour
     12. dmg = slow (scales with overhealth)             - OK
     13. kill = bulwark buff (drain reversed)            - OK
     14. if hp>gold, hp=gold and gold += hplost*10       - OK
-
     */
 }

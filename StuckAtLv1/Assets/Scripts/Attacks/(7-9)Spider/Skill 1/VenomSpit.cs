@@ -7,7 +7,7 @@ public class VenomSpit : MonoBehaviour
     [SerializeField] private Sprite triangle;
     AttackSlotBonus asb;
     private Slot slot;
-    private readonly int VENOMSPIT_BASE_DAMAGE = 1;
+    private readonly int VENOMSPIT_BASE_DAMAGE = 4;
     private readonly float VENOMSPIT_BASE_DURATION = 5; //duration will increase the duration of the anemic effect, rather than the attack's staying power itself.
     private float timer = 0.5f; //this is a constant that needs to be mutable
     private int damage; //damage will also affect the poison dmg

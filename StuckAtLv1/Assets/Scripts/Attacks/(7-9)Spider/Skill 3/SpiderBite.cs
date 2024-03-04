@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpiderBite : MonoBehaviour
 {
     [SerializeField] private Sprite spiderBite;
-    private readonly int SPIDERBITE_BASE_DMG = 2;
+    private readonly int SPIDERBITE_BASE_DMG = 5;
     private readonly float SPIDERBITE_BASE_ANEMIA_DURATION = 5f; //duration will ALSO increase the duration of the anemic effect
     private readonly float SPIDERBITE_BASE_DURATION = 1f;
     private int damage; //damage will also affect the poison dmg

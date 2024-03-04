@@ -66,6 +66,10 @@ public class EnemyManager : MonoBehaviour
         return position;
     }
 
+    public void SetSpawnTimer(float newTimer) {
+        spawnTimer = newTimer;
+    }
+
     public void SetCondition(int n) {
         if (n == -1) {
             specialCondition = false;

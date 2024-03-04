@@ -5,7 +5,7 @@ using UnityEngine;
 public class RockThrowV2 : MonoBehaviour
 {
     private readonly float ROCKTHROW_BASE_TIMER = 1f;
-    private readonly int ROCKTHROW_BASE_DMG = 10;
+    private readonly int ROCKTHROW_BASE_DMG = 20;
     Rigidbody2D rb;
     Slot slot;
     private Vector3 mousePosition;

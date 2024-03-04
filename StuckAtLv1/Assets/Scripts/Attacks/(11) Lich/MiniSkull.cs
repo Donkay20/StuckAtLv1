@@ -7,7 +7,7 @@ public class MiniSkull : MonoBehaviour
     private Slot slot;
     private float timer = 2f; //constant & mutable, unaffected by duration bonuses
     private readonly float SKULL_SPEED = 10f;
-    private readonly int SKULL_BASE_DAMAGE = 1; 
+    private readonly int SKULL_BASE_DAMAGE = 3; 
     private Vector3 mousePosition;
     private Camera mainCamera;
     Rigidbody2D rb;

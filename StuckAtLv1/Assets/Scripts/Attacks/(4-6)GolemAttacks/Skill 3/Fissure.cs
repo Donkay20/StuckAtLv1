@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Fissure : MonoBehaviour
 {
-    private readonly int FISSURE_BASE_DAMAGE = 6;
+    private readonly int FISSURE_BASE_DAMAGE = 15;
     private readonly float FISSURE_BASE_DURATION = 3f;
     private int damage;
     private float timer;

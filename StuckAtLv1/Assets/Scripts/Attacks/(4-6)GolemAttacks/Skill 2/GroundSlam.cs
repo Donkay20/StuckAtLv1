@@ -8,7 +8,7 @@ public class GroundSlam : MonoBehaviour
 {
     private readonly float GROUNDSLAM_BASE_DURATION = 0.3f;
     private readonly float BASE_TARGET_MULTIPLIER = 2f;
-    private readonly int GROUNDSLAM_BASE_DAMAGE = 8;
+    private readonly int GROUNDSLAM_BASE_DAMAGE = 10;
     private float timer;
     private float initialSize, targetSize, timeModifier, maxTime;
     private int damage;

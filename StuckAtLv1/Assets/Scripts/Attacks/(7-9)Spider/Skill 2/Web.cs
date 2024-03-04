@@ -12,7 +12,7 @@ public class Web : MonoBehaviour
     private Slot slot;
     private readonly float WEB_BALL_BASE_TIMER = 1f;
     private readonly float WEB_ACTIVE_BASE_TIMER = 2f;
-    private readonly int WEB_BASE_DAMAGE = 2;
+    private readonly int WEB_BASE_DAMAGE = 5;
     private float speed = 5;
     private float ballTimer; private float webTimer;
     private float initialSize; private float expandedSize;

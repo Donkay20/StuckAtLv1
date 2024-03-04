@@ -50,7 +50,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         buffManager = FindAnyObjectByType<BuffManager>();
         gameManager = FindAnyObjectByType<GameManager>();
         hp += gameManager.ScaleDifficulty();
-        baseSpeed += gameManager.ScaleDifficulty()/10;
+        baseSpeed += gameManager.ScaleDifficulty() / 10;
         moneyOnKill = 5;
         maxHP = hp;
     }
@@ -104,14 +104,11 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     private void Attack() {
-
         if (targetCharacter == null && !stunApplied) { 
             //stunned enemies can't deal damage
             targetCharacter = targetGameObject.GetComponent<Character>();
         }
-        
         targetCharacter.TakeDamage(damage);
-
         switch (this.gameObject.tag) {
             case "LichEffigy":
                 buffManager.AddDebuff("slow", 0.9f, 3f);
