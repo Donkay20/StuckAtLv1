@@ -23,11 +23,11 @@ public class AttackSlotBonus : MonoBehaviour
     public float GetSizeBonus(Slot s) {
         float size = 1;
         if (s.GetCommonUpgrade(1) > 0) {                                                        //common 1
-            size += s.GetCommonUpgrade(1)*0.05f;
+            size += s.GetCommonUpgrade(1) * 0.05f;
         }
         
         if (s.GetRareUpgrade(1) > 0) {                                                          //rare 1
-            size += s.GetRareUpgrade(1)*0.05f;
+            size += s.GetRareUpgrade(1) * 0.05f;
         } 
         
         if (s.GetRareUpgrade(10) > 0 && FindAnyObjectByType<Character>().currentHp > 10) {      //rare 10
@@ -39,11 +39,11 @@ public class AttackSlotBonus : MonoBehaviour
     public float GetDurationBonus(Slot s, float baseDuration) {
         float duration = baseDuration;
         if (s.GetCommonUpgrade(2) > 0) {                    //common 2
-            duration *= 1 + s.GetCommonUpgrade(2)*0.2f;
+            duration *= 1 + s.GetCommonUpgrade(2) * 0.2f;
         }
 
         if (s.GetRareUpgrade(1) > 0) {                      //rare 1
-            duration *= 1 + s.GetRareUpgrade(1)*0.2f;                   
+            duration *= 1 + s.GetRareUpgrade(1) * 0.2f;                   
         }
         return duration;
     }

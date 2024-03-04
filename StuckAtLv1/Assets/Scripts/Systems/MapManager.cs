@@ -18,6 +18,8 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Sprite shopImage;
     [SerializeField] private Sprite miniBossImage;
     [SerializeField] private Sprite bossImage;
+    [SerializeField] private Image background;
+    [SerializeField] private Sprite forestBackground, sewerBackground, abyssBackground;
     [SerializeField] private GameManager manager;
     [SerializeField] private int world; 
     [SerializeField] private int level; 
@@ -399,6 +401,18 @@ public class MapManager : MonoBehaviour
         world++;
         level = 0;
         section = 2;
+
+        switch(world) {
+            case 2:
+                background.sprite = forestBackground;
+                break;
+            case 3: 
+                background.sprite = sewerBackground;
+                break;
+            case 4:
+                background.sprite = abyssBackground;
+                break;
+        }
 
         foreach (Room r in rooms) {GiveRoom(r);}
 

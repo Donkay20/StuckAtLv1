@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] Vector2 spawnArea;
     [SerializeField] float spawnTimer;
     [SerializeField] GameObject player;
+    [SerializeField] MapManager mapManager;
     float timer;
     int condition; bool specialCondition;
 
@@ -36,7 +37,20 @@ public class EnemyManager : MonoBehaviour
                 break;
             }
         } else {
-            enemyID = Random.Range(0, enemyPool.Length);
+            switch(mapManager.GetWorld()) {
+                case 1:
+                    enemyID = Random.Range(0, 9);
+                    break;
+                case 2:
+                    enemyID = Random.Range(9, 17);
+                    break;
+                case 3:
+                    enemyID = Random.Range(17, 26);
+                    break;
+                case 4:
+                    enemyID = Random.Range(0, 26);
+                    break;
+            }
         }
 
         Vector3 position = GenerateRandomPosition();
