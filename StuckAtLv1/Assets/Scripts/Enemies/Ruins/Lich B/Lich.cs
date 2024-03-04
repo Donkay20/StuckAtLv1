@@ -82,7 +82,7 @@ public class Lich : MonoBehaviour
 
     public void ReactivateEffigies() {
         foreach (Enemy deadEffigy in effigies) {
-            deadEffigy.SetHealth(5);
+            deadEffigy.SetHealth(50);
             deadEffigy.gameObject.SetActive(true);
         }
         forceField.SetActive(true);

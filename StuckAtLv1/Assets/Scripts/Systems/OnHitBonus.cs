@@ -114,22 +114,27 @@ public class OnHitBonus : MonoBehaviour
                     Character c = FindAnyObjectByType<Character>();
                     if (criticalHit) {
                         if (slot.GetRareUpgrade(7) > 0) {
-                            c.Heal(damage *= ((int) slot.CriticalDamage() / 10) * (slot.GetRareUpgrade(7) * 2));
+                            c.Heal(damage *= ((int) slot.CriticalDamage() / 5) * (slot.GetRareUpgrade(7) * 2));
                         } else {
-                            c.Heal(damage *= (int) slot.CriticalDamage() / 10);
+                            c.Heal(damage *= (int) slot.CriticalDamage() / 5);
                         }
                     } else {
                         if (slot.GetRareUpgrade(7) > 0) {
-                            c.Heal((damage / 10) * (slot.GetRareUpgrade(7) * 2));
+                            c.Heal((damage / 5) * (slot.GetRareUpgrade(7) * 2));
                         } else {
-                            c.Heal(damage / 10);
+                            c.Heal(damage / 5);
                         }
                     }
                     Debug.Log("Rare | 8");
                 }
 
                 if (slot.GetRareUpgrade(11) > 0) {                                  //rare 11
-                    enemy.ApplyAnemia((damage / 10) * slot.GetRareUpgrade(11), 10);
+                    if (damage / 10 < 1) {
+                        enemy.ApplyAnemia(1 * slot.GetRareUpgrade(11), 10);
+                    } else {
+                        enemy.ApplyAnemia((damage / 10) * slot.GetRareUpgrade(11), 10);
+                    }
+                    
                     appliedAnemia = true;
                     Debug.Log("Rare | 11");
                 }

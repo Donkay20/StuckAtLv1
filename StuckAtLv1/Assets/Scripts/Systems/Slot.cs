@@ -31,13 +31,13 @@ public class Slot : MonoBehaviour
     private int[] legendaryUpgrades = new int[15];
     [SerializeField] private Character character;
     [SerializeField] private Movement movement;
-    [SerializeField] private Image skillImage;                          
+    [SerializeField] private Image skillImage;
     //display for the skill image on the UI
-    [SerializeField] private TextMeshProUGUI uIText;                    
+    [SerializeField] private TextMeshProUGUI uIText;
     //display for the skill usages on the UI
-    [SerializeField] private GameObject bullet;                         
+    [SerializeField] private GameObject bullet;
     //exclusively for the absorption bullet
-    [SerializeField] private GameObject[] attack = new GameObject[2];   
+    [SerializeField] private GameObject[] attack = new GameObject[2];
     //this will expand in accordance to the # of attacks we have
     [SerializeField] private Image cooldownFill;
     [SerializeField] private TextMeshProUGUI cooldownValueText;
@@ -51,12 +51,15 @@ public class Slot : MonoBehaviour
     private void Start() {
         absorbBulletAvailable = true;
         containsSkill = false;
+        if (identity == 1) {
+            //use this to test for upgrades
+        }
     }
 
     void OnEnable() {
         CalculateWeightPenalty();
     }
-    
+
     private void Update() {
         //for handling cooldown. precise fill means we can't really use a coroutine..
         if (activeCD > 0) {
@@ -73,29 +76,29 @@ public class Slot : MonoBehaviour
         }
     }
 
-    public int Identity { get => identity; set => identity = value; }                                           
+    public int Identity { get => identity; set => identity = value; }
     //slot number, assigned by SlotManager class
-    public bool ContainsSkill { get => containsSkill; set => containsSkill = value; }                           
+    public bool ContainsSkill { get => containsSkill; set => containsSkill = value; }
     //determines whether absorption bullet is shot or not
-    public bool AbsorbBulletAvailable { get => absorbBulletAvailable; set => absorbBulletAvailable = value; }   
+    public bool AbsorbBulletAvailable { get => absorbBulletAvailable; set => absorbBulletAvailable = value; }
     //variable that prevents absorption bullet from being shot until the current shot one dissipates
 
-    public void Engage() {     
+    public void Engage() {
         if (!coolingDown) {
             //slot won't do anything if it's on cooldown.
             if (!containsSkill && absorbBulletAvailable) {
                 //handles slot; whether to use skill or to absorb skill
                 Instantiate(bullet, bulletTransform.position, Quaternion.identity, transform);
-                this.absorbBulletAvailable = false;                                                     
+                this.absorbBulletAvailable = false;
                 //the absoption bullet class will set this value back to true when it dissipates
             } else {
-                Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform); 
+                Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform);
 
                 //-BEGIN slot effects-
                 if (containsSkill) {
                     if (commonUpgrades[3] > 0) {                                        //common 3 (rare 7)
                         if (rareUpgrades[7] > 0) {
-                            character.Heal(commonUpgrades[3] * 3 * (rareUpgrades[7] * 2));  
+                            character.Heal(commonUpgrades[3] * 3 * (rareUpgrades[7] * 2));
                         } else {
                             character.Heal(commonUpgrades[3] * 3);
                         }
@@ -141,7 +144,7 @@ public class Slot : MonoBehaviour
                         } else {
                             Debug.Log("Rare | 6, failure");
                         }
-                    }  
+                    }
 
                     if (legendaryUpgrades[7] > 0) {                                     //legendary 7
                         Instantiate(anemiaScreenBlastPrefab, this.transform);
@@ -186,14 +189,14 @@ public class Slot : MonoBehaviour
                     //if skill has run out of uses, reset everything
                 }
             }
-        }                                                                                 
+        }
     }
 
     public void BattleEnd() {
         //When a stage is cleared, reset all cooldowns
         activeCD = 0;
-        cooldownFill.fillAmount = 0; 
-        cooldownValueText.gameObject.SetActive(true); 
+        cooldownFill.fillAmount = 0;
+        cooldownValueText.gameObject.SetActive(true);
         coolingDown = false;
     }
 
@@ -282,7 +285,10 @@ public class Slot : MonoBehaviour
         bool isCrit = false; int critChance = 5;        //base crit chance is 5%
 
         //critical hit chance bonuses start here
-        critChance += commonUpgrades[4] * 10;           //common 4
+        if (commonUpgrades[4] > 0) {                    //common 4
+            critChance += commonUpgrades[4] * 10;
+        }
+
         if (rareUpgrades[3] > 0) {                      //rare 3
             if (character.currentHp <= 10) {
                 critChance += 50 * rareUpgrades[3];
@@ -304,18 +310,18 @@ public class Slot : MonoBehaviour
 
     public float CriticalDamage() {
         float critDmg = 2;                              //critical strikes do 200% dmg at base
-
         //crit damage bonuses start here
-        critDmg += commonUpgrades[6] * 0.2f;            //common 6
+        if (commonUpgrades[6] > 0) {                    //common 6
+            critDmg += commonUpgrades[6] * 0.2f;
+        }
         critDmg += character.CriticalDamageModifier;    //buffs
         //crit damage bonuses end here
-
         return critDmg;
     }
 
     /*
     List of upgrades:
-    Common: 
+    Common:
     0.  Damage +10%                                     - OK
     1.  Size +5%                                        - OK
     2.  Duration +20%                                   - OK
@@ -332,7 +338,7 @@ public class Slot : MonoBehaviour
     13. Gold ON KILL +5                                 - OK
     14. Debuff cleanse ON KILL +1                       - OK
 
-    Rare: 
+    Rare:
     0.  -10% Dash cooldown                              - OK
     1.  Size +5%, Damage +10%, Duration +20%            - OK
     2.  Cooldown of other slots -10%                    - OK

@@ -6,18 +6,30 @@ public class AttackSlotBonus : MonoBehaviour
 {
     public int GetDamageBonus(Slot s, int baseDmg) {
         int damage = baseDmg;
-        damage *= (int) (1 + (s.GetCommonUpgrade(0) * 0.1f));                                       //common 0
-        damage *= (int) (1 + (s.GetRareUpgrade(1) * 0.1f));                                         //rare 1
-        damage += (int) s.GetRareUpgrade(9) * (FindAnyObjectByType<Character>().currentHp / 10);    //rare 9 
-        damage *= (int) FindAnyObjectByType<Character>().DamageModifier;                            //buffs
-        damage *= (int) FindAnyObjectByType<GameManager>().GetShopDamageBonus();                    //shop bonus is final damage multiplier
+        if (s.GetCommonUpgrade(0) > 0) {                                                                //common 0
+            damage *= (int) (1 + (s.GetCommonUpgrade(0) * 0.1f));
+        }
+        if (s.GetRareUpgrade(1) > 0) {                                                                  //rare 1
+            damage *= (int) (1 + (s.GetRareUpgrade(1) * 0.1f));                                         
+        }
+        if (s.GetRareUpgrade(9) > 0) {                                                                  //rare 9
+            damage += (int) s.GetRareUpgrade(9) * (FindAnyObjectByType<Character>().currentHp / 5);     
+        }                                      
+        damage *= (int) FindAnyObjectByType<Character>().DamageModifier;                                //buffs
+        damage *= (int) FindAnyObjectByType<GameManager>().GetShopDamageBonus();                        //shop bonus is final damage multiplier
         return damage;
     }
 
     public float GetSizeBonus(Slot s) {
         float size = 1;
-        size += s.GetCommonUpgrade(1)*0.05f;                                                    //common 1
-        size += s.GetRareUpgrade(1)*0.05f;                                                      //rare 1
+        if (s.GetCommonUpgrade(1) > 0) {                                                        //common 1
+            size += s.GetCommonUpgrade(1)*0.05f;
+        }
+        
+        if (s.GetRareUpgrade(1) > 0) {                                                          //rare 1
+            size += s.GetRareUpgrade(1)*0.05f;
+        } 
+        
         if (s.GetRareUpgrade(10) > 0 && FindAnyObjectByType<Character>().currentHp > 10) {      //rare 10
             size += (float) (FindAnyObjectByType<Character>().currentHp - 10) * 0.01f;
         }                                                    
@@ -26,8 +38,13 @@ public class AttackSlotBonus : MonoBehaviour
 
     public float GetDurationBonus(Slot s, float baseDuration) {
         float duration = baseDuration;
-        duration *= 1 + s.GetCommonUpgrade(2)*0.2f;                 //common 2
-        duration *= 1 + s.GetRareUpgrade(1)*0.2f;                   //rare 1
+        if (s.GetCommonUpgrade(2) > 0) {                    //common 2
+            duration *= 1 + s.GetCommonUpgrade(2)*0.2f;
+        }
+
+        if (s.GetRareUpgrade(1) > 0) {                      //rare 1
+            duration *= 1 + s.GetRareUpgrade(1)*0.2f;                   
+        }
         return duration;
     }
 }

@@ -35,6 +35,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
         damageModifier = 1;
         drainTimer = 1;
         drainValue = 1;
+        criticalDamageModifier = 0;
     }
 
     public void TakeDamage(int damage) {

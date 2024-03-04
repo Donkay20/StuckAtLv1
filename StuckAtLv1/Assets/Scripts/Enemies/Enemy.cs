@@ -199,11 +199,13 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     private void ResolveEnemy() {
         switch (this.gameObject.tag) {
             case "KnightSword": //special rules for the knight's sword; set it to disable instead of destroy so it can be spawned again. then, alert the knight that its sword has died.
+                anemiaApplied = false;  anemiaDamage = 0; anemiaTimer = 0; anemiaTick = 1; //clear poison
                 Knight knight = FindAnyObjectByType<Knight>();
                 knight.SwordDied();
                 gameObject.SetActive(false);
                 break;
             case "LichEffigy":
+                anemiaApplied = false;  anemiaDamage = 0; anemiaTimer = 0; anemiaTick = 1; //clear poison
                 Lich lich = FindAnyObjectByType<Lich>();
                 lich.EffigyDied();
                 gameObject.SetActive(false);
