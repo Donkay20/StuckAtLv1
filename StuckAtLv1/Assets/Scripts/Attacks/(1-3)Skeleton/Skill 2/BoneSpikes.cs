@@ -13,7 +13,7 @@ public class BoneSpikes : MonoBehaviour
     private float speed = 10;
     private int damage;
     private readonly int BONESPIKES_BASE_DMG = 15;
-    private readonly float BONESPIKES_BASE_TIMER = 0.4f;
+    private readonly float BONESPIKES_BASE_TIMER = 0.8f;
 
     private float size;
     void Start() {
