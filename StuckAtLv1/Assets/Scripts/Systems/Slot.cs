@@ -299,7 +299,7 @@ public class Slot : MonoBehaviour
         if (Random.Range(1,101) <= critChance) {isCrit = true;}     //calculate crit odds
 
         //bonuses upon crit begin here
-        if (rareUpgrades[4] > 0) {                      //rare 4
+        if (rareUpgrades[4] > 0 && isCrit) {            //rare 4
             if (character.currentHp <= 10) {
                 character.GainAfterimage(1);
             }

@@ -110,7 +110,7 @@ public class CombatManager : MonoBehaviour
             case "combat":
                 objective = "combat";
                 spawner.enabled = true;
-                spawner.SetSpawnTimer(0.7f);
+                spawner.SetSpawnTimer(0.5f);
                 enemiesToKill = mapProgress.GetWorld()*(10 + (2 * mapProgress.GetLevel())); //orig 10
                 uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
                 StartCoroutine(CombatTracker());
@@ -119,7 +119,7 @@ public class CombatManager : MonoBehaviour
             case "survival":
                 objective = "survival";
                 spawner.enabled = true;
-                spawner.SetSpawnTimer(0.7f);
+                spawner.SetSpawnTimer(0.5f);
                 timeLeft = mapProgress.GetWorld()*(20 + mapProgress.GetLevel()); //orig 20
                 uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
                 StartCoroutine(SurvivalTimer());
@@ -129,7 +129,7 @@ public class CombatManager : MonoBehaviour
                 objective = "miniboss";
                 bossIsAlive = true;
                 spawner.enabled = true;
-                spawner.SetSpawnTimer(2f);
+                spawner.SetSpawnTimer(3f);
                 uIObjective.text = "Defeat miniboss!!";
                 uIObjectiveNumber.text = "∞";
                 StartCoroutine(BossTracker());
@@ -139,7 +139,7 @@ public class CombatManager : MonoBehaviour
                 objective = "boss";
                 bossIsAlive = true;
                 spawner.enabled = true;
-                spawner.SetSpawnTimer(2f);
+                spawner.SetSpawnTimer(3f);
                 uIObjective.text = "Defeat boss!!";
                 uIObjectiveNumber.text = "∞";
                 StartCoroutine(BossTracker());

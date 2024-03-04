@@ -33,7 +33,7 @@ public class ShopManager : MonoBehaviour
             money.text = player.money.ToString();
             afterimages.text = player.afterimages.ToString();
             healthCost = 20; hpButtonText.text = "10 HP | $" + healthCost;
-            afterimageCost = 50; afterimagesButtonText.text = "Shield | $" + afterimageCost;
+            afterimageCost = 50; afterimagesButtonText.text = "Afterimage | $" + afterimageCost;
             upgradeCost = 150; upgradeButtonText.text = "Upgrade: $" + upgradeCost;
             damageCost = 1; damageButtonText.text = "Damage: $" + damageCost;
         }

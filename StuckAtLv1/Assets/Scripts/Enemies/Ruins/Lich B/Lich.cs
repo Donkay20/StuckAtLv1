@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Lich : MonoBehaviour
 {
-    private readonly int LICH_MAX_HP = 500;
+    private readonly int LICH_MAX_HP = 1000;
     private readonly int EFFIGY_MAX_HP = 100;
     [SerializeField] private Enemy[] effigies;
     [SerializeField] private Enemy enemyScript;
@@ -32,7 +32,7 @@ public class Lich : MonoBehaviour
             effigy.SetTarget(FindAnyObjectByType<Character>().gameObject);
         }
         effigyHP = 100;
-        attackTimer = 7;
+        attackTimer = 5;
         vulnerable = false;
         attackSwitch = false;
     }
@@ -67,7 +67,7 @@ public class Lich : MonoBehaviour
         if (effigyHP == 0) {
             forceField.SetActive(false);
             vulnerable = true;
-            InvokeRepeating("Regenerate", 1, 0.1f);
+            InvokeRepeating(nameof(Regenerate), 1, 0.1f);
         }
     }
 
@@ -98,7 +98,7 @@ public class Lich : MonoBehaviour
             attackSwitch = true;
         }
         
-        attackTimer = 5f + (2f * ((float) enemyScript.GetHealth() / LICH_MAX_HP)); //cd between attacks decreases as hp decreases
+        attackTimer = 3f + (2f * ((float) enemyScript.GetHealth() / LICH_MAX_HP)); //cd between attacks decreases as hp decreases
         attackCheck = false;
     }
 

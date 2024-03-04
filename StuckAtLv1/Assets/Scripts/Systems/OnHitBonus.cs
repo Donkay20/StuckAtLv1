@@ -92,6 +92,11 @@ public class OnHitBonus : MonoBehaviour
                 //ON-KILL slot bonuses END here
             } else {                                                                //if the attack doesn't kill (do on-hit stuff instead):
                 //ON-HIT slot bonuses BEGIN here
+                if (slot.GetRareUpgrade(13) > 0 && enemy.IsAnemic()) {              //rare 13 (on-hit version)
+                    GameObject c = Instantiate(anemiaSpreadPrefab, enemy.transform.position, Quaternion.identity);
+                    c.transform.localScale *= slot.GetRareUpgrade(13);
+                }
+
                 if (slot.GetRareUpgrade(12) > 0 && enemy.IsAnemic()) {              //rare 12
                     FindAnyObjectByType<Character>().GainMoney(enemy.AnemiaSeverity());
                     Debug.Log("Rare | 12");
@@ -137,11 +142,6 @@ public class OnHitBonus : MonoBehaviour
                     
                     appliedAnemia = true;
                     Debug.Log("Rare | 11");
-                }
-
-                if (slot.GetRareUpgrade(13) > 0 && enemy.IsAnemic()) {              //rare 13 (on-hit version)
-                    GameObject c = Instantiate(anemiaSpreadPrefab, enemy.transform.position, Quaternion.identity);
-                    c.transform.localScale *= slot.GetRareUpgrade(13);
                 }
 
                 if (slot.GetRareUpgrade(14) > 0 && appliedAnemia) {                 //rare 14

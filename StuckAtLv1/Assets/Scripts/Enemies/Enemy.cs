@@ -81,11 +81,9 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             if (anemiaTick <= 0) {
                 anemiaCheck = true;
                 TakeDamage(anemiaDamage);
-
                 if (buffManager.IsBloodsuckerActive()) {        //legendary 9
                     FindAnyObjectByType<Character>().ActivateBloodsucker((int) Mathf.Floor(anemiaDamage * 0.01f));
                 }
-
                 anemiaTick = 1;
             }
         }

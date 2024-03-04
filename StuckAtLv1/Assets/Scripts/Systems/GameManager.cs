@@ -305,7 +305,24 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     }
 
     public void AdjustScaling() {
-        scaling = mapManager.GetWorld() * mapManager.GetLevel();
+        if (mapManager.GetLevel() > 5) {
+            switch (mapManager.GetWorld()) {
+                case 1:
+                    scaling = mapManager.GetLevel();
+                    break;
+                case 2:
+                    scaling = mapManager.GetWorld() * mapManager.GetLevel();
+                    break;
+                case 3:
+                    scaling = mapManager.GetWorld() * mapManager.GetLevel();
+                    break;
+                case 4:
+                    scaling = mapManager.GetWorld() * mapManager.GetLevel();
+                    break;
+            }
+        } else {
+            scaling = 0;
+        }
     }
 
     public int ScaleDifficulty() {

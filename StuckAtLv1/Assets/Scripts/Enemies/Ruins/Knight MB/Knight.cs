@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Knight : MonoBehaviour
 {
-    private readonly int KNIGHT_MAX_HP = 250;
+    private readonly int KNIGHT_MAX_HP = 500;
     [SerializeField] private GameObject sword; 
     [SerializeField] private Enemy enemyScript, swordScript;
     //handles scripts and objects
@@ -78,7 +78,7 @@ public class Knight : MonoBehaviour
                 break;
         }
         
-        attackCooldown = 3f + (2f *((float) enemyScript.GetHealth() / KNIGHT_MAX_HP)); //cd between attacks decreases as hp decreases
+        attackCooldown = 2f + (3f *((float) enemyScript.GetHealth() / KNIGHT_MAX_HP)); //cd between attacks decreases as hp decreases
         attackCheck = false;
     }
 }
