@@ -926,6 +926,14 @@ PrefabInstance:
       propertyPath: rightCharacter
       value: 
       objectReference: {fileID: 1107149107}
+    - target: {fileID: 2180762122646581369, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3604311608482621571, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7099856849716075218, guid: 6aa0b99b80bc3b84281b007128f1ed68, type: 3}
       propertyPath: m_Pivot.x
       value: 0
