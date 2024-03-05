@@ -33,7 +33,7 @@ public class Siphon : MonoBehaviour
     {
         if(moveTowardsPlayer)
         {
-            transform.position = Vector2.MoveTowards(transform.position, playerPos.position, 0.1f);
+            transform.position = Vector2.MoveTowards(transform.position, playerPos.position, 0.5f);
         }
     }
 

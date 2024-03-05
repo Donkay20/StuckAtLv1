@@ -67,7 +67,12 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 body.velocity = force * baseSpeed;
             }    
         }
-        Flip(force.x);
+
+        if(this.CompareTag("LichEffigy") == false)
+        {
+            Flip(force.x);
+        }
+        
     }
 
     private void Update() {
