@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   characterName: Knight
-  location: 
-  neutralSprite: {fileID: 21300000, guid: 5fbd94119fc140a4fb8969d327b15489, type: 3}
+  location: right
+  neutralSprite: {fileID: 21300000, guid: 1190f8be8f1e81a4eb29de8f009ada9a, type: 3}
   happySprite: {fileID: 0}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}
