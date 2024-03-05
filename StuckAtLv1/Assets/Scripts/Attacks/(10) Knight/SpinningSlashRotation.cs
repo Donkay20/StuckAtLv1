@@ -3,7 +3,8 @@ using UnityEngine;
 public class SpinningSlashRotation : MonoBehaviour
 {
     [SerializeField] private SpinningSlashSword sword;
-    private float KNIGHTSWORD_BASE_DURATION = 2f;
+    private readonly float KNIGHTSWORD_BASE_DURATION = 2f;
+    private readonly float KNIGHTSWORD_ROTATION_SPEED = -9f;  //inconsistent rotation on build, fix later
     private float duration;
     private Slot slot;
     void Start() {
@@ -15,7 +16,7 @@ public class SpinningSlashRotation : MonoBehaviour
 
     void Update() {
         duration -= Time.deltaTime;
-        transform.Rotate(0, 0, -1.5f);
+        transform.Rotate(0, 0, KNIGHTSWORD_ROTATION_SPEED);
         if (duration <= 0) {
             Destroy(gameObject);
         }

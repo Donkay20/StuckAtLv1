@@ -40,6 +40,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private int maxSlots;
     private bool slotEquilibrium;
     void Start() {      //default to the map when the game launches.
+        Application.targetFrameRate = 60;
         previousState = GameState.Map;
         currentState = GameState.Map;
         maxSlots = 2;   //default amt of slots
