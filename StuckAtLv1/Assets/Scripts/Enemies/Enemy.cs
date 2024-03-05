@@ -118,7 +118,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         int actualDamage = 0; 
         string additionalText = "";
 
-        Debug.Log("damage taken: " + damage);
+        //Debug.Log("damage taken: " + damage);
         switch (this.gameObject.tag) {
             case "Knight": //special rules for the knight enemy
                 Knight knight = FindAnyObjectByType<Knight>();

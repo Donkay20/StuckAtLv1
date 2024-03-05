@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class UpgradeManager : MonoBehaviour
 {
+    private readonly int DEFAULT_REROLL_COST = 100;
     //back-end stuff
     private int[] commonUpgradePool = new int[15];
     private int[] rareUpgradePool = new int[15];
@@ -26,6 +27,7 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Button confirmationButton;                     //click this after upgrade and slot to apply are selected
     //the following are for the interactable, visual stuff
     [SerializeField] private Button helpButton;                             //guide button to explain upgrade menu
+    [SerializeField] private Button rerollButton;                           //get another upgrade attempt
     [SerializeField] private GameObject helpMenu;                           //help menu gameobject
     [SerializeField] private Image helpMenuImage;
     [SerializeField] private TextMeshProUGUI helpMenuText;                  //help menu image and text fields contained within the help menu gameobject
@@ -53,11 +55,15 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private string[] rareUpgradeText = new string[15];      
     [TextArea(5,5)]
     [SerializeField] private string[] legendaryUpgradeText = new string[15]; 
+    [SerializeField] private Character character;
+    [SerializeField] private TextMeshProUGUI rerollButtonText, characterMoney;
     [Space]
     //other
     [SerializeField] private GameManager notify;
-    private bool fromShop; private bool fromBoss; private int maxSlots;
-
+    private bool fromShop; 
+    private bool fromBoss; 
+    private int maxSlots;
+    private string upgradeType; private int rerollCost; 
     void Awake()    //initialize the buttons, and capacity for each upgrade at the beginning of the game.
     {
         maxSlots = 2;
@@ -68,7 +74,6 @@ public class UpgradeManager : MonoBehaviour
             rareUpgradePool[i] = 3;
             legendaryUpgradePool[i] = 1;
         }
-
         upgradePositionSelected = -1;
         slotSelected = -1;
     }
@@ -88,6 +93,15 @@ public class UpgradeManager : MonoBehaviour
             OpenHelpMenu();
             helpMenuSeen = true;
         }
+
+        rerollCost = DEFAULT_REROLL_COST;
+        characterMoney.text = character.money.ToString();
+        rerollButtonText.text = "Re-roll | " + DEFAULT_REROLL_COST + "g";
+        if (character.money >= rerollCost) {
+            rerollButton.interactable = true;
+        } else {
+            rerollButton.interactable = false;
+        }
     }
 
     public void Setup(string type) {
@@ -99,6 +113,7 @@ public class UpgradeManager : MonoBehaviour
         //Sets up the upgrades that are displayed in-game. This logic will need to be re-written for if the upgrades run out entirely, although idk if that'll be possible.
         for (int i = 0; i < 3; i++) {       
             if (type == "normal") {
+                upgradeType = "normal";
                 int rarity = Random.Range(0, 101);
                 if (rarity > 65) {          //for now, 30% chance to get a rare upgrade, can be tweaked
                     upgradeRarities[i] = 1; //give rare upgrade
@@ -110,8 +125,9 @@ public class UpgradeManager : MonoBehaviour
             }
 
             if (type == "legendary") {          //legendary upgrades are given after minibosses and bosses, sets all upgrades to legendary
-            upgradeRarities[0] = 2; upgradeRarities[1] = 2; upgradeRarities[2] = 2;
-            upgradeRarityBG[i].sprite = upgradeRarityImage[2];
+                upgradeType = "legendary";
+                upgradeRarities[0] = 2; upgradeRarities[1] = 2; upgradeRarities[2] = 2;
+                upgradeRarityBG[i].sprite = upgradeRarityImage[2];
             }
         }
 
@@ -285,6 +301,19 @@ public class UpgradeManager : MonoBehaviour
         helpMenu.SetActive(false);
     }
 
+    private void RerollButton() {       //reroll button, cost increases every time it's pressed!
+        character.money -= rerollCost;
+        characterMoney.text = character.money.ToString();
+        rerollCost *= 2;
+        rerollButtonText.text = "Re-roll | " + rerollCost + "g";
+        if (character.money >= rerollCost) {
+            rerollButton.interactable = true;
+        } else {
+            rerollButton.interactable = false;
+        }
+        Setup(upgradeType);
+    }
+
     public void Finish() { 
         /*
         Communicate with appropriate slot, and add an upgrade based on the slot and upgrade chosen in this interface.
@@ -381,6 +410,7 @@ public class UpgradeManager : MonoBehaviour
         closeHelpMenu.onClick.AddListener(() => CloseHelpMenu());
         advanceHelpMenu.onClick.AddListener(() => UpdateHelpMenu("advance"));
         backHelpMenu.onClick.AddListener(() => UpdateHelpMenu("back"));
+        rerollButton.onClick.AddListener(() => RerollButton());
     }
 
     public void IncreaseMaxSlots() {

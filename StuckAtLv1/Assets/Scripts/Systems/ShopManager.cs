@@ -84,7 +84,7 @@ public class ShopManager : MonoBehaviour
                 player.afterimages += 1; 
                 afterimages.text = player.afterimages.ToString();
                 if (afterimageCost < 250) {
-                    afterimageCost += 50; afterimagesButtonText.text = "Shield | $" + afterimageCost;
+                    afterimageCost += 50; afterimagesButtonText.text = "Afterimage | $" + afterimageCost;
                 }
                 shopkeeperText.text = "Afterimage purchased."; //temp
                 break;

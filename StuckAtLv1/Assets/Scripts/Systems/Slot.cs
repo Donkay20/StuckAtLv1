@@ -134,8 +134,8 @@ public class Slot : MonoBehaviour
                         buffManager.AddBuff("speed", rareUpgrades[5] * (0.05f * character.afterimages), 5f);
                         Debug.Log("Rare | 5");
                     }
-
-                    if (rareUpgrades[6] > 0) {                                          //rare 6
+ 
+                    if (rareUpgrades[6] > 0) {                                         //rare 6
                         if (character.currentHp > 10) {
                             int goldGain = character.currentHp - 10;
                             character.TakeDamage(goldGain);
@@ -314,7 +314,7 @@ public class Slot : MonoBehaviour
         if (commonUpgrades[6] > 0) {                    //common 6
             critDmg += commonUpgrades[6] * 0.2f;
         }
-        critDmg += character.CriticalDamageModifier;    //buffs
+        critDmg += character.GetCriticalDamageModifier();    //buffs
         //crit damage bonuses end here
         return critDmg;
     }

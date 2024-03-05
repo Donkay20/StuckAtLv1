@@ -40,12 +40,14 @@ public class OnHitBonus : MonoBehaviour
                 if (slot.GetRareUpgrade(13) > 0 && enemy.IsAnemic()) {              //rare 13 (on-kill version)
                     GameObject c = Instantiate(anemiaSpreadPrefab, enemy.transform.position, Quaternion.identity);
                     c.transform.localScale *= slot.GetRareUpgrade(13);
+                    Debug.Log("Rare | 13");
                 }
 
                 if (slot.GetLegendaryUpgrade(0) > 0) {                              //legendary 0
                     GameObject e = Instantiate(explosionPrefab, enemy.transform.position, Quaternion.identity);
                     Explosion g = e.GetComponent<Explosion>();
                     g.Activate(slot);
+                    Debug.Log("Legendary | 0");
                 }
 
                 if (slot.GetLegendaryUpgrade(1) > 0 && slot.SkillUses() > 0) {      //legendary 1
@@ -95,6 +97,7 @@ public class OnHitBonus : MonoBehaviour
                 if (slot.GetRareUpgrade(13) > 0 && enemy.IsAnemic()) {              //rare 13 (on-hit version)
                     GameObject c = Instantiate(anemiaSpreadPrefab, enemy.transform.position, Quaternion.identity);
                     c.transform.localScale *= slot.GetRareUpgrade(13);
+                    Debug.Log("Rare | 13");
                 }
 
                 if (slot.GetRareUpgrade(12) > 0 && enemy.IsAnemic()) {              //rare 12
@@ -155,7 +158,7 @@ public class OnHitBonus : MonoBehaviour
                         Debug.Log("Legendary | 3, crit");
                     } else {
                         FindAnyObjectByType<Character>().GainMoney(FindAnyObjectByType<Character>().afterimages);
-                        Debug.Log("Legendary | 4, normal");
+                        Debug.Log("Legendary | 3, normal");
                     }
                 }
                 

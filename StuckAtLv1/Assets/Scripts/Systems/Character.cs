@@ -16,11 +16,10 @@ Handles main character's active stats in combat, their buffs, and their damage h
     private readonly float iframe = 0.3f;
     private bool invincible; //iframe check
     private bool healthDraining; //overheal drain check
-    private float damageModifier; public float DamageModifier { get => damageModifier; set => damageModifier = value; } //from buffs/debuffs
-    private float criticalDamageModifier; public float CriticalDamageModifier { get => criticalDamageModifier; set => criticalDamageModifier = value; } //from buffs
+    private float damageModifier; //from buffs/debuffs
+    private float criticalDamageModifier; //from buffs
     private float drainTimer = 1; public float DrainTimer { get => drainTimer; set => drainTimer = value; } //from buffs/debuffs
     private int drainValue;
-    
 
     [SerializeField] Animator playerAnim;
     [SerializeField] Animator healthBarAnim;
@@ -36,6 +35,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
         drainTimer = 1;
         drainValue = 1;
         criticalDamageModifier = 0;
+        afterimages /= 2;
     }
 
     public void TakeDamage(int damage) {
@@ -100,7 +100,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
             currentHp += amount;
         }
         healthText.text = currentHp.ToString();
-        Debug.Log("Healed " + amount + " HP. Health: " + currentHp);
+        //Debug.Log("Healed " + amount + " HP. Health: " + currentHp);
         if (currentHp > maxHp && !healthDraining) {
             healthText.color = new Color32(166, 254, 0, 255);
             StartCoroutine(DrainHealth());
@@ -129,6 +129,24 @@ Handles main character's active stats in combat, their buffs, and their damage h
 
     public void ActivateBloodsucker(int hpToRestore) {
         Heal(hpToRestore);
+    }
+
+    public void AdjustDamageModifier(float value) {
+        damageModifier += value;
+        damageModifier = Mathf.Round(value * 100) / 100f;               //floats can sometimes lose precision; this should restore the precision after each instance
+    }
+
+    public float GetDamageModifier() {
+        return damageModifier;
+    }
+
+    public void AdjustCriticalDamageModifier(float value) {
+        criticalDamageModifier += value;
+        criticalDamageModifier = Mathf.Round(value * 100) / 100f;       //floats can sometimes lose precision; this should restore the precision after each instance
+    }
+
+    public float GetCriticalDamageModifier() {
+        return criticalDamageModifier;
     }
 
     public void ActivateBulwark() {

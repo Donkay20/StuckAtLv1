@@ -8,15 +8,21 @@ public class AttackSlotBonus : MonoBehaviour
         int damage = baseDmg;
         if (s.GetCommonUpgrade(0) > 0) {                                                                //common 0
             damage *= (int) (1 + (s.GetCommonUpgrade(0) * 0.1f));
+            Debug.Log("Common | 0, Damage:" + damage);
         }
         if (s.GetRareUpgrade(1) > 0) {                                                                  //rare 1
-            damage *= (int) (1 + (s.GetRareUpgrade(1) * 0.1f));                                         
+            damage *= (int) (1 + (s.GetRareUpgrade(1) * 0.1f));
+            Debug.Log("Rare | 1, Damage:" + damage);                                         
         }
         if (s.GetRareUpgrade(9) > 0) {                                                                  //rare 9
-            damage += (int) s.GetRareUpgrade(9) * (FindAnyObjectByType<Character>().currentHp / 5);     
+            damage += (int) s.GetRareUpgrade(9) * (FindAnyObjectByType<Character>().currentHp / 5);
+            Debug.Log("Rare | 9, Damage:" + damage);      
         }                                      
-        damage *= (int) FindAnyObjectByType<Character>().DamageModifier;                                //buffs
+        damage = (int) (damage * FindAnyObjectByType<Character>().GetDamageModifier());                      //buffs
+        Debug.Log("Damage modifier: " + FindAnyObjectByType<Character>().GetDamageModifier());
+        Debug.Log("After buffs: " + damage);
         damage *= (int) FindAnyObjectByType<GameManager>().GetShopDamageBonus();                        //shop bonus is final damage multiplier
+        Debug.Log("After shop multiplier: " + damage);
         return damage;
     }
 

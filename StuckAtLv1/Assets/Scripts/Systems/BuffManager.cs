@@ -30,17 +30,6 @@ public class BuffManager : MonoBehaviour
         debuffPosition = 0;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.U)) {
-            AddBuff("bloodsucker", 0.5f, 6f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.I)) {
-            AddBuff("bulwark", 0.5f, 30f);
-        }
-        //Manual buffs for testing purposes
-    }
-
     public void AddBuff(string buff, float efficacy, float duration) {
         //Add a buff to the list. Instantiate a new buff object and populate it.
         if (buffPosition < 5) {
@@ -77,7 +66,7 @@ public class BuffManager : MonoBehaviour
         }
         buffs[buffPosition - 1] = null;
         buffPosition--;
-        Debug.Log("Buff Position: " + buffPosition);
+        //Debug.Log("Buff Position: " + buffPosition);
     }
 
     public void DebuffExpired(int id) {
@@ -90,7 +79,7 @@ public class BuffManager : MonoBehaviour
         }
         debuffs[debuffPosition - 1] = null;
         debuffPosition--;
-        Debug.Log("Debuff Position: " + debuffPosition);
+        //Debug.Log("Debuff Position: " + debuffPosition);
     }
 
     public void DispelDebuff() {

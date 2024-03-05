@@ -39,7 +39,7 @@ public class Buff : MonoBehaviour
 
     public void Initialize(string b, float e, float d) {
         buffType = b; efficacy = e; duration = d;
-        Debug.Log("Buff granted. Type: "+ buffType + ", Efficacy: "+ efficacy + ", Duration: " + duration);
+        //Debug.Log("Buff granted. Type: "+ buffType + ", Efficacy: "+ efficacy + ", Duration: " + duration);
         buffActive = true;
         AdjustBuff(buffActive);   
     }
@@ -52,9 +52,9 @@ public class Buff : MonoBehaviour
             case "power":
                 i = 1;
                 if (x) {
-                    character.DamageModifier += efficacy; 
+                    character.AdjustDamageModifier(efficacy); 
                 } else {
-                    character.DamageModifier -= efficacy;
+                    character.AdjustDamageModifier(efficacy * -1);
                 }
                 break;
             case "speed":
@@ -87,9 +87,9 @@ public class Buff : MonoBehaviour
             case "critdmg": //todo
                 i = 5;
                 if (x) {
-                    character.CriticalDamageModifier += efficacy;
+                    character.AdjustCriticalDamageModifier(efficacy);
                 } else {
-                    character.CriticalDamageModifier -= efficacy;
+                    character.AdjustCriticalDamageModifier(efficacy * -1);
                 }
                 break;
         }
