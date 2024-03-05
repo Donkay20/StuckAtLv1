@@ -7,7 +7,7 @@ public class SoulsOfTheDamned : MonoBehaviour
     private Slot slot;
     private readonly float SOULS_BASE_DURATION = 5f;
     private float duration;
-    private float refreshTimer = 0.05f;
+    private float refreshTimer = 0.1f;
     [SerializeField] private GameObject miniGhost;
 
     void Start() {
@@ -26,7 +26,7 @@ public class SoulsOfTheDamned : MonoBehaviour
         refreshTimer -= Time.deltaTime;
         if (refreshTimer <= 0) {
             Instantiate(miniGhost, slot.transform);
-            refreshTimer = 0.05f;
+            refreshTimer = 0.1f;
         }
     }
 }
