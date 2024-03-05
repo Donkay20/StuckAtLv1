@@ -133,7 +133,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
 
     public void AdjustDamageModifier(float value) {
         damageModifier += value;
-        damageModifier = Mathf.Round(value * 100) / 100f;               //floats can sometimes lose precision; this should restore the precision after each instance
+        damageModifier =  Mathf.Round(damageModifier * 100) / 100f;               //floats can sometimes lose precision; this should restore the precision after each instance
     }
 
     public float GetDamageModifier() {
@@ -142,7 +142,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
 
     public void AdjustCriticalDamageModifier(float value) {
         criticalDamageModifier += value;
-        criticalDamageModifier = Mathf.Round(value * 100) / 100f;       //floats can sometimes lose precision; this should restore the precision after each instance
+        criticalDamageModifier = Mathf.Round(criticalDamageModifier * 100) / 100f;       //floats can sometimes lose precision; this should restore the precision after each instance
     }
 
     public float GetCriticalDamageModifier() {
