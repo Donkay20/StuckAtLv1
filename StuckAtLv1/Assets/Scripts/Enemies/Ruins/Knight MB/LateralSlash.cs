@@ -56,7 +56,7 @@ public class LateralSlash : MonoBehaviour
         attackRenderer.sprite = activeLaterSlashSprite;
     }
 
-    private void OnCollisionStay2D(Collision2D col) {
+    private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.layer == LayerMask.NameToLayer("Player")) {
             Attack();
             Destroy(gameObject);

@@ -33,9 +33,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     public int maxHP;
 
     private void Awake() {
-        if (baseSpeed > 0) {
-            body = GetComponent<Rigidbody2D>();
-        }
+        body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
         anemiaTick = 1;
@@ -50,7 +48,9 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         buffManager = FindAnyObjectByType<BuffManager>();
         gameManager = FindAnyObjectByType<GameManager>();
         hp += gameManager.ScaleDifficulty();
-        baseSpeed += gameManager.ScaleDifficulty() / 10;
+        if (!gameObject.CompareTag("LichEffigy")) {   //add conditionals for certain enemies that shouldn't move
+            baseSpeed += gameManager.ScaleDifficulty() / 10;
+        }
         moneyOnKill = 5;
         maxHP = hp;
     }

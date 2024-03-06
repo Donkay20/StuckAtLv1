@@ -38,6 +38,12 @@ public class CombatManager : MonoBehaviour
         condition = -1;
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.L)) {
+            Finish(); //debugging
+        }
+    }
+
     public void Setup(string format) {
         /*
         Set-up includes:

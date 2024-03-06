@@ -9,13 +9,13 @@ public class BlueSkull : MonoBehaviour
     private readonly int BLUE_SKULL_DMG = 2;
     [SerializeField] private Character targetCharacter;
     [SerializeField] private GameObject targetGameObject;
-    void Start()
-    {
+    
+    void Start() {
         targetGameObject = FindAnyObjectByType<Character>().gameObject;
         targetCharacter = targetGameObject.GetComponent<Character>();
     }
 
-    private void OnCollisionEnter2D(Collision2D col) {
+    private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.layer == LayerMask.NameToLayer("Player")) {
             Attack();
             Destroy(gameObject);

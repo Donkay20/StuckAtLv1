@@ -126,7 +126,7 @@ public class UpgradeManager : MonoBehaviour
 
             if (type == "legendary") {          //legendary upgrades are given after minibosses and bosses, sets all upgrades to legendary
                 upgradeType = "legendary";
-                upgradeRarities[0] = 2; upgradeRarities[1] = 2; upgradeRarities[2] = 2;
+                upgradeRarities[i] = 2;
                 upgradeRarityBG[i].sprite = upgradeRarityImage[2];
             }
         }
@@ -356,9 +356,9 @@ public class UpgradeManager : MonoBehaviour
 
         //subtract from the available upgrades
         switch(upgradeRarities[upgradePositionSelected]) {
-            case 0: commonUpgradePool[upgradePositionSelected] -= 1; break;
-            case 1: rareUpgradePool[upgradePositionSelected] -= 1; break;
-            case 2: legendaryUpgradePool[upgradePositionSelected] -= 1; break;
+            case 0: commonUpgradePool[upgradeSelection[upgradePositionSelected]]--; break;
+            case 1: rareUpgradePool[upgradeSelection[upgradePositionSelected]]--; break;
+            case 2: legendaryUpgradePool[upgradeSelection[upgradePositionSelected]]--; break;
         }
 
         //reset all the buttons

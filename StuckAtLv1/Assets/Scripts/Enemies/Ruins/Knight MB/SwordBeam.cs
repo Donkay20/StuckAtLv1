@@ -41,7 +41,7 @@ public class SwordBeam : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D col) {
+    private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.layer == LayerMask.NameToLayer("Player")) {
             Attack();
             Destroy(gameObject);

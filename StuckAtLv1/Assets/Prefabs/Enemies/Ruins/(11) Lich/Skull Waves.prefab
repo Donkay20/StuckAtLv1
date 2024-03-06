@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1769089677889387894}
   - component: {fileID: 4729846774313168297}
   - component: {fileID: 2884036136771398765}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -154,7 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7278883803449780555}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Skull Waves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 3155907646655928838}
   - component: {fileID: 2874818781717622699}
   - component: {fileID: 2174018258152459903}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 5668228306932805730}
   - component: {fileID: 3197564476817239435}
   - component: {fileID: 4723729597144448889}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +452,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 2973764489804379433}
   - component: {fileID: 693371951409661833}
   - component: {fileID: 3660480458053112920}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +597,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 3141114058403622594}
   - component: {fileID: 3139394676148377331}
   - component: {fileID: 3548955131788072759}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -768,7 +768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 900168534258423798}
   - component: {fileID: 5836677838802566543}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: V. Skull Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 6760470883923584517}
   - component: {fileID: 3782684889243052232}
   - component: {fileID: 5597293967099478091}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -938,7 +938,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -966,7 +966,7 @@ GameObject:
   - component: {fileID: 4291060790320604098}
   - component: {fileID: 4610241865784655759}
   - component: {fileID: 6783048124698408673}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1083,7 +1083,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1109,7 +1109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8717146619977364838}
   - component: {fileID: 3081159242305403836}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: H. Skull Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 6137043930389687390}
   - component: {fileID: 9057288471049593019}
   - component: {fileID: 8486518682695783421}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1279,7 +1279,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1307,7 +1307,7 @@ GameObject:
   - component: {fileID: 3580424453453039970}
   - component: {fileID: 218895315410318029}
   - component: {fileID: 2184147647424563140}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1424,7 +1424,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1452,7 +1452,7 @@ GameObject:
   - component: {fileID: 8099229107368621296}
   - component: {fileID: 5728664150571135717}
   - component: {fileID: 3856972542792194083}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Blue Skull 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1569,7 +1569,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

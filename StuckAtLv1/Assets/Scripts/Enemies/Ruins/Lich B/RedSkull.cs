@@ -14,6 +14,7 @@ public class RedSkull : MonoBehaviour
     private Character targetCharacter;
     private Vector2 previousDirection;
     Rigidbody2D rb;
+    
     void Start() {
         lichPosition = FindAnyObjectByType<Lich>().gameObject;
         transform.position = lichPosition.transform.position;
@@ -47,8 +48,7 @@ public class RedSkull : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void OnCollisionStay2D(Collision2D col) {
+    private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.layer == LayerMask.NameToLayer("Player")) {
             Attack();
             Destroy(gameObject);
