@@ -86,6 +86,9 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 2:
+                            if (mapManager.GetLevel() == 0) {
+                                SceneManager.UnloadSceneAsync("RuinsEnd");
+                            }
                             break;
                         case 3:
                             break;
@@ -263,6 +266,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             break;
                     }
                 }
+
                 previousState = GameState.Dialogue;
                 Debug.Log("dialogue state");
                 break;

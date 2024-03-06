@@ -55,7 +55,7 @@ public class AbsorbBullet : MonoBehaviour
                     break;
 
                 case "Skeleton2":   //Bone Spikes
-                    GetComponentInParent<Slot>().AcquireSkill(2, 5, 0.5f);
+                    GetComponentInParent<Slot>().AcquireSkill(2, 2, 0.5f);
                     break;
 
                 case "Skeleton3":   //Upheaval

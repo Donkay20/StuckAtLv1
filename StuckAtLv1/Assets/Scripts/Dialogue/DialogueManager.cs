@@ -138,7 +138,8 @@ public class DialogueManager : MonoBehaviour
                     gameManager.ReceiveCommand("boss");
                     break;
                 case "RuinsBossEnd":
-                    SceneManager.LoadScene("RuinsEnd");
+                    SceneManager.LoadScene("RuinsEnd", LoadSceneMode.Additive);
+                    SceneManager.UnloadSceneAsync("RuinsBossEnd");
                     break;
                 case "RuinsEnd":
                     gameManager.ReceiveCommand("map");
@@ -262,8 +263,8 @@ public class DialogueManager : MonoBehaviour
                     gameManager.ReceiveCommand("boss");
                     break;
                 case "RuinsBossEnd":
-                    //gameManager.ReceiveCommand("map");
-                    SceneManager.LoadScene("RuinsEnd");
+                    SceneManager.UnloadSceneAsync("RuinsBossEnd");
+                    SceneManager.LoadScene("RuinsEnd", LoadSceneMode.Additive);
                     break;
                 case "RuinsEnd":
                     gameManager.ReceiveCommand("map");

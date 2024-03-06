@@ -417,8 +417,11 @@ public class MapManager : MonoBehaviour
         foreach (Room r in rooms) {GiveRoom(r);}
 
         startingRoom.AssignRoomType("combat"); startingRoom.GetComponent<Image>().sprite = combatImage;
+        startingRoom.GetComponent<Button>().interactable = true;
         minibossRoom.AssignRoomType("dialogue"); minibossRoom.GetComponent<Image>().sprite = miniBossImage;
+        minibossRoom.GetComponent<Button>().interactable = true;
         bossRoom.AssignRoomType("dialogue"); bossRoom.GetComponent<Image>().sprite = bossImage;
+        bossRoom.GetComponent<Button>().interactable = true;
 
         HighlightRoom(startingRoom);
 
