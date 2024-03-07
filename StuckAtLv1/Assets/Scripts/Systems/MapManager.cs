@@ -363,6 +363,15 @@ public class MapManager : MonoBehaviour
                 }
     }
 
+    public void SetLinesOff()
+    {
+        nodeList.Clear();
+        for(int i = 0; i < lines.Length; i++)
+        {
+            lines[i].SetActive(false);
+        }
+    }
+
     private void InitializeButtons() {
         //initializes the connection between the rooms and their buttons
         node13.onClick.AddListener(() => {ClickedNode(1,3);});  //surely there's a better way to do this

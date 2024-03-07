@@ -395,6 +395,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
         mapUI.SetActive(true);
         mapManager.NewWorld();
+        mapManager.SetLinesOff();
         mapUI.SetActive(false);
     }
 }
