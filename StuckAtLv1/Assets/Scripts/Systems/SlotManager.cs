@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,68 +11,44 @@ public class SlotManager : MonoBehaviour
     Currently only needs to account for 2, but will eventually be expanded to account for 5. At some point conditions will be added to lock slot usage until it is unlocked via game progress.
     */
 
-    public KeyCode slotKey1, slotKey2, slotKey3, slotKey4, slotKey5;
+    //public KeyCode slotKey1, slotKey2, slotKey3, slotKey4, slotKey5;
+    [SerializeField] private int slotNum = 0;
+    private readonly float BASE_BULLET_COOLDOWN = 0.5f;
+    private float activeBulletCD;
+    [SerializeField] private bool isSkillFiring;
+    [SerializeField] public int[] idRegistry = new int[5];
     [SerializeField] private Slot slot1, slot2, slot3, slot4, slot5;
-    private int slotNum = 1;
     [SerializeField] private int maxSlots;
     [SerializeField] private GameObject[] slots;
     [SerializeField] private Sprite[] onSpriteList;
     [SerializeField] private Sprite[] offSpriteList;
-
+    [SerializeField] private AbsorbBullet absorbBullet;
+    
     private void Awake() {
-        //Sets the first slot as default
-        slots[0].GetComponent<Animator>().SetTrigger("Hit");
-        slots[0].transform.GetChild(1).GetComponent<Image>().sprite = onSpriteList[0];
-        slotNum = 1; 
+        activeBulletCD = BASE_BULLET_COOLDOWN;
+        slotNum = 0; 
         maxSlots = 2; //# of slots unlocked
     }
 
     void Update() {
-        ToggleSlot();
-        InitiateSlot();
+        if (activeBulletCD > 0) {
+            activeBulletCD -= Time.deltaTime;
+        }
+
+        if (Input.GetMouseButton(0) && activeBulletCD <= 0) {
+            AbsorbShots();
+        }
+
+        if (Input.GetMouseButtonDown(1)) {
+            FireAllSlots();
+        }
+
+        //ToggleSlot();
         TurnOffSlots();
     }
 
-    //Select Slot Player wants to use
+    /*
     private void ToggleSlot() {
-        if (Input.mouseScrollDelta.y > 0) {
-            if (slotNum - 1 == 0) {
-                slotNum = maxSlots;
-            } else {
-                slotNum--;
-            }
-            AnimationControl(slots[slotNum - 1], slotNum - 1);
-        }
-
-        if (Input.mouseScrollDelta.y < 0) {
-            if (slotNum + 1 > maxSlots) {
-                slotNum = 1;
-            } else {
-                slotNum++;
-            }
-            AnimationControl(slots[slotNum - 1], slotNum - 1);
-        }
-
-        //For Q and E toggle
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            if (slotNum - 1 == 0) {
-                slotNum = maxSlots;
-            } else {
-                slotNum--;
-            }
-            AnimationControl(slots[slotNum - 1], slotNum - 1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E)) {
-            if (slotNum + 1 > maxSlots) {
-                slotNum = 1;
-            } else {
-                slotNum++;
-            }
-            AnimationControl(slots[slotNum - 1], slotNum - 1);
-        }
-        //=======================
-
         if (Input.GetKeyDown(slotKey1)) {
             slotNum = 1;
             AnimationControl(slots[0], 0);
@@ -88,14 +65,14 @@ public class SlotManager : MonoBehaviour
             AnimationControl(slots[2], 2);
             }
         }
-        
+
         if (maxSlots >= 4) {
             if (Input.GetKeyDown(slotKey4)) {
             slotNum = 4;
             AnimationControl(slots[3], 3);
             }
         }
-        
+
         if (maxSlots == 5) {
             if (Input.GetKeyDown(slotKey5)) {
             slotNum = 5;
@@ -103,27 +80,101 @@ public class SlotManager : MonoBehaviour
             }
         }
     }
-    
-    private void InitiateSlot() {
-        //Initiates slot selected
-        if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)){
-            switch(slotNum){
+    */
+
+    public void AcquireSkill(int ID) {
+        if(slotNum < maxSlots) {
+            if (!idRegistry.Contains(ID) && !isSkillFiring) {
+                switch(slotNum) {
+                case 0:
+                    if (!slot1.IsCoolingDown()) {slot1.AcquireSkill(ID); idRegistry[0] = ID; slotNum++; AnimationControl(slots[0], 0);}
+                    
+                    break;
                 case 1:
-                    slot1.Engage();
+                    if (!slot2.IsCoolingDown()) {slot2.AcquireSkill(ID); idRegistry[1] = ID; slotNum++; AnimationControl(slots[1], 1);}
+                    
                     break;
                 case 2:
-                    slot2.Engage();
+                    if (!slot3.IsCoolingDown()) {slot3.AcquireSkill(ID); idRegistry[2] = ID; slotNum++; AnimationControl(slots[2], 2);}
+                    
                     break;
                 case 3:
-                    slot3.Engage();
+                    if (!slot4.IsCoolingDown()) {slot4.AcquireSkill(ID); idRegistry[3] = ID; slotNum++; AnimationControl(slots[3], 3);}
+                    
                     break;
                 case 4:
-                    slot4.Engage();
+                    if (!slot5.IsCoolingDown()) {slot5.AcquireSkill(ID); idRegistry[4] = ID; slotNum++; AnimationControl(slots[4], 4);}
+                    
+                    break;
+                }
+            }
+        }
+    }
+
+    private void AbsorbShots() {
+        Instantiate(absorbBullet, transform.position, Quaternion.identity, transform);
+        activeBulletCD = BASE_BULLET_COOLDOWN;                                            //set the bullet timer back to the cooldown time. adjust for buffs, nerfs etc
+    }
+    
+    private void FireAllSlots() {
+        if (slotNum > 0) {
+            SlotBlast();
+        }
+    }
+
+    private void SlotBlast() {
+        isSkillFiring = true;
+        while (slotNum > 0) {
+            switch (slotNum) {
+                case 1:
+                    slot1.Engage(); idRegistry[0] = 0;
+                    break;
+                case 2:
+                    slot2.Engage(); idRegistry[1] = 0;
+                    break;
+                case 3:
+                    slot3.Engage(); idRegistry[2] = 0;
+                    break;
+                case 4:
+                    slot4.Engage(); idRegistry[3] = 0;
                     break;
                 case 5:
-                    slot5.Engage();
+                    slot5.Engage(); idRegistry[4] = 0;
                     break;
             }
+            slotNum--;
+        }
+        isSkillFiring = false;
+    }
+
+    public void BattleEnd() {
+        if (isSkillFiring) {
+            StopAllCoroutines();
+            slotNum = 0;
+            for (int i = 0; i < maxSlots; i++) {
+                switch (i) {
+                    case 0:
+                        slot1.DumpSkill();
+                        idRegistry[0] = 0;
+                        break;
+                    case 1:
+                        slot2.DumpSkill();
+                        idRegistry[1] = 0;
+                        break;
+                    case 2:
+                        slot3.DumpSkill();
+                        idRegistry[2] = 0;
+                        break;
+                    case 3:
+                        slot4.DumpSkill();
+                        idRegistry[3] = 0;
+                        break;
+                    case 4:
+                        slot5.DumpSkill();
+                        idRegistry[4] = 0;
+                        break;
+                }
+            } 
         }
     }
 
@@ -166,27 +217,27 @@ public class SlotManager : MonoBehaviour
     }
 
     private void TurnOffSlots() {
-        if(slotNum != 1) {
+        if(slotNum < 1) {
             slots[0].GetComponent<Animator>().SetTrigger("Hit2");
             slots[0].transform.Find("Slot 1_Border").GetComponent<Image>().sprite = offSpriteList[0];
         }
 
-        if(slotNum != 2) {
+        if(slotNum < 2) {
             slots[1].GetComponent<Animator>().SetTrigger("Hit2");
             slots[1].transform.Find("Slot 2_Border").GetComponent<Image>().sprite = offSpriteList[1];
         }
 
-        if(slotNum != 3 && maxSlots >= 3) {
+        if(slotNum < 3 && maxSlots >= 3) {
             slots[2].GetComponent<Animator>().SetTrigger("Hit2");
             slots[2].transform.Find("Slot 3_Border").GetComponent<Image>().sprite = offSpriteList[2];
         }
 
-        if(slotNum != 4 && maxSlots >= 4) {
+        if(slotNum < 4 && maxSlots >= 4) {
             slots[3].GetComponent<Animator>().SetTrigger("Hit2");
             slots[3].transform.Find("Slot 4_Border").GetComponent<Image>().sprite = offSpriteList[3];
         }
 
-        if(slotNum != 5 && maxSlots >= 5) {
+        if(slotNum < 5 && maxSlots >= 5) {
             slots[4].GetComponent<Animator>().SetTrigger("Hit2");
             slots[4].transform.Find("Slot 5_Border").GetComponent<Image>().sprite = offSpriteList[4];
         }

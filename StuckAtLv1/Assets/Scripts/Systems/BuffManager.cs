@@ -104,7 +104,7 @@ public class BuffManager : MonoBehaviour
         bulwarkActive = x;
     }
 
-    public void EndBattle() {
+    public void BattleEnd() {
         //Clear all buffs and debuffs.
         Buff[] buffsToDelete = FindObjectsOfType<Buff>();
         foreach(Buff b in buffsToDelete) {

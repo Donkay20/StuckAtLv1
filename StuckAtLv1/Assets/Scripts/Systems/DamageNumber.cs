@@ -8,9 +8,7 @@ public class DamageNumber : MonoBehaviour
 {
     [SerializeField] private TextMeshPro additionalText;
     [SerializeField] private TextMeshPro damageNumber;
-    private float lifetime = 2f;
     void Start() {
-        Destroy(gameObject, lifetime);
         damageNumber = GetComponent<TextMeshPro>();
     }
 

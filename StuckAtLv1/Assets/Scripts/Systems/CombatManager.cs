@@ -18,6 +18,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameManager notify;
     [SerializeField] private EnemyManager spawner;
     [SerializeField] private BuffManager buffManager;
+    [SerializeField] private SlotManager slotManager;
     [SerializeField] private GameObject bossUI, bossSecondaryUI;
     [SerializeField] private Slot[] slots = new Slot[5];
     [SerializeField] private GameObject[] ruinsRooms = new GameObject[5];
@@ -238,11 +239,12 @@ public class CombatManager : MonoBehaviour
             bossUI.SetActive(false);
         }
 
-        //Reset the objective and stop coroutines in the character script to prevent errors
+        //Reset the objective and stop coroutines in various scripts to prevent errors
         objective = "";
         character.Interrupt();
-        charMovement.CombatEnd();
-        buffManager.EndBattle();
+        charMovement.BattleEnd();
+        buffManager.BattleEnd();
+        slotManager.BattleEnd();
 
         //reset the cooldown when the battle ends.
         foreach (Slot slot in slots) {

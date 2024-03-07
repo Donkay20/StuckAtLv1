@@ -188,6 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   additionalText: {fileID: 2495290342550845517}
   damageNumber: {fileID: 4623479689281901832}
+  lifetime: 2
 --- !u!95 &6095144888828615604
 Animator:
   serializedVersion: 5

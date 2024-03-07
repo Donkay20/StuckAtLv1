@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
     Animator anim;
     SpriteRenderer sr;
 
-    private readonly float BASE_SPEED = 6f;
+    private readonly float BASE_SPEED = 5f;
     private float speedModifier; public float SpeedModifier { get => speedModifier; set => speedModifier = value; }
     private float speedDebuff; public float SpeedDebuff { get => speedDebuff; set => speedDebuff = value; }
     
@@ -136,7 +136,7 @@ public class Movement : MonoBehaviour
         externalModifier = e;
     }
 
-    public void CombatEnd() {
+    public void BattleEnd() {
         activeDashCD = 0;
         dashCooldownFill.fillAmount = 0;
         dashCooldownText.gameObject.SetActive(false);

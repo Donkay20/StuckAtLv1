@@ -21,6 +21,7 @@ public class Slot : MonoBehaviour
     */
 
     [SerializeField] private int identity;
+    private readonly float BASE_SLOT_COOLDOWN = 3f;
     private bool containsSkill = false;
     private bool absorbBulletAvailable = true;
     private int skillID = 0, skillUses = 0;
@@ -70,7 +71,7 @@ public class Slot : MonoBehaviour
             } else {
                 cooldownValueText.text = activeCD.ToString("f1");
             }
-            cooldownFill.fillAmount = activeCD / cooldown * cooldownModifier;
+            cooldownFill.fillAmount = activeCD / (BASE_SLOT_COOLDOWN + cooldownModifier);
         } else {
             coolingDown = false; cooldownValueText.gameObject.SetActive(false);
         }
@@ -86,10 +87,10 @@ public class Slot : MonoBehaviour
     public void Engage() {
         if (!coolingDown) {
             //slot won't do anything if it's on cooldown.
-            if (!containsSkill && absorbBulletAvailable) {
+            if (!containsSkill) {
                 //handles slot; whether to use skill or to absorb skill
-                Instantiate(bullet, bulletTransform.position, Quaternion.identity, transform);
-                this.absorbBulletAvailable = false;
+                //Instantiate(bullet, bulletTransform.position, Quaternion.identity, transform);
+                //this.absorbBulletAvailable = false;
                 //the absoption bullet class will set this value back to true when it dissipates
             } else {
                 Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform);
@@ -179,7 +180,7 @@ public class Slot : MonoBehaviour
                 uIText.text = skillUses.ToString();
                 //drain a skill use and reflect it in the UI
 
-                activeCD = cooldown * cooldownModifier;
+                activeCD = cooldown;
                 //set the cooldown when a skill is used
 
                 if (skillUses <= 0) {
@@ -200,11 +201,11 @@ public class Slot : MonoBehaviour
         coolingDown = false;
     }
 
-    public void AcquireSkill(int ID, int uses, float cd) {    //calls to this method require the ID of the skill and the amt of base uses the skill has.
+    public void AcquireSkill(int ID) {    //calls to this method require the ID of the skill and the amt of base uses the skill has.
         if(ID != 0) {
             skillID = ID;
-            skillUses = uses;
-            cooldown = cd;
+            skillUses = 1;
+            cooldown = BASE_SLOT_COOLDOWN + cooldownModifier;
             skillImage.sprite = attack[ID].GetComponent<SpriteRenderer>().sprite;
             uIText.text = skillUses.ToString();
             containsSkill = true;
@@ -231,6 +232,12 @@ public class Slot : MonoBehaviour
         activeCD -= cooldown * (0.1f * intensity);
     }
 
+    public void DumpSkill() {
+        containsSkill = false;
+        skillImage.sprite = attack[0].GetComponent<SpriteRenderer>().sprite;
+        skillID = 0; skillUses = 0; cooldown = 0;
+    }
+
     public void ApplySlotUpgrade(string rarity, int ID) {
         switch(rarity) {
             case "common":
@@ -253,20 +260,24 @@ public class Slot : MonoBehaviour
         Debug.Log(gameManager.GetWeight(identity));
         int weight = gameManager.GetWeight(identity);
         if (weight == 0) {
-            cooldownModifier = 0.9f;
+            cooldownModifier = -0.25f;
         }
         if (weight >= 1 && weight <= 3) {
-            cooldownModifier = 1 + 0.1f * weight;
+            cooldownModifier = 0.5f;
         }
         if (weight >= 4 && weight <= 6) {
-            cooldownModifier = 1 + 0.2f * weight;
+            cooldownModifier = 1f;
         }
         if (weight >= 7 && weight <= 9) {
-            cooldownModifier = 1 + 0.3f * weight;
+            cooldownModifier = 2f;
         }
         if (weight >= 10) {
-            cooldownModifier = 1 + 0.5f * weight;
+            cooldownModifier = 4f;
         }
+    }
+
+    public bool IsCoolingDown() {
+        return coolingDown;
     }
 
     public int GetCommonUpgrade(int upgrade) {

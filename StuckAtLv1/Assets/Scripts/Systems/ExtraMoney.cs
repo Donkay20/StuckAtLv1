@@ -12,7 +12,9 @@ public class ExtraMoney : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col) {
         Character c = col.GetComponent<Character>();
-        c.GainMoney(moneyInside);
-        Destroy(gameObject);
+        if (c != null) {
+            c.GainMoney(moneyInside);
+            Destroy(gameObject);
+        }
     }
 }
