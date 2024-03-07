@@ -281,4 +281,8 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     public void RaiseReward(int bonusMoney) {
         moneyOnKill += bonusMoney;
     }
+
+    public void SelfDestruct() {
+        Destroy(gameObject);
+    }
 }

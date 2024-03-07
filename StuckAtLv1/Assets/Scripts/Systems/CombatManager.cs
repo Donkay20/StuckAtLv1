@@ -80,6 +80,18 @@ public class CombatManager : MonoBehaviour
                 Debug.Log(roomChosen);
                 break;
             case 2:
+                switch (format) {
+                    case "combat":
+                    case "survival":
+                        roomChosen = 0; //adjust when more rooms are made available.
+                        break;
+                    case "miniboss":
+                        //roomChosen = 4;
+                        break;
+                    case "boss":
+                        //roomChosen = 5;
+                        break;
+                }
                 break;
             case 3:
                 break;
@@ -117,7 +129,7 @@ public class CombatManager : MonoBehaviour
                 objective = "combat";
                 spawner.enabled = true;
                 spawner.SetSpawnTimer(0.5f);
-                enemiesToKill = mapProgress.GetWorld()*(10 + (2 * mapProgress.GetLevel())); //orig 10
+                enemiesToKill = mapProgress.GetWorld() * (10 + (2 * mapProgress.GetLevel())); //orig 10
                 uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
                 StartCoroutine(CombatTracker());
                 break;
@@ -126,7 +138,7 @@ public class CombatManager : MonoBehaviour
                 objective = "survival";
                 spawner.enabled = true;
                 spawner.SetSpawnTimer(0.5f);
-                timeLeft = mapProgress.GetWorld()*(20 + mapProgress.GetLevel()); //orig 20
+                timeLeft = mapProgress.GetWorld() * (20 + mapProgress.GetLevel()); //orig 20
                 uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
                 StartCoroutine(SurvivalTimer());
                 break;
@@ -204,7 +216,8 @@ public class CombatManager : MonoBehaviour
         spawner.enabled = false;
         Enemy[] remainingEnemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
         foreach (Enemy straggler in remainingEnemies) {
-            straggler.TakeDamage(999);
+            //straggler.TakeDamage(999);
+            straggler.SelfDestruct();
             //Destroy(straggler); <- doesn't work
         }
 

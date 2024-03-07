@@ -42,7 +42,8 @@ public class EnemyManager : MonoBehaviour
                     enemyID = Random.Range(0, 9);
                     break;
                 case 2:
-                    enemyID = Random.Range(9, 17);
+                    enemyID = Random.Range(0, 9);
+                    //enemyID = Random.Range(9, 17); //fix when world 2 enemies are in
                     break;
                 case 3:
                     enemyID = Random.Range(17, 26);
@@ -52,7 +53,6 @@ public class EnemyManager : MonoBehaviour
                     break;
             }
         }
-
         Vector3 position = GenerateRandomPosition();
         position += player.transform.position;
         GameObject newEnemy = Instantiate(enemyPool[enemyID]); //change this value to test specific enemies
@@ -62,7 +62,6 @@ public class EnemyManager : MonoBehaviour
     }
 
     private Vector3 GenerateRandomPosition() {
-
         Vector3 position =  new Vector3();
 
         float f = Random.value > 0.5f ? -1f : 1f;
