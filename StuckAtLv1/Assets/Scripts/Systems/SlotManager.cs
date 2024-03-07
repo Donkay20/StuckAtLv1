@@ -52,6 +52,26 @@ public class SlotManager : MonoBehaviour
             AnimationControl(slots[slotNum - 1], slotNum - 1);
         }
 
+        //For Q and E toggle
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            if (slotNum - 1 == 0) {
+                slotNum = maxSlots;
+            } else {
+                slotNum--;
+            }
+            AnimationControl(slots[slotNum - 1], slotNum - 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (slotNum + 1 > maxSlots) {
+                slotNum = 1;
+            } else {
+                slotNum++;
+            }
+            AnimationControl(slots[slotNum - 1], slotNum - 1);
+        }
+        //=======================
+
         if (Input.GetKeyDown(slotKey1)) {
             slotNum = 1;
             AnimationControl(slots[0], 0);

@@ -39,6 +39,11 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private int[] weight = new int[5];
     private int maxSlots;
     private bool slotEquilibrium;
+
+    //Post-Processing
+    [SerializeField] private VirtualCameraStates virtualCamera;
+
+
     void Start() {      //default to the map when the game launches.
         Application.targetFrameRate = 60;
         previousState = GameState.Map;
@@ -397,5 +402,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         mapManager.NewWorld();
         mapManager.SetLinesOff();
         mapUI.SetActive(false);
+
+        //virtualCamera.SetForest();
     }
 }
