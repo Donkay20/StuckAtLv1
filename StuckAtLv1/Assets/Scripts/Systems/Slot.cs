@@ -36,7 +36,7 @@ public class Slot : MonoBehaviour
     //display for the skill image on the UI
     [SerializeField] private TextMeshProUGUI uIText;
     //display for the skill usages on the UI
-    [SerializeField] private GameObject bullet;
+    //[SerializeField] private GameObject bullet;
     //exclusively for the absorption bullet
     [SerializeField] private GameObject[] attack = new GameObject[2];
     //this will expand in accordance to the # of attacks we have
@@ -74,6 +74,10 @@ public class Slot : MonoBehaviour
             cooldownFill.fillAmount = activeCD / (BASE_SLOT_COOLDOWN + cooldownModifier);
         } else {
             coolingDown = false; cooldownValueText.gameObject.SetActive(false);
+        }
+
+        if (!containsSkill) {
+            skillImage.sprite = attack[0].GetComponent<SpriteRenderer>().sprite;
         }
     }
 

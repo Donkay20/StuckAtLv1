@@ -78,7 +78,7 @@ public class CombatManager : MonoBehaviour
                 ruinsRooms[roomChosen].SetActive(true);
                 room = ruinsRooms[roomChosen];
                 character.gameObject.transform.position = ruinsSpawn[roomChosen].gameObject.transform.position;
-                Debug.Log(roomChosen);
+                //Debug.Log(roomChosen);
                 break;
             case 2:
                 switch (format) {
@@ -93,6 +93,10 @@ public class CombatManager : MonoBehaviour
                         //roomChosen = 5;
                         break;
                 }
+                forestRooms[roomChosen].SetActive(true);
+                room = forestRooms[roomChosen];
+                character.gameObject.transform.position = forestSpawn[roomChosen].gameObject.transform.position;
+                //Debug.Log(roomChosen);
                 break;
             case 3:
                 break;

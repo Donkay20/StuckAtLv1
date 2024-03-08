@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,69 +40,52 @@ public class SlotManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1)) {
             FireAllSlots();
         }
-
-        //ToggleSlot();
         TurnOffSlots();
     }
-
-    /*
-    private void ToggleSlot() {
-        if (Input.GetKeyDown(slotKey1)) {
-            slotNum = 1;
-            AnimationControl(slots[0], 0);
-        }
-
-        if (Input.GetKeyDown(slotKey2)) {
-            slotNum = 2;
-            AnimationControl(slots[1], 1);
-        }
-
-        if (maxSlots >= 3) {
-            if (Input.GetKeyDown(slotKey3)) {
-            slotNum = 3;
-            AnimationControl(slots[2], 2);
-            }
-        }
-
-        if (maxSlots >= 4) {
-            if (Input.GetKeyDown(slotKey4)) {
-            slotNum = 4;
-            AnimationControl(slots[3], 3);
-            }
-        }
-
-        if (maxSlots == 5) {
-            if (Input.GetKeyDown(slotKey5)) {
-            slotNum = 5;
-            AnimationControl(slots[4], 4);
-            }
-        }
-    }
-    */
 
     public void AcquireSkill(int ID) {
         if(slotNum < maxSlots) {
             if (!idRegistry.Contains(ID) && !isSkillFiring) {
                 switch(slotNum) {
                 case 0:
-                    if (!slot1.IsCoolingDown()) {slot1.AcquireSkill(ID); idRegistry[0] = ID; slotNum++; AnimationControl(slots[0], 0);}
-                    
+                    if (!slot1.IsCoolingDown()) {
+                        slot1.AcquireSkill(ID); 
+                        idRegistry[0] = ID; 
+                        slotNum++; 
+                        AnimationControl(slots[0], 0);
+                    }
                     break;
                 case 1:
-                    if (!slot2.IsCoolingDown()) {slot2.AcquireSkill(ID); idRegistry[1] = ID; slotNum++; AnimationControl(slots[1], 1);}
-                    
+                    if (!slot2.IsCoolingDown()) {
+                        slot2.AcquireSkill(ID); 
+                        idRegistry[1] = ID; 
+                        slotNum++; 
+                        AnimationControl(slots[1], 1);
+                    }
                     break;
                 case 2:
-                    if (!slot3.IsCoolingDown()) {slot3.AcquireSkill(ID); idRegistry[2] = ID; slotNum++; AnimationControl(slots[2], 2);}
-                    
+                    if (!slot3.IsCoolingDown()) {
+                        slot3.AcquireSkill(ID); 
+                        idRegistry[2] = ID; 
+                        slotNum++; 
+                        AnimationControl(slots[2], 2);
+                    }
                     break;
                 case 3:
-                    if (!slot4.IsCoolingDown()) {slot4.AcquireSkill(ID); idRegistry[3] = ID; slotNum++; AnimationControl(slots[3], 3);}
-                    
+                    if (!slot4.IsCoolingDown()) {
+                        slot4.AcquireSkill(ID); 
+                        idRegistry[3] = ID; 
+                        slotNum++; 
+                        AnimationControl(slots[3], 3);
+                    }
                     break;
                 case 4:
-                    if (!slot5.IsCoolingDown()) {slot5.AcquireSkill(ID); idRegistry[4] = ID; slotNum++; AnimationControl(slots[4], 4);}
-                    
+                    if (!slot5.IsCoolingDown()) {
+                        slot5.AcquireSkill(ID); 
+                        idRegistry[4] = ID; 
+                        slotNum++; 
+                        AnimationControl(slots[4], 4);
+                    }
                     break;
                 }
             }
@@ -117,7 +98,7 @@ public class SlotManager : MonoBehaviour
     }
     
     private void FireAllSlots() {
-        if (slotNum > 0) {
+        if (slotNum > 0 && !isSkillFiring) {
             SlotBlast();
         }
     }
@@ -270,4 +251,36 @@ public class SlotManager : MonoBehaviour
         }
         Debug.Log("Slot Manager: Maximum slots increased to " + maxSlots + ". Process successful.");
     }
+
+    /* //todo
+    public class AttackSpeedManager : MonoBehaviour
+{
+    private float baseAttackSpeed = 0.5f; // Base attack speed in seconds
+    private float currentAttackSpeed; // Current attack speed after applying boosts
+
+    private void Awake()
+    {
+        currentAttackSpeed = baseAttackSpeed;
+    }
+
+    // Method to apply attack speed boost
+    public void ApplyAttackSpeedBoost(float percentageBoost)
+    {
+        float boostMultiplier = 1f + (percentageBoost / 100f); // Convert percentage to multiplier
+        currentAttackSpeed = baseAttackSpeed / boostMultiplier; // Apply the boost
+    }
+
+    // Method to reset attack speed to base value
+    public void ResetAttackSpeed()
+    {
+        currentAttackSpeed = baseAttackSpeed;
+    }
+
+    // Getter method to access current attack speed
+    public float GetCurrentAttackSpeed()
+    {
+        return currentAttackSpeed;
+    }
+}
+    */
 }

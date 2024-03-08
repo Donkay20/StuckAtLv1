@@ -35,7 +35,6 @@ Handles main character's active stats in combat, their buffs, and their damage h
         drainTimer = 1;
         drainValue = 1;
         criticalDamageModifier = 0;
-        afterimages /= 2;
     }
 
     public void TakeDamage(int damage) {
@@ -58,6 +57,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
         }
         
         if (currentHp <= 0) {
+            //die
             SceneManager.LoadScene("TitleScreen");
         }
         hpBar.SetState(currentHp, maxHp);
@@ -151,10 +151,12 @@ Handles main character's active stats in combat, their buffs, and their damage h
 
     public void ActivateBulwark() {
         drainValue = -1;
+        drainTimer /= 2;
     }
 
     public void DeactivateBulwark() {
         drainValue = 1;
+        drainTimer *= 2;
     }
 
     public void DashingIFrames() {
