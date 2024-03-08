@@ -93,7 +93,7 @@ public class SlotManager : MonoBehaviour
     }
 
     private void AbsorbShots() {
-        Instantiate(absorbBullet, transform.position, Quaternion.identity, transform);
+        BulletPool.Instance.GetBullet();
         activeBulletCD = BASE_BULLET_COOLDOWN;                                            //set the bullet timer back to the cooldown time. adjust for buffs, nerfs etc
     }
     

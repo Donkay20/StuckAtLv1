@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class AbsorbBullet : MonoBehaviour
 {
-    float timer = 1f; //if a modifier increase skill time duration, it would call back to the parent slot and acquire the modifier for calculation
+    private readonly float BASE_BULLET_LIFETIME = 1f;
+    [SerializeField] float timer = 1f; //if a modifier increase skill time duration, it would call back to the parent slot and acquire the modifier for calculation
     Rigidbody2D rb;
     private Vector3 mousePosition;
     private Camera mainCamera;
@@ -20,19 +20,29 @@ public class AbsorbBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePosition - transform.position;
-        //Vector3 rotation = transform.position - mousePosition;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
-
-        //get bonuses for slot here
     }
 
-    void Update()   //destroy the bullet
-    {
+    private void OnEnable() {
+        rb = GetComponent<Rigidbody2D>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = mousePosition - transform.position;
+        rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
+    }
+
+    void Update() { //deactivate the bullet
         timer -= Time.deltaTime;
         if (timer <= 0) {
+            timer = BASE_BULLET_LIFETIME;
+            BulletPool.Instance.ReturnBullet(gameObject);
             //GetComponentInParent<Slot>().AbsorbBulletAvailable = true;  //need to make sure the absorb bullet is available again
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
+    }
+
+    public void UpdateTimer() {
+        timer = BASE_BULLET_LIFETIME;
     }
 
     private void OnTriggerEnter2D(Collider2D col) {     //upon hitting an enemy:                  
@@ -109,7 +119,8 @@ public class AbsorbBullet : MonoBehaviour
             //Instantiate(spawnSiphon, transform.position, transform.rotation);
             enemy.TakeDamage(2); //adjust later for stuff
             //GetComponentInParent<Slot>().AbsorbBulletAvailable = true;
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            BulletPool.Instance.ReturnBullet(gameObject);
         }
     }
 }

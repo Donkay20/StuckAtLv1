@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dd4c7f3ec86494dbb708ebad15c8bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 1
   speed: 10
   spawnSiphon: {fileID: 6090192930811305072, guid: 227361a4dbd35c54eaa2e8275bab8aaa, type: 3}
 --- !u!50 &-8111710613359962483
