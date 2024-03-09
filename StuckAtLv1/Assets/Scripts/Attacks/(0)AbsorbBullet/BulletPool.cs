@@ -8,8 +8,8 @@ public class BulletPool : MonoBehaviour
 {
     public static BulletPool Instance;
     public GameObject bulletPrefab;
-    public int initialPoolSize = 1;
-    public int maxSize = 200;
+    public int initialPoolSize = 3;
+    public int maxSize = 100;
     private ObjectPool<GameObject> bulletPool;
     private SlotManager slotManager;
     private bool collectionChecks = false;
@@ -34,8 +34,6 @@ public class BulletPool : MonoBehaviour
     }
 
     void OnTakeFromPool(GameObject bullet) {
-        //bullet.GetComponent<TrailRenderer>().enabled = true;
-        //bullet.GetComponent<TrailRenderer>().time = 0.3f;
         bullet.transform.position = FindAnyObjectByType<SlotManager>().transform.position;
         bullet.GetComponent<AbsorbBullet>().enabled = true;
         bullet.GetComponent<AbsorbBullet>().UpdateTimer();
@@ -43,8 +41,6 @@ public class BulletPool : MonoBehaviour
     }
 
     void OnReturnToPool(GameObject bullet) {
-        //bullet.GetComponent<TrailRenderer>().time = 0f;
-        //  bullet.GetComponent<TrailRenderer>().enabled = false;
         bullet.GetComponent<AbsorbBullet>().UpdateTimer();
         bullet.GetComponent<AbsorbBullet>().enabled = false;
         bullet.SetActive(false);

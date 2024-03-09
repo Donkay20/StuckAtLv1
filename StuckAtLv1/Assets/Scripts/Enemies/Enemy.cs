@@ -17,11 +17,13 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     [SerializeField] private GameObject damageTextPrefab;
     [SerializeField] GameManager gameManager;
     [SerializeField] float baseSpeed;
-    [SerializeField] int hp;
+    [SerializeField] private int hp;
+    [SerializeField] private int baseHP;
+    [SerializeField] public int maxHP;
     [SerializeField] int damage;
     [SerializeField] private float alteredSpeed, alteredSpeedTimer;
     private bool anemiaApplied; private float anemiaTimer, anemiaTick; private int anemiaDamage;
-    private bool stunApplied; private float stunDuration;
+    private bool stunApplied;
     private bool anemiaCheck, critCheck;
     Rigidbody2D body;
     Animator anim;
@@ -30,7 +32,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     public GameObject particlePrefab;
     private Vector3 force;
     private int moneyOnKill;
-    public int maxHP;
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
@@ -47,12 +48,19 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     private void Start() {
         buffManager = FindAnyObjectByType<BuffManager>();
         gameManager = FindAnyObjectByType<GameManager>();
-        hp += gameManager.ScaleDifficulty();
+        hp = baseHP + gameManager.ScaleDifficulty();
+        maxHP = baseHP + gameManager.ScaleDifficulty();
         if (!gameObject.CompareTag("LichEffigy")) {   //add conditionals for certain enemies that shouldn't move
             baseSpeed += gameManager.ScaleDifficulty() / 10;
         }
         moneyOnKill = 5;
-        maxHP = hp;
+    }
+
+    private void OnEnable() {
+        buffManager = FindAnyObjectByType<BuffManager>();
+        gameManager = FindAnyObjectByType<GameManager>();
+        hp = baseHP + gameManager.ScaleDifficulty();
+        maxHP = baseHP + gameManager.ScaleDifficulty();
     }
     
     private void FixedUpdate() {
@@ -214,7 +222,8 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 gameObject.SetActive(false);
                 break;
             default:
-                Destroy(gameObject);
+                EnemyPool.Instance.ReturnEnemy(gameObject);
+                //Destroy(gameObject);
                 break;
         }
     }
@@ -283,6 +292,18 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     public void SelfDestruct() {
-        Destroy(gameObject);
+        EnemyPool.Instance.ReturnEnemy(gameObject);
+        //Destroy(gameObject);
+    }
+
+    public void Cleanse() {
+        anemiaApplied = false;  
+        anemiaDamage = 0; 
+        anemiaTimer = 0; 
+        anemiaTick = 1;
+        alteredSpeedTimer = 0;
+        stunApplied = false;
+        alteredSpeed = baseSpeed;
+        critCheck = false;
     }
 }

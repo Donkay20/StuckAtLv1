@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8722785769283551979
 Transform:
   m_ObjectHideFlags: 0
@@ -172,11 +172,12 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   baseSpeed: 1.5
   hp: 15
+  baseHP: 15
+  maxHP: 15
   damage: 1
   alteredSpeed: 0
   alteredSpeedTimer: 0
   particlePrefab: {fileID: 1210264596843239824, guid: 5a411476ff72944458cd122769dcdca7, type: 3}
-  maxHP: 0
 --- !u!50 &589062988432047767
 Rigidbody2D:
   serializedVersion: 4

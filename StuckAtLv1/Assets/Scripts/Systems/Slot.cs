@@ -24,7 +24,8 @@ public class Slot : MonoBehaviour
     private readonly float BASE_SLOT_COOLDOWN = 3f;
     private bool containsSkill = false;
     private bool absorbBulletAvailable = true;
-    private int skillID = 0, skillUses = 0;
+    [SerializeField] private int skillID = 0;
+    [SerializeField] private int skillUses = 0; 
     private float cooldown, activeCD, cooldownModifier;
     private bool coolingDown = false;
     private int[] commonUpgrades = new int[15];

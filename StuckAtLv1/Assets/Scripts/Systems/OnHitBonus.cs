@@ -12,7 +12,8 @@ public class OnHitBonus : MonoBehaviour
             bool criticalHit = slot.CriticalHit();                                  //calculate critical hit
 
             if (criticalHit) {
-                    damage *= (int) slot.CriticalDamage();
+                    damage = (int) (damage * slot.CriticalDamage());
+                    Debug.Log("Critical hit. Damage: " + damage);
                     enemy.CriticalHit();
             }
 
