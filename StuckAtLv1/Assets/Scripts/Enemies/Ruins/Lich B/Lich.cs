@@ -60,6 +60,10 @@ public class Lich : MonoBehaviour
             attackCheck = true;
             Attack();
         }
+
+        if (forceField.activeSelf) {
+            enemyScript.BossAnemiaCleanse();
+        }
     }
 
     public void EffigyDied() {
