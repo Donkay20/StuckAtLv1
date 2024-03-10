@@ -338,20 +338,40 @@ public class UpgradeManager : MonoBehaviour
             if (slotSelected >= 1 ) {
                 slots[slotSelected - 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
                 notify.AdjustSlotUpgradeCounter(slots[slotSelected - 1].Identity);
+                if (rarity == "rare" && upgradeSelection[upgradePositionSelected] == 2) {       //rare 2
+                    notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+                    notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+                    character.money += 1000;
+                }
             }
 
             if (slotSelected <= 3) {
                 if (slots[slotSelected + 1].isActiveAndEnabled) {
                     slots[slotSelected + 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
                     notify.AdjustSlotUpgradeCounter(slots[slotSelected + 1].Identity);
+                    if (rarity == "rare" && upgradeSelection[upgradePositionSelected] == 2) {   //rare 2
+                        notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+                        notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+                        character.money += 1000;
+                    }
                 }
             }
 
             slots[slotSelected].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
             notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+            if (rarity == "rare" && upgradeSelection[upgradePositionSelected] == 2) {           //rare 2
+                notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+                notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+                character.money += 1000;
+            }
         } else {
             slots[slotSelected].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
             notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+            if (rarity == "rare" && upgradeSelection[upgradePositionSelected] == 2) {           //rare 2
+                notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+                notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
+                character.money += 1000;
+            }
         }
 
         //subtract from the available upgrades

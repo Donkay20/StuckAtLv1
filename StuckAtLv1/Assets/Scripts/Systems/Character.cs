@@ -12,7 +12,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
     public readonly int maxHp = 10;
     public int currentHp = 10;
     public int money = 0;
-    public int afterimages = 0;
+    public float afterimage = 0;
     private readonly float iframe = 0.3f;
     private bool invincible; //iframe check
     private bool healthDraining; //overheal drain check
@@ -29,7 +29,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
     [SerializeField] private TextMeshProUGUI moneyText;
 
     void OnEnable() {
-        afterimageText.text = afterimages.ToString();
+        afterimageText.text = afterimage.ToString();
         moneyText.text = money.ToString();
         damageModifier = 1;
         drainTimer = 1;
@@ -37,15 +37,24 @@ Handles main character's active stats in combat, their buffs, and their damage h
         criticalDamageModifier = 0;
     }
 
+    private void Update() {
+        if (afterimage > 0) {
+            afterimage -= Time.deltaTime;
+            afterimageText.text = afterimage.ToString("f1");
+        }
+
+        if (afterimage < 0) {
+            afterimage = 0;
+            afterimageText.text = afterimage.ToString("f1");
+        }
+    }
+
     public void TakeDamage(int damage) {
         if (!invincible) {
             playerAnim.SetTrigger("Hit");
             healthBarAnim.SetTrigger("Hit");
             invincible = true;
-            if (afterimages > 0) {
-                afterimages --;
-                afterimageText.text = afterimages.ToString();
-            } else {
+            if (afterimage <= 0) {
                 currentHp -= damage; 
                 healthText.text = currentHp.ToString();
                 if (currentHp <= maxHp) {
@@ -107,14 +116,14 @@ Handles main character's active stats in combat, their buffs, and their damage h
         }
     }
 
-    public void GainAfterimage(int amount) {
-        if (afterimages + amount > 99) {
-            afterimages = 99;
+    public void GainAfterimage(float amount, bool exceedCap) {
+        if (afterimage + amount > 10 && !exceedCap) {
+            afterimage = 10;
             Debug.Log("Afterimages capped!");
         } else {
-            afterimages += amount;
+            afterimage += amount;
         }
-        afterimageText.text = afterimages.ToString();
+        //afterimageText.text = afterimage.ToString();
     }
 
     public void GainMoney(int amount) {

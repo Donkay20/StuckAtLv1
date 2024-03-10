@@ -198,8 +198,8 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   baseSpeed: 2
   hp: 8
-  baseHP: 0
-  maxHP: 0
+  baseHP: 8
+  maxHP: 8
   damage: 1
   alteredSpeed: 0
   alteredSpeedTimer: 0

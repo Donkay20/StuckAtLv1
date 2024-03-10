@@ -22,7 +22,11 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     [SerializeField] public int maxHP;
     [SerializeField] int damage;
     [SerializeField] private float alteredSpeed, alteredSpeedTimer;
-    private bool anemiaApplied; private float anemiaTimer, anemiaTick; private int anemiaDamage;
+    private bool anemiaApplied; 
+    private float anemiaTimer;
+    private float anemiaActiveTick = 1;
+    private float anemiaTick = 1; 
+    private int anemiaDamage;
     private bool stunApplied;
     private bool anemiaCheck, critCheck;
     Rigidbody2D body;
@@ -37,7 +41,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
-        anemiaTick = 1;
     }
 
     public void SetTarget(GameObject target) {
@@ -76,8 +79,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             }    
         }
 
-        if(this.CompareTag("LichEffigy") == false)
-        {
+        if (this.CompareTag("LichEffigy") == false) {
             Flip(force.x);
         }
         
@@ -89,22 +91,19 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         }
 
         if (anemiaApplied) {
-            anemiaTick -= Time.deltaTime;
+            anemiaActiveTick -= Time.deltaTime;
             anemiaTimer -= Time.deltaTime;
-            if (anemiaTick <= 0) {
+            if (anemiaActiveTick <= 0) {
                 anemiaCheck = true;
                 TakeDamage(anemiaDamage);
-                if (buffManager.IsBloodsuckerActive()) {        //legendary 9
-                    FindAnyObjectByType<Character>().ActivateBloodsucker((int) Mathf.Ceil(anemiaDamage * 0.01f));
-                }
-                anemiaTick = 1;
+                anemiaActiveTick = anemiaTick;
             }
         }
 
         if (anemiaTimer <= 0) {
             anemiaApplied = false;
             anemiaDamage = 0;
-            anemiaTick = 1;
+            anemiaActiveTick = 1;
         }
     }
 
@@ -115,8 +114,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     private void Attack() {
-        if (targetCharacter == null && !stunApplied) { 
-            //stunned enemies can't deal damage
+        if (targetCharacter == null && !stunApplied) { //stunned enemies can't deal damage
             targetCharacter = targetGameObject.GetComponent<Character>();
         }
         targetCharacter.TakeDamage(damage);
@@ -210,13 +208,13 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     private void ResolveEnemy() {
         switch (this.gameObject.tag) {
             case "KnightSword": //special rules for the knight's sword; set it to disable instead of destroy so it can be spawned again. then, alert the knight that its sword has died.
-                anemiaApplied = false;  anemiaDamage = 0; anemiaTimer = 0; anemiaTick = 1; //clear poison
+                anemiaApplied = false;  anemiaDamage = 0; anemiaTimer = 0; anemiaActiveTick = anemiaTick; //clear poison (but keep acceleration debuff)
                 Knight knight = FindAnyObjectByType<Knight>();
                 knight.SwordDied();
                 gameObject.SetActive(false);
                 break;
             case "LichEffigy":
-                anemiaApplied = false;  anemiaDamage = 0; anemiaTimer = 0; anemiaTick = 1; //clear poison
+                anemiaApplied = false;  anemiaDamage = 0; anemiaTimer = 0; anemiaActiveTick = anemiaTick; //clear poison (but keep acceleration debuff)
                 Lich lich = FindAnyObjectByType<Lich>();
                 lich.EffigyDied();
                 gameObject.SetActive(false);
@@ -272,6 +270,10 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         }
     }
 
+    public void AnemiaAcceleration() {
+        anemiaTick *= 0.7f;
+    }
+
     public void DropMoney(int additionalChance) {
         int chance = 5 + additionalChance;
         if (Random.Range(0, 101) < chance) {
@@ -296,14 +298,23 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         //Destroy(gameObject);
     }
 
+    public void BossAnemiaCleanse() { //clears the boss of active anemia (but keeps the acceleration)
+        anemiaApplied = false;  
+        anemiaDamage = 0; 
+        anemiaTimer = 0; 
+        anemiaActiveTick = 1;
+    }
+
     public void Cleanse() {
         anemiaApplied = false;  
         anemiaDamage = 0; 
         anemiaTimer = 0; 
+        anemiaActiveTick = 1;
         anemiaTick = 1;
         alteredSpeedTimer = 0;
         stunApplied = false;
         alteredSpeed = baseSpeed;
         critCheck = false;
+        rend.color = new Color(1,1,1);
     }
 }

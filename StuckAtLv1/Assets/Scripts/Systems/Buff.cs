@@ -10,6 +10,7 @@ public class Buff : MonoBehaviour
     [SerializeField] private Image activeBuffIcon;
     [SerializeField] private Sprite[] buffIcons;
     private Character character;
+    private SlotManager slotManager;
     private Movement movement;
     private string buffType;
     private float efficacy;
@@ -19,7 +20,8 @@ public class Buff : MonoBehaviour
 
     private void Awake() {
         character = FindAnyObjectByType<Character>();
-        movement = FindAnyObjectByType<Movement>();        
+        movement = FindAnyObjectByType<Movement>();     
+        slotManager = FindAnyObjectByType<SlotManager>();   
     }
 
     void Update() {
@@ -57,6 +59,7 @@ public class Buff : MonoBehaviour
                     character.AdjustDamageModifier(efficacy * -1);
                 }
                 break;
+
             case "speed":
                 i = 2;
                 if (x) {
@@ -69,11 +72,14 @@ public class Buff : MonoBehaviour
             case "bloodsucker": //todo
                 i = 3;
                 if (x) {
+                    slotManager.ActivateBloodsucker();
                     FindAnyObjectByType<BuffManager>().SetBloodsuckerStatus(true);
                 } else {
+                    slotManager.DeactivateBloodsucker();
                     FindAnyObjectByType<BuffManager>().SetBloodsuckerStatus(false);
                 }
                 break;
+
             case "bulwark": //todo
                 i = 4;
                 if (x) {
@@ -84,12 +90,35 @@ public class Buff : MonoBehaviour
                     FindAnyObjectByType<BuffManager>().SetBulwarkStatus(false);
                 }
                 break;
+
             case "critdmg": //todo
                 i = 5;
                 if (x) {
                     character.AdjustCriticalDamageModifier(efficacy);
                 } else {
                     character.AdjustCriticalDamageModifier(efficacy * -1);
+                }
+                break;
+
+            case "penetration": //todo
+                i = 6;
+                if (x) {
+                    slotManager.ActivatePenetration();
+                    FindAnyObjectByType<BuffManager>().SetPenetrationStatus(true);
+                } else {
+                    slotManager.DeactivatePenetration();
+                    FindAnyObjectByType<BuffManager>().SetPenetrationStatus(false);
+                }
+                break;
+
+            case "avarice":
+                i = 7;
+                if (x) {
+                    slotManager.ActivateAvarice();
+                    FindAnyObjectByType<BuffManager>().SetAvariceStatus(true);
+                } else {
+                    slotManager.DeactivateAvarice();
+                    FindAnyObjectByType<BuffManager>().SetAvariceStatus(false);
                 }
                 break;
         }
@@ -113,4 +142,6 @@ Icon directory:
 3 - bloodsucker
 4 - bulwark
 5 - crit dmg
+6 - penetration
+7 - avarice
 */

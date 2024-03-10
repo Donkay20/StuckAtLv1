@@ -85,6 +85,7 @@ public class Lich : MonoBehaviour
             deadEffigy.SetHealth(50);
             deadEffigy.gameObject.SetActive(true);
         }
+        enemyScript.BossAnemiaCleanse();
         forceField.SetActive(true);
         vulnerable = false;
     }

@@ -11,8 +11,6 @@ public class SlotManager : MonoBehaviour
 
     //public KeyCode slotKey1, slotKey2, slotKey3, slotKey4, slotKey5;
     [SerializeField] private int slotNum = 0;
-    private readonly float BASE_BULLET_COOLDOWN = 0.5f;
-    private float activeBulletCD;
     [SerializeField] private bool isSkillFiring;
     [SerializeField] public int[] idRegistry = new int[5];
     [SerializeField] private Slot slot1, slot2, slot3, slot4, slot5;
@@ -21,11 +19,18 @@ public class SlotManager : MonoBehaviour
     [SerializeField] private Sprite[] onSpriteList;
     [SerializeField] private Sprite[] offSpriteList;
     [SerializeField] private AbsorbBullet absorbBullet;
+    private readonly float BASE_BULLET_COOLDOWN = 0.5f;
+    private float tempBonusAtkSpd, permanentBonusAtkSpd;
+    private int tempBonusAtkDmg, permanentBonusAtkDmg;
+    private float activeBulletCD;
+    private bool penetration, avarice, bloodsucker;
     
     private void Awake() {
         activeBulletCD = BASE_BULLET_COOLDOWN;
         slotNum = 0; 
         maxSlots = 2; //# of slots unlocked
+        permanentBonusAtkSpd = 1;
+        tempBonusAtkSpd = 1;
     }
 
     void Update() {
@@ -41,6 +46,11 @@ public class SlotManager : MonoBehaviour
             FireAllSlots();
         }
         TurnOffSlots();
+    }
+
+    private void OnEnable() {
+        tempBonusAtkDmg = 0;
+        tempBonusAtkSpd = 1;
     }
 
     public void AcquireSkill(int ID) {
@@ -94,7 +104,7 @@ public class SlotManager : MonoBehaviour
 
     private void AbsorbShots() {
         BulletPool.Instance.GetBullet();
-        activeBulletCD = BASE_BULLET_COOLDOWN;                                            //set the bullet timer back to the cooldown time. adjust for buffs, nerfs etc
+        activeBulletCD = BASE_BULLET_COOLDOWN * permanentBonusAtkSpd * tempBonusAtkSpd;     //set the bullet timer back to the cooldown time. adjust for buffs/debuffs
     }
     
     private void FireAllSlots() {
@@ -165,38 +175,6 @@ public class SlotManager : MonoBehaviour
         slot.transform.GetChild(1).GetComponent<Image>().sprite = onSpriteList[spriteNumOn];
     }
 
-    public void RareTwoCooldownCut(int identity, int intensity) {       //rare 2
-        for (int i = 0; i < maxSlots; i++) {
-            switch (i) {
-                case 0:
-                    if (identity != i) {
-                        slot1.CutCooldown(intensity);
-                    }
-                    break;
-                case 1:
-                    if (identity != i) {
-                        slot2.CutCooldown(intensity);
-                    }
-                    break;
-                case 2:
-                    if (identity != i) {
-                        slot3.CutCooldown(intensity);
-                    }
-                    break;
-                case 3:
-                    if (identity != i) {
-                        slot4.CutCooldown(intensity);
-                    }
-                    break;
-                case 4:
-                    if (identity != i) {
-                        slot5.CutCooldown(intensity);
-                    }
-                    break;
-            }
-        }
-    }
-
     private void TurnOffSlots() {
         if(slotNum < 1) {
             slots[0].GetComponent<Animator>().SetTrigger("Hit2");
@@ -222,6 +200,68 @@ public class SlotManager : MonoBehaviour
             slots[4].GetComponent<Animator>().SetTrigger("Hit2");
             slots[4].transform.Find("Slot 5_Border").GetComponent<Image>().sprite = offSpriteList[4];
         }
+    }
+
+    public void AddPermanentAtkDmg(int bonus) {
+        permanentBonusAtkDmg += bonus;
+    }
+
+    public void AddTempAtkDmg(int bonus) {
+        tempBonusAtkDmg += bonus;
+    }
+
+    public int GetTempAtkDmg() {
+        return tempBonusAtkDmg;
+    }
+
+    public int GetPermanentAtkDmg() {
+        return permanentBonusAtkDmg;
+    }
+
+    public void AddPermanentAtkSpd() {
+        permanentBonusAtkSpd *= 0.99f;
+    }
+
+    public void AddTempAtkSpd(int times) {
+        for (int i = 0; i < times; i++) {
+            tempBonusAtkSpd *= 0.99f;
+        }
+    }
+
+    public void ActivatePenetration() {
+        penetration = true;
+    }
+    
+    public void DeactivatePenetration() {
+        penetration = false;
+    }
+
+    public bool IsPenetrationActive() {
+        return penetration;
+    }
+
+    public void ActivateAvarice() {
+        avarice = true;
+    }
+    
+    public void DeactivateAvarice() {
+        avarice = false;
+    }
+
+    public bool IsAvariceActive() {
+        return avarice;
+    }
+
+    public void ActivateBloodsucker() {
+        bloodsucker = true;
+    }
+
+    public void DeactivateBloodsucker() {
+        bloodsucker = false;
+    }
+
+    public bool IsBloodsuckerActive() {
+        return bloodsucker;
     }
 
     public void IncreaseMaxSlots() {

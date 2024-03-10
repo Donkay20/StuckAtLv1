@@ -194,6 +194,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3dec43e1ccef8c349a1ab4558b95fd54, type: 3}
   - {fileID: 21300000, guid: 3939e5336bd0ef34b91346d960140f3a, type: 3}
   - {fileID: 21300000, guid: aaddd904ea13dbe428766c15cc9286ce, type: 3}
+  - {fileID: 21300000, guid: 0df9eb35353156f488905c093ad22eb7, type: 3}
+  - {fileID: 21300000, guid: 2ba51c4491c85114c9048a5ed910c2ce, type: 3}
 --- !u!222 &4328037570631330291
 CanvasRenderer:
   m_ObjectHideFlags: 0

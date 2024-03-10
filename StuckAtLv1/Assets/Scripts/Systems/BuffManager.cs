@@ -17,7 +17,7 @@ public class BuffManager : MonoBehaviour
     private Debuff[] debuffs = new Debuff[5];
     //Back-end
     private int buffPosition, debuffPosition;
-    private bool bloodsuckerActive, bulwarkActive;
+    private bool bloodsuckerActive, bulwarkActive, penetrationActive, avariceActive;
     //Variables
 
     private void Awake() {
@@ -102,6 +102,22 @@ public class BuffManager : MonoBehaviour
 
     public void SetBulwarkStatus(bool x) {
         bulwarkActive = x;
+    }
+
+    public bool IsPenetrationActive() {
+        return penetrationActive;
+    }
+
+    public void SetPenetrationStatus(bool x) {
+        penetrationActive = x;
+    }
+
+    public bool IsAvariceActive() {
+        return avariceActive;
+    }
+
+    public void SetAvariceStatus(bool x) {
+        avariceActive = x;
     }
 
     public void BattleEnd() {

@@ -6,7 +6,7 @@ using UnityEngine;
 public class RedSkull : MonoBehaviour
 {
     private readonly int HOMING_SKULL_DMG = 4;
-    private readonly float HOMING_SKULL_SPD = 3f;
+    private readonly float HOMING_SKULL_SPD = 4f;
     private float homingTimer = 5f;
     private float lifetime = 7f;
     private GameObject lichPosition;

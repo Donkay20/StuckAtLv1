@@ -31,7 +31,7 @@ public class ShopManager : MonoBehaviour
             shopkeeperText.text = "Welcome."; //temp
             hp.text = player.currentHp.ToString();
             money.text = player.money.ToString();
-            afterimages.text = player.afterimages.ToString();
+            afterimages.text = player.afterimage.ToString("f1");
             healthCost = 20; hpButtonText.text = "10 HP | $" + healthCost;
             afterimageCost = 50; afterimagesButtonText.text = "Afterimage | $" + afterimageCost;
             upgradeCost = 150; upgradeButtonText.text = "Upgrade: $" + upgradeCost;
@@ -81,8 +81,8 @@ public class ShopManager : MonoBehaviour
             case "afterimage":
                 player.money -= afterimageCost; 
                 money.text = player.money.ToString();
-                player.afterimages += 1; 
-                afterimages.text = player.afterimages.ToString();
+                player.afterimage += 1; 
+                afterimages.text = player.afterimage.ToString("f1");
                 if (afterimageCost < 250) {
                     afterimageCost += 50; afterimagesButtonText.text = "Afterimage | $" + afterimageCost;
                 }

@@ -20,8 +20,7 @@ public class LinkTextHandler : MonoBehaviour, IPointerClickHandler
         linkedText.ForceMeshUpdate();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
+    public void OnPointerClick(PointerEventData eventData) {
         Vector3 mousePosition = new Vector3(eventData.position.x, eventData.position.y, z:0);
         var linkTaggedText = TMP_TextUtilities.FindIntersectingLink(linkedText, mousePosition, cameraToUse);
         if (linkTaggedText != -1) {

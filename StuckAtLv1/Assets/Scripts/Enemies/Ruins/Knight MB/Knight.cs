@@ -77,8 +77,7 @@ public class Knight : MonoBehaviour
                 swapAttack = true;
                 break;
         }
-        
-        attackCooldown = 2f + (3f *((float) enemyScript.GetHealth() / KNIGHT_MAX_HP)); //cd between attacks decreases as hp decreases
+        attackCooldown = 1f + (4f *((float) enemyScript.GetHealth() / KNIGHT_MAX_HP)); //cd between attacks decreases as hp decreases
         attackCheck = false;
     }
 }

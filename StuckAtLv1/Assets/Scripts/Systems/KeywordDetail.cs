@@ -51,11 +51,13 @@ public class KeywordDetail : MonoBehaviour
                 keywordTitle.text = titlePool[5];
                 keywordDetail.text = detailPool[5];
                 break;
-            default:
-                Debug.LogWarning($"Keyword '{keyword}' not recognized.");
-                // Display a default message or handle the unrecognized keyword case
-                keywordTitle.text = "Unknown Keyword";
-                keywordDetail.text = "No information available.";
+            case "penetration":
+                keywordTitle.text = titlePool[6];
+                keywordDetail.text = detailPool[6];
+                break;
+            case "avarice":
+                keywordTitle.text = titlePool[7];
+                keywordDetail.text = detailPool[7];
                 break;
         }
     }

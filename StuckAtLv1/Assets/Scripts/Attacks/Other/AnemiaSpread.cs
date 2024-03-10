@@ -12,12 +12,12 @@ public class AnemiaSpread : MonoBehaviour
         Enemy enemy = col.GetComponent<Enemy>();
         if (enemy != null) {
             int anemiaDamage;
-            if ((int) (enemy.GetHealth() * 0.05f) < 1) {
+            if ((int) (enemy.maxHP * 0.05f) < 1) {
                 anemiaDamage = 1;
-            } else if ((int) (enemy.GetHealth() * 0.05f) > 100) {
+            } else if ((int) (enemy.maxHP * 0.05f) > 100) {
                 anemiaDamage = 100;
             } else {
-                anemiaDamage = (int) (enemy.GetHealth() * 0.05f);
+                anemiaDamage = (int) (enemy.maxHP * 0.05f);
             }
             enemy.ApplyAnemia(anemiaDamage, 5f);
         }
