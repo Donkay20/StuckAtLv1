@@ -28,14 +28,13 @@ public class SwordBeam : MonoBehaviour
         direction = targetGameObject.transform.position - transform.position;
     }
 
-    void FixedUpdate()
-    {
-        rb.velocity = direction * SWORD_BEAM_SPD;
+    void FixedUpdate() {
+        //rb.velocity = direction * SWORD_BEAM_SPD;
     }
     
     void Update() {
         lifetime -= Time.deltaTime;
-
+        rb.velocity = direction * SWORD_BEAM_SPD;
         if (lifetime <= 0) {
             Destroy(gameObject);
         }
