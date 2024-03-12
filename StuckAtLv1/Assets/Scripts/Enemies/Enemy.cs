@@ -114,7 +114,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     private void Attack() {
-        if (targetCharacter != null && !stunApplied) { //stunned enemies can't deal damage
+        if (!stunApplied) { //stunned enemies can't deal damage
             targetCharacter = targetGameObject.GetComponent<Character>();
         }
 
@@ -195,7 +195,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     public void ApplyStun(float duration) {
-        targetCharacter = null;
         alteredSpeed = 0;
         alteredSpeedTimer += duration;
         stunApplied = true;
