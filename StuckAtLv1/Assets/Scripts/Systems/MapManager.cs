@@ -25,6 +25,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private int level; 
     [SerializeField] private int section;
     private string report;
+    Animator mapAnimation;
 
     //Map Highlights
     [SerializeField] private Sprite combatImageHighlight, survivalImageHighlight, eventImageHighlight, shopImageHighlight, miniBossImageHighlight, bossImageHighlight;
@@ -43,9 +44,15 @@ public class MapManager : MonoBehaviour
         startingRoom.AssignRoomType("combat"); startingRoom.GetComponent<Image>().sprite = combatImage;
         minibossRoom.AssignRoomType("dialogue"); minibossRoom.GetComponent<Image>().sprite = miniBossImage;
         bossRoom.AssignRoomType("dialogue"); bossRoom.GetComponent<Image>().sprite = bossImage;
+        mapAnimation = GetComponent<Animator>();
         //hard code the first room to be combat, and hard code the positions of miniboss room & boss room
 
         HighlightRoom(startingRoom);
+        mapAnimation.SetTrigger("Intro");
+    }
+
+    private void OnEnable() {
+        mapAnimation.SetTrigger("Intro");
     }
 
     public void ClickedNode(int clickedLevel, int clickedSection) {
@@ -249,8 +256,14 @@ public class MapManager : MonoBehaviour
                 break;
             }
             manager.AdjustScaling();
-            manager.ReceiveCommand(report);
+            //todo for outro animation
+            mapAnimation.SetTrigger("Outro");
+            //manager.ReceiveCommand(report);
         }
+    }
+
+    public void TransitionAnimationComplete() {    //called from the end of the "Outro" animation's via an event
+        manager.ReceiveCommand(report);
     }
     
     private void GiveRoom(Room r) {

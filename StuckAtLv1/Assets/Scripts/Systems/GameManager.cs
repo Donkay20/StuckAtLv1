@@ -136,12 +136,14 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     mapUI.SetActive(false); mouseCursorUI.SetActive(false);
                     combat.SetActive(true); combatUI.SetActive(true);
                     combat.GetComponent<CombatManager>().Setup("combat");
+                    //combat.GetComponent<CombatManager>().SetObjective("combat");
                     //disable map stuff and go into combat
                 }
                 if (previousState == GameState.Event) {
                     eventUI.SetActive(false);
                     combat.SetActive(true); combatUI.SetActive(true);
                     combat.GetComponent<CombatManager>().Setup("combat");
+                    //combat.GetComponent<CombatManager>().SetObjective("combat");
                     Debug.Log("event to combat");
                 }
                 previousState = GameState.Combat;
@@ -153,6 +155,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     mapUI.SetActive(false); mouseCursorUI.SetActive(false);
                     combat.SetActive(true); combatUI.SetActive(true);
                     combat.GetComponent<CombatManager>().Setup("survival");
+                    //combat.GetComponent<CombatManager>().SetObjective("survival");
                     //disable map stuff and go into survival
                     Debug.Log("map to survival");
                 }
@@ -193,6 +196,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                         case 1:
                             combat.SetActive(true); combatUI.SetActive(true);
                             combat.GetComponent<CombatManager>().Setup("miniboss");
+                            //combat.GetComponent<CombatManager>().SetObjective("miniboss");
                             SceneManager.UnloadSceneAsync("RuinsMiniBossIntro");
                             break;
                         case 2:
@@ -213,6 +217,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                         case 1:
                             combat.SetActive(true); combatUI.SetActive(true);
                             combat.GetComponent<CombatManager>().Setup("boss");
+                            //combat.GetComponent<CombatManager>().SetObjective("boss");
                             SceneManager.UnloadSceneAsync("RuinsBossIntro");
                             break;
                         case 2:

@@ -25,37 +25,37 @@ public class Room : MonoBehaviour
         switch (type) {
             case "combat":
                 room = RoomType.Combat;
-                Debug.Log("roomtype_combat");
+                //Debug.Log("roomtype_combat");
                 break;
 
             case "survival":
                 room = RoomType.Survival;
-                Debug.Log("roomtype_survival");
+                //Debug.Log("roomtype_survival");
                 break;
 
             case "event":
                 room = RoomType.Event;
-                Debug.Log("roomtype_event");
+                //Debug.Log("roomtype_event");
                 break;
 
             case "shop":
                 room = RoomType.Shop;
-                Debug.Log("roomtype_shop");
+                //Debug.Log("roomtype_shop");
                 break;
 
             case "miniboss":
                 room = RoomType.Miniboss;
-                Debug.Log("roomtype_miniboss");
+                //Debug.Log("roomtype_miniboss");
                 break;
 
             case "boss":
                 room = RoomType.Boss;
-                Debug.Log("roomtype_boss");
+                //Debug.Log("roomtype_boss");
                 break;
                 
             case "dialogue":
                 room = RoomType.Dialogue;
-                Debug.Log("roomtype_dialogue");
+                //Debug.Log("roomtype_dialogue");
                 break;
         }
     }
