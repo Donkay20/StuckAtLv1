@@ -25,6 +25,7 @@ public class KeywordDetail : MonoBehaviour
         gameObject.SetActive(true);
         keywordTitle.text = "";
         keywordDetail.text = "";
+        Debug.Log("Tooltip: " + keyword);
 
         switch(keyword) {
             case "overheal":

@@ -64,11 +64,12 @@ public class UpgradeManager : MonoBehaviour
     private bool fromBoss; 
     private int maxSlots;
     private string upgradeType; private int rerollCost; 
-    void Awake()    //initialize the buttons, and capacity for each upgrade at the beginning of the game.
-    {
+    private Animator anim;
+
+    void Awake() {                      //initialize the buttons, and capacity for each upgrade at the beginning of the game.
+        anim = GetComponent<Animator>();
         maxSlots = 2;
         InitializeButtons();
-
         for (int i = 0; i < 15; i++) {
             commonUpgradePool[i] = 5;
             rareUpgradePool[i] = 3;
@@ -102,6 +103,7 @@ public class UpgradeManager : MonoBehaviour
         } else {
             rerollButton.interactable = false;
         }
+        anim.SetTrigger("Intro");
     }
 
     public void Setup(string type) {
@@ -393,8 +395,11 @@ public class UpgradeManager : MonoBehaviour
         //reset both the slots and the upgrades to be unselected
         upgradePositionSelected = -1;
         slotSelected = -1;
-
         //go back to the map, or shop
+        anim.SetTrigger("Outro");
+    }
+
+    private void OutroAnimationFinished() {
         if (fromShop) {
             fromShop = false;
             notify.ReceiveCommand("shop");
