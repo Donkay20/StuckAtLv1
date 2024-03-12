@@ -11,21 +11,31 @@ public class KeywordDetail : MonoBehaviour
     [Space]
     [SerializeField] private string[] titlePool = new string[2];
     [TextArea(10,10)]
-    [SerializeField] private string[] detailPool = new string[2]; 
+    [SerializeField] private string[] detailPool = new string[2];
+    private Animator keywordAnimation; 
     private void Awake() {
         InitializeButton();
+        keywordAnimation = GetComponent<Animator>();
+        keywordAnimation.SetTrigger("Intro");
+    }
+
+    private void OnEnable() {
+        keywordAnimation.SetTrigger("Intro");
     }
 
     private void ClickOut() {
+        Debug.Log("button clicked");
+        keywordAnimation.SetTrigger("Outro");
+    }
+
+    private void DisableKeywordDetail() {
         gameObject.SetActive(false);
     }
 
     public void Enable(string keyword) {
-        
         gameObject.SetActive(true);
         keywordTitle.text = "";
         keywordDetail.text = "";
-        Debug.Log("Tooltip: " + keyword);
 
         switch(keyword) {
             case "overheal":

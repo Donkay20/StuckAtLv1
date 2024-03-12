@@ -15,15 +15,18 @@ public class ShopManager : MonoBehaviour
     private int healthCost, afterimageCost, upgradeCost, damageCost;
     private int damageCounter;
     private bool doNotReset;
+    private Animator anim;
     void Awake()
     {
         InitializeButtons();
+        anim = GetComponent<Animator>();
         doNotReset = false;
         healthCost = 20;
         afterimageCost = 50;
         upgradeCost = 200;
         damageCost = 1;
         damageCounter = 0;
+        anim.SetTrigger("Intro");
     }
     
     void OnEnable() {
@@ -33,21 +36,22 @@ public class ShopManager : MonoBehaviour
             money.text = player.money.ToString();
             afterimages.text = player.afterimage.ToString("f1");
             healthCost = 20; hpButtonText.text = "10 HP | $" + healthCost;
-            afterimageCost = 50; afterimagesButtonText.text = "Afterimage | $" + afterimageCost;
-            upgradeCost = 150; upgradeButtonText.text = "Upgrade: $" + upgradeCost;
-            damageCost = 1; damageButtonText.text = "Damage: $" + damageCost;
+            afterimageCost = 50; afterimagesButtonText.text = "Afterimage-time | $" + afterimageCost;
+            upgradeCost = 150; upgradeButtonText.text = "Upgrade | $" + upgradeCost;
+            damageCost = 1; damageButtonText.text = "Damage | $" + damageCost;
         }
         CheckPurchasability();
+        anim.SetTrigger("Intro");
     }
 
     private void CheckPurchasability() {
-        if(player.money < afterimageCost) {
+        if(player.money < afterimageCost || player.afterimage >= 10.0f) {
             buyAfterimage.interactable = false;
         } else {
             buyAfterimage.interactable = true;
         }
 
-        if(player.money < healthCost) {
+        if(player.money < healthCost || player.currentHp >= 999) {
             buyHP.interactable = false;
         } else {
             buyHP.interactable = true;
@@ -71,7 +75,11 @@ public class ShopManager : MonoBehaviour
             case "hp":
                 player.money -= healthCost; 
                 money.text = player.money.ToString();
-                player.currentHp += 10; 
+                if (player.currentHp + 10 > 999) {
+                    player.currentHp = 999;
+                } else {
+                    player.currentHp += 10;
+                }
                 hp.text = player.currentHp.ToString();
                 if (healthCost < 100) {
                     healthCost += 20; hpButtonText.text = "10 HP | $" + healthCost;
@@ -81,18 +89,22 @@ public class ShopManager : MonoBehaviour
             case "afterimage":
                 player.money -= afterimageCost; 
                 money.text = player.money.ToString();
-                player.afterimage += 1; 
+                if (player.afterimage + 1 > 10) {
+                    player.afterimage = 10;
+                } else {
+                    player.afterimage += 1.0f;
+                }
                 afterimages.text = player.afterimage.ToString("f1");
                 if (afterimageCost < 250) {
-                    afterimageCost += 50; afterimagesButtonText.text = "Afterimage | $" + afterimageCost;
+                    afterimageCost += 50; afterimagesButtonText.text = "Afterimage-time | $" + afterimageCost;
                 }
-                shopkeeperText.text = "Afterimage purchased."; //temp
+                shopkeeperText.text = "Afterimage-time purchased."; //temp
                 break;
             case "upgrade":
                 player.money -= upgradeCost; 
                 money.text = player.money.ToString();
                 upgradeCost *= 2;
-                upgradeButtonText.text = "Upgrade: $" + upgradeCost;
+                upgradeButtonText.text = "Upgrade | $" + upgradeCost;
                 shopkeeperText.text = "Upgrade purchased."; //temp
                 doNotReset = true;
                 manager.ReceiveCommand("upgrade");
@@ -101,7 +113,7 @@ public class ShopManager : MonoBehaviour
                 player.money -= damageCost; money.text = player.money.ToString();
                 manager.UpgradeShopDamageBonus();
                 damageCost *= 2; 
-                damageButtonText.text = "Damage: $" + damageCost;
+                damageButtonText.text = "Damage | $" + damageCost;
                 damageCounter++; damage.text = damageCounter.ToString() + "%";
                 shopkeeperText.text = "Damage boost purchased."; //temp
                 break;
@@ -111,6 +123,10 @@ public class ShopManager : MonoBehaviour
 
     private void Exit() {
         doNotReset = false;
+        anim.SetTrigger("Outro");
+    }
+
+    public void ExitAfterOutroFinished() {
         manager.ReceiveCommand("map");
     }
 

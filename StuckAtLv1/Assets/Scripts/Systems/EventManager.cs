@@ -20,27 +20,32 @@ public class EventManager : MonoBehaviour
     [SerializeField] private Image speaker, background;
     [SerializeField] private Sprite def, jamp, oldMan, lonelyGhost, angryGhost, oldShadow, ghostShadow;
     [SerializeField] private Sprite ruinsBG, forestBG, sewerBG, abyssBG;
-
     private Event selectedEvent; //chosen event
     private string[] dialogue, names, options; private int[] skip, outcome; //copy from the chosen event
     private int messageCounter, numberOfButtons, outcomeDecided; //messagecounter is to track what line we're on, where numberofbuttons is to track how many buttons to display
     private bool selecting; //if this is enabled, do not allow dialogue progression, as the user needs to make a button choice
     private string resolve; //this is for deciding what screen to go to after the event is done.
-     void Awake()
-    {
+    private Animator eventAnimation;
+
+    void Awake() {
         InitializeButtons();
         DisableButtons();
+        eventAnimation = GetComponent<Animator>();
+        eventAnimation.SetTrigger("Intro");
+    }
+
+    private void OnEnable() {
+        eventAnimation.SetTrigger("Intro");
     }
 
     public void InitializeEvent() { //to reset the event and determine what event to do
-
         messageCounter = 0;
         title.text = "";
         dialogueText.text = "";
         button1Text.text = ""; button2Text.text = ""; button3Text.text = "";
         health.text = player.currentHp.ToString();
         selecting = false;
-        afterimages.text = 0.ToString(); //todo
+        afterimages.text = player.afterimage.ToString("f1"); //todo
         money.text = player.money.ToString(); //todo
         
         //reset the stuff from before
@@ -152,15 +157,20 @@ public class EventManager : MonoBehaviour
     }
 
     private void ResolveOutcome() { //all of the outcomes for the events.
-
-        /*
-        Progress:
-            Ruins:
-            1. done
-            2. done
-            3. todo
-            4. todo
-            5. done
+        /*  
+            Progress:
+                Ruins:
+                    1. done
+                    2. done
+                    3. done
+                    4. done
+                    5. done
+                Forest:
+                    1. todo
+                    2. todo
+                    3. todo
+                    4. todo
+                    5. todo
         */
 
         switch(outcomeDecided) {
@@ -218,6 +228,10 @@ public class EventManager : MonoBehaviour
                 resolve = "normal";
                 break;
         }
+        eventAnimation.SetTrigger("Outro");
+    }
+
+    private void OutroAnimationFinished() {
         Exit();
     }
     

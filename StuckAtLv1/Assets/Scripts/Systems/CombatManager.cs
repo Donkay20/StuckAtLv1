@@ -124,7 +124,7 @@ public class CombatManager : MonoBehaviour
                     spawner.SetCondition(condition);
                     uIObjective.text = "Defeat!";
                     objective = "combat";
-                    //spawner.enabled = true;
+                    combatSkull.SetActive(true);
                     enemiesToKill = 20;
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
@@ -133,7 +133,7 @@ public class CombatManager : MonoBehaviour
                     spawner.SetCondition(condition);
                     uIObjective.text = "Defeat!";
                     objective = "combat";
-                    //spawner.enabled = true;
+                    combatSkull.SetActive(true);
                     enemiesToKill = 10;
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
@@ -143,7 +143,6 @@ public class CombatManager : MonoBehaviour
             switch (format) {
             case "combat":
                 objective = "combat";
-                //spawner.enabled = true;
                 combatSkull.SetActive(true);
                 spawner.SetSpawnTimer(0.5f);
                 enemiesToKill = mapProgress.GetWorld() * (10 + (2 * mapProgress.GetLevel())); //orig 10
@@ -153,7 +152,6 @@ public class CombatManager : MonoBehaviour
 
             case "survival":
                 objective = "survival";
-                //spawner.enabled = true;
                 survivalHourglass.SetActive(true);
                 spawner.SetSpawnTimer(0.5f);
                 timeLeft = mapProgress.GetWorld() * (20 + mapProgress.GetLevel()); //orig 20
@@ -164,7 +162,6 @@ public class CombatManager : MonoBehaviour
             case "miniboss":
                 objective = "miniboss";
                 bossIsAlive = true;
-                //spawner.enabled = true;
                 spawner.SetSpawnTimer(3f);
                 uIObjective.text = "Defeat miniboss!!";
                 uIObjectiveNumber.text = "∞";
@@ -174,7 +171,6 @@ public class CombatManager : MonoBehaviour
             case "boss":
                 objective = "boss";
                 bossIsAlive = true;
-                //spawner.enabled = true;
                 spawner.SetSpawnTimer(3f);
                 uIObjective.text = "Defeat boss!!";
                 uIObjectiveNumber.text = "∞";
@@ -188,8 +184,14 @@ public class CombatManager : MonoBehaviour
     public void EnemyKilled() {
         //for combat-type encounter use only
         if(objective == "combat") {
-            enemiesToKill--; uIObjectiveNumber.text = enemiesToKill.ToString();
+            enemiesToKill--;
+            if (enemiesToKill <= 0) {
+                uIObjectiveNumber.text = "Clear!";
+            } else {
+                uIObjectiveNumber.text = enemiesToKill.ToString();
+            }
         }
+
         if(objective == "miniboss" || objective == "boss") {
             bossIsAlive = false;
         }

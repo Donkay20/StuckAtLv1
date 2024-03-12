@@ -11,7 +11,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
 */
 {
     Transform targetDestination;
-    GameObject targetGameObject;
+    [SerializeField] GameObject targetGameObject;
     Character targetCharacter;
     [SerializeField] private GameObject moneyDropPrefab;
     [SerializeField] private GameObject damageTextPrefab;
@@ -249,27 +249,10 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         return anemiaDamage;
     }
 
-    public float AnemiaDuration() {
-        return anemiaTimer;
-    }
-
-    public void ResetAnemia() {
-        anemiaTimer = 0.01f;
-    }
-
     public void AnemicShock() {
         if (anemiaApplied) {
             anemiaCheck = true;
             TakeDamage((int) (anemiaDamage * anemiaTimer));
-        }
-    }
-
-    public void AnemicTorture() {
-        //add clause so that it doesn't work on bosses
-        if (this.gameObject.CompareTag("Knight") || this.gameObject.CompareTag("Lich")) {
-            Debug.Log("Anemic Torture doesn't work on bosses!");
-        } else {
-            anemiaTimer *= 2;
         }
     }
 
