@@ -136,6 +136,10 @@ public class Movement : MonoBehaviour
         externalModifier = e;
     }
 
+    public float GetSpeed() {
+        return BASE_SPEED * (1 + speedModifier) * speedDebuff;
+    }
+
     public void BattleEnd() {
         activeDashCD = 0;
         dashCooldownFill.fillAmount = 0;

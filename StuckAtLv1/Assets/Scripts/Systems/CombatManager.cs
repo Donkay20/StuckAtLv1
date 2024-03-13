@@ -162,7 +162,7 @@ public class CombatManager : MonoBehaviour
             case "miniboss":
                 objective = "miniboss";
                 bossIsAlive = true;
-                spawner.SetSpawnTimer(3f);
+                spawner.SetSpawnTimer(2f);
                 uIObjective.text = "Defeat miniboss!!";
                 uIObjectiveNumber.text = "∞";
                 StartCoroutine(BossTracker());
@@ -171,7 +171,7 @@ public class CombatManager : MonoBehaviour
             case "boss":
                 objective = "boss";
                 bossIsAlive = true;
-                spawner.SetSpawnTimer(3f);
+                spawner.SetSpawnTimer(2f);
                 uIObjective.text = "Defeat boss!!";
                 uIObjectiveNumber.text = "∞";
                 StartCoroutine(BossTracker());

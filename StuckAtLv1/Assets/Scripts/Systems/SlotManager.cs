@@ -228,6 +228,14 @@ public class SlotManager : MonoBehaviour
         }
     }
 
+    public float GetTempAtkSpd() {
+        return tempBonusAtkSpd;
+    }
+
+    public float GetPermanentAtkSpd() {
+        return permanentBonusAtkSpd;
+    }
+    
     public void ActivatePenetration() {
         penetration = true;
     }
