@@ -23,6 +23,16 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI basicAtkDmgText;
     [SerializeField] private TextMeshProUGUI basicAtkSpdText;
     [SerializeField] private TextMeshProUGUI moveSpeedText;
+    [SerializeField] private TextMeshProUGUI tempAtkDmgBoost;
+    [SerializeField] private TextMeshProUGUI permAtkDmgBoost;
+    [SerializeField] private TextMeshProUGUI tempAtkSpdBoost;
+    [SerializeField] private TextMeshProUGUI permAtkSpdBoost;
+    [SerializeField] private TextMeshProUGUI moveSpdBuff;
+    [SerializeField] private TextMeshProUGUI moveSpdDebuff;
+    [SerializeField] private TextMeshProUGUI dashCooldown;
+    [SerializeField] private GameObject atkDmgTooltip;
+    [SerializeField] private GameObject atkSpdTooltip;
+    [SerializeField] private GameObject moveSpdTooltip;
     [Space] //center
     [Header("Center | Pause Menu")]
     [SerializeField] private Button resumeButton;
@@ -44,6 +54,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     private void UpdateAllStatuses() {
+        //Left side
         HPText.text = character.currentHp.ToString();
         if (character.currentHp > 10) {
             HPText.color = Color.green;
@@ -52,12 +63,26 @@ public class PauseMenu : MonoBehaviour
         } else {
             HPText.color = Color.white;
         }
-        
+
         afterimageText.text = character.afterimage.ToString("f1") + "s";
         moneyText.text = character.money.ToString();
+
         basicAtkDmgText.text = (2 + slotManager.GetTempAtkDmg() + slotManager.GetPermanentAtkDmg()).ToString();
-        basicAtkSpdText.text = (1 / (0.5f * slotManager.GetTempAtkSpd() * slotManager.GetPermanentAtkSpd())).ToString("f1") + " / second";
+        tempAtkDmgBoost.text = slotManager.GetTempAtkDmg().ToString();
+        permAtkDmgBoost.text = slotManager.GetPermanentAtkDmg().ToString();
+        
+        basicAtkSpdText.text = (1 / (0.5f * slotManager.GetTempAtkSpd() * slotManager.GetPermanentAtkSpd())).ToString("f2") + " / second";
+        tempAtkSpdBoost.text = (((1 / slotManager.GetTempAtkSpd()) - 1) * 100).ToString("f0") + "%";
+        permAtkSpdBoost.text = (((1 / slotManager.GetPermanentAtkSpd()) - 1) * 100).ToString("f0") + "%";
+
         moveSpeedText.text = movement.GetSpeed().ToString("f1");
+        moveSpdBuff.text = ((movement.SpeedModifier - 1) * 100).ToString("f0") + "%";
+        moveSpdDebuff.text = ((movement.SpeedDebuff - 1) * -100).ToString("f0") + "%";
+
+        dashCooldown.text = movement.GetDashCooldown().ToString("f1");
+        //Center
+
+        //Right side
     }
 
     private void PauseMenuStart() {
@@ -73,6 +98,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuOpen = false;
     }
 
+    //Center
     public void Center() {
         if (status != "center") {
             pauseAnimator.SetTrigger("Center");
@@ -80,6 +106,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    //Right
     public void Right() {
         if (status != "right") {
             pauseAnimator.SetTrigger("Right");
@@ -87,10 +114,23 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    //Left
     public void Left() {
         if (status != "left") {
             pauseAnimator.SetTrigger("Left");
             status = "left";
         }
     }
+
+    public void ShowAtkDmgTooltip() {atkDmgTooltip.SetActive(true);}
+
+    public void HideAtkDmgTooltip() {atkDmgTooltip.SetActive(false);}
+
+    public void ShowAtkSpdTooltip() {atkSpdTooltip.SetActive(true);}
+
+    public void HideAtkSpdTooltip() {atkSpdTooltip.SetActive(false);}
+
+    public void ShowMoveSpdTooltip() {moveSpdTooltip.SetActive(true);}
+
+    public void HideMoveSpdTooltip() {moveSpdTooltip.SetActive(false);}
 }

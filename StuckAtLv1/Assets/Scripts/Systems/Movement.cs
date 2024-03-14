@@ -43,9 +43,10 @@ public class Movement : MonoBehaviour
         coolingDown = false;
         dashCooldownFill.fillAmount = 0f;
         speedDebuff = 1;
+        speedModifier = 1;
     }
     private void OnEnable() {
-        speedModifier = 0;
+        speedModifier = 1;
         speedDebuff = 1;
     }
 
@@ -68,7 +69,7 @@ public class Movement : MonoBehaviour
         }
 
         if (!isDashing) {
-            movementVector = movementVector.normalized * BASE_SPEED * (1 + speedModifier) * speedDebuff;
+            movementVector = movementVector.normalized * BASE_SPEED * speedModifier * speedDebuff;
             body.velocity = movementVector;
         }
         
@@ -132,12 +133,16 @@ public class Movement : MonoBehaviour
         activeDashCD = BASE_COOLDOWN + dashCooldownModifier + externalModifier;
     }
 
+    public float GetDashCooldown() {
+        return BASE_COOLDOWN + dashCooldownModifier + externalModifier;
+    }
+
     public void SetExternalModifier(float e) {
         externalModifier = e;
     }
 
     public float GetSpeed() {
-        return BASE_SPEED * (1 + speedModifier) * speedDebuff;
+        return BASE_SPEED * speedModifier * speedDebuff;
     }
 
     public void BattleEnd() {
