@@ -83,14 +83,26 @@ public class PauseMenu : MonoBehaviour
         basicAtkDmgText.text = (2 + slotManager.GetTempAtkDmg() + slotManager.GetPermanentAtkDmg()).ToString();
         tempAtkDmgBoost.text = slotManager.GetTempAtkDmg().ToString();
         permAtkDmgBoost.text = slotManager.GetPermanentAtkDmg().ToString();
-        
-        basicAtkSpdText.text = (1 / (0.5f * slotManager.GetTempAtkSpd() * slotManager.GetPermanentAtkSpd())).ToString("f2") + " / second";
-        tempAtkSpdBoost.text = (((1 / slotManager.GetTempAtkSpd()) - 1) * 100).ToString("f0") + "%";
-        permAtkSpdBoost.text = (((1 / slotManager.GetPermanentAtkSpd()) - 1) * 100).ToString("f0") + "%";
 
-        moveSpeedText.text = movement.GetSpeed().ToString("f1");
-        moveSpdBuff.text = ((movement.SpeedModifier - 1) * 100).ToString("f0") + "%";
-        moveSpdDebuff.text = ((movement.SpeedDebuff - 1) * -100).ToString("f0") + "%";
+        if (mapManager.GetWorld() == 1 && mapManager.GetLevel() == 0) { //stats break if the player hasn't entered at least one level, for some reason
+            basicAtkSpdText.text = "2.00 / second";
+            tempAtkSpdBoost.text = "0%";
+            permAtkSpdBoost.text = "0%";
+
+            moveSpeedText.text = "5.0";
+            moveSpdBuff.text = "0%";
+            moveSpdDebuff.text = "0%";
+        } else {
+            basicAtkSpdText.text = (1 / (0.5f * slotManager.GetTempAtkSpd() * slotManager.GetPermanentAtkSpd())).ToString("f2") + " / second";
+            tempAtkSpdBoost.text = (((1 / slotManager.GetTempAtkSpd()) - 1) * 100).ToString("f0") + "%";
+            permAtkSpdBoost.text = (((1 / slotManager.GetPermanentAtkSpd()) - 1) * 100).ToString("f0") + "%";
+
+            moveSpeedText.text = movement.GetSpeed().ToString("f1");
+            moveSpdBuff.text = ((movement.SpeedModifier - 1) * 100).ToString("f0") + "%";
+            moveSpdDebuff.text = ((movement.SpeedDebuff - 1) * -100).ToString("f0") + "%";
+        }
+        
+        
 
         dashCooldown.text = movement.GetDashCooldown().ToString("f1");
 
