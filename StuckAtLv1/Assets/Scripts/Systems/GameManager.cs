@@ -39,6 +39,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private int[] weight = new int[5];
     private int maxSlots;
     private bool slotEquilibrium;
+    private bool easyMode;
 
     //Post-Processing
     [SerializeField] private VirtualCameraStates virtualCamera;
@@ -341,7 +342,15 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     }
 
     public int ScaleDifficulty() {
-        return scaling;
+        if (easyMode) {
+            return 0;
+        } else {
+            return scaling;
+        }
+    }
+
+    public void EasyModeToggle(bool isOn) {
+        easyMode = isOn;
     }
 
     public void AdjustSlotUpgradeCounter(int identity) {

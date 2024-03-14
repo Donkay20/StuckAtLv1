@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -12,9 +13,10 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Character character;
     [SerializeField] private Movement movement;
     [SerializeField] private SlotManager slotManager;
-    private Animator pauseAnimator;
-    private bool pauseMenuOpen;
-    private String status;
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private MapManager mapManager;
+    [SerializeField] private Slot[] slots;
+    private string status;
     [Space] //left side
     [Header("Left Section | Status")]
     [SerializeField] private TextMeshProUGUI HPText;
@@ -35,11 +37,22 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject moveSpdTooltip;
     [Space] //center
     [Header("Center | Pause Menu")]
+    [SerializeField] private TextMeshProUGUI worldNumber;
+    [SerializeField] private TextMeshProUGUI levelNumber;
     [SerializeField] private Button resumeButton;
+    [SerializeField] private Button optionsButton;
+    [SerializeField] private Button optionCancel;
+    [SerializeField] private Toggle easyModeToggle;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button quitYes, quitNo;
+    [SerializeField] private GameObject quitContextMenu;
+    [SerializeField] private GameObject optionContextMenu;
+    private Animator pauseAnimator;
+    private bool pauseMenuOpen;
 
     void Awake() {
         pauseAnimator = GetComponent<Animator>();
+        InitializeButtons();
     }
 
     void Update() {
@@ -80,12 +93,16 @@ public class PauseMenu : MonoBehaviour
         moveSpdDebuff.text = ((movement.SpeedDebuff - 1) * -100).ToString("f0") + "%";
 
         dashCooldown.text = movement.GetDashCooldown().ToString("f1");
+
         //Center
+        worldNumber.text = mapManager.GetWorld().ToString();
+        levelNumber.text = mapManager.GetLevel().ToString();
 
         //Right side
     }
 
     private void PauseMenuStart() {
+        EnableCenterButtons();
         pauseAnimator.SetTrigger("Intro");
         Time.timeScale = 0;
         pauseMenuOpen = true;
@@ -93,6 +110,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     private void PauseMenuEnd() {
+        OptionCancel();
+        QuitCancel();
         pauseAnimator.SetTrigger("Outro");
         Time.timeScale = 1;
         pauseMenuOpen = false;
@@ -101,14 +120,40 @@ public class PauseMenu : MonoBehaviour
     //Center
     public void Center() {
         if (status != "center") {
+            EnableCenterButtons();
             pauseAnimator.SetTrigger("Center");
             status = "center";
         }
     }
 
+    private void QuitButtonClicked() {quitContextMenu.SetActive(true);}
+
+    private void QuitConfirm() {SceneManager.LoadScene("TitleScreen");}
+
+    private void QuitCancel() {quitContextMenu.SetActive(false);}
+
+    private void OptionButtonClicked() {optionContextMenu.SetActive(true);}
+
+    private void OptionToggleClicked(bool isEasyMode) {gameManager.EasyModeToggle(easyModeToggle.isOn);}
+
+    private void OptionCancel() {optionContextMenu.SetActive(false);}
+
+    private void DisableCenterButtons() {
+        resumeButton.interactable = false;
+        optionsButton.interactable = false;
+        quitButton.interactable = false;
+    }
+
+    private void EnableCenterButtons() {
+        resumeButton.interactable = true;
+        optionsButton.interactable = true;
+        quitButton.interactable = true;
+    }
+
     //Right
     public void Right() {
         if (status != "right") {
+            DisableCenterButtons();
             pauseAnimator.SetTrigger("Right");
             status = "right";
         }
@@ -117,6 +162,7 @@ public class PauseMenu : MonoBehaviour
     //Left
     public void Left() {
         if (status != "left") {
+            DisableCenterButtons();
             pauseAnimator.SetTrigger("Left");
             status = "left";
         }
@@ -133,4 +179,19 @@ public class PauseMenu : MonoBehaviour
     public void ShowMoveSpdTooltip() {moveSpdTooltip.SetActive(true);}
 
     public void HideMoveSpdTooltip() {moveSpdTooltip.SetActive(false);}
+
+    private void InitializeButtons() {
+        //Center
+        resumeButton.onClick.AddListener(() => PauseMenuEnd());
+
+        optionsButton.onClick.AddListener(() => OptionButtonClicked());
+        optionCancel.onClick.AddListener(() => OptionCancel());
+        easyModeToggle.onValueChanged.AddListener(OptionToggleClicked);
+
+        quitButton.onClick.AddListener(() => QuitButtonClicked());
+        quitYes.onClick.AddListener(() => QuitConfirm());
+        quitNo.onClick.AddListener(() => QuitCancel());
+        
+        //Right side
+    }
 }

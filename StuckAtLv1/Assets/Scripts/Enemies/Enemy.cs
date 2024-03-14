@@ -67,7 +67,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
     
     private void FixedUpdate() {
-        //add condition here, depending on type of enemy, especially bosses
         force = (targetDestination.position - transform.position).normalized;
         if (alteredSpeedTimer > 0) {
             if (baseSpeed > 0) {
@@ -82,7 +81,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         if (this.CompareTag("LichEffigy") == false) {
             Flip(force.x);
         }
-        
     }
 
     private void Update() {
@@ -224,7 +222,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 break;
             default:
                 EnemyPool.Instance.ReturnEnemy(gameObject);
-                //Destroy(gameObject);
                 break;
         }
     }
