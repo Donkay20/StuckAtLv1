@@ -340,6 +340,7 @@ public class UpgradeManager : MonoBehaviour
             if (slotSelected >= 1 ) {
                 slots[slotSelected - 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
                 notify.AdjustSlotUpgradeCounter(slots[slotSelected - 1].Identity);
+
                 if (rarity == "rare" && upgradeSelection[upgradePositionSelected] == 2) {       //rare 2
                     notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
                     notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
@@ -348,9 +349,10 @@ public class UpgradeManager : MonoBehaviour
             }
 
             if (slotSelected <= 3) {
-                if (slots[slotSelected + 1].isActiveAndEnabled) {
+                if (slots[slotSelected + 1].Identity <= maxSlots) {
                     slots[slotSelected + 1].ApplySlotUpgrade(rarity, upgradeSelection[upgradePositionSelected]);
                     notify.AdjustSlotUpgradeCounter(slots[slotSelected + 1].Identity);
+
                     if (rarity == "rare" && upgradeSelection[upgradePositionSelected] == 2) {   //rare 2
                         notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
                         notify.AdjustSlotUpgradeCounter(slots[slotSelected].Identity);
