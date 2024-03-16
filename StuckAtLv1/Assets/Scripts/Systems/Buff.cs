@@ -125,6 +125,10 @@ public class Buff : MonoBehaviour
         activeBuffIcon.sprite = buffIcons[i];
     }
 
+    public (string, float, float) GetBuffInfo() {
+        return (buffType, efficacy, duration);
+    }
+
     public void EndBuff() {
         //Communicate to the buff manager that this buff should be deleted, and reorganize the buffs.
         buffActive = false;

@@ -89,6 +89,10 @@ public class Debuff : MonoBehaviour
         activeDebuffIcon.sprite = debuffIcons[i];
     }
 
+    public (string, float, float) GetDebuffInfo() {
+        return (debuffType, severity, duration);
+    }
+
     public void EndDebuff() {
         debuffActive = false;
         AdjustDebuff(debuffActive);

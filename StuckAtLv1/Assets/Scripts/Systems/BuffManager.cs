@@ -30,6 +30,16 @@ public class BuffManager : MonoBehaviour
         debuffPosition = 0;
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.I)) {
+            AddBuff("power", 0.2f, 3f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.O)) {
+            AddDebuff("slow", 0.2f, 3f);
+        }
+    }
+
     public void AddBuff(string buff, float efficacy, float duration) {
         //Add a buff to the list. Instantiate a new buff object and populate it.
         if (buffPosition < 5) {
@@ -118,6 +128,26 @@ public class BuffManager : MonoBehaviour
 
     public void SetAvariceStatus(bool x) {
         avariceActive = x;
+    }
+
+    public (int, int) GetNumberOfBuffsDebuffs() {
+        return (buffPosition, debuffPosition);
+    }
+    
+    public bool doesBuffExist(int buffPos) {
+        return buffs[buffPos] != null;
+    }
+
+    public bool doesDebuffExist(int debuffPos) {
+        return debuffs[debuffPos] != null;
+    }
+
+    public (string, float, float) GetBuffInfo(int buffPos) {
+        return buffs[buffPos].GetBuffInfo();
+    }
+
+    public (string, float, float) GetDebuffInfo(int debuffPos) {
+        return debuffs[debuffPos].GetDebuffInfo();
     }
 
     public void BattleEnd() {
