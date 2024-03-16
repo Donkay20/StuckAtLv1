@@ -36,14 +36,23 @@ public class OnHitBonus : MonoBehaviour
                     Debug.Log("Common | 13");
                 }
 
-                if (slot.GetRareUpgrade(8) > 0) {                                   //rare 8 (rare 7)
+                if (slot.GetRareUpgrade(8) > 0) {                                   //rare 8 (rare 7) (rare 6)
                     Character c = FindAnyObjectByType<Character>();
+                    SlotManager s = FindAnyObjectByType<SlotManager>();
                     if (slot.GetRareUpgrade(7) > 0) {
-                        c.Heal(1 * slot.GetRareUpgrade(8) * (2 * slot.GetRareUpgrade(7)));
+                        if (slot.GetRareUpgrade(6) > 0) {
+                            s.AddTempAtkSpd(slot.GetRareUpgrade(6) * slot.GetRareUpgrade(8) * 2 * slot.GetRareUpgrade(7));
+                        } else {
+                            c.Heal(1 * slot.GetRareUpgrade(8) * 2 * slot.GetRareUpgrade(7));
+                        }
                     } else {
-                        c.Heal(1 * slot.GetRareUpgrade(8));
+                        if (slot.GetRareUpgrade(6) > 0) {
+                            s.AddTempAtkSpd(slot.GetRareUpgrade(6) * slot.GetRareUpgrade(8));
+                        } else {
+                            c.Heal(1 * slot.GetRareUpgrade(8));
+                        }
                     }
-                    Debug.Log("Rare | 8");
+                    Debug.Log("Rare | 8 (Rare | 7) (Rare | 6)");
                 }
 
                 if (slot.GetRareUpgrade(13) > 0 && enemy.IsAnemic()) {              //rare 13 (on-kill version)
@@ -131,14 +140,23 @@ public class OnHitBonus : MonoBehaviour
                     }
                 }
 
-                if (slot.GetRareUpgrade(8) > 0) {                                   //rare 8 (rare 7)
+                if (slot.GetRareUpgrade(8) > 0) {                                   //rare 8 (rare 7) (rare 6)
                     Character c = FindAnyObjectByType<Character>();
+                    SlotManager s = FindAnyObjectByType<SlotManager>();
                     if (slot.GetRareUpgrade(7) > 0) {
-                        c.Heal(1 * slot.GetRareUpgrade(8) * (2 * slot.GetRareUpgrade(7)));
+                        if (slot.GetRareUpgrade(6) > 0) {
+                            s.AddTempAtkSpd(slot.GetRareUpgrade(6) * slot.GetRareUpgrade(8) * 2 * slot.GetRareUpgrade(7));
+                        } else {
+                            c.Heal(1 * slot.GetRareUpgrade(8) * 2 * slot.GetRareUpgrade(7));
+                        }
                     } else {
-                        c.Heal(1 * slot.GetRareUpgrade(8));
+                        if (slot.GetRareUpgrade(6) > 0) {
+                            s.AddTempAtkSpd(slot.GetRareUpgrade(6) * slot.GetRareUpgrade(8));
+                        } else {
+                            c.Heal(1 * slot.GetRareUpgrade(8));
+                        }
                     }
-                    Debug.Log("Rare | 8");
+                    Debug.Log("Rare | 8 (Rare | 7) (Rare | 6)");
                 }
 
                 if (slot.GetRareUpgrade(11) > 0) {                                  //rare 11

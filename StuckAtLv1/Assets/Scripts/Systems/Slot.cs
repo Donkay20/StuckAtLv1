@@ -37,8 +37,6 @@ public class Slot : MonoBehaviour
     //display for the skill image on the UI
     [SerializeField] private TextMeshProUGUI uIText;
     //display for the skill usages on the UI
-    //[SerializeField] private GameObject bullet;
-    //exclusively for the absorption bullet
     [SerializeField] private GameObject[] attack = new GameObject[2];
     //this will expand in accordance to the # of attacks we have
     [SerializeField] private Image cooldownFill;
@@ -95,11 +93,20 @@ public class Slot : MonoBehaviour
             if (containsSkill) {
                 Instantiate(attack[skillID], bulletTransform.position, Quaternion.identity, transform);
                 //-BEGIN slot effects-
-                if (commonUpgrades[3] > 0) {                                        //common 3 (rare 7)
+                if (commonUpgrades[3] > 0) {                                        //common 3 (rare 7) (rare 6)
                     if (rareUpgrades[7] > 0) {
-                        character.Heal(commonUpgrades[3] * 3 * (rareUpgrades[7] * 2));
+                        if (rareUpgrades[6] > 0) {
+                            slotManager.AddTempAtkSpd(commonUpgrades[3] * rareUpgrades[7] * 2 * rareUpgrades[6]);
+                        } else {
+                            character.Heal(commonUpgrades[3] * 3 * rareUpgrades[7] * 2);
+                        }
+                        
                     } else {
-                        character.Heal(commonUpgrades[3] * 3);
+                        if (rareUpgrades[6] > 0) {
+                            slotManager.AddTempAtkSpd(rareUpgrades[6] * commonUpgrades[3]);
+                        } else {
+                            character.Heal(commonUpgrades[3] * 3);
+                        }
                     }
                     Debug.Log("Common | 3");
                 }
@@ -131,17 +138,6 @@ public class Slot : MonoBehaviour
                 if (rareUpgrades[5] > 0 && character.afterimage > 0) {              //rare 5
                     buffManager.AddBuff("speed", rareUpgrades[5] * (0.05f * character.afterimage), 5f);
                     Debug.Log("Rare | 5");
-                }
-
-                if (rareUpgrades[6] > 0) {                                          //rare 6
-                    if (character.currentHp > 10) {
-                        int atkSpdGain = character.currentHp - 10;
-                        character.TakeDamage(atkSpdGain);
-                        slotManager.AddTempAtkSpd(atkSpdGain / 10);
-                        Debug.Log("Rare | 6, success");
-                    } else {
-                        Debug.Log("Rare | 6, failure");
-                    }
                 }
 
                 if (legendaryUpgrades[7] > 0) {                                     //legendary 7

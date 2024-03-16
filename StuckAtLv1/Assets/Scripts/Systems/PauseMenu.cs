@@ -56,6 +56,12 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button quitYes, quitNo;
     [SerializeField] private GameObject quitContextMenu;
     [SerializeField] private GameObject optionContextMenu;
+
+    [Space]
+    [Header ("Right | Artifact")]
+    [SerializeField] private TextMeshProUGUI[] slotDamage;
+    [SerializeField] private TextMeshProUGUI[] slotSize;
+    [SerializeField] private TextMeshProUGUI[] slotDuration;
     private Animator pauseAnimator;
     private bool pauseMenuOpen;
 
@@ -71,6 +77,32 @@ public class PauseMenu : MonoBehaviour
                 PauseMenuStart();
             } else {
                 PauseMenuEnd();
+            }
+        }
+
+        if (pauseMenuOpen) {
+            switch (status) {
+                case "center":
+                    if (Input.GetKeyDown(KeyCode.A)) {
+                        Left();
+                    } else if (Input.GetKeyDown(KeyCode.D)) {
+                        Right();
+                    }
+                    break;
+                case "left":
+                    if (Input.GetKeyDown(KeyCode.D)) {
+                        Center();
+                    } else if (Input.GetKeyDown(KeyCode.A)) {
+                        Right();
+                    }
+                    break;
+                case "right":
+                    if (Input.GetKeyDown(KeyCode.A)) {
+                        Center();
+                    } else if (Input.GetKeyDown(KeyCode.D)) {
+                        Left();
+                    }
+                    break;
             }
         }
     }
@@ -91,7 +123,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenuOpen = false;
     }
 
-    private void UpdateAllStatuses() {
+    private void UpdateAllStatuses() {  //takes a snapshot of all relevant stats right before pausing.
         //Left side
         HPText.text = character.currentHp.ToString();
         if (character.currentHp > 10) {
@@ -109,7 +141,7 @@ public class PauseMenu : MonoBehaviour
         tempAtkDmgBoost.text = slotManager.GetTempAtkDmg().ToString();
         permAtkDmgBoost.text = slotManager.GetPermanentAtkDmg().ToString();
 
-        if (mapManager.GetWorld() == 1 && mapManager.GetLevel() == 0) { //stats break if the player hasn't entered at least one level, for some reason
+        if (mapManager.GetWorld() == 1 && mapManager.GetLevel() == 0) {     //stats won't display correctly if the player hasn't entered at least one level
             basicAtkSpdText.text = "2.00 / s"; tempAtkSpdBoost.text = "0%"; permAtkSpdBoost.text = "0%";
             moveSpeedText.text = "5.0"; moveSpdBuff.text = "0%"; moveSpdDebuff.text = "0%";
         } else {
@@ -134,10 +166,11 @@ public class PauseMenu : MonoBehaviour
         levelNumber.text = mapManager.GetLevel().ToString();
 
         //Right side
+
     }
 
     //Center
-    public void Center() {
+    public void Center() {  //swap screen to center view
         if (status != "center") {
             EnableCenterButtons();
             pauseAnimator.SetTrigger("Center");
@@ -159,30 +192,30 @@ public class PauseMenu : MonoBehaviour
 
     private void DisableCenterButtons() {
         resumeButton.interactable = false;
-        resumeButton.image.raycastTarget = false;
-        resumeButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = false;
+        //resumeButton.image.raycastTarget = false;
+        //resumeButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = false;
         optionsButton.interactable = false;
-        optionsButton.image.raycastTarget = false;
-        optionsButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = false;
+        //optionsButton.image.raycastTarget = false;
+        //optionsButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = false;
         quitButton.interactable = false;
-        quitButton.image.raycastTarget = false;
-        quitButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = false;
+        //quitButton.image.raycastTarget = false;
+        //quitButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = false;
     }
 
     private void EnableCenterButtons() {
         resumeButton.interactable = true;
-        resumeButton.image.raycastTarget = true;
-        resumeButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = true;
+        //resumeButton.image.raycastTarget = true;
+        //resumeButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = true;
         optionsButton.interactable = true;
-        optionsButton.image.raycastTarget = true;
-        optionsButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = true;
+        //optionsButton.image.raycastTarget = true;
+        //optionsButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = true;
         quitButton.interactable = true;
-        quitButton.image.raycastTarget = true;
-        quitButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = true;
+        //quitButton.image.raycastTarget = true;
+        //quitButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = true;
     }
 
     //Right
-    public void Right() {
+    public void Right() {   //swap screen to right view
         if (status != "right") {
             DisableCenterButtons();
             pauseAnimator.SetTrigger("Right");
@@ -191,7 +224,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     //Left
-    public void Left() {
+    public void Left() {    //swap screen to left view
         if (status != "left") {
             DisableCenterButtons();
             pauseAnimator.SetTrigger("Left");
@@ -211,7 +244,7 @@ public class PauseMenu : MonoBehaviour
 
     public void HideMoveSpdTooltip() {moveSpdTooltip.SetActive(false);}
 
-    private void PopulateBuffsDebuffs() {
+    private void PopulateBuffsDebuffs() {   //looks at the buff manager and grabs all of the buffs and debuffs currently affecting Jamp
         for (int i = 0; i < 5 ; i++) {
             if (buffManager.doesBuffExist(i)) {
                 (string buffType, float efficacy, float duration) = buffManager.GetBuffInfo(i);
@@ -247,7 +280,7 @@ public class PauseMenu : MonoBehaviour
                 }
                 activeBuffDuration[i].text = duration.ToString("f1") + "s";
                 buffTooltipInteractable[i] = true;
-                Debug.Log("Buff populated: " + i);
+                //Debug.Log("Buff populated: " + i);
             } else {
                 activeBuffs[i].sprite = buffIcons[0];
                 activeBuffDuration[i].text = "";
@@ -260,11 +293,11 @@ public class PauseMenu : MonoBehaviour
                 switch (debuffType) {
                     case "slow":
                         activeDebuffs[i].sprite = debuffIcons[1];
-                        activeDebuffTooltipText[i].text = "Reduces movement speed by " + (-1 * ((1 - severity) * 100)) + "%.";
+                        activeDebuffTooltipText[i].text = "Reduces movement speed by " + ((1 - severity)* 100) + "%.";
                         break;
                     case "bleed":
                         activeDebuffs[i].sprite = debuffIcons[2];
-                        activeDebuffTooltipText[i].text = "Health drain is increased by " + (severity * 100) + "%.";
+                        activeDebuffTooltipText[i].text = "Overhealth drains " + (severity * 100) + "% faster.";
                         break;
                     case "anemia":
                         activeDebuffs[i].sprite = debuffIcons[3];
@@ -273,7 +306,7 @@ public class PauseMenu : MonoBehaviour
                 }
                 activeDebuffDuration[i].text = duration.ToString("f1") + "s";
                 debuffTooltipInteractable[i] = true;
-                Debug.Log("Debuff populated: " + i);
+                //Debug.Log("Debuff populated: " + i);
             } else {
                 activeDebuffs[i].sprite = debuffIcons[0];
                 activeDebuffDuration[i].text = "";
@@ -286,7 +319,7 @@ public class PauseMenu : MonoBehaviour
     public void ShowBuffTooltip(int buff) {
         if (buffTooltipInteractable[buff]) {
             activeBuffTooltip[buff].SetActive(true);
-            Debug.Log("Buff tooltip " + buff + " activated");
+            //Debug.Log("Buff tooltip " + buff + " activated");
         }
     }
 
@@ -297,7 +330,7 @@ public class PauseMenu : MonoBehaviour
     public void ShowDebuffTooltip(int debuff) {
         if (debuffTooltipInteractable[debuff]) {
             activeDebuffTooltip[debuff].SetActive(true);
-            Debug.Log("Debuff tooltip " + debuff + " activated");
+            //Debug.Log("Debuff tooltip " + debuff + " activated");
         }
     }
 
@@ -318,6 +351,5 @@ public class PauseMenu : MonoBehaviour
         quitNo.onClick.AddListener(() => QuitCancel());
         
         //Right side
-        //Left side
     }
 }
