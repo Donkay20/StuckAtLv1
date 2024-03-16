@@ -19,6 +19,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private AttackSlotBonus attackSlotBonus;
     [SerializeField] private Slot[] slots;
     private string status;
+    [SerializeField] private bool okToClose, okToOpen;
     [Space] //left side
     [Header("Left Section | Status")]
     [SerializeField] private TextMeshProUGUI HPText;
@@ -76,6 +77,7 @@ public class PauseMenu : MonoBehaviour
     private bool pauseMenuOpen;
 
     void Awake() {
+        okToOpen = true;
         pauseAnimator = GetComponent<Animator>();
         InitializeButtons();
     }
@@ -118,20 +120,35 @@ public class PauseMenu : MonoBehaviour
     }
 
     private void PauseMenuStart() {
-        EnableCenterButtons();
-        pauseAnimator.SetTrigger("Intro");
-        Time.timeScale = 0;
-        pauseMenuOpen = true;
-        status = "center";
+        if (okToOpen) {
+            okToOpen = false;
+            EnableCenterButtons();
+            pauseAnimator.SetTrigger("Intro");
+            Time.timeScale = 0;
+            pauseMenuOpen = true;
+            status = "center";
+        }
+        
+    }
+
+    private void IntroAnimationFinished() {
+        okToClose = true;
+    }
+
+    private void OutroAnimationFinished() {
+        okToOpen = true;
     }
 
     private void PauseMenuEnd() {
-        OptionCancel();
-        QuitCancel();
-        CloseAdditionalDetailPanel();
-        pauseAnimator.SetTrigger("Outro");
-        Time.timeScale = 1;
-        pauseMenuOpen = false;
+        if (okToClose) {
+            okToClose = false;
+            OptionCancel();
+            QuitCancel();
+            CloseAdditionalDetailPanel();
+            pauseAnimator.SetTrigger("Outro");
+            Time.timeScale = 1;
+            pauseMenuOpen = false;
+        }
     }
 
     private void UpdateAllStatuses() {  //takes a snapshot of all relevant stats right before pausing.
