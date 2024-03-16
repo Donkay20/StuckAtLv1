@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dialogue/Ruins/RuinsEnd.unity
     guid: f8b8ddd6ec6dcfe40993862a02220746
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Forest/ForestIntro.unity
+    guid: 4e2330b8032e66f4ca94d31e78ab875d
   m_configObjects: {}

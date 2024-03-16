@@ -61,4 +61,24 @@ public class AttackSlotBonus : MonoBehaviour
         }
         return duration;
     }
+
+    public (float, float, float) GetUpgradeCalculation(Slot s) {
+        float damage = 1;
+        if (s.GetCommonUpgrade(0) > 0) {damage *= 1 + (s.GetCommonUpgrade(0) * 0.1f);}
+        if (s.GetRareUpgrade(1) > 0) {damage *= 1 + (s.GetRareUpgrade(1) * 0.1f);}
+        if (s.GetRareUpgrade(9) > 0) {damage *= s.GetRareUpgrade(9) * (1 + (FindAnyObjectByType<Character>(FindObjectsInactive.Include).currentHp / 200));}  
+        damage *= FindAnyObjectByType<Character>(FindObjectsInactive.Include).GetDamageModifier();
+        damage *= FindAnyObjectByType<GameManager>().GetShopDamageBonus();
+
+        float size = 1;
+        if (s.GetCommonUpgrade(1) > 0) {size += s.GetCommonUpgrade(1) * 0.05f;}
+        if (s.GetRareUpgrade(1) > 0) {size += s.GetRareUpgrade(1) * 0.05f;} 
+        if (s.GetRareUpgrade(10) > 0 && FindAnyObjectByType<Character>(FindObjectsInactive.Include).currentHp > 10) {size += (FindAnyObjectByType<Character>(FindObjectsInactive.Include).currentHp - 10) * 0.01f;}    
+
+        float duration = 1;
+        if (s.GetCommonUpgrade(2) > 0) {duration *= 1 + s.GetCommonUpgrade(2) * 0.2f;}
+        if (s.GetRareUpgrade(1) > 0) {duration *= 1 + s.GetRareUpgrade(1) * 0.2f;}
+
+        return (damage, size, duration);
+    }
 }

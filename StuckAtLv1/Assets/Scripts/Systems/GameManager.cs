@@ -31,6 +31,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     [SerializeField] private GameObject shopUI;
     [SerializeField] private MapManager mapManager;
     [SerializeField] private SlotManager slotManager;
+    [SerializeField] private PauseMenu pauseMenu;
     private GameState currentState;
     private GameState previousState;
     private int scaling;
@@ -93,7 +94,8 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             break;
                         case 2:
                             if (mapManager.GetLevel() == 0) {
-                                SceneManager.UnloadSceneAsync("RuinsEnd");
+                                //SceneManager.UnloadSceneAsync("RuinsEnd");    
+                                SceneManager.UnloadSceneAsync("ForestIntro");
                             }
                             break;
                         case 3:
@@ -417,6 +419,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         mapManager.SetLinesOff();
         mapUI.SetActive(false);
 
+        pauseMenu.IncreaseMaxSlots();
         //virtualCamera.SetForest();
     }
 }

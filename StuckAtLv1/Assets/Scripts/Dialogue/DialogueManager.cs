@@ -142,6 +142,10 @@ public class DialogueManager : MonoBehaviour
                     SceneManager.UnloadSceneAsync("RuinsBossEnd");
                     break;
                 case "RuinsEnd":
+                    SceneManager.LoadScene("ForestIntro", LoadSceneMode.Additive);
+                    SceneManager.UnloadSceneAsync("RuinsEnd");
+                    break;
+                case "ForestIntro":
                     gameManager.ReceiveCommand("map");
                     break;
             }
@@ -267,6 +271,10 @@ public class DialogueManager : MonoBehaviour
                     SceneManager.LoadScene("RuinsEnd", LoadSceneMode.Additive);
                     break;
                 case "RuinsEnd":
+                    SceneManager.LoadScene("ForestIntro", LoadSceneMode.Additive);
+                    SceneManager.UnloadSceneAsync("RuinsEnd");
+                    break;
+                case "ForestIntro":
                     gameManager.ReceiveCommand("map");
                     break;
             }

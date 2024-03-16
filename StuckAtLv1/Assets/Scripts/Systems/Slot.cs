@@ -24,6 +24,7 @@ public class Slot : MonoBehaviour
     private readonly float BASE_SLOT_COOLDOWN = 3f;
     private bool containsSkill = false;
     private bool atkDmgBoostAvailable = true;   //common 9
+    private bool rareZeroBoostAvailable = true; //rare 0
     [SerializeField] private int skillID = 0;
     [SerializeField] private int skillUses = 0; 
     private float cooldown, activeCD, cooldownModifier;
@@ -51,6 +52,7 @@ public class Slot : MonoBehaviour
 
     private void Start() {
         atkDmgBoostAvailable = true;
+        rareZeroBoostAvailable = true;
         containsSkill = false;
         if (identity == 1) {
             //use this to test for upgrades
@@ -77,6 +79,7 @@ public class Slot : MonoBehaviour
         if (activeCD <= 0 && coolingDown) {
             coolingDown = false; cooldownValueText.gameObject.SetActive(false);
             atkDmgBoostAvailable = true;                                            //common 9
+            rareZeroBoostAvailable = true;                                          //rare 0
         }
 
         if (!containsSkill) {
@@ -128,11 +131,6 @@ public class Slot : MonoBehaviour
 
                 if (commonUpgrades[14] > 0) {                                       //common 14
                     slotManager.AddTempAtkSpd(1);
-                }
-
-                if (rareUpgrades[0] > 0) {                                          //rare 0
-                    movement.ActiveDashCD -= movement.ActiveDashCD * rareUpgrades[0] * 0.1f;
-                    Debug.Log("Rare | 0");
                 }
 
                 if (rareUpgrades[5] > 0 && character.afterimage > 0) {              //rare 5
@@ -203,6 +201,14 @@ public class Slot : MonoBehaviour
         if (atkDmgBoostAvailable) {
             slotManager.AddTempAtkDmg(commonUpgrades[9]);
             atkDmgBoostAvailable = false;
+        }
+    }
+
+    public void RareZeroBoost() {                           //rare 0
+        if (rareZeroBoostAvailable) {
+            slotManager.AddTempAtkDmg(rareUpgrades[0]);
+            slotManager.AddTempAtkSpd(rareUpgrades[0] * 5);
+            rareZeroBoostAvailable = false;
         }
     }
 
@@ -296,6 +302,19 @@ public class Slot : MonoBehaviour
         return isCrit;
     }
 
+    public int GetCritChance() {
+        int critChance = 5;
+        if (commonUpgrades[4] > 0) {
+            critChance += commonUpgrades[4] * 10;
+        }
+        if (rareUpgrades[3] > 0) {
+            if (character.currentHp <= 10) {
+                critChance += 30 * rareUpgrades[3];
+            }
+        }
+        return critChance;
+    }
+
     public float CriticalDamage() {
         float critDmg = 2;                              //critical strikes do 200% dmg at base
         //crit damage bonuses start here
@@ -327,13 +346,13 @@ public class Slot : MonoBehaviour
     14. Attack speed buff +1% (room)                    - OK
 
     Rare:
-    0.  -10% Dash cooldown                              - OK
+    0.  +1 attack damage & +5% atk spd on kill (room)   - OK
     1.  Size +5%, Damage +10%, Duration +20%            - OK
     2.  3 slot weight, +1000g                           - OK
     3.  No overheal = +30% crit chance                  - OK
     4.  No overheal = crit = 0.5s afterimage            - OK
     5.  Movement speed +5% * 1s of afterimage           - OK
-    6.  Turn overheal to atk spd (room)                 - OK
+    6.  Negate overheal & overheal = atk spd (room)     - OK
     7.  x2 overhealing                                  - OK
     8.  Overheal 1 for each enemy hit                   - OK
     9.  Bonus dmg * 0.5% of HP                          - OK

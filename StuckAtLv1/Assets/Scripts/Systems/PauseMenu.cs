@@ -16,6 +16,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private MapManager mapManager;
     [SerializeField] private BuffManager buffManager;
+    [SerializeField] private AttackSlotBonus attackSlotBonus;
     [SerializeField] private Slot[] slots;
     private string status;
     [Space] //left side
@@ -62,6 +63,15 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] slotDamage;
     [SerializeField] private TextMeshProUGUI[] slotSize;
     [SerializeField] private TextMeshProUGUI[] slotDuration;
+    [SerializeField] private TextMeshProUGUI[] slotCritChance;
+    [SerializeField] private TextMeshProUGUI[] slotCritDamage;
+    [SerializeField] private GameObject slot3Group, slot4Group, slot5Group;
+    [SerializeField] private GameObject slot3LockImage, slot4LockImage, slot5LockImage;
+    [SerializeField] private Button[] slotDetailButtons;
+    [SerializeField] private GameObject artifactUpgradeDetailPanel;
+    [SerializeField] private Button closeArtifactUpgradeDetailPanel;
+    [SerializeField] private TextMeshProUGUI detailPanelText;
+    //end
     private Animator pauseAnimator;
     private bool pauseMenuOpen;
 
@@ -118,6 +128,7 @@ public class PauseMenu : MonoBehaviour
     private void PauseMenuEnd() {
         OptionCancel();
         QuitCancel();
+        CloseAdditionalDetailPanel();
         pauseAnimator.SetTrigger("Outro");
         Time.timeScale = 1;
         pauseMenuOpen = false;
@@ -166,10 +177,10 @@ public class PauseMenu : MonoBehaviour
         levelNumber.text = mapManager.GetLevel().ToString();
 
         //Right side
-
+        GetSlotStatistics();
     }
 
-    //Center
+    //CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER CENTER 
     public void Center() {  //swap screen to center view
         if (status != "center") {
             EnableCenterButtons();
@@ -192,29 +203,17 @@ public class PauseMenu : MonoBehaviour
 
     private void DisableCenterButtons() {
         resumeButton.interactable = false;
-        //resumeButton.image.raycastTarget = false;
-        //resumeButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = false;
         optionsButton.interactable = false;
-        //optionsButton.image.raycastTarget = false;
-        //optionsButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = false;
         quitButton.interactable = false;
-        //quitButton.image.raycastTarget = false;
-        //quitButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = false;
     }
 
     private void EnableCenterButtons() {
         resumeButton.interactable = true;
-        //resumeButton.image.raycastTarget = true;
-        //resumeButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = true;
         optionsButton.interactable = true;
-        //optionsButton.image.raycastTarget = true;
-        //optionsButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = true;
         quitButton.interactable = true;
-        //quitButton.image.raycastTarget = true;
-        //quitButton.GetComponentInChildren<TextMeshProUGUI>().raycastTarget = true;
     }
 
-    //Right
+    //RIGHT SIDE RIGHT SIDE RIGHT SIDE RIGHT SIDE RIGHT SIDE RIGHT SIDE RIGHT SIDE RIGHT SIDE 
     public void Right() {   //swap screen to right view
         if (status != "right") {
             DisableCenterButtons();
@@ -223,7 +222,201 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    //Left
+    private void GetSlotStatistics() {
+        for (int i = 0; i < gameManager.GetMaxSlots(); i++) {
+            Debug.Log(gameManager.GetMaxSlots());
+            (float damage, float size, float duration) = attackSlotBonus.GetUpgradeCalculation(slots[i]);
+            int critChance = slots[i].GetCritChance();
+            float critDamage = slots[i].CriticalDamage();
+
+            if (mapManager.GetWorld() == 1 && mapManager.GetLevel() == 0) { //breaks if paused before the game starts
+                slotDamage[i].text = "+0%";
+                slotSize[i].text = "+0%" ;
+                slotDuration[i].text = "+0%" ;
+                slotCritChance[i].text = "5%";
+                slotCritDamage[i].text = "200%";
+            } else {
+                slotDamage[i].text = "+" + ((damage - 1) * 100).ToString("f0") + "%";
+                slotSize[i].text = "+" + ((size - 1) * 100).ToString("f0") + "%";
+                slotDuration[i].text = "+" + ((duration - 1) * 100).ToString("f0") + "%";
+                slotCritChance[i].text = critChance.ToString("f0") + "%";
+                slotCritDamage[i].text = (critDamage * 100).ToString("f0") + "%";
+            }
+
+            
+        }
+    }
+
+    private void GenerateAdditionalDetailPanel(int slot) {
+        artifactUpgradeDetailPanel.SetActive(true);
+
+        //Common
+        if (slots[slot].GetCommonUpgrade(0) > 0) {
+            detailPanelText.text += "Skill damage +10% (" + slots[slot].GetCommonUpgrade(0) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(1) > 0) {
+            detailPanelText.text += "Skill size +5% (" + slots[slot].GetCommonUpgrade(1) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(2) > 0) {
+            detailPanelText.text += "Skill duration +20% (" + slots[slot].GetCommonUpgrade(2) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(3) > 0) {
+            detailPanelText.text += "Overheal 2 HP on skill cast (" + slots[slot].GetCommonUpgrade(3) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(4) > 0) {
+            detailPanelText.text += "Critical chance +10% (" + slots[slot].GetCommonUpgrade(4) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(5) > 0) {
+            detailPanelText.text += "5% skill damage buff on skill cast (" + slots[slot].GetCommonUpgrade(5) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(6) > 0) {
+            detailPanelText.text += "Critical damage +20% (" + slots[slot].GetCommonUpgrade(6) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(7) > 0) {
+            detailPanelText.text += "Skills inflict 20% slow for 5 seconds (" + slots[slot].GetCommonUpgrade(7) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(8) > 0) {
+            detailPanelText.text += "5% movement speed buff on skill cast (" + slots[slot].GetCommonUpgrade(8) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(9) > 0) {
+            detailPanelText.text += "+1 temp. basic attack damage on-kill (" + slots[slot].GetCommonUpgrade(9) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(10) > 0) {
+            detailPanelText.text += "Skill chance to inflict anemia on-hit +50% (" + slots[slot].GetCommonUpgrade(10) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(11) > 0) {
+            detailPanelText.text += "Push away nearby enemies on skill cast (" + slots[slot].GetCommonUpgrade(11) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(12) > 0) {
+            detailPanelText.text += "Treasure Chest spawn chance on-kill +5% (" + slots[slot].GetCommonUpgrade(12) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(13) > 0) {
+            detailPanelText.text += "Enemy kills grant increased gold (" + slots[slot].GetCommonUpgrade(13) + ")\n";
+        }
+        if (slots[slot].GetCommonUpgrade(14) > 0) {
+            detailPanelText.text += "+1% temp. attack speed on-cast (" + slots[slot].GetCommonUpgrade(14) + ")\n";
+        }
+
+        //Rare 
+        detailPanelText.text += "\n";
+        if (slots[slot].GetRareUpgrade(0) > 0) {
+            detailPanelText.text += "+1 temp. basic attack damage / +5% basic attack speed on-kill (" + slots[slot].GetRareUpgrade(0) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(1) > 0) {
+            detailPanelText.text += "+5% skill size / +10% skill damage / +20% skill duration (" + slots[slot].GetRareUpgrade(1) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(2) > 0) {
+            detailPanelText.text += "+3 slot weight (instead of 1) / +1000g (" + slots[slot].GetRareUpgrade(2) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(3) > 0) {
+            detailPanelText.text += "No overheal = +30% crit chance (" + slots[slot].GetRareUpgrade(3) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(4) > 0) {
+            detailPanelText.text += "No overheal & critical hit = +0.5s afterimage-time (" + slots[slot].GetRareUpgrade(4) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(5) > 0) {
+            detailPanelText.text += "+5% move speed buff per second of afterimage-time on-cast (" + slots[slot].GetRareUpgrade(5) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(6) > 0) {
+            detailPanelText.text += "Cannot gain overheal, gain temp. attack speed instead (" + slots[slot].GetRareUpgrade(6) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(7) > 0) {
+            detailPanelText.text += "Doubles overhealing gained (" + slots[slot].GetRareUpgrade(7) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(8) > 0) {
+            detailPanelText.text += "Overheal 1 HP on-hit (" + slots[slot].GetRareUpgrade(8) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(9) > 0) {
+            detailPanelText.text += "Skill damage +0.5% of HP (" + slots[slot].GetRareUpgrade(9) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(10) > 0) {
+            detailPanelText.text += "Skill size +1% of overheal (" + slots[slot].GetRareUpgrade(10) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(11) > 0) {
+            detailPanelText.text += "Inflict anemia on-hit (" + slots[slot].GetRareUpgrade(11) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(12) > 0) {
+            detailPanelText.text += "Grants gold when hitting an anemic enemy (" + slots[slot].GetRareUpgrade(12) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(13) > 0) {
+            detailPanelText.text += "Spreads anemia nearby when hitting an anemic enemy (" + slots[slot].GetRareUpgrade(13) + ")\n";
+        }
+        if (slots[slot].GetRareUpgrade(14) > 0) {
+            detailPanelText.text += "+20% skill damage boost upon inflicting anemia (" + slots[slot].GetRareUpgrade(14) + ")\n";
+        }
+
+        //Legendary
+        detailPanelText.text += "\n";
+        if (slots[slot].GetLegendaryUpgrade(0) > 0) {
+            detailPanelText.text += "Enemy explodes on-kill (" + slots[slot].GetLegendaryUpgrade(0) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(1) > 0) {
+            detailPanelText.text += "Grant Penetration on-kill for 3 seconds (" + slots[slot].GetLegendaryUpgrade(1) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(2) > 0) {
+            detailPanelText.text += "Slot upgrades applied to this slot are also applied to adjacent slots (" + slots[slot].GetLegendaryUpgrade(2) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(3) > 0) {
+            detailPanelText.text += "No overheal = +1s afterimage-time on-hit (+3s on critical hit) (" + slots[slot].GetLegendaryUpgrade(3) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(4) > 0) {
+            detailPanelText.text += "Critical hit = Avarice for 3 seconds (" + slots[slot].GetLegendaryUpgrade(4) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(5) > 0) {
+            detailPanelText.text += "+1 permanent attack speed on-kill with critical hit (" + slots[slot].GetLegendaryUpgrade(5) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(6) > 0) {
+            detailPanelText.text += "Critical hit = +50% critical damage buff for 3 seconds & clear status condition (" + slots[slot].GetLegendaryUpgrade(6) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(7) > 0) {
+            detailPanelText.text += "Damage all anemic enemies on-screen on-kill and on-cast (" + slots[slot].GetLegendaryUpgrade(7) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(8) > 0) {
+            detailPanelText.text += "Anemic Shock upon inflicting an anemic enemy with anemia (" + slots[slot].GetLegendaryUpgrade(8) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(9) > 0) {
+            detailPanelText.text += "Bloodsucker buff for 2 seconds on-cast (" + slots[slot].GetLegendaryUpgrade(9) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(10) > 0) {
+            detailPanelText.text += "Damaging an anemic enemy increases their damage rate speed on-hit (" + slots[slot].GetLegendaryUpgrade(10) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(11) > 0) {
+            detailPanelText.text += "Treasure chest spawn chance += 5% of overheal (" + slots[slot].GetLegendaryUpgrade(11) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(12) > 0) {
+            detailPanelText.text += "Slows enemy equal to 1% of overheal on-hit (" + slots[slot].GetLegendaryUpgrade(12) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(13) > 0) {
+            detailPanelText.text += "Grants Bulwark buff on-kill (" + slots[slot].GetLegendaryUpgrade(13) + ")\n";
+        }
+        if (slots[slot].GetLegendaryUpgrade(14) > 0) {
+            detailPanelText.text += "+1 permanent basic attack damage on-kill per 100 HP (" + slots[slot].GetLegendaryUpgrade(14) + ")\n";
+        }
+    }
+
+    private void CloseAdditionalDetailPanel() {
+        detailPanelText.text = "";
+        artifactUpgradeDetailPanel.SetActive(false);
+    }
+
+    public void IncreaseMaxSlots() {
+        switch (gameManager.GetMaxSlots()) {
+            case 3:
+                slot3LockImage.SetActive(false);
+                slot3Group.SetActive(true);
+                break;
+            case 4:
+                slot4LockImage.SetActive(false);
+                slot4Group.SetActive(true);
+                break;
+            case 5:
+                slot5LockImage.SetActive(false);
+                slot5Group.SetActive(true);
+                break;
+        }
+    }
+
+    //LEFT SIDE LEFT SIDE LEFT SIDE LEFT SIDE LEFT SIDE LEFT SIDE LEFT SIDE
     public void Left() {    //swap screen to left view
         if (status != "left") {
             DisableCenterButtons();
@@ -280,7 +473,6 @@ public class PauseMenu : MonoBehaviour
                 }
                 activeBuffDuration[i].text = duration.ToString("f1") + "s";
                 buffTooltipInteractable[i] = true;
-                //Debug.Log("Buff populated: " + i);
             } else {
                 activeBuffs[i].sprite = buffIcons[0];
                 activeBuffDuration[i].text = "";
@@ -306,7 +498,6 @@ public class PauseMenu : MonoBehaviour
                 }
                 activeDebuffDuration[i].text = duration.ToString("f1") + "s";
                 debuffTooltipInteractable[i] = true;
-                //Debug.Log("Debuff populated: " + i);
             } else {
                 activeDebuffs[i].sprite = debuffIcons[0];
                 activeDebuffDuration[i].text = "";
@@ -319,7 +510,6 @@ public class PauseMenu : MonoBehaviour
     public void ShowBuffTooltip(int buff) {
         if (buffTooltipInteractable[buff]) {
             activeBuffTooltip[buff].SetActive(true);
-            //Debug.Log("Buff tooltip " + buff + " activated");
         }
     }
 
@@ -330,7 +520,6 @@ public class PauseMenu : MonoBehaviour
     public void ShowDebuffTooltip(int debuff) {
         if (debuffTooltipInteractable[debuff]) {
             activeDebuffTooltip[debuff].SetActive(true);
-            //Debug.Log("Debuff tooltip " + debuff + " activated");
         }
     }
 
@@ -351,5 +540,11 @@ public class PauseMenu : MonoBehaviour
         quitNo.onClick.AddListener(() => QuitCancel());
         
         //Right side
+        slotDetailButtons[0].onClick.AddListener(() => GenerateAdditionalDetailPanel(0));
+        slotDetailButtons[1].onClick.AddListener(() => GenerateAdditionalDetailPanel(1));
+        slotDetailButtons[2].onClick.AddListener(() => GenerateAdditionalDetailPanel(2));
+        slotDetailButtons[3].onClick.AddListener(() => GenerateAdditionalDetailPanel(3));
+        slotDetailButtons[4].onClick.AddListener(() => GenerateAdditionalDetailPanel(4));
+        closeArtifactUpgradeDetailPanel.onClick.AddListener(() => CloseAdditionalDetailPanel());
     }
 }

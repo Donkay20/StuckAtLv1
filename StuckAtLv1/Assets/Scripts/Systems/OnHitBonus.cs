@@ -36,6 +36,10 @@ public class OnHitBonus : MonoBehaviour
                     Debug.Log("Common | 13");
                 }
 
+                if (slot.GetRareUpgrade(0) > 0) {                                   //rare 0
+                    slot.RareZeroBoost();
+                }
+
                 if (slot.GetRareUpgrade(8) > 0) {                                   //rare 8 (rare 7) (rare 6)
                     Character c = FindAnyObjectByType<Character>();
                     SlotManager s = FindAnyObjectByType<SlotManager>();
