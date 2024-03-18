@@ -111,4 +111,12 @@ public class EnemyPool : MonoBehaviour
         golem1.Dispose(); golem2.Dispose(); golem3.Dispose();
         spider1.Dispose(); spider2.Dispose(); spider3.Dispose();
     }
+
+    public void WorldTwoClear() {
+        //todo
+    }
+
+    public void WorldThreeClear() {
+        //todo
+    }
 }

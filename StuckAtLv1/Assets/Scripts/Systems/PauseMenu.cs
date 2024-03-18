@@ -18,8 +18,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private BuffManager buffManager;
     [SerializeField] private AttackSlotBonus attackSlotBonus;
     [SerializeField] private Slot[] slots;
-    private string status;
-    [SerializeField] private bool okToClose, okToOpen;
     [Space] //left side
     [Header("Left Section | Status")]
     [SerializeField] private TextMeshProUGUI HPText;
@@ -43,9 +41,6 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] activeBuffDuration, activeDebuffDuration;
     [SerializeField] private GameObject[] activeBuffTooltip, activeDebuffTooltip;
     [SerializeField] private TextMeshProUGUI[] activeBuffTooltipText, activeDebuffTooltipText;
-    private bool[] buffTooltipInteractable = new bool[5];
-    private bool[] debuffTooltipInteractable = new bool[5];
-    
     [Space] //center
     [Header("Center | Pause Menu")]
     [SerializeField] private TextMeshProUGUI worldNumber;
@@ -73,8 +68,13 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button closeArtifactUpgradeDetailPanel;
     [SerializeField] private TextMeshProUGUI detailPanelText;
     //end
+    //variables
     private Animator pauseAnimator;
     private bool pauseMenuOpen;
+    private string status;
+    private bool okToClose, okToOpen;
+    private bool[] buffTooltipInteractable = new bool[5];
+    private bool[] debuffTooltipInteractable = new bool[5];
 
     void Awake() {
         okToOpen = true;

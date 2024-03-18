@@ -24,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     private void SpawnEnemy() {
-        int enemyID = -1;
+        int enemyID = -1; Vector3 position;
 
         if (specialCondition) {
         //special conditions are for events.
@@ -53,10 +53,21 @@ public class EnemyManager : MonoBehaviour
                     break;
             }
         }
-        Vector3 position = GenerateRandomPosition();
-        position += player.transform.position;
-        GameObject newEnemy = EnemyPool.Instance.GetEnemy(enemyID);
-        //GameObject newEnemy = Instantiate(enemyPool[enemyID]); //change this value to test specific enemies
+        
+        switch (enemyID) {
+            case int n when n < 9:
+                position = GenerateRandomPosition();
+                position += player.transform.position;
+                break;
+            case int n when n > 9 && n < 17:
+                //todo different spawn patterns
+            default:
+                position = GenerateRandomPosition();
+                position += player.transform.position;
+                break;
+        }
+        
+        GameObject newEnemy = EnemyPool.Instance.GetEnemy(enemyID); //change this value to test specific enemies
         newEnemy.transform.position = position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
         newEnemy.transform.parent = transform;
