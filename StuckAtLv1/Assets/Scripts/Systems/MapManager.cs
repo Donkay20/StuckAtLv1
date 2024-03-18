@@ -37,8 +37,7 @@ public class MapManager : MonoBehaviour
         level = 0;
         section = 2;
 
-        foreach (Room r in rooms) {GiveRoom(r);}
-
+        AssignRoomProcess();
         InitializeButtons();
 
         startingRoom.AssignRoomType("combat"); startingRoom.GetComponent<Image>().sprite = combatImage;
@@ -59,11 +58,15 @@ public class MapManager : MonoBehaviour
         
         /*  First, check if the node that was clicked is one level ahead, and one that connects to a path that the user can go to.
             For example, you can't go from a 3-layer bottom room to a 2-layer top room as the paths do not connect.
-            Then, 
+
+            If it's an invalid move, do nothing. 
+            If it's a valid move, disable the button and all other buttons in that section.
+
+            Then, mark down the type of room that was clicked by getting the info from the room script assigned to the button that was clicked.
+
+            Then, do the outro animation and tell the game manager what type of room was clicked so it can act accordingly.
         */
         if (level + 1 == clickedLevel && (section + 1 == clickedSection || section - 1 == clickedSection)) { //check if the button clicked is a valid one
-
-            
             Vector2 currentNode = new Vector2(clickedLevel, clickedSection);
             nodeList.Add(currentNode);
             AssignLine(currentNode);
@@ -256,36 +259,61 @@ public class MapManager : MonoBehaviour
                 break;
             }
             manager.AdjustScaling();
-            //todo for outro animation
             mapAnimation.SetTrigger("Outro");
-            //manager.ReceiveCommand(report);
         }
     }
 
     public void TransitionAnimationComplete() {    //called from the end of the "Outro" animation's via an event
         manager.ReceiveCommand(report);
     }
+
+    private void AssignRoomProcess() {      //only have a set amount of shops in the map at once.
+        int firstShopBeforeMiniboss, secondShopBeforeMiniboss, firstShopAfterMiniboss, secondShopAfterMiniboss;
+        firstShopBeforeMiniboss = Random.Range(2,5);
+        secondShopBeforeMiniboss = Random.Range(5,7);
+        firstShopAfterMiniboss = Random.Range(14,17);
+        secondShopAfterMiniboss = Random.Range(17,19);
+
+        if (world == 1) {   //In the first world, only put one shop before the miniboss. After, put two before every miniboss.
+            for (int i = 0; i < 19; i++) {
+                if (i == secondShopBeforeMiniboss || i == firstShopAfterMiniboss || i == secondShopAfterMiniboss) {
+                    GiveRoom(rooms[i], true);
+                } else {
+                    GiveRoom(rooms[i], false);
+                }
+            }
+        } else {
+            for (int i = 0; i < 19; i++) {
+                if (i == firstShopBeforeMiniboss || i == secondShopBeforeMiniboss || i == firstShopAfterMiniboss || i == secondShopAfterMiniboss) {
+                    GiveRoom(rooms[i], true);
+                } else {
+                    GiveRoom(rooms[i], false);
+                }
+            }
+        }
+    }
     
-    private void GiveRoom(Room r) {
+    private void GiveRoom(Room r, bool isShop) {
         r.GetComponent<Button>().interactable = true;
-        int number = Random.Range(1,5);
-        switch(number) {
-            case 1:
-                r.AssignRoomType("combat");
-                r.GetComponent<Image>().sprite = combatImage;
-                break;
-            case 2:
-                r.AssignRoomType("survival");
-                r.GetComponent<Image>().sprite = survivalImage;
-                break;
-            case 3:
-                r.AssignRoomType("event");
-                r.GetComponent<Image>().sprite = eventImage;
-                break;
-            case 4:
-                r.AssignRoomType("shop");
-                r.GetComponent<Image>().sprite = shopImage;
-                break;
+        if (isShop) {
+            r.AssignRoomType("shop");
+            r.GetComponent<Image>().sprite = shopImage;
+        } else {
+            int number = Random.Range(1,4);
+            switch(number) {
+                case 1:
+                    r.AssignRoomType("combat");
+                    r.GetComponent<Image>().sprite = combatImage;
+                    break;
+                case 2:
+                    r.AssignRoomType("survival");
+                    r.GetComponent<Image>().sprite = survivalImage;
+                    break;
+                case 3:
+                    r.AssignRoomType("event");
+                    r.GetComponent<Image>().sprite = eventImage;
+                    break;
+            }
         }
     }
 
@@ -436,7 +464,8 @@ public class MapManager : MonoBehaviour
                 break;
         }
 
-        foreach (Room r in rooms) {GiveRoom(r);}
+        //foreach (Room r in rooms) {GiveRoom(r);}
+        AssignRoomProcess();
 
         startingRoom.AssignRoomType("combat"); startingRoom.GetComponent<Image>().sprite = combatImage;
         startingRoom.GetComponent<Button>().interactable = true;
