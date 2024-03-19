@@ -13,10 +13,13 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] MapManager mapManager;
     [SerializeField] GameObject[] forestSpecialEnemies;
-    float timer;
-    int condition; bool specialCondition;
+    [SerializeField] float timer, specialTimer;
+    int condition; bool eventCondition;
 
     //todo: add special separate timer for special enemy spawns during forest, then randomize the timer
+    private void OnEnable() {
+        ResetSpecialTimer();
+    }
 
     private void Update() {
         timer -= Time.deltaTime;
@@ -24,12 +27,19 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemy();
             timer = spawnTimer;
         }
+
+        if (mapManager.GetWorld() > 1) {
+            if (specialTimer > 0) {specialTimer -= Time.deltaTime;}
+            if (specialTimer <= 0) {
+                SpawnSpecialEnemy(mapManager.GetWorld());
+                ResetSpecialTimer();
+            }
+        }
     }
 
     private void SpawnEnemy() {
-        int enemyID = -1; Vector3 position;
-
-        if (specialCondition) {
+        int enemyID = -1; //Vector3 position;
+        if (eventCondition) {
         //special conditions are for events.
             switch (condition) {
             case 2: //Ruins Event 2
@@ -45,8 +55,7 @@ public class EnemyManager : MonoBehaviour
                     enemyID = Random.Range(0, 9);
                     break;
                 case 2:
-                    enemyID = Random.Range(0, 9);
-                    //enemyID = Random.Range(9, 17); //fix when world 2 enemies are in
+                    enemyID = Random.Range(0, 9); //adjust for world 2 enemies
                     break;
                 case 3:
                     enemyID = Random.Range(17, 26);
@@ -56,26 +65,40 @@ public class EnemyManager : MonoBehaviour
                     break;
             }
         }
-        
-        switch (enemyID) {      //special conditions for position goes here dependent on enemy, otherwise just default to a random position
-            /*
-            case int n when n < 9:
-                position = GenerateRandomPosition();
-                position += player.transform.position;
-                break;
-            case int n when n > 9 && n < 17:
-                //todo different spawn patterns
-            */
-            default:
-                position = GenerateRandomPosition();
-                position += player.transform.position;
-                break;
-        }
-        
+        //position = GenerateRandomPosition() + player.transform.position;
         GameObject newEnemy = EnemyPool.Instance.GetEnemy(enemyID); //change this value to test specific enemies
-        newEnemy.transform.position = position;
+        newEnemy.transform.position = GenerateRandomPosition() + player.transform.position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
         newEnemy.transform.parent = transform;
+    }
+
+    private void SpawnSpecialEnemy(int world) {
+        switch (world) {
+            case 2:
+                GameObject newSpecialEnemy = Instantiate(forestSpecialEnemies[Random.Range(0, forestSpecialEnemies.Length)]);
+                newSpecialEnemy.transform.position += player.transform.position;
+                newSpecialEnemy.transform.parent = transform;
+                break;
+            //case 3:
+                //break;
+            //case 4:
+                //break;
+        }
+    }
+
+    private void ResetSpecialTimer() {
+        specialTimer = Random.Range(10, 21);
+        switch (mapManager.GetWorld()) {
+            case 2:
+                specialTimer -= 1;
+                break;
+            case 3:
+                specialTimer -= 3;
+                break;
+            case 4:
+                specialTimer -= 5;
+                break;
+        }
     }
 
     private Vector3 GenerateRandomPosition() {
@@ -102,10 +125,10 @@ public class EnemyManager : MonoBehaviour
 
     public void SetCondition(int n) {
         if (n == -1) {
-            specialCondition = false;
+            eventCondition = false;
         } else {
-            specialCondition = true;
+            eventCondition = true;
+            condition = n;
         }
-        condition = n;
     }
 }
