@@ -69,7 +69,7 @@ public class Knight : MonoBehaviour
         //Swaps between the sword beam and the lateral slash.
         switch (swapAttack) {
             case true: //Sword Beam
-                Instantiate(swordBeamPrefab, lateralSlashParent.transform);
+                Instantiate(swordBeamPrefab, swordBeamParent.transform);
                 swapAttack = false;
                 break;
             case false: //Lateral Slash

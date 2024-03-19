@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float spawnTimer;
     [SerializeField] GameObject player;
     [SerializeField] MapManager mapManager;
+    [SerializeField] GameObject[] forestSpecialEnemies;
     float timer;
     int condition; bool specialCondition;
 

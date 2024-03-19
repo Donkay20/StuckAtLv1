@@ -236,13 +236,12 @@ public class CombatManager : MonoBehaviour
     }
 
     private void Finish() {
-        //Disable the spawner & kill all remaining enemies
+        //Disable the spawner & get rid of all remaining enemies, damage numbers, money, and drops
         spawner.enabled = false;
+
         Enemy[] remainingEnemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
         foreach (Enemy straggler in remainingEnemies) {
-            //straggler.TakeDamage(999);
             straggler.SelfDestruct();
-            //Destroy(straggler); <- doesn't work
         }
 
         DamageNumberParent[] remainingDamageNumbers = FindObjectsByType<DamageNumberParent>(FindObjectsSortMode.None);
@@ -253,10 +252,14 @@ public class CombatManager : MonoBehaviour
         ExtraMoney[] remainingMoneyDrops = FindObjectsByType<ExtraMoney>(FindObjectsSortMode.None);
         foreach (ExtraMoney moneybags in remainingMoneyDrops) {
             moneybags.DestroyExtraMoney();
-            //Destroy(moneybags); <- I don't know if this doesn't work but the other one doesn't work so I'm just gonna do the same here
         }
 
-        //Disable any unnecessary UI
+        EnemyGroup[] remainingEnemyGroups = FindObjectsByType<EnemyGroup>(FindObjectsSortMode.None);
+        foreach (EnemyGroup enemyGroup in remainingEnemyGroups) {
+            enemyGroup.BattleEnd();
+        }
+
+        //Disable UI
         survivalHourglass.SetActive(false);
         combatSkull.SetActive(false);
         if (objective == "miniboss" || objective == "boss") {

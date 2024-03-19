@@ -18,6 +18,15 @@ TagManager:
   - KnightSword
   - Lich
   - LichEffigy
+  - Squirrel1
+  - Squirrel2
+  - Squirrel3
+  - Tree1
+  - Tree2
+  - Tree3
+  - Wolf1
+  - Wolf2
+  - Wolf3
   layers:
   - Default
   - TransparentFX
