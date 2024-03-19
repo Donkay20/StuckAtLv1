@@ -16,6 +16,8 @@ public class EnemyManager : MonoBehaviour
     float timer;
     int condition; bool specialCondition;
 
+    //todo: add special separate timer for special enemy spawns during forest, then randomize the timer
+
     private void Update() {
         timer -= Time.deltaTime;
         if (timer < 0f) {
@@ -55,13 +57,15 @@ public class EnemyManager : MonoBehaviour
             }
         }
         
-        switch (enemyID) {
+        switch (enemyID) {      //special conditions for position goes here dependent on enemy, otherwise just default to a random position
+            /*
             case int n when n < 9:
                 position = GenerateRandomPosition();
                 position += player.transform.position;
                 break;
             case int n when n > 9 && n < 17:
                 //todo different spawn patterns
+            */
             default:
                 position = GenerateRandomPosition();
                 position += player.transform.position;

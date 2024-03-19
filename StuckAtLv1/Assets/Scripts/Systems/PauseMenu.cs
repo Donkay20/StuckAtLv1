@@ -183,11 +183,7 @@ public class PauseMenu : MonoBehaviour
         }
         
         dashCooldown.text = movement.GetDashCooldown().ToString("f1");
-
-        (int buffs, int debuffs) = buffManager.GetNumberOfBuffsDebuffs();
-        if (buffs > 0 || debuffs > 0) {
-            PopulateBuffsDebuffs();
-        }
+        PopulateBuffsDebuffs();
 
         //Center
         worldNumber.text = mapManager.GetWorld().ToString();

@@ -6,10 +6,7 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-    /*
-    Handles both combat and survival modes.
-    */
-
+    //Handles both combat and survival modes.
     [SerializeField] private TextMeshProUGUI uIObjective;
     [SerializeField] private TextMeshProUGUI uIObjectiveNumber;
     [SerializeField] private Character character;
@@ -22,6 +19,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject bossUI, bossSecondaryUI;
     [SerializeField] private GameObject survivalHourglass;
     [SerializeField] private GameObject combatSkull;
+    [SerializeField] private GameObject warningLeft, warningRight;
     [SerializeField] private Slot[] slots = new Slot[5];
     [SerializeField] private GameObject[] ruinsRooms = new GameObject[5];
     [SerializeField] private GameObject[] ruinsSpawn = new GameObject[5];
@@ -29,13 +27,13 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject[] forestSpawn = new GameObject[5];
     [SerializeField] private GameObject[] sewerRooms = new GameObject[5];
     [SerializeField] private GameObject[] sewerSpawn = new GameObject[5];
-    //todo, abyss?
+    //todo, abyss
     private int enemiesToKill, timeLeft, condition, roomChosen;
     private bool bossIsAlive;
     private GameObject room;
     private string objective;
     private bool specialCondition;
-    [SerializeField] private Animator combatAnimation, combatUIAnimation;
+    [SerializeField] private Animator combatAnimation, combatUIAnimation, warningAnimation;
 
     private void Awake() {
         specialCondition = false;
@@ -229,6 +227,10 @@ public class CombatManager : MonoBehaviour
 
     public string GetObjective() {
         return objective;
+    }
+
+    public void WarningAnimation(string side) {
+        combatUIAnimation.SetTrigger(side);
     }
 
     public void SetObjective(string objective) {
