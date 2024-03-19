@@ -162,7 +162,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -1209442628, guid: bde0294f10f0a334b8563bae0882345a, type: 3}
+  m_Sprite: {fileID: 1533449597, guid: 3f5328ce710e67946bb0e1d8c60be578, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ae85e3d3b5e4242bfdf3abb38e7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetGameObject: {fileID: 0}
   moneyDropPrefab: {fileID: 4269447868980704985, guid: 365e70c495b6f53488d62faa2315be3d, type: 3}
   damageTextPrefab: {fileID: 1713743412437274532, guid: 9e69095aeeb4b1e49840c8d74d107da6, type: 3}
   gameManager: {fileID: 0}

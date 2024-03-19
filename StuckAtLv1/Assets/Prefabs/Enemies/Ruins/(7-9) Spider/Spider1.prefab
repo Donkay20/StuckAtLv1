@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ae85e3d3b5e4242bfdf3abb38e7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetGameObject: {fileID: 0}
   moneyDropPrefab: {fileID: 4269447868980704985, guid: 365e70c495b6f53488d62faa2315be3d, type: 3}
   damageTextPrefab: {fileID: 1713743412437274532, guid: 9e69095aeeb4b1e49840c8d74d107da6, type: 3}
   gameManager: {fileID: 0}
