@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
-    //[SerializeField] GameObject[] enemyPool;
     [SerializeField] Vector2 spawnArea;
     [SerializeField] float spawnTimer;
     [SerializeField] GameObject player;
@@ -65,7 +64,6 @@ public class EnemyManager : MonoBehaviour
                     break;
             }
         }
-        //position = GenerateRandomPosition() + player.transform.position;
         GameObject newEnemy = EnemyPool.Instance.GetEnemy(enemyID); //change this value to test specific enemies
         newEnemy.transform.position = GenerateRandomPosition() + player.transform.position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
