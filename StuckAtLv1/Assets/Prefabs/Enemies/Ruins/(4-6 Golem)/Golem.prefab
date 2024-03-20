@@ -116,7 +116,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4017010206105386207}
   m_Father: {fileID: 0}
@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ae85e3d3b5e4242bfdf3abb38e7688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetGameObject: {fileID: 0}
   moneyDropPrefab: {fileID: 4269447868980704985, guid: 365e70c495b6f53488d62faa2315be3d, type: 3}
   damageTextPrefab: {fileID: 1713743412437274532, guid: 9e69095aeeb4b1e49840c8d74d107da6, type: 3}
   gameManager: {fileID: 0}
