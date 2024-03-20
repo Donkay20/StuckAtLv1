@@ -98,6 +98,18 @@ public class AbsorbBullet : MonoBehaviour
                     Lich lich = FindAnyObjectByType<Lich>();
                     if (lich.IsVulnerable()) {slotManager.AcquireSkill(11);}
                     break;
+                
+                case "Squirrel1":   //Squirrel Bite
+                    slotManager.AcquireSkill(12);
+                    break;
+
+                case "Squirrel2":   //Squirrel Tail Swipe
+                    slotManager.AcquireSkill(13);
+                    break;
+
+                case "Squirrel3":   //Squirrel Ball
+                    slotManager.AcquireSkill(14);
+                    break;
             }
 
             //Instantiate(spawnSiphon, transform.position, transform.rotation);

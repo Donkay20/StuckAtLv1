@@ -12,7 +12,6 @@ public class SpinningSlashSword : MonoBehaviour
     public void Activate(Slot s) {
         slot = s;
         AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
-
         damage = asb.GetDamageBonus(slot, KNIGHTSWORD_BASE_DAMAGE);
         size = asb.GetSizeBonus(slot); transform.localScale = new Vector2(size, size);
     }
