@@ -17,6 +17,7 @@ public class AttackSpawner : MonoBehaviour
     6: Fissure
     8: Ensnaring Web
     12: Squirrel Bite
+    15: Apple Shotgun
     */
     
     public void SpawnAttack(int id, Slot s) {

@@ -110,9 +110,31 @@ public class AbsorbBullet : MonoBehaviour
                 case "Squirrel3":   //Squirrel Ball
                     slotManager.AcquireSkill(14);
                     break;
-            }
 
-            //Instantiate(spawnSiphon, transform.position, transform.rotation);
+                case "Tree1":       //Apple Barrage
+                    slotManager.AcquireSkill(15);
+                    break;
+
+                case "Tree2":
+                    slotManager.AcquireSkill(16);
+                    break;
+
+                case "Tree3":
+                    slotManager.AcquireSkill(17);
+                    break;
+                
+                case "Wolf1":
+                    slotManager.AcquireSkill(18);
+                    break;
+                
+                case "Wolf2":
+                    slotManager.AcquireSkill(19);
+                    break;
+                
+                case "Wolf3":
+                    slotManager.AcquireSkill(20);
+                    break;
+            }
 
             if (slotManager.IsBloodsuckerActive()) {    //legendary 9
                 enemy.ApplyAnemia(1,3);

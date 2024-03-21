@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyInside: 500
+  healthInside: 0
+  money: 1
+  health: 0
 --- !u!61 &8949289316580113367
 BoxCollider2D:
   m_ObjectHideFlags: 0

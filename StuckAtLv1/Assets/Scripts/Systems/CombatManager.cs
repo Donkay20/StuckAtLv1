@@ -251,9 +251,9 @@ public class CombatManager : MonoBehaviour
             d.BattleOver();
         }
 
-        ExtraMoney[] remainingMoneyDrops = FindObjectsByType<ExtraMoney>(FindObjectsSortMode.None);
-        foreach (ExtraMoney moneybags in remainingMoneyDrops) {
-            moneybags.DestroyExtraMoney();
+        ExtraDrop[] remainingMoneyDrops = FindObjectsByType<ExtraDrop>(FindObjectsSortMode.None);
+        foreach (ExtraDrop moneybags in remainingMoneyDrops) {
+            moneybags.DestroyExtraDrops();
         }
 
         EnemyGroup[] remainingEnemyGroups = FindObjectsByType<EnemyGroup>(FindObjectsSortMode.None);
