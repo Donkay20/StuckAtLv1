@@ -26,7 +26,7 @@ public class VirtualCameraStates : MonoBehaviour
 
     public void SetRuins()
     {
-        vg.color.Override(new Color(.25f, .05f, .05f, 1.0f));
+        //vg.color.Override(new Color(.25f, .05f, .05f, 1.0f));
     }
 
     public void SetForest()

@@ -43,7 +43,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private bool easyMode;
 
     //Post-Processing
-    [SerializeField] private VirtualCameraStates virtualCamera;
+    //[SerializeField] private VirtualCameraStates virtualCamera;
 
 
     void Start() {      //default to the map when the game launches.

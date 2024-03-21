@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;  
 
 public class MapManager : MonoBehaviour
 {
@@ -31,6 +33,10 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Sprite combatImageHighlight, survivalImageHighlight, eventImageHighlight, shopImageHighlight, miniBossImageHighlight, bossImageHighlight;
     [SerializeField] private GameObject[] lines;
     private List<Vector2> nodeList = new List<Vector2>();
+
+    //VirtualCamera/post-processing changes
+    [SerializeField] private Volume[] volumes;
+    [SerializeField] private GameObject[] fog;
 
     void Awake() {
         world = 1;
@@ -477,5 +483,17 @@ public class MapManager : MonoBehaviour
         HighlightRoom(startingRoom);
 
         //Philip: add more code here to reset the highlights and lines.
+        SetVirtualCameraColor();
+    }
+
+    private void SetVirtualCameraColor()
+    {
+        if(world == 2)
+        {
+            volumes[1].gameObject.SetActive(false);
+            fog[0].SetActive(false);
+            fog[1].SetActive(true);
+        }
+        
     }
 }
