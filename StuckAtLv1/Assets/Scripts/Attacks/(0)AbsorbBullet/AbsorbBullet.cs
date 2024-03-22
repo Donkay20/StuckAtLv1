@@ -134,6 +134,14 @@ public class AbsorbBullet : MonoBehaviour
                 case "Wolf3":
                     slotManager.AcquireSkill(20);
                     break;
+
+                case "DeerWoman":
+                    slotManager.AcquireSkill(21);
+                    break;
+
+                case "VenusFlyTrap":
+                    slotManager.AcquireSkill(22);
+                    break;
             }
 
             if (slotManager.IsBloodsuckerActive()) {    //legendary 9

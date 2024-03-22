@@ -15,7 +15,6 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float timer, specialTimer;
     int condition; bool eventCondition;
 
-    //todo: add special separate timer for special enemy spawns during forest, then randomize the timer
     private void OnEnable() {
         ResetSpecialTimer();
     }
@@ -64,7 +63,7 @@ public class EnemyManager : MonoBehaviour
                     break;
             }
         }
-        GameObject newEnemy = EnemyPool.Instance.GetEnemy(enemyID); //change this value to test specific enemies
+        GameObject newEnemy = EnemyPool.Instance.GetEnemy(enemyID); //change this value to test specific enemies or attacks
         newEnemy.transform.position = GenerateRandomPosition() + player.transform.position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
         newEnemy.transform.parent = transform;
