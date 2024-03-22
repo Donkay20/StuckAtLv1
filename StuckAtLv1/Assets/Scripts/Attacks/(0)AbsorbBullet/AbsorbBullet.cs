@@ -115,11 +115,11 @@ public class AbsorbBullet : MonoBehaviour
                     slotManager.AcquireSkill(15);
                     break;
 
-                case "Tree2":
+                case "Tree2":       //Tree Branch
                     slotManager.AcquireSkill(16);
                     break;
 
-                case "Tree3":
+                case "Tree3":       //Vine Snare
                     slotManager.AcquireSkill(17);
                     break;
                 
