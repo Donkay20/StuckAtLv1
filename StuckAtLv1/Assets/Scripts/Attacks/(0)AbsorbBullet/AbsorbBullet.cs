@@ -123,11 +123,11 @@ public class AbsorbBullet : MonoBehaviour
                     slotManager.AcquireSkill(17);
                     break;
                 
-                case "Wolf1":
+                case "Wolf1":       //Howl
                     slotManager.AcquireSkill(18);
                     break;
                 
-                case "Wolf2":
+                case "Wolf2":       //Summon Wolf
                     slotManager.AcquireSkill(19);
                     break;
                 
