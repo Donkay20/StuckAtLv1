@@ -87,13 +87,12 @@ public class CombatManager : MonoBehaviour
                 ruinsRooms[roomChosen].SetActive(true);
                 room = ruinsRooms[roomChosen];
                 character.gameObject.transform.position = ruinsSpawn[roomChosen].gameObject.transform.position;
-                //Debug.Log(roomChosen);
                 break;
             case 2:
                 switch (format) {
                     case "combat":
                     case "survival":
-                        roomChosen = 0; //adjust when more rooms are made available.
+                        roomChosen = 0; //adjust when more forest rooms are made available.
                         break;
                     case "miniboss":
                         //roomChosen = 4;
@@ -105,7 +104,6 @@ public class CombatManager : MonoBehaviour
                 forestRooms[roomChosen].SetActive(true);
                 room = forestRooms[roomChosen];
                 character.gameObject.transform.position = forestSpawn[roomChosen].gameObject.transform.position;
-                //Debug.Log(roomChosen);
                 break;
             case 3:
                 break;

@@ -125,7 +125,7 @@ MonoBehaviour:
   moneyDropPrefab: {fileID: 4269447868980704985, guid: 0a72ccdeb39d9d94c890ac223f28774e, type: 3}
   damageTextPrefab: {fileID: 1713743412437274532, guid: 9e69095aeeb4b1e49840c8d74d107da6, type: 3}
   gameManager: {fileID: 0}
-  baseSpeed: 2
+  baseSpeed: 2.5
   hp: 8
   baseHP: 8
   maxHP: 8

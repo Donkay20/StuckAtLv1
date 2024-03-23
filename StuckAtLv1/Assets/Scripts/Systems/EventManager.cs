@@ -56,7 +56,8 @@ public class EventManager : MonoBehaviour
                 background.sprite = ruinsBG;
                 break;
             case 2: //forest
-                //todo
+                selectedEvent = forestEvents[Random.Range(0, ruinsEvents.Length)];
+                background.sprite = forestBG;
                 break;
             case 3: //sewer
                 //todo

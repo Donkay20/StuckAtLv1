@@ -19,6 +19,7 @@ public class EnemyPool : MonoBehaviour
     }
 
     private void InitializePools() {
+        //World 1: Ruins
         skeleton1 = new ObjectPool<GameObject>(() => CreateEnemy(0), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
         skeleton2 = new ObjectPool<GameObject>(() => CreateEnemy(1), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
         skeleton3 = new ObjectPool<GameObject>(() => CreateEnemy(2), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
@@ -29,7 +30,7 @@ public class EnemyPool : MonoBehaviour
         spider2 = new ObjectPool<GameObject>(() => CreateEnemy(7), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
         spider3 = new ObjectPool<GameObject>(() => CreateEnemy(8), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
 
-        /*
+        //World 2: Forest
         squirrel1 = new ObjectPool<GameObject>(() => CreateEnemy(9), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
         squirrel2 = new ObjectPool<GameObject>(() => CreateEnemy(10), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
         squirrel3 = new ObjectPool<GameObject>(() => CreateEnemy(11), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
@@ -39,7 +40,6 @@ public class EnemyPool : MonoBehaviour
         wolf1 = new ObjectPool<GameObject>(() => CreateEnemy(15), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
         wolf2 = new ObjectPool<GameObject>(() => CreateEnemy(16), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
         wolf3 = new ObjectPool<GameObject>(() => CreateEnemy(17), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
-        */
     }
 
     GameObject CreateEnemy(int ID) {
@@ -49,7 +49,6 @@ public class EnemyPool : MonoBehaviour
     }
 
     void OnTakeFromPool(GameObject enemy) {
-        //enemy.GetComponent<Enemy>().SetHealth(enemy.GetComponent<Enemy>().maxHP);
         enemy.SetActive(true);
     }
 
@@ -79,8 +78,8 @@ public class EnemyPool : MonoBehaviour
                 return spider2.Get();
             case 8:
                 return spider3.Get();
+
             //forest enemies
-            /*
             case 9:
                 return squirrel1.Get();
             case 10:
@@ -99,7 +98,9 @@ public class EnemyPool : MonoBehaviour
                 return wolf2.Get();
             case 17:
                 return wolf3.Get();
-            */
+
+            //todo: sewer
+
             default:
                 return null;
         }
@@ -107,6 +108,7 @@ public class EnemyPool : MonoBehaviour
 
     public void ReturnEnemy(GameObject enemy) {
         switch (enemy.tag) {
+            //Ruins Enemies
             case "Skeleton1":
                 skeleton1.Release(enemy);
                 break;
@@ -134,7 +136,8 @@ public class EnemyPool : MonoBehaviour
             case "Spider3":
                 spider3.Release(enemy);
                 break;
-            /*
+
+            //Forest Enemies
             case "Squirrel1":
                 squirrel1.Release(enemy);
                 break;
@@ -162,7 +165,8 @@ public class EnemyPool : MonoBehaviour
             case "Wolf3":
                 wolf3.Release(enemy);
                 break;
-            */
+                
+            //Sewer Enemies
             //case "":
                 //x.Release(enemy);
         }

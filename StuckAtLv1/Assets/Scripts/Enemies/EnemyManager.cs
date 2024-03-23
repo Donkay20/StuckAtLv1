@@ -12,7 +12,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] MapManager mapManager;
     [SerializeField] GameObject[] forestSpecialEnemies;
-    [SerializeField] float timer, specialTimer;
+    private float timer, specialTimer;
     int condition; bool eventCondition;
 
     private void OnEnable() {
@@ -47,13 +47,13 @@ public class EnemyManager : MonoBehaviour
                 enemyID = Random.Range(3, 6);
                 break;
             case 11:    //Forest Event 1
-                enemyID = Random.Range(18, 21);
-                break;
-            case 12:    //Forest Event 3
                 enemyID = Random.Range(15, 18);
                 break;
-            case 19:    //Forest Event 5
+            case 12:    //Forest Event 3
                 enemyID = Random.Range(12, 15);
+                break;
+            case 19:    //Forest Event 5
+                enemyID = Random.Range(9, 12);
                 break;
             }
         } else {
@@ -62,10 +62,10 @@ public class EnemyManager : MonoBehaviour
                     enemyID = Random.Range(0, 9);
                     break;
                 case 2:
-                    enemyID = Random.Range(0, 9); //adjust for world 2 enemies
+                    enemyID = Random.Range(9, 18);
                     break;
                 case 3:
-                    enemyID = Random.Range(17, 26);
+                    enemyID = Random.Range(0, 18); //todo for world 3 enemies
                     break;
                 case 4:
                     enemyID = Random.Range(0, 26);
@@ -85,10 +85,10 @@ public class EnemyManager : MonoBehaviour
                 newSpecialEnemy.transform.position += player.transform.position;
                 newSpecialEnemy.transform.parent = transform;
                 break;
-            //case 3:
-                //break;
-            //case 4:
-                //break;
+            case 3:
+                break;
+            case 4:
+                break;
         }
     }
 
