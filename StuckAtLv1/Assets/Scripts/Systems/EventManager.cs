@@ -18,7 +18,7 @@ public class EventManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI title, nameText, dialogueText, button1Text, button2Text, button3Text, health, afterimages, money;
     [SerializeField] private Button button1, button2, button3, advanceButton;
     [SerializeField] private Image speaker, background;
-    [SerializeField] private Sprite def, jamp, oldMan, lonelyGhost, angryGhost, oldShadow, ghostShadow;
+    [SerializeField] private Sprite def, jamp, oldMan, lonelyGhost, angryGhost, oldShadow, ghostShadow, ash, fairy, wolf, tree;
     [SerializeField] private Sprite ruinsBG, forestBG, sewerBG, abyssBG;
     private Event selectedEvent; //chosen event
     private string[] dialogue, names, options; private int[] skip, outcome; //copy from the chosen event
@@ -113,6 +113,18 @@ public class EventManager : MonoBehaviour
                         case "Ghost Shadow":
                             speaker.sprite = ghostShadow;
                             break;
+                        case "Ash":
+                            speaker.sprite = ash;
+                            break;
+                        case "Fairy":
+                            speaker.sprite = fairy;
+                            break;
+                        case "Wolf":
+                            speaker.sprite = wolf;
+                            break;
+                        case "Tree":
+                            speaker.sprite = tree;
+                            break;
                     }
                     messageCounter++;
                     break;
@@ -122,10 +134,21 @@ public class EventManager : MonoBehaviour
 
     private void DialogueOption(int number) {
         selecting = false;                  //re-enables the dialogue options
-        messageCounter = skip[number];       
-        ProgressDialogue(messageCounter);   //skips to the appropriate dialogue line determined by the event
         DisableButtons();                   //gets rid of the buttons
-        outcomeDecided = outcome[number];   //sets the action to take; the result of the event
+
+        if (selectedEvent.GetTitle() == "The Injury" && number == 0) {
+            //This event one button with a 50/50 chance of two different outcomes. 
+            //I didn't say no before realizing this would be a pain in the ass to implement, so we'll just hard code it
+            int randomSelection = Random.Range(0,2);  
+            messageCounter = skip[number + randomSelection];       
+            ProgressDialogue(messageCounter);
+            outcomeDecided = outcome[number + randomSelection];
+        } else {
+            messageCounter = skip[number];       
+            ProgressDialogue(messageCounter);   //skips to the appropriate dialogue line determined by the event
+            outcomeDecided = outcome[number];   //sets the action to take; the result of the event
+        }
+        
     }
 
     private void EnableButtons() { //enables the buttons for each dialogue option, then sets them to the text that they need to be
@@ -140,6 +163,12 @@ public class EventManager : MonoBehaviour
         if (numberOfButtons == 3) {
             button3.gameObject.SetActive(true);
             button3Text.text = options[2];
+        }
+
+        if (selectedEvent.GetTitle() == "The Fairy Circle") {   //If you don't have 500 gold, you can't pay the 500 gold.
+            if (player.money < 500) {
+                button1.interactable = false;
+            }
         }
     }
 
@@ -166,6 +195,12 @@ public class EventManager : MonoBehaviour
                     4. done
                     5. done
                 Forest:
+                    1. done
+                    2. todo
+                    3. done
+                    4. todo
+                    5. todo
+                Sewer:
                     1. todo
                     2. todo
                     3. todo
@@ -187,7 +222,7 @@ public class EventManager : MonoBehaviour
                 resolve = "normal";
                 break;
             case 2:     //skeleton swarm (event 2, ruins)
-                combat.ReceiveCondition(2);
+                combat.ReceiveCondition(outcomeDecided);
                 resolve = "combat";
                 break;
             case 3:     //-100g, +1 buff (event 3, ruins)
@@ -221,11 +256,51 @@ public class EventManager : MonoBehaviour
                 resolve = "normal";
                 break;
             case 8:     //vs fight against golem swarm (event 5, ruins)
-                combat.ReceiveCondition(8);
+                combat.ReceiveCondition(outcomeDecided);
                 resolve = "combat";
                 break;
             case 9:     //nothing happens (event 5, ruins)
                 resolve = "normal";
+                break;
+            case 10:    //-500g if 500+g (event 1, forest)
+                player.money -= 500;
+                resolve = "normal";
+                break;
+            case 11:    //fight vs wolf swarm (event 1, forest)
+                combat.ReceiveCondition(outcomeDecided);
+                resolve = "combat";
+                break;
+            case 12:    //fight vs tree swarm (event 3, forest)
+                combat.ReceiveCondition(outcomeDecided);
+                resolve = "combat";
+                break;
+            case 13:    //Ash wrestles the wolf off of Jamp, nothing happens(event 2, forest)
+                resolve = "normal";
+                break;
+            case 14:    //Jamp gets bit by the wolf (-10 HP) (event 2, forest)
+                if (player.currentHp <= 10) {
+                    player.currentHp = 1;
+                } else {
+                    player.currentHp -= 10;
+                }
+                resolve = "normal";
+                break;
+            case 15:    //Jamp and Ash leave the wolf alone, nothing happens (event 2, forest)
+                resolve = "normal";
+                break;
+            case 16:    //Jamp cuts the tree down and eats the golden apples. +20HP (event 4, forest)
+                player.currentHp += 20;
+                resolve = "normal";
+                break;
+            case 17:    //Jamp leaves the tree alone. Nothing happens. (event 4, forest)
+                resolve = "normal";
+                break;
+            case 18:    //Jamp knocks out all the squirrels. Nothing happens. (event 5, forest)
+                resolve = "normal";
+                break;
+            case 19:    //fight vs squirrel swarm (event 5, forest)
+                combat.ReceiveCondition(outcomeDecided);
+                resolve = "combat";
                 break;
         }
         eventAnimation.SetTrigger("Outro");

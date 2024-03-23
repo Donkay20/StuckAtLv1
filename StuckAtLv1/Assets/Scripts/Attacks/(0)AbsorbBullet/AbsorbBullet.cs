@@ -131,7 +131,7 @@ public class AbsorbBullet : MonoBehaviour
                     slotManager.AcquireSkill(19);
                     break;
                 
-                case "Wolf3":
+                case "Wolf3":       //Claw Frenzy
                     slotManager.AcquireSkill(20);
                     break;
 

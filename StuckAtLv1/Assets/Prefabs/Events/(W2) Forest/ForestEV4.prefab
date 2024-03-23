@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3764279872949867651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7919176514699622260}
+  - component: {fileID: -4328304349388995548}
+  m_Layer: 0
+  m_Name: ForestEV4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7919176514699622260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764279872949867651}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4328304349388995548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764279872949867651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: The Golden Apples
+  dialogue:
+  - '"Woah. Look at that tree."'
+  - "\"Are those\u2026golden apples?\""
+  - '"Mhm. You want one?"'
+  - "\"Well\u2026I am kinda hungry\u2026\""
+  - '"Then climb it."'
+  - "\"Princes don\u2019t climb trees! As a peasant, you should cut it down for me!\""
+  - "\"Jeez, the things I do for this guy\u2026\""
+  - "Ash goes to cut down the tree, when suddenly\u2026"
+  - '"Stop!"'
+  - '"Wah? Did that tree just talk?"'
+  - '"I am the sacred Golden Apple Tree! To cut me down is sinful! If you do so,
+    I will curse you for a thousand years!"'
+  - "\"Uh\u2026Well, it's up to you, Jamp.\""
+  - '[CHOOSE]'
+  - '"Curse? Been there, done that. Hurry up and cut it down!"'
+  - "\"If you say so\u2026\""
+  - '"WAIT! NOOOOOOO-"'
+  - The tree is cut, and it rains golden apples. Jamp eats one, and it heals 30 HP.
+  - '"Alright! Yummy apples, gold, and no curse?"'
+  - "\"I guess he was bluffing\u2026\""
+  - "\"Heh. Chump. Let\u2019s keep going, maybe we\u2019ll find diamond-encrusted
+    oranges next!\""
+  - '[END]'
+  - "\"I\u2019ve had enough curses for a lifetime. Let\u2019s just go.\""
+  - '"Heh, you got it."'
+  - "\"\u2026phew.\""
+  - '[END]'
+  names:
+  - Ash
+  - Jamp
+  - Ash
+  - Jamp
+  - Ash
+  - Jamp
+  - Ash
+  - NARRATION
+  - Tree
+  - Jamp
+  - Tree
+  - Ash
+  - '[CHOOSE]'
+  - Jamp
+  - Ash
+  - Tree
+  - NARRATION
+  - Jamp
+  - Ash
+  - Jamp
+  - '[END]'
+  - Jamp
+  - Ash
+  - Tree
+  - '[END]'
+  optionsToSelect:
+  - Cut the tree down.
+  - Leave the tree alone.
+  skipToThisValueAfterChoices: 0d00000015000000
+  outcome: 1000000011000000

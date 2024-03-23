@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3655870919695753423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6564801460069580297}
+  - component: {fileID: 5248783498172684125}
+  m_Layer: 0
+  m_Name: ForestEV5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6564801460069580297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655870919695753423}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5248783498172684125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3655870919695753423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Yikes! Squirrels!
+  dialogue:
+  - "\"Erm\u2026what is that group of squirrels doing over there?\""
+  - "\"They seem to be\u2026congregating\u2026?\""
+  - The squirrels spot the two.
+  - They screech and start running towards them.
+  - "\"They\u2019re hungry!\""
+  - '"Uh... I have a bag of nuts I could throw at them!"'
+  - "\"Don\u2019t you remember what I told you? They want your flesh!\""
+  - '[CHOOSE]'
+  - '"Well it''s worth a shot anyway right?"'
+  - Jamp starts throwing nuts at the squirrels.
+  - "\"Woah! You\u2019re hitting them right between the eyes! Not bad!\""
+  - '"Muahaha! I have many talents, and this just so happens to be one of them!"'
+  - Soon, every squirrel has been knocked unconscious.
+  - "\"That was insane\u2026\""
+  - '"Hehehe, worry not Ash, for I will never use my hidden talents on you!"'
+  - "\"Well, that\u2019s good to know.\""
+  - '[END]'
+  - "\"Alright alright! I\u2019m not going down without a fight!\""
+  - '[END]'
+  names:
+  - Jamp
+  - Ash
+  - NARRATION
+  - NARRATION
+  - Ash
+  - Jamp
+  - Ash
+  - '[CHOOSE]'
+  - Jamp
+  - NARRATION
+  - Ash
+  - Jamp
+  - NARRATION
+  - Ash
+  - Jamp
+  - Ash
+  - '[END]'
+  - Jamp
+  - '[END]'
+  optionsToSelect:
+  - Throw the nuts.
+  - Fight instead.
+  skipToThisValueAfterChoices: 0800000011000000
+  outcome: 1200000013000000

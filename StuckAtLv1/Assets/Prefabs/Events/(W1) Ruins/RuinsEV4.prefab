@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1293822588736436597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8558675471261916574}
+  - component: {fileID: 8722859079356077336}
+  m_Layer: 0
+  m_Name: RuinsEV4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8558675471261916574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293822588736436597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8722859079356077336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293822588736436597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Tiffany's Statue
+  dialogue:
+  - "\"This is a statue of the Queen, it\u2019s in a tranquil spot. I used to come
+    here and leave coins in the fountain.\""
+  - "\"I feel kind of conflicted looking at this\u2026 \""
+  - '[CHOOSE]'
+  - "\"She\u2019s still my mother after all\u2026I guess it wouldn\u2019t hurt to
+    leave something.\""
+  - Jamp tosses a coin into the fountain.
+  - Jamp feels power swell within him; he feels light on his feet.
+  - '"I feel more in tune with my admittedly small vampiric abilities. I guess that
+    was worth it!"'
+  - Dash cooldown has been decreased for the next battle. Lost 1 gold.
+  - '[END]'
+  - '"Honestly, what kind of mother disowns her own son?!"'
+  - '"If I die on this journey, at least I can take out my rage on this dumb statue!"'
+  - Jamp punts the statue. He is immediately struck by lightning.
+  - '"OW!!!!!!! What the hell???"'
+  - '"Hehe..."'
+  - Jamp loses 50 HP.
+  - '[END]'
+  - "\"Everyone here is dead right? What use do they have for money? It wouldn\u2019t
+    hurt to take a little bit\u2026right?\""
+  - Jamp reaches into the fountain, and fishes around for a handful of coins.
+  - '"..."'
+  - '"Alright! Nothing happened!"'
+  - "\"Phew\u2026I thought for sure she\u2019d strike you with lightning, or something
+    like that.\""
+  - "\"Mother would never do that to me! Now, let\u2019s keep going!\""
+  - Jamp fished 500 gold from the fountain.
+  - '[END]'
+  names:
+  - Old Man
+  - Jamp
+  - '[CHOOSE]'
+  - Jamp
+  - NARRATION
+  - NARRATION
+  - Jamp
+  - NARRATION
+  - '[END]'
+  - Jamp
+  - Jamp
+  - NARRATION
+  - Jamp
+  - Old Man
+  - NARRATION
+  - '[END]'
+  - Jamp
+  - NARRATION
+  - Jamp
+  - Jamp
+  - Old Man
+  - Jamp
+  - NARRATION
+  - '[END]'
+  optionsToSelect:
+  - Toss a coin in the fountain.
+  - Kick the statue.
+  - Fish for coins.
+  skipToThisValueAfterChoices: 030000000900000010000000
+  outcome: 050000000600000007000000

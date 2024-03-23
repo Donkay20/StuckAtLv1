@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8663583006842634134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3195259994751474658}
+  - component: {fileID: 1829010873612985479}
+  m_Layer: 0
+  m_Name: ForestEV1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3195259994751474658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663583006842634134}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1829010873612985479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8663583006842634134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: The Fairy Circle
+  dialogue:
+  - "\"What is that small, flying\u2026creature?\""
+  - "\"Oh, that\u2019s a-\""
+  - '"A FAIRY???? BEGONE, VILE PEST!"'
+  - "\"Don\u2019t run! You might step in a-\""
+  - '"Hehehe!"'
+  - "\"AHHHH! I\u2019m trapped! Help me Ash!\""
+  - "\"-\u2026fairy circle.\""
+  - "\"Hehehe! A pretty thing like you must be wed to me! Let\u2019s get married!\""
+  - "\"Married?! I don\u2019t even know you! Let me out!\""
+  - "\"Pay me 500 gold first. Hehe. Or, you can just fight your way out! You won\u2019t
+    win though!\""
+  - '"Ash! Help me!!"'
+  - "\"I can\u2019t. Once you step in a fairy circle, no outsider can help.\""
+  - "\"Ugh\u2026\""
+  - '[CHOOSE]'
+  - "\"Sigh\u2026 alright, here.\""
+  - '"Pleasure doing business with you!"'
+  - '[END]'
+  - "\"Bring it on! I\u2019ll fight my way out!\""
+  - '[END]'
+  names:
+  - Jamp
+  - Ash
+  - Jamp
+  - Ash
+  - Fairy
+  - Jamp
+  - Ash
+  - Fairy
+  - Jamp
+  - Fairy
+  - Jamp
+  - Ash
+  - Jamp
+  - '[CHOOSE]'
+  - Jamp
+  - Fairy
+  - '[END]'
+  - Jamp
+  - '[END]'
+  optionsToSelect:
+  - Pay 500 gold.
+  - Fight!
+  skipToThisValueAfterChoices: 0e00000011000000
+  outcome: 0a0000000b000000

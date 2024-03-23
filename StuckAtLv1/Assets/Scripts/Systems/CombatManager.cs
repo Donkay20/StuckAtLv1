@@ -115,24 +115,52 @@ public class CombatManager : MonoBehaviour
                 break;
         }
 
-        if (specialCondition) {
-            //when adding a special condition, it needs to be mentioned here, and on the enemy manager.
+        if (specialCondition) {     //when adding a special condition, it needs to be mentioned here, and on the enemy manager.
+            spawner.SetCondition(condition);
+            
             switch(condition) {
-                case 2: //Ruins Event 2
-                    spawner.SetCondition(condition);
+                case 2:     //Ruins Event 2
                     uIObjective.text = "Defeat!";
                     objective = "combat";
                     combatSkull.SetActive(true);
                     enemiesToKill = 20;
+                    spawner.SetSpawnTimer(0.3f);
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;
-                case 8: //Ruins Event 5
-                    spawner.SetCondition(condition);
+                case 8:     //Ruins Event 5
                     uIObjective.text = "Defeat!";
                     objective = "combat";
                     combatSkull.SetActive(true);
-                    enemiesToKill = 10;
+                    enemiesToKill = 15;
+                    spawner.SetSpawnTimer(0.3f);
+                    uIObjectiveNumber.text = enemiesToKill.ToString();
+                    StartCoroutine(CombatTracker());
+                    break;
+                case 11:    //Forest Event 1
+                    uIObjective.text = "Defeat!";
+                    objective = "combat";
+                    combatSkull.SetActive(true);
+                    enemiesToKill = 30;
+                    spawner.SetSpawnTimer(0.3f);
+                    uIObjectiveNumber.text = enemiesToKill.ToString();
+                    StartCoroutine(CombatTracker());
+                    break;
+                case 12:    //Forest Event 3
+                    uIObjective.text = "Defeat!";
+                    objective = "combat";
+                    combatSkull.SetActive(true);
+                    enemiesToKill = 30;
+                    spawner.SetSpawnTimer(0.3f);
+                    uIObjectiveNumber.text = enemiesToKill.ToString();
+                    StartCoroutine(CombatTracker());
+                    break;
+                case 19:    //Forest Event 5
+                    uIObjective.text = "Defeat!";
+                    objective = "combat";
+                    combatSkull.SetActive(true);
+                    enemiesToKill = 50;
+                    spawner.SetSpawnTimer(0.3f);
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;

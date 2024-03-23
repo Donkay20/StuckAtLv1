@@ -40,11 +40,20 @@ public class EnemyManager : MonoBehaviour
         if (eventCondition) {
         //special conditions are for events.
             switch (condition) {
-            case 2: //Ruins Event 2
+            case 2:     //Ruins Event 2
                 enemyID = Random.Range(0, 3);
                 break;
-            case 8: //Ruins Event 5
+            case 8:     //Ruins Event 5
                 enemyID = Random.Range(3, 6);
+                break;
+            case 11:    //Forest Event 1
+                enemyID = Random.Range(18, 21);
+                break;
+            case 12:    //Forest Event 3
+                enemyID = Random.Range(15, 18);
+                break;
+            case 19:    //Forest Event 5
+                enemyID = Random.Range(12, 15);
                 break;
             }
         } else {
