@@ -127,7 +127,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     public void TakeDamage(int damage) {
-        int actualDamage = 0; 
+        int actualDamage; 
         string additionalText = "";
 
         //Debug.Log("damage taken: " + damage);
@@ -167,9 +167,9 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
 
         if (hp < 1) {
             CombatManager c = FindAnyObjectByType<CombatManager>();
-            if (c.GetObjective() == "miniboss" && this.gameObject.CompareTag("Knight")) {
+            if (c.GetObjective() == "miniboss" && (gameObject.CompareTag("Knight") || gameObject.CompareTag("DeerNymph"))) {
                 c.EnemyKilled();
-            } else if (c.GetObjective() == "boss" && this.gameObject.CompareTag("Lich")) {
+            } else if (c.GetObjective() == "boss" && (this.gameObject.CompareTag("Lich") || gameObject.CompareTag("VenusFlyTrap"))) {
                 c.EnemyKilled();
             } else if (c.GetObjective() == "combat") {
                 c.EnemyKilled();
@@ -299,5 +299,13 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         alteredSpeed = baseSpeed;
         critCheck = false;
         rend.color = new Color(1,1,1);
+    }
+
+    public void SetSpeed(int speedToSet) {
+        baseSpeed = speedToSet;
+    }
+
+    public bool IsStunned() {
+        return stunApplied;
     }
 }

@@ -27,6 +27,7 @@ TagManager:
   - Wolf1
   - Wolf2
   - Wolf3
+  - DeerNymph
   layers:
   - Default
   - TransparentFX
@@ -42,8 +43,8 @@ TagManager:
   - EnemyAttack
   - KnockbackCircle
   - PassThroughEnemy
-  - 
-  - 
+  - CrystalRock
+  - DeerWoman
   - 
   - 
   - 

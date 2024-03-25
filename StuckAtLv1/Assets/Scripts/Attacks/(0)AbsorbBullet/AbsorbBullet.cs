@@ -135,7 +135,7 @@ public class AbsorbBullet : MonoBehaviour
                     slotManager.AcquireSkill(20);
                     break;
 
-                case "DeerWoman":
+                case "DeerNymph":   //Pheromone
                     slotManager.AcquireSkill(21);
                     break;
 
