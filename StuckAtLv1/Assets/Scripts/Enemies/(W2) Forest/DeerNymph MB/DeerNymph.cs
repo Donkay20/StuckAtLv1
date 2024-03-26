@@ -44,7 +44,7 @@ public class DeerNymph : MonoBehaviour
         //boss hp bar
         angerBar.SetActive(true);
         secondaryBarTextName.text = "Anger";
-        angerBarFill.fillAmount = 1;
+        angerBarFill.fillAmount = 0;
         //secondary hp bar
     }
 
@@ -138,7 +138,7 @@ public class DeerNymph : MonoBehaviour
         charging = false;
         if (crystal) {  //stop momentum, deal a bunch of damage to the boss and stun
             rb.velocity = new Vector2(0, 0);
-            enemyScript.TakeDamage(deerwomanMaxHP/5);
+            enemyScript.TakeDamage(deerwomanMaxHP / 5);
             enemyScript.ApplySlow(0.1f, 3);
         } else {        //just stop momentum
             enemyScript.ApplySlow(0.1f, 1);
