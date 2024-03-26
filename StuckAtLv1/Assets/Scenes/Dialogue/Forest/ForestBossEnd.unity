@@ -677,11 +677,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.size
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.size
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[0]
@@ -689,7 +689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[1]
-      value: Centaur
+      value: Ash
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[2]
@@ -697,7 +697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[3]
-      value: Ash
+      value: ' '
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[4]
@@ -721,23 +721,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.size
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.data[0]
-      value: ' '
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.data[1]
-      value: sad
+      value: neutral
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.data[2]
-      value: mad
+      value: neutral
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.data[3]
-      value: neutral
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.data[4]
@@ -761,23 +761,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[0]
-      value: (Finally, the Centaur kneels, panting.)
+      value: (The Flytrap screams and shrivels up.)
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[1]
-      value: "You fight valiantly\u2026"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
-      propertyPath: sentences.Array.data[2]
-      value: S-So do you!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
-      propertyPath: sentences.Array.data[3]
       value: Please, let us do this.
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
-      propertyPath: sentences.Array.data[4]
+      propertyPath: sentences.Array.data[2]
       value: This altar is causing damage to your home! We can fix this!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
+      propertyPath: sentences.Array.data[3]
+      value: (Finally, the giant plant lays motionless.)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
+      propertyPath: sentences.Array.data[4]
+      value: "You won\u2019t regret this. Okay, let\u2019s destroy that altar!"
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[5]
