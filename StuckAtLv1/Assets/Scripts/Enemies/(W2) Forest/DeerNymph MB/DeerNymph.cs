@@ -111,13 +111,20 @@ public class DeerNymph : MonoBehaviour
     }
 
     private IEnumerator ChargeAttack() {
-        chargePrep = true; enemyScript.SetSpeed(0); rb.velocity = new Vector2(0, 0);
-
+        chargePrep = true; 
+        enemyScript.SetSpeed(0); 
+        rb.velocity = new Vector2(0, 0);
         chargeLine.SetActive(true); 
+
         yield return new WaitForSeconds(4); //track player during this time w/ the charge line
         
         chargePrep = false; charging = true; chargeLine.SetActive(false);
         rb.velocity = angleToCharge;
+
+        yield return new WaitForSeconds(2); //if hasn't hit anything in 2 seconds, just reset
+        rb.velocity = new Vector2(0, 0);
+        enemyScript.SetSpeed(BASE_SPEED);
+        anger /= 2;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -135,7 +142,7 @@ public class DeerNymph : MonoBehaviour
     }
 
     private void HitSomething(bool crystal) {
-        charging = false;
+        charging = false; StopAllCoroutines();
         if (crystal) {  //stop momentum, deal a bunch of damage to the boss and stun
             rb.velocity = new Vector2(0, 0);
             enemyScript.TakeDamage(deerwomanMaxHP / 5);

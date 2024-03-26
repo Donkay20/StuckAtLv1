@@ -14,7 +14,7 @@ public class VenusFlyTrap : MonoBehaviour
     [SerializeField] private PointEffector2D suction;
     [SerializeField] private PointEffector2D hyperSuction;
     [SerializeField] private Animator leftHead, centerHead, rightHead;
-    [SerializeField] private GameObject vineWaves;
+    [SerializeField] private GameObject vineWavesVertical, vinesWavesHorizontal;
     [Space]
     [Header("UI")]
     [SerializeField] private GameObject bossHPBar;
@@ -24,8 +24,11 @@ public class VenusFlyTrap : MonoBehaviour
     private readonly int MAX_RAGE = 360;
     private int bossMaxHP, rage;
     private float attackTimer, attackTimerResetValue;
+    private readonly float suctionTimerResetValue = 20;
+    private float suctionTimer;
     void Start() {
         attackTimer = 5;
+        suctionTimer = suctionTimerResetValue;
         bossMaxHP = enemyScript.maxHP;
         enemyScript.SetTarget(FindAnyObjectByType<Character>().gameObject);
     }
@@ -52,6 +55,12 @@ public class VenusFlyTrap : MonoBehaviour
             Attack();
         }
 
+        suctionTimer -= Time.deltaTime;
+
+        if (suctionTimer <= 0) {
+            StartCoroutine(SuctionAttack());
+        }
+
         if (rage == MAX_RAGE) {
             attackTimerResetValue = 1;
         } else {
@@ -67,8 +76,13 @@ public class VenusFlyTrap : MonoBehaviour
         }
     }
 
-    private void Attack() {
+    private IEnumerator SuctionAttack() {
+        yield return new WaitForSeconds(1);
         //todo
+        suctionTimer = suctionTimerResetValue;
+    }
+
+    private void Attack() {
         attackTimer = attackTimerResetValue;
     }
 }
