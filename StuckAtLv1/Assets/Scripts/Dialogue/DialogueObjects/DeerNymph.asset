@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Deer Nymph
   location: 
-  neutralSprite: {fileID: 0}
+  neutralSprite: {fileID: 21300000, guid: b421fdca07e2cbb42a0d1f45e7aafce7, type: 3}
   happySprite: {fileID: 0}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}
-  madSprite: {fileID: 0}
+  madSprite: {fileID: 21300000, guid: 223597b8173cc7c4aba1230854cfeec6, type: 3}
   shockedSprite: {fileID: 0}
