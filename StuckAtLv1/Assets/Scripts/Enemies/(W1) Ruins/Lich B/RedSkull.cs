@@ -13,7 +13,10 @@ public class RedSkull : MonoBehaviour
     private GameObject targetPosition;
     private Character targetCharacter;
     private Vector2 previousDirection;
+    private Vector2 directionToTarget;
     Rigidbody2D rb;
+
+    private Animator anim;
     
     void Start() {
         lichPosition = FindAnyObjectByType<Lich>().gameObject;
@@ -21,10 +24,11 @@ public class RedSkull : MonoBehaviour
         targetCharacter = FindAnyObjectByType<Character>();
         targetPosition = targetCharacter.gameObject;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate() {
-        Vector2 directionToTarget = (targetPosition.transform.position - transform.position).normalized;
+        directionToTarget = (targetPosition.transform.position - transform.position).normalized;
 
         if (homingTimer > 0) {
             // Move towards the target player
@@ -40,6 +44,43 @@ public class RedSkull : MonoBehaviour
         }
     }
 
+    private void FacePlayer()
+    {
+        if(Mathf.Abs(directionToTarget.x) > Mathf.Abs(directionToTarget.y))
+        {
+            if(directionToTarget.x > 0)
+            {
+                anim.SetBool("Up", false);
+                anim.SetBool("Down", false);
+                anim.SetBool("Left", false);
+                anim.SetBool("Right", true);
+            }
+            else
+            {
+                anim.SetBool("Up", false);
+                anim.SetBool("Down", false);
+                anim.SetBool("Right", false);
+                anim.SetBool("Left", true);
+            }
+        }
+        else if(Mathf.Abs(directionToTarget.x) < Mathf.Abs(directionToTarget.y))
+        {
+            if(directionToTarget.y > 0)
+            {
+                anim.SetBool("Down", false);
+                anim.SetBool("Left", false);
+                anim.SetBool("Right", false);
+                anim.SetBool("Up", true);
+            }
+            else{
+                anim.SetBool("Up", false);
+                anim.SetBool("Left", false);
+                anim.SetBool("Right", false);
+                anim.SetBool("Down", true);
+            }
+        }
+    }
+
     private void Update() {
         homingTimer -= Time.deltaTime;
         lifetime -= Time.deltaTime;
@@ -47,6 +88,8 @@ public class RedSkull : MonoBehaviour
         if (lifetime <= 0) {
             Destroy(gameObject);
         }
+
+        FacePlayer();
     }
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.layer == LayerMask.NameToLayer("Player")) {

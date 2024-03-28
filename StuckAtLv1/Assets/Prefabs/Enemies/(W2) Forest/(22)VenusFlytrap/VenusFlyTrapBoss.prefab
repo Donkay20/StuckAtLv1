@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1756436108383581095}
   - component: {fileID: 5861759397825089354}
   - component: {fileID: 6692597431739556998}
+  - component: {fileID: 5186057279018904397}
   m_Layer: 7
   m_Name: FlyTrapBase_0
   m_TagString: VenusFlyTrap
@@ -147,6 +148,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.25}
   m_Size: {x: 11.1, y: 3.2}
   m_Direction: 1
+--- !u!95 &5186057279018904397
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920173837746830482}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3aac076f001895f4ab6f19330243b69f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3342389461915763610
 GameObject:
   m_ObjectHideFlags: 0
