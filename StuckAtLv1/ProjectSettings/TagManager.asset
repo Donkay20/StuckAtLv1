@@ -28,6 +28,7 @@ TagManager:
   - Wolf2
   - Wolf3
   - DeerNymph
+  - VenusFlyTrap
   layers:
   - Default
   - TransparentFX
@@ -45,7 +46,7 @@ TagManager:
   - PassThroughEnemy
   - CrystalRock
   - DeerWoman
-  - 
+  - FlyBomb
   - 
   - 
   - 

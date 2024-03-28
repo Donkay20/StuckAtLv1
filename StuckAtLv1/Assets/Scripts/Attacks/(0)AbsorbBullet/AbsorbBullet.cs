@@ -139,7 +139,7 @@ public class AbsorbBullet : MonoBehaviour
                     slotManager.AcquireSkill(21);
                     break;
 
-                case "VenusFlyTrap":
+                case "VenusFlyTrap"://Fly Bomb
                     slotManager.AcquireSkill(22);
                     break;
             }

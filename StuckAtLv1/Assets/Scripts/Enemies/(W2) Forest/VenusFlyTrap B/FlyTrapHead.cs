@@ -18,6 +18,7 @@ public class FlyTrapHead : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.collider.TryGetComponent<Character>(out var player)) {
+            buffManager.AddDebuff("anemia", 0.5f, 5);
             player.TakeDamage(HEAD_DAMAGE);
         }
     }

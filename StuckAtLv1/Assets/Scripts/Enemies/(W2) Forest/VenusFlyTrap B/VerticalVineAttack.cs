@@ -20,7 +20,7 @@ public class VerticalVineAttack : MonoBehaviour
         if (col.TryGetComponent<Character>(out var player)) {
             player.TakeDamage(VINE_DAMAGE);
             buffManager.AddDebuff("slow", 0.5f, 1);
-            buffManager.AddDebuff("anemia", 0.5f, 3);
+            buffManager.AddDebuff("anemia", 0.2f, 3);
         }
 
         if (col.gameObject.layer == LayerMask.NameToLayer("Wall")) {
