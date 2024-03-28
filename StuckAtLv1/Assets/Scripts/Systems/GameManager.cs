@@ -87,15 +87,19 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             if (mapManager.GetLevel() == 5) {
                                 SceneManager.UnloadSceneAsync("RuinsMiniBossEnd");
                             }
-
                             if (mapManager.GetLevel() == 11) {
                                 SceneManager.UnloadSceneAsync("RuinsBossEnd");
                             }
                             break;
                         case 2:
-                            if (mapManager.GetLevel() == 0) {
-                                //SceneManager.UnloadSceneAsync("RuinsEnd");    
+                            if (mapManager.GetLevel() == 0) {   
                                 SceneManager.UnloadSceneAsync("ForestIntro");
+                            }
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.UnloadSceneAsync("ForestMiniBossEnd");
+                            }
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.UnloadSceneAsync("ForestBossEnd");
                             }
                             break;
                         case 3:
@@ -195,15 +199,16 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
             case GameState.Miniboss: //MINIBOSS STATE
                 if (previousState == GameState.Dialogue) {
+
+                    combat.SetActive(true); combatUI.SetActive(true);
+                    combat.GetComponent<CombatManager>().Setup("miniboss");
+
                     switch (mapManager.GetWorld()) {
                         case 1:
-                            combat.SetActive(true); combatUI.SetActive(true);
-                            combat.GetComponent<CombatManager>().Setup("miniboss");
-                            //combat.GetComponent<CombatManager>().SetObjective("miniboss");
                             SceneManager.UnloadSceneAsync("RuinsMiniBossIntro");
                             break;
                         case 2:
-                            //todo 
+                            SceneManager.UnloadSceneAsync("ForestMiniBossIntro");
                             break;
                         case 3:
                             //todo
@@ -216,15 +221,16 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
             case GameState.Boss: //BOSS STATE
                 if (previousState == GameState.Dialogue) {
+
+                    combat.SetActive(true); combatUI.SetActive(true);
+                    combat.GetComponent<CombatManager>().Setup("boss");
+
                     switch (mapManager.GetWorld()) {
                         case 1:
-                            combat.SetActive(true); combatUI.SetActive(true);
-                            combat.GetComponent<CombatManager>().Setup("boss");
-                            //combat.GetComponent<CombatManager>().SetObjective("boss");
                             SceneManager.UnloadSceneAsync("RuinsBossIntro");
                             break;
                         case 2:
-                            //todo 
+                            SceneManager.UnloadSceneAsync("ForestBossIntro"); 
                             break;
                         case 3:
                             //todo
@@ -251,7 +257,12 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 2:
-                            //todo
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.LoadScene("ForestMiniBossIntro", LoadSceneMode.Additive);
+                            }
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.LoadScene("ForestBossIntro", LoadSceneMode.Additive);
+                            }
                             break;
                         case 3:
                             //todo
@@ -272,7 +283,13 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 2:
-                            //todo
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.LoadScene("ForestMiniBossEnd", LoadSceneMode.Additive);
+                            }
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.LoadScene("ForestBossEnd", LoadSceneMode.Additive);
+                                UpdateSlotProtocol(); //+1 max slots, total 4.
+                            }
                             break;
                         case 3:
                             //todo

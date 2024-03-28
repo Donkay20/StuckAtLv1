@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
 Handles main character's active stats in combat, their buffs, and their damage handling.
 */
 {
-    public readonly int maxHp = 10;
+    public readonly int MAX_HP = 10;
     public int currentHp = 10;
     public int money = 0;
     public float afterimage = 0;
@@ -57,7 +57,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
             if (afterimage <= 0) {
                 currentHp -= damage; 
                 healthText.text = currentHp.ToString();
-                if (currentHp <= maxHp) {
+                if (currentHp <= MAX_HP) {
                     healthText.color = new Color32(255, 240, 240, 255);
                     healthDraining = false;
                 }
@@ -69,7 +69,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
             //die
             SceneManager.LoadScene("TitleScreen");
         }
-        hpBar.SetState(currentHp, maxHp);
+        hpBar.SetState(currentHp, MAX_HP);
     }
 
     IEnumerator InvincibilityFrame() {              //elapse this amt of time before the character can be hit again
@@ -79,15 +79,15 @@ Handles main character's active stats in combat, their buffs, and their damage h
 
     IEnumerator DrainHealth() {
         healthDraining = true;
-        while (currentHp > maxHp) {
+
+        while (currentHp > MAX_HP) {
+            yield return new WaitForSeconds(drainTimer); //Buffs or debuffs that affect drain time take effect here.
             currentHp -= drainValue; 
             healthText.text = currentHp.ToString();
-            if (currentHp <= maxHp) {
+
+            if (currentHp <= MAX_HP) {
                 healthText.color = new Color32(255, 240, 240, 255);
                 healthDraining = false;
-                yield break;
-            } else {
-                yield return new WaitForSeconds(drainTimer); //Buffs or debuffs that affect drain time take effect here.
             }
         }
     }
@@ -109,8 +109,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
             currentHp += amount;
         }
         healthText.text = currentHp.ToString();
-        //Debug.Log("Healed " + amount + " HP. Health: " + currentHp);
-        if (currentHp > maxHp && !healthDraining) {
+        if (currentHp > MAX_HP && !healthDraining) {
             healthText.color = new Color32(166, 254, 0, 255);
             StartCoroutine(DrainHealth());
         }

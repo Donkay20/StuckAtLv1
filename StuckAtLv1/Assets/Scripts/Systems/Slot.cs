@@ -55,6 +55,7 @@ public class Slot : MonoBehaviour
         rareZeroBoostAvailable = true;
         containsSkill = false;
         if (identity == 1) {
+            ApplySlotUpgrade("rare", 8);
             //use this to test for upgrades
         }
     }

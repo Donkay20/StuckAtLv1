@@ -8,9 +8,12 @@ public class SkullWaveScroll : MonoBehaviour
     [SerializeField] private GameObject parent;
     private float timer = 15f;
     void Update() {
-        if (movement) {transform.Translate(0, -0.1f ,0);}
-
-        if (!movement) {transform.Translate(-0.1f, 0, 0);}
+        
+        if (movement) { 
+            transform.position += new Vector3(0, -0.1f, 0); 
+        } else { 
+            transform.position += new Vector3(-0.1f, 0, 0); 
+        }
 
         timer -= Time.deltaTime;
         if (timer <= 0) {

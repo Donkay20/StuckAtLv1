@@ -26,7 +26,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private Button skipButton;
 
-    // Start is called before the first frame update
     void Start()
     {
         InitializeButtons();
@@ -45,7 +44,6 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(!EventSystem.current.IsPointerOverGameObject()) {
@@ -114,7 +112,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     void displayNextSentence() {
-         if (lines.Count <= 0) {
+        if (lines.Count <= 0) {
             Debug.Log("Ran out of lines.");
             Scene currentScene = gameObject.scene;
             Debug.Log("Current scene: " + currentScene.name);
@@ -147,6 +145,24 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "ForestIntro":
                     gameManager.ReceiveCommand("map");
+                    break;
+                case "ForestMiniBossIntro":
+                    gameManager.ReceiveCommand("miniboss");
+                    break;
+                case "ForestMiniBossEnd":
+                    gameManager.ReceiveCommand("map");    
+                    break;
+                case "ForestBossIntro":
+                    gameManager.ReceiveCommand("boss");
+                    break;
+                case "ForestBossEnd":
+                    SceneManager.LoadScene("ForestEnd", LoadSceneMode.Additive);
+                    SceneManager.UnloadSceneAsync("ForestBossEnd");
+                    break;
+                case "ForestEnd":
+                    //SceneManager.LoadScene("SewerIntro", LoadSceneMode.Additive);
+                    //todo add tiffany shit here
+                    SceneManager.UnloadSceneAsync("ForestEnd");
                     break;
             }
         }
@@ -248,36 +264,54 @@ public class DialogueManager : MonoBehaviour
     private void SkipDialogue() {
         Scene currentScene = gameObject.scene;
         switch (currentScene.name) {
-                case "OpeningScene":
-                    SceneManager.LoadScene("ArtifactIntro");
-                    break;
-                case "ArtifactIntro":
-                    SceneManager.LoadScene("RuinsIntro");
-                    break;
-                case "RuinsIntro":
-                    SceneManager.LoadScene("MainGame");
-                    break;
-                case "RuinsMiniBossIntro":
-                    gameManager.ReceiveCommand("miniboss");
-                    break;
-                case "RuinsMiniBossEnd":
-                    gameManager.ReceiveCommand("map");    
-                    break;
-                case "RuinsBossIntro":
-                    gameManager.ReceiveCommand("boss");
-                    break;
-                case "RuinsBossEnd":
-                    SceneManager.UnloadSceneAsync("RuinsBossEnd");
-                    SceneManager.LoadScene("RuinsEnd", LoadSceneMode.Additive);
-                    break;
-                case "RuinsEnd":
-                    SceneManager.LoadScene("ForestIntro", LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync("RuinsEnd");
-                    break;
-                case "ForestIntro":
-                    gameManager.ReceiveCommand("map");
-                    break;
-            }
+            case "OpeningScene":
+                SceneManager.LoadScene("ArtifactIntro");
+                break;
+            case "ArtifactIntro":
+                SceneManager.LoadScene("RuinsIntro");
+                break;
+            case "RuinsIntro":
+                SceneManager.LoadScene("MainGame");
+                break;
+            case "RuinsMiniBossIntro":
+                gameManager.ReceiveCommand("miniboss");
+                break;
+            case "RuinsMiniBossEnd":
+                gameManager.ReceiveCommand("map");    
+                break;
+            case "RuinsBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
+            case "RuinsBossEnd":
+                SceneManager.UnloadSceneAsync("RuinsBossEnd");
+                SceneManager.LoadScene("RuinsEnd", LoadSceneMode.Additive);
+                break;
+            case "RuinsEnd":
+                SceneManager.LoadScene("ForestIntro", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("RuinsEnd");
+                break;
+            case "ForestIntro":
+                gameManager.ReceiveCommand("map");
+                break;
+            case "ForestMiniBossIntro":
+                gameManager.ReceiveCommand("miniboss");
+                break;
+            case "ForestMiniBossEnd":
+                gameManager.ReceiveCommand("map");    
+                break;
+            case "ForestBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
+            case "ForestBossEnd":
+                SceneManager.LoadScene("ForestEnd", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("ForestBossEnd");
+                break;
+            case "ForestEnd":
+                //SceneManager.LoadScene("SewerIntro", LoadSceneMode.Additive);
+                //todo add tiffany shit here
+                SceneManager.UnloadSceneAsync("ForestEnd");
+                break;
+        }
     }
 
     private void InitializeButtons() {
