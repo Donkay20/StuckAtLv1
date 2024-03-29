@@ -11,6 +11,12 @@ public class TitleScreen : MonoBehaviour
         InitializeButtons();
     }
 
+    /*
+    private void OnEnable() {
+        Time.timeScale = 1;
+    }
+    */
+
     private void InitializeButtons() {
         startGame.onClick.AddListener(() => StartGame());
     }

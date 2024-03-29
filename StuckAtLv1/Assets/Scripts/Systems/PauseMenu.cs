@@ -204,7 +204,7 @@ public class PauseMenu : MonoBehaviour
 
     private void QuitButtonClicked() {quitContextMenu.SetActive(true);}
 
-    private void QuitConfirm() {SceneManager.LoadScene("TitleScreen");}
+    private void QuitConfirm() {Time.timeScale = 1; SceneManager.LoadScene("TitleScreen");}
 
     private void QuitCancel() {quitContextMenu.SetActive(false);}
 
