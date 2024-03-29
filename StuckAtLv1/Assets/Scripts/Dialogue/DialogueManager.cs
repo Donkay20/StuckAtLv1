@@ -121,7 +121,7 @@ public class DialogueManager : MonoBehaviour
                     SceneManager.LoadScene("ArtifactIntro");
                     break;
                 case "ArtifactIntro":
-                    SceneManager.LoadScene("RuinsIntro");
+                    SceneManager.LoadScene("Tutorial");
                     break;
                 case "RuinsIntro":
                     SceneManager.LoadScene("MainGame");
@@ -268,7 +268,7 @@ public class DialogueManager : MonoBehaviour
                 SceneManager.LoadScene("ArtifactIntro");
                 break;
             case "ArtifactIntro":
-                SceneManager.LoadScene("RuinsIntro");
+                SceneManager.LoadScene("Tutorial");
                 break;
             case "RuinsIntro":
                 SceneManager.LoadScene("MainGame");

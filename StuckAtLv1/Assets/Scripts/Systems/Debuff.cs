@@ -75,9 +75,9 @@ public class Debuff : MonoBehaviour
             case "bleed": //If the character has overhealing, the drain rate is increased.
                 i = 2;
                 if (x) {
-                    character.DrainTimer *= severity;
+                    character.DrainTimerModifier *= severity;
                 } else {
-                    character.DrainTimer /= severity;
+                    character.DrainTimerModifier /= severity;
                 }
                 break;
             case "anemia": //Deals [efficacy]% of the character's current health per second. Always deals at least 1 damage. Anemia handled in Update method.

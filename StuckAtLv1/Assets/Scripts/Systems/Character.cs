@@ -18,7 +18,8 @@ Handles main character's active stats in combat, their buffs, and their damage h
     private bool healthDraining; //overheal drain check
     private float damageModifier; //from buffs/debuffs
     private float criticalDamageModifier; //from buffs
-    private float drainTimer = 1; public float DrainTimer { get => drainTimer; set => drainTimer = value; } //from buffs/debuffs
+    private float drainTimer;
+    private float drainTimerModifier = 1; public float DrainTimerModifier { get => drainTimerModifier; set => drainTimerModifier = value; } //from buffs/debuffs
     private int drainValue;
 
     [SerializeField] Animator playerAnim;
@@ -32,12 +33,18 @@ Handles main character's active stats in combat, their buffs, and their damage h
         afterimageText.text = afterimage.ToString();
         moneyText.text = money.ToString();
         damageModifier = 1;
-        drainTimer = 1;
         drainValue = 1;
         criticalDamageModifier = 0;
+        CalculateDrainTimer();
     }
 
     private void Update() {
+        CalculateDrainTimer();
+        if (currentHp > 999) {
+            currentHp = 999;
+            healthText.text = currentHp.ToString();
+        }
+
         if (afterimage > 0) {
             afterimage -= Time.deltaTime;
             afterimageText.text = afterimage.ToString("f1");
@@ -135,6 +142,42 @@ Handles main character's active stats in combat, their buffs, and their damage h
         moneyText.text = money.ToString();
     }
 
+    private void CalculateDrainTimer() {
+        switch(currentHp) {
+            case int n when n > 10 && n <= 100:
+                drainTimer = 1;
+                break;
+            case int n when n > 100 && n <= 200:
+                drainTimer = 0.9f;
+                break;
+            case int n when n > 200 && n <= 300:
+                drainTimer = 0.8f;
+                break;
+            case int n when n > 300 && n <= 400:
+                drainTimer = 0.7f;
+                break;
+            case int n when n > 400 && n <= 500:
+                drainTimer = 0.6f;
+                break;
+            case int n when n > 500 && n <= 600:
+                drainTimer = 0.5f;
+                break;
+            case int n when n > 600 && n <= 700:
+                drainTimer = 0.4f;
+                break;
+            case int n when n > 700 && n <= 800:
+                drainTimer = 0.3f;
+                break;
+            case int n when n > 800 && n <= 900:
+                drainTimer = 0.2f;
+                break;
+            case int n when n > 900:
+                drainTimer = 0.1f;
+                break;
+        }
+        drainTimer *= drainTimerModifier;
+    }
+
     public void ActivateBloodsucker(int hpToRestore) {
         Heal(hpToRestore);
     }
@@ -159,12 +202,12 @@ Handles main character's active stats in combat, their buffs, and their damage h
 
     public void ActivateBulwark() {
         drainValue = -1;
-        drainTimer /= 2;
+        drainTimerModifier /= 2;
     }
 
     public void DeactivateBulwark() {
         drainValue = 1;
-        drainTimer *= 2;
+        drainTimerModifier *= 2;
     }
 
     public void DashingIFrames() {

@@ -10,6 +10,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Sprite[] tutorialImage;
     [SerializeField] private TextMeshProUGUI tutorialUIText;
     [SerializeField] private Image tutorialUIImage;
+    [SerializeField] private Button yesButton, noButton;
+    [SerializeField] private GameObject tutorialQuestion;
     [Space]
     [SerializeField] private GameObject player;
     [SerializeField] private Enemy tutorialEnemy1;
@@ -17,6 +19,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private GameObject blockingWall;
     private int triggerCount;
     void Start() {
+        InitializeButtons();
+        
         tutorialUIText.text = tutorialText[0];
         tutorialUIImage.sprite = tutorialImage[0];
 
@@ -42,6 +46,10 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    private void BeginTutorial() {
+        tutorialQuestion.SetActive(false);
+    }
+
     public void NextMessage(int trigger) {
         if (trigger == 7) {
             ExitTutorial();
@@ -56,7 +64,12 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    private void InitializeButtons() {
+        yesButton.onClick.AddListener(() => BeginTutorial());
+        noButton.onClick.AddListener(() => ExitTutorial());
+    }
+
     public void ExitTutorial() {
-        //SceneManager.LoadScene(0); //fix later
+        SceneManager.LoadScene("RuinsIntro");
     }
 }
