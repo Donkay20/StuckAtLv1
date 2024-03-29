@@ -22,6 +22,8 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     [SerializeField] public int maxHP;
     [SerializeField] int damage;
     [SerializeField] private float alteredSpeed, alteredSpeedTimer;
+    [Space]
+    [SerializeField] private bool tutorial;
     private bool anemiaApplied; 
     private float anemiaTimer;
     private float anemiaActiveTick = 1;
@@ -166,13 +168,15 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         }
 
         if (hp < 1) {
-            CombatManager c = FindAnyObjectByType<CombatManager>();
-            if (c.GetObjective() == "miniboss" && (gameObject.CompareTag("Knight") || gameObject.CompareTag("DeerNymph"))) {
-                c.EnemyKilled();
-            } else if (c.GetObjective() == "boss" && (this.gameObject.CompareTag("Lich") || gameObject.CompareTag("VenusFlyTrap"))) {
-                c.EnemyKilled();
-            } else if (c.GetObjective() == "combat") {
-                c.EnemyKilled();
+            if (!tutorial) {
+                CombatManager c = FindAnyObjectByType<CombatManager>();
+                if (c.GetObjective() == "miniboss" && (gameObject.CompareTag("Knight") || gameObject.CompareTag("DeerNymph"))) {
+                    c.EnemyKilled();
+                } else if (c.GetObjective() == "boss" && (this.gameObject.CompareTag("Lich") || gameObject.CompareTag("VenusFlyTrap")) ) {
+                    c.EnemyKilled();
+                } else if (c.GetObjective() == "combat") {
+                    c.EnemyKilled();
+                }
             }
             Instantiate(particlePrefab, this.transform.position, this.transform.rotation);
             Character character = FindAnyObjectByType<Character>();

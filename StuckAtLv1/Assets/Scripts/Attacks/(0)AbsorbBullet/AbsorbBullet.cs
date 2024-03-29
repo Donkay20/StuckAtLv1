@@ -50,8 +50,11 @@ public class AbsorbBullet : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col) {     //upon hitting an enemy:                  
-        Enemy enemy = col.GetComponent<Enemy>();        //the enemy class will need to be changed to a bare-bones calculation class as every enemy will need it, can stack other classes on different enemies for unique behavior             
-        if (enemy != null) {
+        if (col.TryGetComponent<BreakableWall>(out var wall)) {
+            wall.TakeDamage(damage);
+        }
+
+        if (col.TryGetComponent<Enemy>(out var enemy)) {
             switch (enemy.tag) {    //Each enemy will have a unique tag which will identify which one the bullet is hitting.                              
                 case "Skeleton1":   //Bone Toss
                     slotManager.AcquireSkill(1);                                      

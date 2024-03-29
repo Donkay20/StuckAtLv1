@@ -48,6 +48,7 @@ public class Slot : MonoBehaviour
     [SerializeField] private BuffManager buffManager;
     [SerializeField] private GameObject anemiaScreenBlastPrefab;
     [SerializeField] private GameObject knockbackCirclePrefab;
+    [SerializeField] private bool tutorialStage;
     public int Identity { get => identity; set => identity = value; }
 
     private void Start() {
@@ -55,7 +56,7 @@ public class Slot : MonoBehaviour
         rareZeroBoostAvailable = true;
         containsSkill = false;
         if (identity == 1) {
-            ApplySlotUpgrade("rare", 8);
+            //ApplySlotUpgrade("rare", 8);
             //use this to test for upgrades
         }
     }
@@ -231,23 +232,23 @@ public class Slot : MonoBehaviour
     }
 
     private void CalculateWeightPenalty() {
-        Debug.Log("Identity: " + identity + ". Identity-1: " + (identity-1));
-        Debug.Log(gameManager.GetWeight(identity));
-        int weight = gameManager.GetWeight(identity);
-        if (weight == 0) {
-            cooldownModifier = -0.25f;
-        }
-        if (weight >= 1 && weight <= 3) {
-            cooldownModifier = 0.5f;
-        }
-        if (weight >= 4 && weight <= 6) {
-            cooldownModifier = 1f;
-        }
-        if (weight >= 7 && weight <= 9) {
-            cooldownModifier = 2f;
-        }
-        if (weight >= 10) {
-            cooldownModifier = 4f;
+        if (!tutorialStage) {
+            int weight = gameManager.GetWeight(identity);
+            if (weight == 0) {
+                cooldownModifier = -0.25f;
+            }
+            if (weight >= 1 && weight <= 3) {
+                cooldownModifier = 0.5f;
+            }
+            if (weight >= 4 && weight <= 6) {
+                cooldownModifier = 1f;
+            }
+            if (weight >= 7 && weight <= 9) {
+                cooldownModifier = 2f;
+            }
+            if (weight >= 10) {
+                cooldownModifier = 4f;
+            }
         }
     }
 
