@@ -9,7 +9,6 @@ using UnityEngine.UIElements;
 public class BuffManager : MonoBehaviour
 {
     [SerializeField] private Character character;
-    //Debugging purposes.
     [SerializeField] private GameObject buffPrefab, debuffPrefab;    
     [SerializeField] private GameObject[] buffPlacement = new GameObject[5];
     [SerializeField] private GameObject[] debuffPlacement = new GameObject[5];
@@ -18,7 +17,8 @@ public class BuffManager : MonoBehaviour
     //Back-end
     private int buffPosition, debuffPosition;
     private bool bloodsuckerActive, bulwarkActive, penetrationActive, avariceActive;
-    //Variables
+
+    //Max of 5 buffs and debuffs are allowed due to technical constraints and also to preserve balance.
 
     private void Awake() {
         buffPosition = 0;
@@ -76,7 +76,6 @@ public class BuffManager : MonoBehaviour
         }
         buffs[buffPosition - 1] = null;
         buffPosition--;
-        //Debug.Log("Buff Position: " + buffPosition);
     }
 
     public void DebuffExpired(int id) {
@@ -89,7 +88,6 @@ public class BuffManager : MonoBehaviour
         }
         debuffs[debuffPosition - 1] = null;
         debuffPosition--;
-        //Debug.Log("Debuff Position: " + debuffPosition);
     }
 
     public void DispelDebuff() {
@@ -134,11 +132,11 @@ public class BuffManager : MonoBehaviour
         return (buffPosition, debuffPosition);
     }
     
-    public bool doesBuffExist(int buffPos) {
+    public bool DoesBuffExist(int buffPos) {
         return buffs[buffPos] != null;
     }
 
-    public bool doesDebuffExist(int debuffPos) {
+    public bool DoesDebuffExist(int debuffPos) {
         return debuffs[debuffPos] != null;
     }
 

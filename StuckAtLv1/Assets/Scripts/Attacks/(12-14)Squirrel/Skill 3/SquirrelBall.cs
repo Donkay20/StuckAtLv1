@@ -15,6 +15,7 @@ public class SquirrelBall : MonoBehaviour
     private bool hitCheck;
     private float hitRefreshRate = 0.3f;
     private Character character;
+    [SerializeField] private Sprite properSprite;
 
     void Start() {
         slot = GetComponentInParent<Slot>();
@@ -30,6 +31,8 @@ public class SquirrelBall : MonoBehaviour
         timer = asb.GetDurationBonus(slot, SQUIRRELBALL_BASE_DURATION);
 
         character.GainAfterimage(1, false);
+
+        GetComponent<SpriteRenderer>().sprite = properSprite;
     }
 
     void Update() {

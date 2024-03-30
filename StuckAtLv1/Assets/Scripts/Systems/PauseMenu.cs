@@ -452,7 +452,7 @@ public class PauseMenu : MonoBehaviour
 
     private void PopulateBuffsDebuffs() {   //looks at the buff manager and grabs all of the buffs and debuffs currently affecting Jamp
         for (int i = 0; i < 5 ; i++) {
-            if (buffManager.doesBuffExist(i)) {
+            if (buffManager.DoesBuffExist(i)) {
                 (string buffType, float efficacy, float duration) = buffManager.GetBuffInfo(i);
                 switch (buffType) {
                     case "power":
@@ -493,7 +493,7 @@ public class PauseMenu : MonoBehaviour
                 buffTooltipInteractable[i] = false;
             }
 
-            if (buffManager.doesDebuffExist(i)) {
+            if (buffManager.DoesDebuffExist(i)) {
                 (string debuffType, float severity, float duration) = buffManager.GetDebuffInfo(i);
                 switch (debuffType) {
                     case "slow":

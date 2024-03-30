@@ -9,6 +9,7 @@ public class CombatManager : MonoBehaviour
     //Handles both combat and survival modes.
     [SerializeField] private TextMeshProUGUI uIObjective;
     [SerializeField] private TextMeshProUGUI uIObjectiveNumber;
+    [SerializeField] private TextMeshProUGUI uIObjectiveReminderText;
     [SerializeField] private Character character;
     [SerializeField] private Movement charMovement;
     [SerializeField] private MapManager mapProgress;
@@ -34,7 +35,7 @@ public class CombatManager : MonoBehaviour
     private GameObject room;
     private string objective;
     private bool specialCondition;
-    [SerializeField] private Animator combatAnimation, combatUIAnimation, warningAnimation;
+    [SerializeField] private Animator combatAnimation, combatUIAnimation;
 
     private void Awake() {
         specialCondition = false;
@@ -87,7 +88,7 @@ public class CombatManager : MonoBehaviour
                 }
                 ruinsRooms[roomChosen].SetActive(true);
                 room = ruinsRooms[roomChosen];
-                character.gameObject.transform.position = ruinsSpawn[roomChosen].gameObject.transform.position;
+                character.gameObject.transform.position = ruinsSpawn[roomChosen].transform.position;
                 break;
             case 2: //Forest
                 switch (format) {
@@ -104,7 +105,7 @@ public class CombatManager : MonoBehaviour
                 }
                 forestRooms[roomChosen].SetActive(true);
                 room = forestRooms[roomChosen];
-                character.gameObject.transform.position = forestSpawn[roomChosen].gameObject.transform.position;
+                character.gameObject.transform.position = forestSpawn[roomChosen].transform.position;
                 break;
             case 3:
                 break;
@@ -237,6 +238,10 @@ public class CombatManager : MonoBehaviour
         while (timeLeft > 0) {
             yield return new WaitForSeconds(1);
             timeLeft--; uIObjectiveNumber.text = timeLeft.ToString();
+            if (timeLeft == 10 || (timeLeft < 4 && timeLeft > 0)) {
+                uIObjectiveReminderText.text = timeLeft.ToString();
+                combatUIAnimation.SetTrigger("Objective");
+            } 
         }
         Finish();
     }

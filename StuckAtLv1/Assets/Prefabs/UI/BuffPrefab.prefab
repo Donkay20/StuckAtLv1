@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 30, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1353454495287715402
@@ -162,7 +162,7 @@ RectTransform:
   m_GameObject: {fileID: 7344494797422048518}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1195252355893452900}
@@ -189,13 +189,13 @@ MonoBehaviour:
   activeBuffIcon: {fileID: 592184949684493421}
   buffIcons:
   - {fileID: 21300000, guid: 87f8fa497350daa4db6adb13eb732189, type: 3}
-  - {fileID: 21300000, guid: 54f5e63fc5c84514eabf583cce748561, type: 3}
-  - {fileID: 21300000, guid: c39c01dc5f7114c43bf8874b52781a56, type: 3}
-  - {fileID: 21300000, guid: 3dec43e1ccef8c349a1ab4558b95fd54, type: 3}
-  - {fileID: 21300000, guid: 3939e5336bd0ef34b91346d960140f3a, type: 3}
-  - {fileID: 21300000, guid: aaddd904ea13dbe428766c15cc9286ce, type: 3}
-  - {fileID: 21300000, guid: 0df9eb35353156f488905c093ad22eb7, type: 3}
-  - {fileID: 21300000, guid: 2ba51c4491c85114c9048a5ed910c2ce, type: 3}
+  - {fileID: 21300000, guid: 467e1f176b6c91d4dad4beca0b1e6b7e, type: 3}
+  - {fileID: 21300000, guid: eb6543fd64889af4ca7c2c3c7a27c639, type: 3}
+  - {fileID: 21300000, guid: dd9ad1713f5ff534bbee236d55258428, type: 3}
+  - {fileID: 21300000, guid: c97318842d7bb704a88cf01afed1914b, type: 3}
+  - {fileID: 21300000, guid: 95576f05208cba1408cfd0219eee63e3, type: 3}
+  - {fileID: 21300000, guid: adbc5b5219beed64698e84d7cad5e7b6, type: 3}
+  - {fileID: 21300000, guid: f9a9e8284931c6148ac37d50dc27b9a6, type: 3}
 --- !u!222 &4328037570631330291
 CanvasRenderer:
   m_ObjectHideFlags: 0

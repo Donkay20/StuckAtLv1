@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6509e55c6df0c1a4196c6a1c97b591d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 30
+  lifetime: 15
   enemiesInGroup:
   - {fileID: 207675042061486510}
   - {fileID: 125041268901950110}
@@ -62,6 +62,8 @@ MonoBehaviour:
   - {fileID: 3649775403972483144}
   - {fileID: 4810228751153482737}
   - {fileID: 5502286201394527568}
+  Left: 0
+  Right: 0
 --- !u!1001 &1963094695314983672
 PrefabInstance:
   m_ObjectHideFlags: 0

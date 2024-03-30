@@ -58,52 +58,30 @@ public class EnemyPool : MonoBehaviour
     }
 
     public GameObject GetEnemy(int ID) {
-        switch (ID) {
+        return ID switch {
             //ruins enemies
-            case 0:
-                return skeleton1.Get();
-            case 1:
-                return skeleton2.Get();
-            case 2:
-                return skeleton3.Get();
-            case 3:
-                return golem1.Get();
-            case 4:
-                return golem2.Get();
-            case 5:
-                return golem3.Get();
-            case 6:
-                return spider1.Get();
-            case 7:
-                return spider2.Get();
-            case 8:
-                return spider3.Get();
-
+            0 => skeleton1.Get(),
+            1 => skeleton2.Get(),
+            2 => skeleton3.Get(),
+            3 => golem1.Get(),
+            4 => golem2.Get(),
+            5 => golem3.Get(),
+            6 => spider1.Get(),
+            7 => spider2.Get(),
+            8 => spider3.Get(),
             //forest enemies
-            case 9:
-                return squirrel1.Get();
-            case 10:
-                return squirrel2.Get();
-            case 11:
-                return squirrel3.Get();
-            case 12:
-                return tree1.Get();
-            case 13:
-                return tree2.Get();
-            case 14:
-                return tree3.Get();
-            case 15:
-                return wolf1.Get();
-            case 16:
-                return wolf2.Get();
-            case 17:
-                return wolf3.Get();
-
+            9 => squirrel1.Get(),
+            10 => squirrel2.Get(),
+            11 => squirrel3.Get(),
+            12 => tree1.Get(),
+            13 => tree2.Get(),
+            14 => tree3.Get(),
+            15 => wolf1.Get(),
+            16 => wolf2.Get(),
+            17 => wolf3.Get(),
             //todo: sewer
-
-            default:
-                return null;
-        }
+            _ => null,
+        };
     }
 
     public void ReturnEnemy(GameObject enemy) {

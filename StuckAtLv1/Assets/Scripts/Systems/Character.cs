@@ -122,6 +122,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
             healthText.color = new Color32(166, 254, 0, 255);
             StartCoroutine(DrainHealth());
         }
+        hpBar.SetState(currentHp, MAX_HP);
     }
 
     public void GainAfterimage(float amount, bool exceedCap) {

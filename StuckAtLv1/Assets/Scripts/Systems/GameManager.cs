@@ -32,6 +32,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     [SerializeField] private MapManager mapManager;
     [SerializeField] private SlotManager slotManager;
     [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private EnemyPool enemyPool;
     private GameState currentState;
     private GameState previousState;
     private int scaling;
@@ -437,6 +438,19 @@ There are separate combat, map, event, and upgrade scripts that manage each even
         mapUI.SetActive(false);
 
         pauseMenu.IncreaseMaxSlots();
+        
+        switch (mapManager.GetWorld()) {
+            case 2:
+                enemyPool.WorldOneClear();
+                break;
+            case 3:
+                enemyPool.WorldTwoClear();
+                break;
+            case 4:
+                enemyPool.WorldThreeClear();
+                break;
+        }
+
         //virtualCamera.SetForest();
     }
 }
