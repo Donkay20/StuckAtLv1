@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3322595812988298908}
   - component: {fileID: 6695627693154540130}
-  - component: {fileID: 4122800883909102323}
   - component: {fileID: 8382515389019149367}
   - component: {fileID: 6892416426624848723}
+  - component: {fileID: 373735725086534490}
+  - component: {fileID: 7786876313099917633}
   m_Layer: 0
   m_Name: Howl
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 0d91e56d45723374e81eab81a74d3538, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3cadefc090428bc4f9e59ec226592d9d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,51 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4122800883909102323
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7228471597389165517}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 1}
-    newSize: {x: 4, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &8382515389019149367
 Rigidbody2D:
   serializedVersion: 4
@@ -171,3 +127,156 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c288165998c99d4d845d05ba9d71f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!60 &373735725086534490
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7228471597389165517}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.25, y: 6.25}
+    newSize: {x: 4, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.71875, y: 1.3125}
+      - {x: 1.1284356, y: 1.0773387}
+      - {x: 1.6619489, y: 0.5455921}
+      - {x: 1.84375, y: 0.27962983}
+      - {x: 1.9746382, y: -0.1334539}
+      - {x: 2.125, y: -0.15625}
+      - {x: 2.125, y: 0.03125}
+      - {x: 2.0625, y: 0.34375}
+      - {x: 1.84375, y: 0.8125}
+      - {x: 0.78970397, y: 1.6106579}
+      - {x: 0.625, y: 1.6875}
+      - {x: -0.53125, y: 1.6875}
+      - {x: -0.59375, y: 1.65625}
+      - {x: -1.3125, y: 1.3125}
+      - {x: -1.809556, y: 0.7897039}
+      - {x: -2.125, y: 0.1875}
+      - {x: -2.125, y: -0.15625}
+      - {x: -1.90625, y: -0.15625}
+      - {x: -1.875, y: -0.09375}
+      - {x: -1.525551, y: 0.7216941}
+      - {x: -0.96666867, y: 1.2151606}
+      - {x: -0.28419402, y: 1.411949}
+    - - {x: 1.53125, y: -0.15625}
+      - {x: 1.75, y: -0.15625}
+      - {x: 1.6360197, y: 0.19300991}
+      - {x: 1.46875, y: 0.59375}
+      - {x: 0.84375, y: 1.102204}
+      - {x: 0.40625, y: 1.28125}
+      - {x: -0.3125, y: 1.28125}
+      - {x: -0.53125, y: 1.1930099}
+      - {x: -0.9601069, y: 0.9799589}
+      - {x: -1.4459538, y: 0.588051}
+      - {x: -1.6588159, y: 0.16745889}
+      - {x: -1.75, y: -0.15625}
+      - {x: -1.5143422, y: -0.11065793}
+      - {x: -1.255142, y: 0.45643115}
+      - {x: -0.75550985, y: 0.8382401}
+      - {x: -0.21784672, y: 0.99371076}
+      - {x: 0.32660738, y: 0.996598}
+      - {x: 0.77260697, y: 0.8439391}
+      - {x: 1.3125, y: 0.28125}
+    - - {x: 0.6875, y: 0.28125}
+      - {x: 1, y: -0.15625}
+      - {x: 1.1875, y: -0.15625}
+      - {x: 1.21875, y: -0.125}
+      - {x: 1.21875, y: 0.0625}
+      - {x: 0.78125, y: 0.5625}
+      - {x: 0.3125, y: 0.78125}
+      - {x: 0.3125, y: 0.78125}
+      - {x: -0.3125, y: 0.78125}
+      - {x: -0.625, y: 0.75}
+      - {x: -1.21875, y: 0.15625}
+      - {x: -1.21875, y: -0.09375}
+      - {x: -1.1875, y: -0.15625}
+      - {x: -1.03125, y: -0.15625}
+      - {x: -0.96875, y: -0.125}
+      - {x: -0.28125, y: 0.46875}
+      - {x: 0.125, y: 0.53125}
+  m_UseDelaunayMesh: 0
+--- !u!114 &7786876313099917633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7228471597389165517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 2
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 0.6084906, b: 0.99033225, a: 1}
+  m_Intensity: 5.09
+  m_LightVolumeIntensity: 1.85
+  m_LightVolumeIntensityEnabled: 1
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 21300000, guid: 3cadefc090428bc4f9e59ec226592d9d, type: 3}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: 0.765625, z: 0}
+    m_Extent: {x: 2.125, y: 0.921875, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
