@@ -13,12 +13,17 @@ public class SquirrelTailRotate : MonoBehaviour
     private bool direction;
     private Slot slot;
 
+    [SerializeField] Sprite rightTail, leftTail;
+    private SpriteRenderer sr;
+    
     void Start() {
         RotateTowardsMouse();
         slot = GetComponentInParent<Slot>();
         AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
         tail.Activate(slot);
         duration = asb.GetDurationBonus(slot, SQUIRREL_TAIL_BASE_DURATION);
+
+        sr = tail.gameObject.GetComponent<SpriteRenderer>();
     }
 
     void Update() {
@@ -40,8 +45,10 @@ public class SquirrelTailRotate : MonoBehaviour
         if (swap <= 0) {
             if (direction) {
                 direction = false;
+                sr.sprite = rightTail;
             } else {
                 direction = true;
+                sr.sprite = leftTail;
             }
             swap = SWAP_TIMER;
         }
