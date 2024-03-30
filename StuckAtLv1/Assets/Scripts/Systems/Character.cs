@@ -109,13 +109,15 @@ Handles main character's active stats in combat, their buffs, and their damage h
         if (currentHp <= 0) {
             return;
         }
+
         if (currentHp + amount > 999) {
             currentHp = 999;
-            Debug.Log("Health capped!");
         } else {
             currentHp += amount;
         }
+
         healthText.text = currentHp.ToString();
+
         if (currentHp > MAX_HP && !healthDraining) {
             healthText.color = new Color32(166, 254, 0, 255);
             StartCoroutine(DrainHealth());
@@ -125,17 +127,14 @@ Handles main character's active stats in combat, their buffs, and their damage h
     public void GainAfterimage(float amount, bool exceedCap) {
         if (afterimage + amount > 10 && !exceedCap) {
             afterimage = 10;
-            Debug.Log("Afterimages capped!");
         } else {
             afterimage += amount;
         }
-        //afterimageText.text = afterimage.ToString();
     }
 
     public void GainMoney(int amount) {
         if (amount + money > 999999) {
             money = 999999;
-            Debug.Log("Money capped!");
         } else {
             money += amount;
         }
@@ -143,7 +142,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
     }
 
     private void CalculateDrainTimer() {
-        switch(currentHp) {
+        switch(currentHp) {         //overheal will drain faster the more health the player has.
             case int n when n > 10 && n <= 100:
                 drainTimer = 1;
                 break;
@@ -175,7 +174,12 @@ Handles main character's active stats in combat, their buffs, and their damage h
                 drainTimer = 0.1f;
                 break;
         }
-        drainTimer *= drainTimerModifier;
+
+        drainTimer *= drainTimerModifier;   //apply modifiers
+
+        if (drainValue < 0) {               //if bulwark is active, don't accelerate anything
+            drainTimer = 1 * drainTimerModifier;
+        }
     }
 
     public void ActivateBloodsucker(int hpToRestore) {

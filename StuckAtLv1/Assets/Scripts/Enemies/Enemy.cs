@@ -224,6 +224,14 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 lich.EffigyDied();
                 gameObject.SetActive(false);
                 break;
+            case "Knight":  
+            case "Lich":
+            case "DeerNymph":
+                Destroy(gameObject);
+                break;
+            case "VenusFlyTrap":
+                Destroy(gameObject.transform.parent.gameObject);
+                break;
             default:
                 EnemyPool.Instance.ReturnEnemy(gameObject);
                 break;
@@ -281,8 +289,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     public void SelfDestruct() {
-        EnemyPool.Instance.ReturnEnemy(gameObject);
-        //Destroy(gameObject);
+        ResolveEnemy();
     }
 
     public void BossAnemiaCleanse() { //clears the boss of active anemia (but keeps the acceleration)

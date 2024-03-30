@@ -197,10 +197,10 @@ public class EventManager : MonoBehaviour
                     5. done
                 Forest:
                     1. done
-                    2. todo
+                    2. done
                     3. done
-                    4. todo
-                    5. todo
+                    4. done
+                    5. done
                 Sewer:
                     1. todo
                     2. todo

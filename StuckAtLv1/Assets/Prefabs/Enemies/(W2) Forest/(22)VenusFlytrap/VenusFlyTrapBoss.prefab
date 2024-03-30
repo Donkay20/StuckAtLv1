@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5861759397825089354}
   - component: {fileID: 6692597431739556998}
   - component: {fileID: 5186057279018904397}
+  - component: {fileID: 7944186819574826920}
   m_Layer: 7
   m_Name: FlyTrapBase_0
   m_TagString: VenusFlyTrap
@@ -112,6 +113,7 @@ MonoBehaviour:
   damage: 3
   alteredSpeed: 0
   alteredSpeedTimer: 0
+  tutorial: 0
   particlePrefab: {fileID: 0}
 --- !u!70 &6692597431739556998
 CapsuleCollider2D:
@@ -169,6 +171,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!50 &7944186819574826920
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920173837746830482}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 999999
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 7
 --- !u!1 &3342389461915763610
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +601,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5447542871742891217}
   - component: {fileID: 6689786507104450658}
-  - component: {fileID: 3025733852169090962}
   m_Layer: 0
   m_Name: VenusFlyTrapBoss
   m_TagString: Untagged
@@ -639,35 +667,8 @@ MonoBehaviour:
   enrageBarFill: {fileID: 0}
   bossName: {fileID: 0}
   enrageName: {fileID: 0}
-  attackTimerResetValue: 6
+  attackTimerResetValue: 7
   suctionTimerResetValue: 25
---- !u!50 &3025733852169090962
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7519682987931574223}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 200000
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 7
 --- !u!1 &7543526581933207413
 GameObject:
   m_ObjectHideFlags: 0

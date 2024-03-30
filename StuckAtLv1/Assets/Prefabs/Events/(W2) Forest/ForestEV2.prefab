@@ -124,5 +124,5 @@ MonoBehaviour:
   optionsToSelect:
   - Try to treat the injury.
   - Leave the wolf alone.
-  skipToThisValueAfterChoices: 060000001300000020000000
+  skipToThisValueAfterChoices: 0600000020000000
   outcome: 0d0000000e0000000f000000

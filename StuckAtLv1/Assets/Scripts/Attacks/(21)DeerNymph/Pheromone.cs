@@ -45,9 +45,10 @@ public class Pheromone : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy.CompareTag("DeerNymph")) {
-            enemy.GetComponent<DeerNymph>().RaiseAnger();
+        if (col.TryGetComponent<Enemy>(out var enemy)) {
+            if (enemy.CompareTag("DeerNymph") && enemy != null) {
+                enemy.gameObject.GetComponent<DeerNymph>().RaiseAnger();
+            }
         }
         FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);
     }
