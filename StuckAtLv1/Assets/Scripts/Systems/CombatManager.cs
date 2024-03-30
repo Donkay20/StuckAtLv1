@@ -16,6 +16,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private EnemyManager spawner;
     [SerializeField] private BuffManager buffManager;
     [SerializeField] private SlotManager slotManager;
+    [SerializeField] private CombatUIAnimation uIAnimation;
     [SerializeField] private GameObject bossUI, bossSecondaryUI;
     [SerializeField] private GameObject survivalHourglass;
     [SerializeField] private GameObject combatSkull;
@@ -320,7 +321,8 @@ public class CombatManager : MonoBehaviour
         room.SetActive(false);
 
         //Do the outro animation
-        combatAnimation.SetTrigger("Outro");
+        //combatAnimation.SetTrigger("Outro");
+        combatUIAnimation.SetTrigger("Outro");
     }
 
     public void IntroTransitionAnimationComplete() {
