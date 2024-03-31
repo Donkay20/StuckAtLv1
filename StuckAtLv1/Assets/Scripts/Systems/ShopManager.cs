@@ -12,9 +12,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hpButtonText, afterimagesButtonText, damageButtonText, upgradeButtonText;
     [SerializeField] private GameManager manager;
     [SerializeField] private Character player;
-    private int healthCost, afterimageCost, upgradeCost, damageCost;
+    private int healthCost, afterimageCost, damageCost;
+    private readonly int UPGRADE_COST = 500;
     private int damageCounter;
-    private bool doNotReset;
+    private bool doNotReset, upgradePurchased;
     private Animator anim;
     void Awake()
     {
@@ -23,7 +24,6 @@ public class ShopManager : MonoBehaviour
         doNotReset = false;
         healthCost = 20;
         afterimageCost = 50;
-        upgradeCost = 200;
         damageCost = 1;
         damageCounter = 0;
         anim.SetTrigger("Intro");
@@ -37,7 +37,7 @@ public class ShopManager : MonoBehaviour
             afterimages.text = player.afterimage.ToString("f1");
             healthCost = 20; hpButtonText.text = "10 HP | $" + healthCost;
             afterimageCost = 50; afterimagesButtonText.text = "Afterimage-time | $" + afterimageCost;
-            upgradeCost = 150; upgradeButtonText.text = "Upgrade | $" + upgradeCost;
+            upgradeButtonText.text = "Upgrade | $" + UPGRADE_COST;
             damageCost = 1; damageButtonText.text = "Damage | $" + damageCost;
         }
         CheckPurchasability();
@@ -57,7 +57,7 @@ public class ShopManager : MonoBehaviour
             buyHP.interactable = true;
         }
 
-        if(player.money < upgradeCost) {
+        if(player.money < UPGRADE_COST || upgradePurchased) {
             buyUpgrade.interactable = false;
         } else {
             buyUpgrade.interactable = true;
@@ -101,12 +101,12 @@ public class ShopManager : MonoBehaviour
                 shopkeeperText.text = "Afterimage-time purchased."; //temp
                 break;
             case "upgrade":
-                player.money -= upgradeCost; 
+                player.money -= UPGRADE_COST; 
                 money.text = player.money.ToString();
-                upgradeCost *= 2;
-                upgradeButtonText.text = "Upgrade | $" + upgradeCost;
+                upgradeButtonText.text = "Upgrade purchased";
                 shopkeeperText.text = "Upgrade purchased."; //temp
                 doNotReset = true;
+                upgradePurchased = true;
                 manager.ReceiveCommand("upgrade");
                 break;
             case "damage":
@@ -123,6 +123,7 @@ public class ShopManager : MonoBehaviour
 
     private void Exit() {
         doNotReset = false;
+        upgradePurchased = false;
         anim.SetTrigger("Outro");
     }
 

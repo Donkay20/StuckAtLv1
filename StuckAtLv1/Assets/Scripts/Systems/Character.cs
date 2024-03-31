@@ -25,6 +25,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
     [SerializeField] Animator playerAnim;
     [SerializeField] Animator healthBarAnim;
     [SerializeField] StatusBar hpBar;
+    [SerializeField] SpriteRenderer healthBarColor;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI afterimageText;
     [SerializeField] private TextMeshProUGUI moneyText;
@@ -53,6 +54,14 @@ Handles main character's active stats in combat, their buffs, and their damage h
         if (afterimage < 0) {
             afterimage = 0;
             afterimageText.text = afterimage.ToString("f1");
+        }
+
+        if (currentHp > MAX_HP) {
+            healthBarColor.color = Color.green;
+        } else if (afterimage > 0) {
+            healthBarColor.color = Color.blue;
+        } else {
+            healthBarColor.color = Color.red;   
         }
     }
 
@@ -96,6 +105,8 @@ Handles main character's active stats in combat, their buffs, and their damage h
                 healthText.color = new Color32(255, 240, 240, 255);
                 healthDraining = false;
             }
+
+            hpBar.SetState(currentHp, MAX_HP);
         }
     }
 
@@ -148,31 +159,31 @@ Handles main character's active stats in combat, their buffs, and their damage h
                 drainTimer = 1;
                 break;
             case int n when n > 100 && n <= 200:
-                drainTimer = 0.9f;
-                break;
-            case int n when n > 200 && n <= 300:
                 drainTimer = 0.8f;
                 break;
-            case int n when n > 300 && n <= 400:
-                drainTimer = 0.7f;
-                break;
-            case int n when n > 400 && n <= 500:
+            case int n when n > 200 && n <= 300:
                 drainTimer = 0.6f;
                 break;
-            case int n when n > 500 && n <= 600:
-                drainTimer = 0.5f;
-                break;
-            case int n when n > 600 && n <= 700:
+            case int n when n > 300 && n <= 400:
                 drainTimer = 0.4f;
                 break;
-            case int n when n > 700 && n <= 800:
-                drainTimer = 0.3f;
-                break;
-            case int n when n > 800 && n <= 900:
+            case int n when n > 400 && n <= 500:
                 drainTimer = 0.2f;
                 break;
-            case int n when n > 900:
+            case int n when n > 500 && n <= 600:
                 drainTimer = 0.1f;
+                break;
+            case int n when n > 600 && n <= 700:
+                drainTimer = 0.08f;
+                break;
+            case int n when n > 700 && n <= 800:
+                drainTimer = 0.06f;
+                break;
+            case int n when n > 800 && n <= 900:
+                drainTimer = 0.03f;
+                break;
+            case int n when n > 900:
+                drainTimer = 0.01f;
                 break;
         }
 

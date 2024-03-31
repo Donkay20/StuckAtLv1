@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class UpgradeManager : MonoBehaviour
 {
-    private readonly int DEFAULT_REROLL_COST = 100;
+    private readonly int REROLL_COST = 100;
     //back-end stuff
     private int[] commonUpgradePool = new int[15];
     private int[] rareUpgradePool = new int[15];
@@ -63,7 +63,7 @@ public class UpgradeManager : MonoBehaviour
     private bool fromShop; 
     private bool fromBoss; 
     private int maxSlots;
-    private string upgradeType; private int rerollCost; 
+    private string upgradeType;
     private Animator anim;
 
     void Awake() {                      //initialize the buttons, and capacity for each upgrade at the beginning of the game.
@@ -95,10 +95,10 @@ public class UpgradeManager : MonoBehaviour
             helpMenuSeen = true;
         }
 
-        rerollCost = DEFAULT_REROLL_COST;
         characterMoney.text = character.money.ToString();
-        rerollButtonText.text = "Re-roll | " + DEFAULT_REROLL_COST + "g";
-        if (character.money >= rerollCost) {
+        rerollButtonText.text = "Re-roll | " + REROLL_COST + "g";
+
+        if (character.money >= REROLL_COST) {
             rerollButton.interactable = true;
         } else {
             rerollButton.interactable = false;
@@ -107,10 +107,28 @@ public class UpgradeManager : MonoBehaviour
     }
 
     public void Setup(string type) {
+        Debug.Log("Setup reached.");
+        int commonUpgradesAvailable = 0, rareUpgradesAvailable = 0, legendaryUpgradesAvailable =  0;
+
+        foreach (int i in commonUpgradePool) {
+            commonUpgradesAvailable += i;
+        }
+        foreach (int i in rareUpgradePool) {
+            rareUpgradesAvailable += i;
+        }
+        foreach (int i in legendaryUpgradePool) {
+            legendaryUpgradesAvailable += i;
+        }
+
+        Debug.Log("Common upgrades left:" + commonUpgradesAvailable);
+        Debug.Log("Rare upgrades left:" + rareUpgradesAvailable);
+        Debug.Log("Legendary upgrades left:" + legendaryUpgradesAvailable);
+        
         upgradeText[0].gameObject.SetActive(false); upgradeText[0].text = "";
         upgradeText[1].gameObject.SetActive(false); upgradeText[1].text = "";
         upgradeText[2].gameObject.SetActive(false); upgradeText[2].text = "";
-          
+        Debug.Log("Initial reset complete.");
+
         //Called from the gamemanager with a type of reward, dependent on type of battle fought. Should be called every time we go into this menu.
         //Sets up the upgrades that are displayed in-game. This logic will need to be re-written for if the upgrades run out entirely, although idk if that'll be possible.
         for (int i = 0; i < 3; i++) {       
@@ -120,9 +138,11 @@ public class UpgradeManager : MonoBehaviour
                 if (rarity > 65) {          //for now, 30% chance to get a rare upgrade, can be tweaked
                     upgradeRarities[i] = 1; //give rare upgrade
                     upgradeRarityBG[i].sprite = upgradeRarityImage[1];  //Update the background for the appropriate rarity
+                    Debug.Log("Upgrade" + i + " - Normal upgrade: Rare");
                 } else {
                     upgradeRarities[i] = 0; //give common upgrade
                     upgradeRarityBG[i].sprite = upgradeRarityImage[0];
+                    Debug.Log("Upgrade" + i + " - Normal upgrade: Common");
                 }
             }
 
@@ -130,54 +150,74 @@ public class UpgradeManager : MonoBehaviour
                 upgradeType = "legendary";
                 upgradeRarities[i] = 2;
                 upgradeRarityBG[i].sprite = upgradeRarityImage[2];
+                Debug.Log("Upgrade" + i + " - Legendary Upgrade: Legendary");
             }
         }
 
         for (int i = 0; i < 3; i++) {           //checks to see if the specific upgrade is empty. if so, reroll until you get one that isn't
             int roll = Random.Range(0, 15);
+            Debug.Log("Upgrade "+ i + ": Initial roll: " + roll);
             switch (upgradeRarities[i]) {
                 case 0:     //common
-                     do {
+                    Debug.Log("-COMMON-");
+                    do {
                         if (i == 1 && upgradeRarities[0] == 0) {                                //reroll if you get dupes
+                            Debug.Log("Upgrade 1 matches Upgrade 0. Upgrade 0: " + upgradeSelection[0]);
                             while (roll == upgradeSelection[0]) {
                                 roll = Random.Range(0, 15);
+                                Debug.Log("Rerolled. New roll: " + roll);
                             }
+                            Debug.Log("New number found.");
                         }
 
                         if (i == 2 && (upgradeRarities[0] == 0 || upgradeRarities[1] == 0)) {   //reroll if you get dupes
                             while ((upgradeRarities[0] == 0 && roll == upgradeSelection[0]) || (upgradeRarities[1] == 0 && roll == upgradeSelection[1])) {
                                 roll = Random.Range(0, 15);
+                                Debug.Log("Upgrade 2 matches Upgrade 0 or 1.");
+                                Debug.Log("Upgrade 0 Rarity:" + upgradeRarities[0] + "Upgrade 0: " + upgradeSelection[0]);
+                                Debug.Log("Upgrade 1 Rarity:" + upgradeRarities[1] + "Upgrade 1: " + upgradeSelection[1]);
                             }
                         }
                     } while (commonUpgradePool[roll] == 0);
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = commonIconPool[roll];
                     upgradeText[i].SetText(commonUpgradeText[roll]);
+                    Debug.Log("Common upgrade found. Common upgrade assigned to card " + i + ": " + roll);
                     break;
 
                 case 1:     //rare
+                    Debug.Log("-RARE-");
                     do {
                         if (i == 1 && upgradeRarities[0] == 1) {                                //reroll if you get dupes
+                            Debug.Log("Upgrade 1 matches Upgrade 0. Upgrade 0: " + upgradeSelection[0]);
                             while (roll == upgradeSelection[0]) {
                                 roll = Random.Range(0, 15);
+                                Debug.Log("Rerolled. New roll: " + roll);
                             }
+                            Debug.Log("New number found.");
                         }
 
                         if (i == 2 && (upgradeRarities[0] == 1 || upgradeRarities[1] == 1)) {   //reroll if you get dupes
                             while ((upgradeRarities[0] == 1 && roll == upgradeSelection[0]) || (upgradeRarities[1] == 1 && roll == upgradeSelection[1])) {
                                 roll = Random.Range(0, 15);
+                                Debug.Log("Upgrade 2 matches Upgrade 0 or 1.");
+                                Debug.Log("Upgrade 0 Rarity:" + upgradeRarities[0] + "Upgrade 0: " + upgradeSelection[0]);
+                                Debug.Log("Upgrade 1 Rarity:" + upgradeRarities[1] + "Upgrade 1: " + upgradeSelection[1]);
                             }
                         }
                     } while (rareUpgradePool[roll] == 0);
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = rareIconPool[roll];
                     upgradeText[i].SetText(rareUpgradeText[roll]);
+                    Debug.Log("Rare upgrade found. Rare upgrade assigned to card " + i + ": " + roll);
                     break;
 
                 case 2:     //legendary
+                    Debug.Log("-LEGENDARY-");
                     do {
                         if (i == 1) { 
                             while (roll == upgradeSelection[0]) {                                   //reroll if you get dupes
+                                Debug.Log("Upgrade 1 matches Upgrade 0. Upgrade 0: " + upgradeSelection[0]);
                                 roll = Random.Range(0, 15);
                             }
                         }
@@ -185,12 +225,16 @@ public class UpgradeManager : MonoBehaviour
                         if (i == 2) {
                             while (roll == upgradeSelection[0] || roll == upgradeSelection[1]) {    //reroll if you get dupes
                                 roll = Random.Range(0, 15);
+                                Debug.Log("Upgrade 2 matches Upgrade 0 or 1.");
+                                Debug.Log("Upgrade 0 Rarity:" + upgradeRarities[0] + "Upgrade 0: " + upgradeSelection[0]);
+                                Debug.Log("Upgrade 1 Rarity:" + upgradeRarities[1] + "Upgrade 1: " + upgradeSelection[1]);
                             }
                         }
                     } while (legendaryUpgradePool[roll] == 0);
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = legendaryIconPool[roll];
                     upgradeText[i].SetText(legendaryUpgradeText[roll]);
+                    Debug.Log("Legendary upgrade found. Legendary upgrade assigned to card " + i + ": " + roll);
                     break;
             }
         }
@@ -200,6 +244,7 @@ public class UpgradeManager : MonoBehaviour
         upgradeText[0].gameObject.SetActive(true);
         upgradeText[1].gameObject.SetActive(true);
         upgradeText[2].gameObject.SetActive(true);
+        Debug.Log("Setup complete.");
     }
 
     public void ClickedUpgrade(int position) {      
@@ -304,15 +349,10 @@ public class UpgradeManager : MonoBehaviour
     }
 
     private void RerollButton() {       //reroll button, cost increases every time it's pressed!
-        character.money -= rerollCost;
+        character.money -= REROLL_COST;
         characterMoney.text = character.money.ToString();
-        rerollCost *= 2;
-        rerollButtonText.text = "Re-roll | " + rerollCost + "g";
-        if (character.money >= rerollCost) {
-            rerollButton.interactable = true;
-        } else {
-            rerollButton.interactable = false;
-        }
+        rerollButton.interactable = false;
+        rerollButtonText.text = "Reroll purchased";
         Setup(upgradeType);
     }
 
