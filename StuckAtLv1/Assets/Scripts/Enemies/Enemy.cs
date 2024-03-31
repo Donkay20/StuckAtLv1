@@ -172,7 +172,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 CombatManager c = FindAnyObjectByType<CombatManager>();
                 if (c.GetObjective() == "miniboss" && (gameObject.CompareTag("Knight") || gameObject.CompareTag("DeerNymph"))) {
                     c.EnemyKilled();
-                } else if (c.GetObjective() == "boss" && (this.gameObject.CompareTag("Lich") || gameObject.CompareTag("VenusFlyTrap")) ) {
+                } else if (c.GetObjective() == "boss" && (gameObject.CompareTag("Lich") || gameObject.CompareTag("VenusFlyTrap")) ) {
                     c.EnemyKilled();
                 } else if (c.GetObjective() == "combat") {
                     c.EnemyKilled();
