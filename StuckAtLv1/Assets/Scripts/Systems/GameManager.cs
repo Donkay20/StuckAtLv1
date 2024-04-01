@@ -104,6 +104,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 3:
+                            //todo
                             break;
                     }
                     mapUI.SetActive(true);
@@ -227,17 +228,17 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     combat.GetComponent<CombatManager>().Setup("boss");
 
                     switch (mapManager.GetWorld()) {
+                        //unload dialogue scene
                         case 1:
                             SceneManager.UnloadSceneAsync("RuinsBossIntro");
                             break;
                         case 2:
                             SceneManager.UnloadSceneAsync("ForestBossIntro"); 
                             break;
-                        case 3:
-                            //todo
+                        case 3: //temp for tiffany fight, adjust later
+                            SceneManager.UnloadSceneAsync("TiffBossIntro");
                             break;
                     }
-                    //unload dialogue scene
                 }   
                 previousState = GameState.Boss;
                 Debug.Log("boss state");
@@ -293,6 +294,9 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 3:
+                            if (mapManager.GetLevel() == 0) {
+                                SceneManager.LoadScene("TiffBossEnd");
+                            }
                             //todo
                             break;
                     }
@@ -422,23 +426,26 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     }
 
     private void UpdateSlotProtocol() {
-        maxSlots++;
+        if (mapManager.GetWorld() < 2) {    //change to 5 later
+            maxSlots++;
 
-        upgradeUI.SetActive(true); 
-        upgradeUI.GetComponent<UpgradeManager>().IncreaseMaxSlots(); 
-        upgradeUI.SetActive(false);
+            upgradeUI.SetActive(true); 
+            upgradeUI.GetComponent<UpgradeManager>().IncreaseMaxSlots(); 
+            upgradeUI.SetActive(false);
 
-        combat.SetActive(true); combatUI.SetActive(true); 
-        slotManager.IncreaseMaxSlots(); 
-        combat.SetActive(false); combatUI.SetActive(false);
+            combat.SetActive(true); combatUI.SetActive(true); 
+            slotManager.IncreaseMaxSlots(); 
+            combat.SetActive(false); combatUI.SetActive(false);
+
+            pauseMenu.IncreaseMaxSlots();
+        }
 
         mapUI.SetActive(true);
         mapManager.NewWorld();
         mapManager.SetLinesOff();
         mapUI.SetActive(false);
-
-        pauseMenu.IncreaseMaxSlots();
         
+        /*
         switch (mapManager.GetWorld()) {
             case 2:
                 enemyPool.WorldOneClear();
@@ -450,6 +457,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                 enemyPool.WorldThreeClear();
                 break;
         }
+        */
 
         //virtualCamera.SetForest();
     }

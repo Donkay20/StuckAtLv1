@@ -161,8 +161,17 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "ForestEnd":
                     //SceneManager.LoadScene("SewerIntro", LoadSceneMode.Additive);
-                    //todo add tiffany shit here
+                    SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive); //ttiffany shit, temporary
                     SceneManager.UnloadSceneAsync("ForestEnd");
+                    break;
+                case "TiffBossIntro":
+                    gameManager.ReceiveCommand("boss");
+                    break;
+                case "TiffBossEnd":
+                    SceneManager.LoadScene("FinalScene");
+                    break;
+                case "FinalScene":
+                    SceneManager.LoadScene("TitleScreen");
                     break;
             }
         }
@@ -308,8 +317,17 @@ public class DialogueManager : MonoBehaviour
                 break;
             case "ForestEnd":
                 //SceneManager.LoadScene("SewerIntro", LoadSceneMode.Additive);
-                //todo add tiffany shit here
+                SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive); //ttiffany shit, temporary
                 SceneManager.UnloadSceneAsync("ForestEnd");
+                break;
+            case "TiffBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
+            case "TiffBossEnd":
+                SceneManager.LoadScene("FinalScene");
+                break;
+            case "FinalScene":
+                SceneManager.LoadScene("TitleScreen");
                 break;
         }
     }

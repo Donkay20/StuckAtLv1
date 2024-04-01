@@ -53,4 +53,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dialogue/Forest/ForestBossEnd.unity
     guid: 1c3e1284c45eb3f4bbbf646d9b3e5fec
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Forest/ForestEnd.unity
+    guid: e232066774501a049bc60d0b7a32f5c1
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Tiffany/TiffBossIntro.unity
+    guid: a3a75c9a2ad48474db01da81abd2b182
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Tiffany/TiffBossEnd.unity
+    guid: e629aef9b59e8d54295b8512fed39124
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/FinalScene.unity
+    guid: bfb738dd4dc7cce4daf7d140f2c14d29
   m_configObjects: {}

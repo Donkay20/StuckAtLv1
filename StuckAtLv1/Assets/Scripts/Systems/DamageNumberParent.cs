@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageNumberParent : MonoBehaviour
 {
-    private float lifetime = 2f;
+    private float lifetime = 1f;
     private void Update() {
         lifetime -= Time.deltaTime;
         

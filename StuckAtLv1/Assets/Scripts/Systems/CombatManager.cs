@@ -29,6 +29,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject[] forestSpawn = new GameObject[5];
     [SerializeField] private GameObject[] sewerRooms = new GameObject[5];
     [SerializeField] private GameObject[] sewerSpawn = new GameObject[5];
+    [SerializeField] private GameObject tiffanyRoom;
+    [SerializeField] private GameObject tiffanySpawn;
     //todo, abyss
     private int enemiesToKill, timeLeft, condition, roomChosen;
     private bool bossIsAlive;
@@ -108,6 +110,9 @@ public class CombatManager : MonoBehaviour
                 character.gameObject.transform.position = forestSpawn[roomChosen].transform.position;
                 break;
             case 3:
+                tiffanyRoom.SetActive(true);
+                room = tiffanyRoom;
+                character.gameObject.transform.position = tiffanySpawn.transform.position;
                 break;
             case 4:
                 break;
@@ -199,6 +204,12 @@ public class CombatManager : MonoBehaviour
                 bossIsAlive = true;
                 spawner.SetSpawnTimer(2f);
                 uIObjective.text = "Defeat boss!!";
+
+                if (mapProgress.GetWorld() == 3) {
+                    spawner.SetSpawnTimer(1f);
+                    uIObjective.text = "Kill Tiffany!!";
+                }
+                
                 uIObjectiveNumber.text = "∞";
                 StartCoroutine(BossTracker());
                 break;
