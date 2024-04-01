@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3457215681502180421}
   - component: {fileID: 4119758123668796307}
   - component: {fileID: 6184578603983642068}
+  - component: {fileID: 5737688884889651853}
   m_Layer: 0
   m_Name: Rotten Apple (4)
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: bbb3627368bce6b4d855ffb51e65a86a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa19f185ddd1e1644b77e64c9a752c7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134,6 +135,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDrop: {fileID: 8193109245715682836, guid: 248d4481effbdc14eabf82f56ff90c8d, type: 3}
+--- !u!95 &5737688884889651853
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776136676319898686}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 310d0f5493537f24b9c9d8221b5f5418, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2055389677598419950
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +168,7 @@ GameObject:
   - component: {fileID: 2886097004182186587}
   - component: {fileID: 6430303744371340705}
   - component: {fileID: 2693573925700177147}
+  - component: {fileID: 1735905249877749817}
   m_Layer: 0
   m_Name: Rotten Apple
   m_TagString: Untagged
@@ -209,7 +232,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: bbb3627368bce6b4d855ffb51e65a86a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa19f185ddd1e1644b77e64c9a752c7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -268,6 +291,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDrop: {fileID: 8193109245715682836, guid: 248d4481effbdc14eabf82f56ff90c8d, type: 3}
+--- !u!95 &1735905249877749817
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055389677598419950}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 310d0f5493537f24b9c9d8221b5f5418, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5776904502937755020
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +324,7 @@ GameObject:
   - component: {fileID: 3593642928650898814}
   - component: {fileID: 7929602104538240155}
   - component: {fileID: 3745154001359139711}
+  - component: {fileID: 5566325558732111791}
   m_Layer: 0
   m_Name: Rotten Apple (3)
   m_TagString: Untagged
@@ -343,7 +388,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: bbb3627368bce6b4d855ffb51e65a86a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa19f185ddd1e1644b77e64c9a752c7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -402,6 +447,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDrop: {fileID: 8193109245715682836, guid: 248d4481effbdc14eabf82f56ff90c8d, type: 3}
+--- !u!95 &5566325558732111791
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5776904502937755020}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 310d0f5493537f24b9c9d8221b5f5418, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6864244280461387905
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +557,7 @@ GameObject:
   - component: {fileID: 5385764362305102963}
   - component: {fileID: 4285245927625371543}
   - component: {fileID: 4865051839330596515}
+  - component: {fileID: 2278283584533967045}
   m_Layer: 0
   m_Name: Rotten Apple (2)
   m_TagString: Untagged
@@ -554,7 +621,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: bbb3627368bce6b4d855ffb51e65a86a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa19f185ddd1e1644b77e64c9a752c7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -613,6 +680,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDrop: {fileID: 8193109245715682836, guid: 248d4481effbdc14eabf82f56ff90c8d, type: 3}
+--- !u!95 &2278283584533967045
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7033154284268401058}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 310d0f5493537f24b9c9d8221b5f5418, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7505368179789262593
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +713,7 @@ GameObject:
   - component: {fileID: 2036037980133860015}
   - component: {fileID: 1457265611669993256}
   - component: {fileID: 3613881055473623995}
+  - component: {fileID: 1772053817422081166}
   m_Layer: 0
   m_Name: Rotten Apple (1)
   m_TagString: Untagged
@@ -688,7 +777,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: bbb3627368bce6b4d855ffb51e65a86a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa19f185ddd1e1644b77e64c9a752c7f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -747,3 +836,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDrop: {fileID: 8193109245715682836, guid: 248d4481effbdc14eabf82f56ff90c8d, type: 3}
+--- !u!95 &1772053817422081166
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7505368179789262593}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 310d0f5493537f24b9c9d8221b5f5418, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
