@@ -9,15 +9,15 @@ public class AnemiaSpread : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null) {
+        if (col.TryGetComponent<Enemy>(out var enemy)) {
             int anemiaDamage;
             if ((int) (enemy.maxHP * 0.05f) < 1) {
                 anemiaDamage = 1;
-            } else if ((int) (enemy.maxHP * 0.05f) > 100) {
-                anemiaDamage = 100;
             } else {
                 anemiaDamage = (int) (enemy.maxHP * 0.05f);
+            } 
+            if (anemiaDamage > 50) {
+                anemiaDamage = 50;
             }
             enemy.ApplyAnemia(anemiaDamage, 3f);
         }

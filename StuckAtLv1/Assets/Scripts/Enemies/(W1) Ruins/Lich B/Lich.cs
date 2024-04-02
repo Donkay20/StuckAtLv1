@@ -86,7 +86,7 @@ public class Lich : MonoBehaviour
 
     public void ReactivateEffigies() {
         foreach (Enemy deadEffigy in effigies) {
-            deadEffigy.SetHealth(50);
+            deadEffigy.SetHealth(25);
             deadEffigy.gameObject.SetActive(true);
         }
         enemyScript.BossAnemiaCleanse();

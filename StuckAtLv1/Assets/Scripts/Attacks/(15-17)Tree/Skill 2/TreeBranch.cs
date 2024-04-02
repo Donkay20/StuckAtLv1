@@ -51,19 +51,10 @@ public class TreeBranch : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null) {
+        if (col.TryGetComponent<Enemy>(out var enemy)) {
             if (!bonusBranchSpawned) {
-                Vector3 offsetL = new Vector3(-1,0,0);
-                Quaternion rotation = Quaternion.Euler(0f, 0f, 45f + transform.localRotation.z);
-                GameObject b = Instantiate(bonusBranchL, bonusBranchSpawnPosition.transform.position + offsetL, rotation);
-                b.GetComponent<TreeBranch>().ActivateBranch(slot);
-
-                Vector3 offsetR = new Vector3(1,0,0);
-                Quaternion rotation2 = Quaternion.Euler(0f, 0f, -45f + transform.localRotation.z);
-                GameObject b2 = Instantiate(bonusBranchR, bonusBranchSpawnPosition.transform.position + offsetR, rotation2);
+                GameObject b2 = Instantiate(bonusBranchR, bonusBranchSpawnPosition.transform.position, Quaternion.identity);
                 b2.GetComponent<TreeBranch>().ActivateBranch(slot);
-
                 bonusBranchSpawned = true;
             }
             FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);

@@ -54,7 +54,7 @@ public class Phase3Enemy : MonoBehaviour
     }
 
     private void Attack() {
-        enemyScript.BossAnemiaCleanse();
+        //enemyScript.BossAnemiaCleanse();
         switch (Random.Range(0,3)) {
             case 0:
                 Instantiate(crissCross, crissCrossSpawnPoint.transform.position, Quaternion.identity);
