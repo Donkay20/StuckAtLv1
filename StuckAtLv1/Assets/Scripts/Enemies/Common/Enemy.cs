@@ -176,7 +176,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 break;
         }
 
-        //anim.SetTrigger("Hit");
+        anim.SetTrigger("Hit");
 
         if (damageTextPrefab) {
             var dmg = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
