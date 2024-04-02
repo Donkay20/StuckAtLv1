@@ -86,9 +86,9 @@ public class VenusFlyTrap : MonoBehaviour
         }
 
         if (rage >= MAX_RAGE) {
-            attackTimerResetValue = 1;
+            attackTimerResetValue = 2;
         } else {
-            attackTimerResetValue = 5;
+            attackTimerResetValue = 8;
         }
     }
 

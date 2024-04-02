@@ -93,7 +93,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     private void ResetSpecialTimer() {
-        specialTimer = Random.Range(10, 21);
+        specialTimer = Random.Range(20, 31);
         switch (mapManager.GetWorld()) {
             case 2:
                 specialTimer -= 1;

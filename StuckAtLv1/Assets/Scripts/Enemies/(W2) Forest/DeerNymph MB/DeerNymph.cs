@@ -129,7 +129,6 @@ public class DeerNymph : MonoBehaviour
         yield return new WaitForSeconds(2); //if hasn't hit anything in 2 seconds, just reset
         rb.velocity = new Vector2(0, 0);
         enemyScript.SetSpeed(BASE_SPEED);
-        anger /= 2;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

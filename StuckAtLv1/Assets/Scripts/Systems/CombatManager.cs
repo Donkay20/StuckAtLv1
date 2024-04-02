@@ -129,7 +129,7 @@ public class CombatManager : MonoBehaviour
                     objective = "combat";
                     combatSkull.SetActive(true);
                     enemiesToKill = 20;
-                    spawner.SetSpawnTimer(0.3f);
+                    spawner.SetSpawnTimer(0.4f);
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;
@@ -138,7 +138,7 @@ public class CombatManager : MonoBehaviour
                     objective = "combat";
                     combatSkull.SetActive(true);
                     enemiesToKill = 15;
-                    spawner.SetSpawnTimer(0.3f);
+                    spawner.SetSpawnTimer(0.4f);
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;
@@ -147,7 +147,7 @@ public class CombatManager : MonoBehaviour
                     objective = "combat";
                     combatSkull.SetActive(true);
                     enemiesToKill = 30;
-                    spawner.SetSpawnTimer(0.3f);
+                    spawner.SetSpawnTimer(0.4f);
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;
@@ -156,7 +156,7 @@ public class CombatManager : MonoBehaviour
                     objective = "combat";
                     combatSkull.SetActive(true);
                     enemiesToKill = 30;
-                    spawner.SetSpawnTimer(0.3f);
+                    spawner.SetSpawnTimer(0.4f);
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;
@@ -165,7 +165,7 @@ public class CombatManager : MonoBehaviour
                     objective = "combat";
                     combatSkull.SetActive(true);
                     enemiesToKill = 50;
-                    spawner.SetSpawnTimer(0.3f);
+                    spawner.SetSpawnTimer(0.4f);
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;
@@ -193,7 +193,7 @@ public class CombatManager : MonoBehaviour
             case "miniboss":
                 objective = "miniboss";
                 bossIsAlive = true;
-                spawner.SetSpawnTimer(2f);
+                spawner.SetSpawnTimer(3f);
                 uIObjective.text = "Defeat miniboss!!";
                 uIObjectiveNumber.text = "∞";
                 StartCoroutine(BossTracker());
