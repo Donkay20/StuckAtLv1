@@ -59,6 +59,10 @@ public class CombatManager : MonoBehaviour
     }
 
     public void Setup(string format) {
+        Enemy[] remainingEnemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+        foreach (Enemy straggler in remainingEnemies) {
+            straggler.SelfDestruct();
+        }
         /*
         Set-up includes:
         - choosing the map and placing a character in it

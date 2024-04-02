@@ -19,7 +19,7 @@ public class AnemiaSpread : MonoBehaviour
             } else {
                 anemiaDamage = (int) (enemy.maxHP * 0.05f);
             }
-            enemy.ApplyAnemia(anemiaDamage, 5f);
+            enemy.ApplyAnemia(anemiaDamage, 3f);
         }
     }
 }

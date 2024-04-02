@@ -153,6 +153,10 @@ public class EventManager : MonoBehaviour
     }
 
     private void EnableButtons() { //enables the buttons for each dialogue option, then sets them to the text that they need to be
+        button1.interactable = true;
+        button2.interactable = true;
+        button3.interactable = true;
+        
         if (numberOfButtons >= 1) {
             button1.gameObject.SetActive(true);
             button1Text.text = options[0];
