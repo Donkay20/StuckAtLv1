@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +8,6 @@ public class Phase2Enemy : MonoBehaviour
     [Header("Back-end")]
     [SerializeField] private Enemy enemyScript;
     [SerializeField] private GameObject target;
-    [SerializeField] private FinalBossManager finalBossManager;
     [SerializeField] private GameObject bossHPBar, summonBar;
     [SerializeField] private TextMeshProUGUI bossTitle, extraTitle;
     [SerializeField] private Image hpBarFill, summonBarFill;
@@ -23,28 +21,30 @@ public class Phase2Enemy : MonoBehaviour
     private int maxHP;
     private int summonTimer;
     private float attackTimer;
-    private readonly int SUMMON_MAX = 20;
-    private readonly int ATTACK_RESET_TIME = 10;
+    private readonly int SUMMON_MAX = 15;
+    private readonly int ACTIVE_ATTACK_RESET_TIME = 7;
+    private readonly int INACTIVE_ATTACK_RESET_TIME = 10;
     private bool active;
     void Awake() {
         enemyScript.SetTarget(target);
         maxHP = enemyScript.maxHP;
-        attackTimer = ATTACK_RESET_TIME;
+        attackTimer = ACTIVE_ATTACK_RESET_TIME;
     }
 
     void Update() {
+        attackTimer -= Time.deltaTime;
+        if (attackTimer <= 0) {
+            Attack();
+        }
+
         if (active) {
             hpBarFill.fillAmount = (float) enemyScript.GetHealth() / maxHP;
             summonBarFill.fillAmount = (float) summonTimer/SUMMON_MAX;
-
-            attackTimer -= Time.deltaTime;
-            if (attackTimer <= 0) {
-                Attack();
-            }
         }
 
         if (enemyScript.GetHealth() <= maxHP/2) {
-            if (laserSwivel != null && !laserSwivel.activeInHierarchy) { 
+            if (laserSwivel != null && !laserSwivel.activeInHierarchy) {
+                enemyScript.BossAnemiaCleanse(); 
                 laserSwivel.SetActive(true);
             }
         }
@@ -59,7 +59,12 @@ public class Phase2Enemy : MonoBehaviour
                 Instantiate(jailAttack, target.transform.position, Quaternion.identity);
                 break;
         }
-        attackTimer = ATTACK_RESET_TIME;
+
+        if (active) {
+            attackTimer = ACTIVE_ATTACK_RESET_TIME;
+        } else {
+            attackTimer = INACTIVE_ATTACK_RESET_TIME;
+        }
     }
 
     private IEnumerator IncrementSummon() {
@@ -87,7 +92,7 @@ public class Phase2Enemy : MonoBehaviour
         Destroy(forceField);
 
         bossHPBar.SetActive(true);
-        bossTitle.text = "Tiffany, Queen of Vespera";
+        bossTitle.text = "Tiffany, Queen of Vespera.";
         hpBarFill.fillAmount = 1;
 
         summonBar.SetActive(true);

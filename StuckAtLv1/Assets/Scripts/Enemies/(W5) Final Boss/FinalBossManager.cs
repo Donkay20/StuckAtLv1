@@ -33,12 +33,11 @@ public class FinalBossManager : MonoBehaviour
         switch (phase) {
             case 2:
                 Debug.Log("Phase 2 Activated.");
-                enemyManager.SetSpawnTimer(60f);
+                enemyManager.SetSpawnTimer(5f);
                 p2Script.Activate();
                 break;
             case 3:
-                enemyManager.enabled = true;
-                enemyManager.SetSpawnTimer(2f);
+                enemyManager.SetSpawnTimer(3f);
                 phase3Enemy.SetActive(true);
                 break;
         }

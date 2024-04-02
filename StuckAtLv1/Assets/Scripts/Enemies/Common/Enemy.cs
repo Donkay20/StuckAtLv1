@@ -258,6 +258,9 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 FindAnyObjectByType<FinalBossManager>().BossDied(2);
                 Destroy(gameObject);
                 break;
+            case "FinalBossPhase3":
+                Destroy(gameObject);
+                break;
             default:
                 if (finalBoss && FindAnyObjectByType<FinalBossManager>().GetPhase() == 1) {
                     FindAnyObjectByType<FinalBossManager>().Phase1EnemyDied();

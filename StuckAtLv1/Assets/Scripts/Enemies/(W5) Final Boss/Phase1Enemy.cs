@@ -18,7 +18,7 @@ public class Phase1Enemy : MonoBehaviour
 
     private void OnEnable() {
         bossHPBar.SetActive(true);
-        bossTitle.text = "Tiffany's Royal Guard";
+        bossTitle.text = "Tiffany's Royal Guard.";
         hpBarFill.fillAmount = 1;
     }
 

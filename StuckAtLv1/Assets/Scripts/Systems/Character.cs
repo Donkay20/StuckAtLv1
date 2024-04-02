@@ -29,6 +29,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI afterimageText;
     [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private GameObject particlePrefab;
 
     void OnEnable() {
         afterimageText.text = afterimage.ToString();
@@ -82,7 +83,8 @@ Handles main character's active stats in combat, their buffs, and their damage h
         }
         
         if (currentHp <= 0) {
-            //die
+            //Instantiate(particlePrefab, transform.position, Quaternion.identity);
+            //Destroy(gameObject);
             SceneManager.LoadScene("TitleScreen");
         }
         hpBar.SetState(currentHp, MAX_HP);

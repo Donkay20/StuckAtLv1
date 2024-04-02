@@ -49,12 +49,20 @@ public class EnemyPool : MonoBehaviour
     }
 
     void OnTakeFromPool(GameObject enemy) {
-        enemy.SetActive(true);
+        if (enemy != null) {
+            enemy.SetActive(true);
+        } else {
+            Debug.Log("Enemy Pool: Enemy was null");
+        }
     }
 
     void OnReturnToPool(GameObject enemy) {
-        enemy.GetComponent<Enemy>().Cleanse();
-        enemy.SetActive(false);
+        if (enemy != null) {
+            enemy.GetComponent<Enemy>().Cleanse();
+            enemy.SetActive(false);
+        } else {
+            Debug.Log("Enemy Pool: Enemy was null");
+        }
     }
 
     public GameObject GetEnemy(int ID) {
