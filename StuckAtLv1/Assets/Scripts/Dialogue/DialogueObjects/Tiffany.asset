@@ -19,4 +19,4 @@ MonoBehaviour:
   sadSprite: {fileID: 21300000, guid: f455f0ecb5d5d0547ae473cfdc461eda, type: 3}
   thinkingSprite: {fileID: 21300000, guid: 694c7411f7cbca047a4b5bba087bc834, type: 3}
   madSprite: {fileID: 21300000, guid: ba55e995a2ffae84fa231eba6a5b32c1, type: 3}
-  shockedSprite: {fileID: 0}
+  shockedSprite: {fileID: 21300000, guid: d53ce6a0751ef7a44bd5f08efc788c08, type: 3}
