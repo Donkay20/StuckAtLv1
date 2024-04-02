@@ -71,9 +71,9 @@ public class UpgradeManager : MonoBehaviour
         maxSlots = 2;
         InitializeButtons();
         for (int i = 0; i < 15; i++) {
-            commonUpgradePool[i] = 5;
-            rareUpgradePool[i] = 3;
-            legendaryUpgradePool[i] = 1;
+            commonUpgradePool[i] = 7;
+            rareUpgradePool[i] = 5;
+            legendaryUpgradePool[i] = 3;
         }
         upgradePositionSelected = -1;
         slotSelected = -1;
@@ -160,7 +160,9 @@ public class UpgradeManager : MonoBehaviour
             switch (upgradeRarities[i]) {
                 case 0:     //common
                     Debug.Log("-COMMON-");
-                    do {
+                    while (commonUpgradePool[roll] == 0) {
+                        roll = Random.Range(0, 15);
+                        /*
                         if (i == 1 && upgradeRarities[0] == 0) {                                //reroll if you get dupes
                             Debug.Log("Upgrade 1 matches Upgrade 0. Upgrade 0: " + upgradeSelection[0]);
                             while (roll == upgradeSelection[0]) {
@@ -178,7 +180,8 @@ public class UpgradeManager : MonoBehaviour
                                 Debug.Log("Upgrade 1 Rarity:" + upgradeRarities[1] + "Upgrade 1: " + upgradeSelection[1]);
                             }
                         }
-                    } while (commonUpgradePool[roll] == 0);
+                        */
+                    } 
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = commonIconPool[roll];
                     upgradeText[i].SetText(commonUpgradeText[roll]);
@@ -187,7 +190,9 @@ public class UpgradeManager : MonoBehaviour
 
                 case 1:     //rare
                     Debug.Log("-RARE-");
-                    do {
+                    while (rareUpgradePool[roll] == 0) {
+                        roll = Random.Range(0, 15);
+                        /*
                         if (i == 1 && upgradeRarities[0] == 1) {                                //reroll if you get dupes
                             Debug.Log("Upgrade 1 matches Upgrade 0. Upgrade 0: " + upgradeSelection[0]);
                             while (roll == upgradeSelection[0]) {
@@ -205,7 +210,8 @@ public class UpgradeManager : MonoBehaviour
                                 Debug.Log("Upgrade 1 Rarity:" + upgradeRarities[1] + "Upgrade 1: " + upgradeSelection[1]);
                             }
                         }
-                    } while (rareUpgradePool[roll] == 0);
+                        */
+                    }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = rareIconPool[roll];
                     upgradeText[i].SetText(rareUpgradeText[roll]);
@@ -214,7 +220,9 @@ public class UpgradeManager : MonoBehaviour
 
                 case 2:     //legendary
                     Debug.Log("-LEGENDARY-");
-                    do {
+                    while (legendaryUpgradePool[roll] == 0) {
+                        roll = Random.Range(0, 15);
+                        /*
                         if (i == 1) { 
                             while (roll == upgradeSelection[0]) {                                   //reroll if you get dupes
                                 Debug.Log("Upgrade 1 matches Upgrade 0. Upgrade 0: " + upgradeSelection[0]);
@@ -230,7 +238,8 @@ public class UpgradeManager : MonoBehaviour
                                 Debug.Log("Upgrade 1 Rarity:" + upgradeRarities[1] + "Upgrade 1: " + upgradeSelection[1]);
                             }
                         }
-                    } while (legendaryUpgradePool[roll] == 0);
+                        */
+                    }
                     upgradeSelection[i] = roll;
                     upgradeIcon[i].sprite = legendaryIconPool[roll];
                     upgradeText[i].SetText(legendaryUpgradeText[roll]);

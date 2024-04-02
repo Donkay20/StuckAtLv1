@@ -37,7 +37,7 @@ public class Phase3Enemy : MonoBehaviour
         hpBarFill.fillAmount = 1;
 
         executeBar.SetActive(true);
-        executeTitle.text = "Sanguine Symphony";
+        executeTitle.text = "Sanguine Sonata";
         executeFill.fillAmount = 1;
 
         StartCoroutine(IncrementSanguineScourge());

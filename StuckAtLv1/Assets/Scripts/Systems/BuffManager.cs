@@ -30,16 +30,6 @@ public class BuffManager : MonoBehaviour
         debuffPosition = 0;
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.I)) {
-            AddBuff("power", 0.2f, 3f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.O)) {
-            AddDebuff("slow", 0.2f, 3f);
-        }
-    }
-
     public void AddBuff(string buff, float efficacy, float duration) {
         //Add a buff to the list. Instantiate a new buff object and populate it.
         if (buffPosition < 5) {
