@@ -76,8 +76,8 @@ public class VenusFlyTrap : MonoBehaviour
             float t = Mathf.Clamp01(mapwideSuctionPrepTimer/3f);
             float tr = Mathf.Lerp(0, 87, t);
             float tc = Mathf.Lerp(8, 12, t);
-            warningCircle.transform.localScale = new Vector2(tr, tr);
-            cam.m_Lens.OrthographicSize = tc;
+            warningCircle.transform.localScale = new Vector2(tr, tr);       //Gradually make the warning circle cover the map
+            cam.m_Lens.OrthographicSize = tc;                               //Gradually zoom the Camera out during suction prep
         } else {
             mapwideSuctionPrepTimer = 0;
         }
@@ -100,8 +100,8 @@ public class VenusFlyTrap : MonoBehaviour
         if (resetTimer <= 0.5f) {
             resetTimer += Time.deltaTime;
             float t = Mathf.Clamp01(resetTimer / 0.5f);
-            float tc = Mathf.Lerp(12, 8, t); // Interpolate from 12 to 8
-            cam.m_Lens.OrthographicSize = tc;
+            float tc = Mathf.Lerp(12, 8, t);                
+            cam.m_Lens.OrthographicSize = tc;           //Gradually zoom the Camera back in after suction attacks are done.
         }
     }
 
@@ -146,7 +146,7 @@ public class VenusFlyTrap : MonoBehaviour
 
     private IEnumerator VineAttackH() {
         Instantiate(vineWavesH[0]);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         Instantiate(vineWavesH[1]);
     }
 
@@ -156,7 +156,7 @@ public class VenusFlyTrap : MonoBehaviour
         Instantiate(vineWavesV[2]);
         Instantiate(vineWavesV[3]);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         
         Instantiate(vineWavesV[4]);
         Instantiate(vineWavesV[5]);

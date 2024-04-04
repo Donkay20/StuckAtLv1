@@ -467,7 +467,6 @@ public class MapManager : MonoBehaviour
                 break;
         }
 
-        //foreach (Room r in rooms) {GiveRoom(r);}
         AssignRoomProcess();
 
         startingRoom.AssignRoomType("combat"); startingRoom.GetComponent<Image>().sprite = combatImage;
@@ -479,7 +478,6 @@ public class MapManager : MonoBehaviour
 
         HighlightRoom(startingRoom);
 
-        //Philip: add more code here to reset the highlights and lines.
         SetVirtualCameraColor();
     }
 

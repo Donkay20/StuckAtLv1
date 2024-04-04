@@ -47,13 +47,12 @@ public class CombatManager : MonoBehaviour
         combatUIAnimation.SetTrigger("Intro");
     }
 
-    /*
     private void Update() {
         if (Input.GetKeyDown(KeyCode.L)) {
             Finish(); //debugging
         }
     }
-    */
+    
 
     private void OnEnable() {
         combatAnimation.SetTrigger("Intro");
