@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,12 +26,15 @@ public class VenusFlyTrap : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bossName, enrageName;
     [SerializeField] private float attackTimerResetValue;
     [SerializeField] private float suctionTimerResetValue;
+    [SerializeField] private CinemachineVirtualCamera cam;
+    private float resetTimer;
     private float attackTimer;
     private float suctionTimer;
     private readonly int MAX_RAGE = 360;
     private int bossMaxHP, rage;
     private bool mapwideSuctionPrep, mapwideSuction, hyperSuction; private float mapwideSuctionPrepTimer, hyperSuctionPrepTimer;
     void Start() {
+        resetTimer = 1;
         attackTimer = attackTimerResetValue;
         suctionTimer = suctionTimerResetValue;
         bossMaxHP = enemyScript.maxHP;
@@ -53,7 +57,7 @@ public class VenusFlyTrap : MonoBehaviour
         bossHPBarFill.fillAmount = (float) enemyScript.GetHealth() / bossMaxHP;
         enrageBarFill.fillAmount = (float) rage / MAX_RAGE;
 
-        if (attackTimer > 0) {
+        if (attackTimer > 0 && !mapwideSuctionPrep && !mapwideSuction) {
             attackTimer -= Time.deltaTime;
             if (attackTimer <= 0) {
                 Attack();
@@ -71,7 +75,9 @@ public class VenusFlyTrap : MonoBehaviour
             mapwideSuctionPrepTimer += Time.deltaTime;
             float t = Mathf.Clamp01(mapwideSuctionPrepTimer/3f);
             float tr = Mathf.Lerp(0, 87, t);
+            float tc = Mathf.Lerp(8, 12, t);
             warningCircle.transform.localScale = new Vector2(tr, tr);
+            cam.m_Lens.OrthographicSize = tc;
         } else {
             mapwideSuctionPrepTimer = 0;
         }
@@ -79,7 +85,7 @@ public class VenusFlyTrap : MonoBehaviour
         if (mapwideSuction) {
             hyperSuctionPrepTimer += Time.deltaTime;
             float t = Mathf.Clamp01(hyperSuctionPrepTimer/5f);
-            float tr = Mathf.Lerp(0,20,t);
+            float tr = Mathf.Lerp(0, 20, t);
             hyperWarningCircle.transform.localScale = new Vector2(tr, tr);
         } else {
             hyperSuctionPrepTimer = 0;
@@ -89,6 +95,13 @@ public class VenusFlyTrap : MonoBehaviour
             attackTimerResetValue = 2;
         } else {
             attackTimerResetValue = 8;
+        }
+
+        if (resetTimer <= 0.5f) {
+            resetTimer += Time.deltaTime;
+            float t = Mathf.Clamp01(resetTimer / 0.5f);
+            float tc = Mathf.Lerp(12, 8, t); // Interpolate from 12 to 8
+            cam.m_Lens.OrthographicSize = tc;
         }
     }
 
@@ -122,8 +135,13 @@ public class VenusFlyTrap : MonoBehaviour
         leftHead.BiteAttack(); centerHead.BiteAttack(); rightHead.BiteAttack();
         yield return new WaitForSeconds(1);                 //hyper suction duration
         vineGround.SetActive(false); hyperSuction = false;
+        ResetCameraAfterSuction();
 
         suctionTimer = suctionTimerResetValue;
+    }
+
+    private void ResetCameraAfterSuction() {
+        resetTimer = 0;
     }
 
     private IEnumerator VineAttackH() {
