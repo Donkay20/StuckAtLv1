@@ -287,12 +287,15 @@ public class CombatManager : MonoBehaviour
 
     private void Finish() {
         //Disable the spawner & get rid of all remaining enemies, damage numbers, money, and drops
+        spawner.ClearEnemies();
         spawner.enabled = false;
 
+        /*
         Enemy[] remainingEnemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
         foreach (Enemy straggler in remainingEnemies) {
             straggler.SelfDestruct();
         }
+        */
 
         DamageNumberParent[] remainingDamageNumbers = FindObjectsByType<DamageNumberParent>(FindObjectsSortMode.None);
         foreach (DamageNumberParent d in remainingDamageNumbers) {

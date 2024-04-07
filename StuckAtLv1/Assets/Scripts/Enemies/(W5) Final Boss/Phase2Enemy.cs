@@ -77,6 +77,7 @@ public class Phase2Enemy : MonoBehaviour
                     GameObject newEnemy = EnemyPool.Instance.GetEnemy(Random.Range(0,17)); //change this later for sewer enemies
                     newEnemy.transform.position = summonPositions[i].transform.position;
                     newEnemy.GetComponent<Enemy>().SetTarget(target);
+                    FindAnyObjectByType<EnemyManager>().AddEnemy(newEnemy.GetComponent<Enemy>());
                 }
             }
         }

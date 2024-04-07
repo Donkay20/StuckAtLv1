@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] MapManager mapManager;
     [SerializeField] GameObject[] forestSpecialEnemies;
+    private List<Enemy> activeEnemyList = new List<Enemy>();
     private float timer, specialTimer;
     int condition; bool eventCondition;
 
@@ -76,6 +77,7 @@ public class EnemyManager : MonoBehaviour
         newEnemy.transform.position = GenerateRandomPosition() + player.transform.position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
         newEnemy.transform.parent = transform;
+        AddEnemy(newEnemy.GetComponent<Enemy>());
     }
 
     private void SpawnSpecialEnemy(int world) {
@@ -136,5 +138,22 @@ public class EnemyManager : MonoBehaviour
             eventCondition = true;
             condition = n;
         }
+    }
+
+    public void AddEnemy(Enemy enemy) {
+        activeEnemyList.Add(enemy);
+    }
+
+    public void RemoveEnemy(Enemy enemy) {
+        activeEnemyList.Remove(enemy);
+    }
+
+    public void ClearEnemies() {
+        List<Enemy> enemiesToRemove = new(activeEnemyList); //make a new temporary list since we can't mess up with the original list
+        foreach (Enemy enemy in enemiesToRemove) {
+            enemy.SelfDestruct();
+            activeEnemyList.Remove(enemy);
+        }
+        enemiesToRemove.Clear();
     }
 }
