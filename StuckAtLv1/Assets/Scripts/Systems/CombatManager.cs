@@ -49,7 +49,7 @@ public class CombatManager : MonoBehaviour
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.L)) {
-            Finish(); //debugging
+            StartCoroutine(Finish()); //debugging
         }
     }
     
@@ -259,18 +259,18 @@ public class CombatManager : MonoBehaviour
                 combatUIAnimation.SetTrigger("Objective");
             } 
         }
-        Finish();
+        StartCoroutine(Finish());
     }
 
     private IEnumerator CombatTracker() {
         //handles tracker for combat format
         yield return new WaitUntil(() => enemiesToKill <= 0);
-        Finish();
+        StartCoroutine(Finish());
     }
 
     private IEnumerator BossTracker() {
         yield return new WaitUntil(() => !bossIsAlive);
-        Finish();
+        StartCoroutine(Finish());
     }
 
     public string GetObjective() {
@@ -285,17 +285,10 @@ public class CombatManager : MonoBehaviour
         this.objective = objective;
     }
 
-    private void Finish() {
+    private IEnumerator Finish() {
         //Disable the spawner & get rid of all remaining enemies, damage numbers, money, and drops
         spawner.ClearEnemies();
         spawner.enabled = false;
-
-        /*
-        Enemy[] remainingEnemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
-        foreach (Enemy straggler in remainingEnemies) {
-            straggler.SelfDestruct();
-        }
-        */
 
         DamageNumberParent[] remainingDamageNumbers = FindObjectsByType<DamageNumberParent>(FindObjectsSortMode.None);
         foreach (DamageNumberParent d in remainingDamageNumbers) {
@@ -345,9 +338,13 @@ public class CombatManager : MonoBehaviour
         room.SetActive(false);
 
         //Do the outro animation
-        //combatAnimation.SetTrigger("Outro");
         combatUIAnimation.SetTrigger("Outro");
+
+        //fail-safe if something breaks
+        yield return new WaitForSeconds(4f);
+        notify.ReceiveCommand("upgrade");
     }
+
 
     public void IntroTransitionAnimationComplete() {
         Debug.Log("Intro animation method called");
@@ -356,6 +353,7 @@ public class CombatManager : MonoBehaviour
 
     public void OutroTransitionAnimationComplete() {
         //Notify the game manager.
+        StopAllCoroutines();
         notify.ReceiveCommand("upgrade");
     }
 }

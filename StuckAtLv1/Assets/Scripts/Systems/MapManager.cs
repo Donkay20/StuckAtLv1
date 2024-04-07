@@ -20,9 +20,11 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Sprite forestBackground, sewerBackground, abyssBackground;
     [SerializeField] private GameManager manager;
-    [SerializeField] private int world; 
-    [SerializeField] private int level; 
-    [SerializeField] private int section;
+    [SerializeField] private GameObject levelIndicator;
+    [SerializeField] private GameObject[] levelIndicatorPositon;
+    private int world; 
+    private int level; 
+    private int section;
     private string report;
     Animator mapAnimation;
 
@@ -55,6 +57,7 @@ public class MapManager : MonoBehaviour
 
     private void OnEnable() {
         mapAnimation.SetTrigger("Intro");
+        levelIndicator.transform.position = levelIndicatorPositon[level].transform.position;
     }
 
     public void ClickedNode(int clickedLevel, int clickedSection) {
