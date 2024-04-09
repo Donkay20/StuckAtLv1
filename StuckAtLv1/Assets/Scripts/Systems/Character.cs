@@ -83,11 +83,10 @@ Handles main character's active stats in combat, their buffs, and their damage h
         }
         
         if (currentHp <= 0) {
-            //Instantiate(particlePrefab, transform.position, Quaternion.identity);
-            //Destroy(gameObject);
+            //die
             SceneManager.LoadScene("TitleScreen");
         }
-        hpBar.SetState(currentHp, MAX_HP);
+        hpBar.SetState(currentHp);
     }
 
     IEnumerator InvincibilityFrame() {              //elapse this amt of time before the character can be hit again
@@ -108,7 +107,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
                 healthDraining = false;
             }
 
-            hpBar.SetState(currentHp, MAX_HP);
+            hpBar.SetState(currentHp);
         }
     }
 
@@ -135,7 +134,7 @@ Handles main character's active stats in combat, their buffs, and their damage h
             healthText.color = new Color32(166, 254, 0, 255);
             StartCoroutine(DrainHealth());
         }
-        hpBar.SetState(currentHp, MAX_HP);
+        hpBar.SetState(currentHp);
     }
 
     public void GainAfterimage(float amount, bool exceedCap) {
