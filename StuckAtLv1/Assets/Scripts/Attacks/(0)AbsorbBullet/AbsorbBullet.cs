@@ -19,7 +19,7 @@ public class AbsorbBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePosition - transform.position;
-        rb.velocity = (Vector2)direction.normalized * speed;
+        rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
         damage = BASE_BULLET_DAMAGE + slotManager.GetPermanentAtkDmg() + slotManager.GetTempAtkDmg();
     }
 
@@ -29,7 +29,7 @@ public class AbsorbBullet : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePosition - transform.position;
-        rb.velocity = (Vector2)direction.normalized * speed;
+        rb.velocity = new Vector2(direction.x, direction.y).normalized * speed;
         damage = BASE_BULLET_DAMAGE + slotManager.GetPermanentAtkDmg() + slotManager.GetTempAtkDmg();
     }
 
@@ -53,7 +53,7 @@ public class AbsorbBullet : MonoBehaviour
         if (col.TryGetComponent<Enemy>(out var enemy)) {
             switch (enemy.tag) {    //Each enemy will have a unique tag which will identify which one the bullet is hitting.                              
                 case "Skeleton1":   //Bone Toss
-                    slotManager.AcquireSkill(0);                                      
+                    slotManager.AcquireSkill(1);                                      
                     break;
 
                 case "Skeleton2":   //Bone Spikes
