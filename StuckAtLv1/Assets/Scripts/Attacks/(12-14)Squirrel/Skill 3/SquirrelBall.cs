@@ -30,7 +30,7 @@ public class SquirrelBall : MonoBehaviour
 
         timer = asb.GetDurationBonus(slot, SQUIRRELBALL_BASE_DURATION);
 
-        character.GainAfterimage(1, false);
+        character.GainAfterimage(2, false);
 
         GetComponent<SpriteRenderer>().sprite = properSprite;
     }
@@ -61,7 +61,7 @@ public class SquirrelBall : MonoBehaviour
             Collider2D[] passThroughEnemyColliders = Physics2D.OverlapCircleAll(transform.position, ballCollider.radius, LayerMask.GetMask("PassThroughEnemy"));
             
             foreach (Collider2D c in enemyColliders.Concat(passThroughEnemyColliders)) {
-                character.GainAfterimage(0.1f, false);
+                character.GainAfterimage(0.2f, false);
                 Enemy enemy = c.GetComponent<Enemy>();
                 FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);
             }

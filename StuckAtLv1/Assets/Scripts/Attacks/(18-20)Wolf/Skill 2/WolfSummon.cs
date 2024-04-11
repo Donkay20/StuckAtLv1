@@ -47,7 +47,6 @@ public class WolfSummon : MonoBehaviour
             force = (target.transform.position - transform.position).normalized;
             rb.velocity = force * WOLF_BASE_SPEED;
         }
-        
     }
 
     public Enemy FindNearestEnemy(Vector3 position) {

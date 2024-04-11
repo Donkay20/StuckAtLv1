@@ -48,11 +48,9 @@ public class CombatManager : MonoBehaviour
     }
 
     private void Update() {
-        /*
         if (Input.GetKeyDown(KeyCode.L)) {
             StartCoroutine(Finish()); //debugging
         }
-        */
     }
     
 
