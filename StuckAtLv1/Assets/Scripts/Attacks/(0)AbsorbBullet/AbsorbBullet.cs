@@ -53,7 +53,7 @@ public class AbsorbBullet : MonoBehaviour
         if (col.TryGetComponent<Enemy>(out var enemy)) {
             switch (enemy.tag) {    //Each enemy will have a unique tag which will identify which one the bullet is hitting.                              
                 case "Skeleton1":   //Bone Toss
-                    slotManager.AcquireSkill(1);                                      
+                    slotManager.AcquireSkill(24);                                      
                     break;
 
                 case "Skeleton2":   //Bone Spikes
@@ -146,7 +146,7 @@ public class AbsorbBullet : MonoBehaviour
                     slotManager.AcquireSkill(23);
                     break;
                 
-                case "Slime2":      //
+                case "Slime2":      //Slime Puddle
                     slotManager.AcquireSkill(24);
                     break;
                 
