@@ -74,9 +74,9 @@ public class EnemyManager : MonoBehaviour
             }
         }
         GameObject newEnemy = EnemyPool.Instance.GetEnemy(enemyID); //change this value to test specific enemies or attacks
+        newEnemy.transform.parent = transform;
         newEnemy.transform.position = GenerateRandomPosition() + player.transform.position;
         newEnemy.GetComponent<Enemy>().SetTarget(player);
-        newEnemy.transform.parent = transform;
         AddEnemy(newEnemy.GetComponent<Enemy>());
     }
 
