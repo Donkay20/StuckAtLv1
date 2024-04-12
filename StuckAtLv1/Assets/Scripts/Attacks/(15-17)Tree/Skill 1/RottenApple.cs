@@ -19,8 +19,7 @@ public class RottenApple : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null) {
+        if (col.TryGetComponent<Enemy>(out var enemy)) {
             if (enemy.GetHealth() < damage) {
                 Instantiate(healthDrop, transform.position, Quaternion.identity);
             }

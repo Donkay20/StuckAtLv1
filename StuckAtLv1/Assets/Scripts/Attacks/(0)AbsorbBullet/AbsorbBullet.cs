@@ -141,6 +141,42 @@ public class AbsorbBullet : MonoBehaviour
                 case "VenusFlyTrap"://Fly Bomb
                     slotManager.AcquireSkill(22);
                     break;
+                
+                case "Slime1":      //Artillery
+                    slotManager.AcquireSkill(23);
+                    break;
+                
+                case "Slime2":      //
+                    slotManager.AcquireSkill(24);
+                    break;
+                
+                case "Slime3":      //Sticky Slime
+                    slotManager.AcquireSkill(25);
+                    break;
+
+                case "Ghost1":      //Shadow Ball
+                    slotManager.AcquireSkill(26);
+                    break;
+                
+                case "Ghost2":      //Vortex
+                    slotManager.AcquireSkill(27);
+                    break;
+                
+                case "Ghost3":      //Spirits
+                    slotManager.AcquireSkill(28);
+                    break;
+                
+                case "Imp1":
+                    slotManager.AcquireSkill(29);
+                    break;
+                
+                case "Imp2":
+                    slotManager.AcquireSkill(30);
+                    break;
+                
+                case "Imp3":
+                    slotManager.AcquireSkill(31);
+                    break;
             }
 
             if (slotManager.IsBloodsuckerActive()) {    //legendary 9
