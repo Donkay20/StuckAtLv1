@@ -166,11 +166,11 @@ public class AbsorbBullet : MonoBehaviour
                     slotManager.AcquireSkill(28);
                     break;
                 
-                case "Imp1":
+                case "Imp1":        //Laser
                     slotManager.AcquireSkill(29);
                     break;
                 
-                case "Imp2":
+                case "Imp2":        //Pinball Pyro-bomb
                     slotManager.AcquireSkill(30);
                     break;
                 
