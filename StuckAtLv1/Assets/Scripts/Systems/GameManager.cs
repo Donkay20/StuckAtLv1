@@ -42,10 +42,8 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     private int maxSlots;
     private bool slotEquilibrium;
     private bool easyMode;
-
     //Post-Processing
     //[SerializeField] private VirtualCameraStates virtualCamera;
-
 
     void Start() {      //default to the map when the game launches.
         Application.targetFrameRate = 60;
@@ -104,7 +102,17 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 3:
-                            //todo
+                            if (mapManager.GetLevel() == 0) {   
+                                SceneManager.UnloadSceneAsync("CaveIntro");
+                            }
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.UnloadSceneAsync("CaveMiniBossEnd");
+                            }
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.UnloadSceneAsync("CaveBossEnd");
+                            }
+                            break;
+                        case 4:
                             break;
                     }
                     mapUI.SetActive(true);
@@ -201,7 +209,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
             case GameState.Miniboss: //MINIBOSS STATE
                 if (previousState == GameState.Dialogue) {
-
                     combat.SetActive(true); combatUI.SetActive(true);
                     combat.GetComponent<CombatManager>().Setup("miniboss");
 
@@ -213,6 +220,9 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             SceneManager.UnloadSceneAsync("ForestMiniBossIntro");
                             break;
                         case 3:
+                            SceneManager.UnloadSceneAsync("CaveMiniBossIntro");
+                            break;
+                        case 4:
                             //todo
                             break;
                     }
@@ -235,7 +245,13 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                         case 2:
                             SceneManager.UnloadSceneAsync("ForestBossIntro"); 
                             break;
-                        case 3: //temp for tiffany fight, adjust later
+                        case 3: 
+                            SceneManager.UnloadSceneAsync("CaveBossIntro"); 
+                            break;
+                        case 4:
+                            //todo
+                            break;
+                        case 5:
                             SceneManager.UnloadSceneAsync("TiffBossIntro");
                             break;
                     }
@@ -267,7 +283,12 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 3:
-                            //todo
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.LoadScene("CaveMiniBossIntro", LoadSceneMode.Additive);
+                            }
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.LoadScene("CaveBossIntro", LoadSceneMode.Additive);
+                            }
                             break;
                     }
                 }
@@ -294,10 +315,20 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 3:
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.LoadScene("CaveMiniBossEnd", LoadSceneMode.Additive);
+                            }
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.LoadScene("CaveBossEnd", LoadSceneMode.Additive);
+                                UpdateSlotProtocol(); //+1 max slots, total 5.
+                            }
+                            break;
+                        case 4:
+                            break;
+                        case 5:
                             if (mapManager.GetLevel() == 0) {
                                 SceneManager.LoadScene("TiffBossEnd");
                             }
-                            //todo
                             break;
                     }
                 }
@@ -426,7 +457,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     }
 
     private void UpdateSlotProtocol() {
-        if (mapManager.GetWorld() < 2) {    //change to 5 later
+        if (mapManager.GetWorld() < 5) {
             maxSlots++;
 
             upgradeUI.SetActive(true); 

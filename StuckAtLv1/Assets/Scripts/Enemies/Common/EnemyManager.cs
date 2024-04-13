@@ -66,11 +66,13 @@ public class EnemyManager : MonoBehaviour
                     enemyID = Random.Range(9, 18);
                     break;
                 case 3:
-                    enemyID = Random.Range(0, 18); //todo for world 3 enemies
+                    enemyID = Random.Range(18, 27);
                     break;
                 case 4:
-                    enemyID = Random.Range(0, 26);
+                case 5:
+                    enemyID = Random.Range(0, 27);
                     break;
+                
             }
         }
         GameObject newEnemy = EnemyPool.Instance.GetEnemy(enemyID); //change this value to test specific enemies or attacks
@@ -88,6 +90,7 @@ public class EnemyManager : MonoBehaviour
                 newSpecialEnemy.transform.parent = transform;
                 break;
             case 3:
+                //todo
                 break;
             case 4:
                 break;

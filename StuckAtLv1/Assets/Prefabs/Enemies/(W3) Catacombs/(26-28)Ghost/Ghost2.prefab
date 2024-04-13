@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 7039329450834369382}
   m_Layer: 7
   m_Name: Ghost2
-  m_TagString: Skeleton1
+  m_TagString: Ghost2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

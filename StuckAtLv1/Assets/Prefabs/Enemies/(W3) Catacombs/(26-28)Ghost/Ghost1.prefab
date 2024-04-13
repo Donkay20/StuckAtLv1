@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 7039329450834369382}
   m_Layer: 7
   m_Name: Ghost1
-  m_TagString: Skeleton1
+  m_TagString: Ghost1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,9 +262,9 @@ MonoBehaviour:
   damageTextPrefab: {fileID: 1713743412437274532, guid: 9e69095aeeb4b1e49840c8d74d107da6, type: 3}
   gameManager: {fileID: 0}
   baseSpeed: 1.5
-  hp: 15
-  baseHP: 15
-  maxHP: 15
+  hp: 60
+  baseHP: 60
+  maxHP: 60
   damage: 1
   alteredSpeed: 0
   alteredSpeedTimer: 0

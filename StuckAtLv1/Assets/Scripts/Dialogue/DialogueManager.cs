@@ -160,9 +160,18 @@ public class DialogueManager : MonoBehaviour
                     SceneManager.UnloadSceneAsync("ForestBossEnd");
                     break;
                 case "ForestEnd":
-                    //SceneManager.LoadScene("SewerIntro", LoadSceneMode.Additive);
-                    SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive); //ttiffany shit, temporary
+                    SceneManager.LoadScene("CaveIntro", LoadSceneMode.Additive);
                     SceneManager.UnloadSceneAsync("ForestEnd");
+                    break;
+                case "CaveIntro":
+                    gameManager.ReceiveCommand("map");
+                    break;
+
+                    //put cave shit here
+
+                case "AbyssEnd":
+                    SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive);
+                    SceneManager.UnloadSceneAsync("AbyssEnd");
                     break;
                 case "TiffBossIntro":
                     gameManager.ReceiveCommand("boss");
@@ -316,9 +325,18 @@ public class DialogueManager : MonoBehaviour
                 SceneManager.UnloadSceneAsync("ForestBossEnd");
                 break;
             case "ForestEnd":
-                //SceneManager.LoadScene("SewerIntro", LoadSceneMode.Additive);
-                SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive); //ttiffany shit, temporary
+                SceneManager.LoadScene("CaveIntro", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("ForestEnd");
+                break;
+            case "CaveIntro":
+                gameManager.ReceiveCommand("map");
+                break;
+
+                //put cave shit here
+
+            case "AbyssEnd":
+                SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("AbyssEnd");
                 break;
             case "TiffBossIntro":
                 gameManager.ReceiveCommand("boss");

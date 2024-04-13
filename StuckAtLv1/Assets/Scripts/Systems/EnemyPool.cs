@@ -10,8 +10,9 @@ public class EnemyPool : MonoBehaviour
     private int initialPoolSize = 3;
     private int maxSize = 50;
     private bool collectionChecks = false;
-    private ObjectPool<GameObject> skeleton1, skeleton2, skeleton3, golem1, golem2, golem3, spider1, spider2, spider3; //world 1
-    private ObjectPool<GameObject> squirrel1, squirrel2, squirrel3, tree1, tree2, tree3, wolf1, wolf2, wolf3; //world 2
+    private ObjectPool<GameObject> skeleton1, skeleton2, skeleton3, golem1, golem2, golem3, spider1, spider2, spider3;  //world 1
+    private ObjectPool<GameObject> squirrel1, squirrel2, squirrel3, tree1, tree2, tree3, wolf1, wolf2, wolf3;           //world 2
+    private ObjectPool<GameObject> slime1, slime2, slime3, ghost1, ghost2, ghost3, imp1, imp2, imp3;                    //world 3
 
     private void Awake() {
         Instance = this;
@@ -40,6 +41,17 @@ public class EnemyPool : MonoBehaviour
         wolf1 = new ObjectPool<GameObject>(() => CreateEnemy(15), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
         wolf2 = new ObjectPool<GameObject>(() => CreateEnemy(16), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
         wolf3 = new ObjectPool<GameObject>(() => CreateEnemy(17), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
+
+        //World 3: Catacombs
+        slime1 = new ObjectPool<GameObject>(() => CreateEnemy(18), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
+        slime2 = new ObjectPool<GameObject>(() => CreateEnemy(19), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
+        slime3 = new ObjectPool<GameObject>(() => CreateEnemy(20), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
+        ghost1 = new ObjectPool<GameObject>(() => CreateEnemy(21), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
+        ghost2 = new ObjectPool<GameObject>(() => CreateEnemy(22), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
+        ghost3 = new ObjectPool<GameObject>(() => CreateEnemy(23), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
+        imp1 = new ObjectPool<GameObject>(() => CreateEnemy(24), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
+        imp2 = new ObjectPool<GameObject>(() => CreateEnemy(25), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
+        imp3 = new ObjectPool<GameObject>(() => CreateEnemy(26), OnTakeFromPool, OnReturnToPool, null, collectionChecks, initialPoolSize, maxSize);
     }
 
     GameObject CreateEnemy(int ID) {
@@ -87,7 +99,17 @@ public class EnemyPool : MonoBehaviour
             15 => wolf1.Get(),
             16 => wolf2.Get(),
             17 => wolf3.Get(),
-            //todo: sewer
+            //sewer enemies
+            18 => slime1.Get(),
+            19 => slime2.Get(),
+            20 => slime3.Get(),
+            21 => ghost1.Get(),
+            22 => ghost2.Get(),
+            23 => ghost3.Get(),
+            24 => imp1.Get(),
+            25 => imp2.Get(),
+            26 => imp3.Get(),
+            //default
             _ => null,
         };
     }
@@ -153,11 +175,36 @@ public class EnemyPool : MonoBehaviour
                 break;
                 
             //Sewer Enemies
-            //case "":
-                //x.Release(enemy);
+            case "Slime1":
+                slime1.Release(enemy);
+                break;
+            case "Slime2":
+                slime2.Release(enemy);
+                break;
+            case "Slime3":
+                slime3.Release(enemy);
+                break;
+            case "Ghost1":
+                ghost1.Release(enemy);
+                break;
+            case "Ghost2":
+                ghost2.Release(enemy);
+                break;
+            case "Ghost3":
+                ghost3.Release(enemy);
+                break;
+            case "Imp1":
+                imp1.Release(enemy);
+                break;
+            case "Imp2":
+                imp2.Release(enemy);
+                break;
+            case "Imp3":
+                imp3.Release(enemy);
+                break;
         }
     }
-
+    /*
     public void WorldOneClear() {
         skeleton1.Dispose(); skeleton2.Dispose(); skeleton3.Dispose();
         golem1.Dispose(); golem2.Dispose(); golem3.Dispose();
@@ -171,4 +218,5 @@ public class EnemyPool : MonoBehaviour
     public void WorldThreeClear() {
         //todo
     }
+    */
 }

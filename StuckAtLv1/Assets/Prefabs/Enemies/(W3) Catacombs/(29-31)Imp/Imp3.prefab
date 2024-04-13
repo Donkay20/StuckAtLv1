@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3246798668862486246}
   m_Layer: 7
   m_Name: Imp3
-  m_TagString: Spider1
+  m_TagString: Imp3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,9 +177,9 @@ MonoBehaviour:
   damageTextPrefab: {fileID: 1713743412437274532, guid: 9e69095aeeb4b1e49840c8d74d107da6, type: 3}
   gameManager: {fileID: 0}
   baseSpeed: 2
-  hp: 8
-  baseHP: 8
-  maxHP: 8
+  hp: 50
+  baseHP: 50
+  maxHP: 50
   damage: 1
   alteredSpeed: 0
   alteredSpeedTimer: 0

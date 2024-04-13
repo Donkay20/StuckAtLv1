@@ -115,13 +115,28 @@ public class CombatManager : MonoBehaviour
                 character.gameObject.transform.position = forestSpawn[roomChosen].transform.position;
                 break;
             case 3:
-                tiffanyRoom.SetActive(true);
-                room = tiffanyRoom;
-                character.gameObject.transform.position = tiffanySpawn.transform.position;
+                switch (format) {
+                    case "combat":
+                    case "survival":
+                        roomChosen = Random.Range(0, 1); //adjust when more catacombs rooms are made available.
+                        break;
+                    case "miniboss":
+                        roomChosen = 4;
+                        break;
+                    case "boss":
+                        roomChosen = 5;
+                        break;
+                }
+                sewerRooms[roomChosen].SetActive(true);
+                room = sewerRooms[roomChosen];
+                character.gameObject.transform.position = sewerSpawn[roomChosen].transform.position;
                 break;
             case 4:
                 break;
             case 5:
+                tiffanyRoom.SetActive(true);
+                room = tiffanyRoom;
+                character.gameObject.transform.position = tiffanySpawn.transform.position;
                 break;
         }
 

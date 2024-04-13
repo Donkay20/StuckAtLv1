@@ -57,11 +57,12 @@ public class MapManager : MonoBehaviour
 
     private void OnEnable() {
         mapAnimation.SetTrigger("Intro");
-        levelIndicator.transform.position = levelIndicatorPositon[level].transform.position;
+        if (level < 11) {
+            levelIndicator.transform.position = levelIndicatorPositon[level].transform.position;
+        }
     }
 
     public void ClickedNode(int clickedLevel, int clickedSection) {
-        
         /*  First, check if the node that was clicked is one level ahead, and one that connects to a path that the user can go to.
             For example, you can't go from a 3-layer bottom room to a 2-layer top room as the paths do not connect.
 
@@ -354,10 +355,8 @@ public class MapManager : MonoBehaviour
     //Adds Line to see where traveled
     private void AssignLine(Vector2 newNode) {
         Vector2 previousNode;
-        for(int i = 0; i < nodeList.Count; i++)
-        {
-            if(nodeList[i] == newNode && nodeList.Count > 1)
-            {
+        for (int i = 0; i < nodeList.Count; i++) {
+            if(nodeList[i] == newNode && nodeList.Count > 1) {
                 Debug.Log("find previous Node");
                 previousNode = nodeList[i - 1];
                 Debug.Log("find newNode");
@@ -404,17 +403,14 @@ public class MapManager : MonoBehaviour
     }
 
     private void SetLinesActive(Vector2 prevNode, Vector2 currentNode, int lineNum, Vector2 checkPrev, Vector2 CheckCurrent) {
-        if(prevNode == checkPrev && currentNode == CheckCurrent)
-                {
-                    lines[lineNum].SetActive(true);
-                }
+        if (prevNode == checkPrev && currentNode == CheckCurrent) {
+            lines[lineNum].SetActive(true);
+        }
     }
 
-    public void SetLinesOff()
-    {
+    public void SetLinesOff() {
         nodeList.Clear();
-        for(int i = 0; i < lines.Length; i++)
-        {
+        for (int i = 0; i < lines.Length; i++) {
             lines[i].SetActive(false);
         }
     }
@@ -484,14 +480,11 @@ public class MapManager : MonoBehaviour
         SetVirtualCameraColor();
     }
 
-    private void SetVirtualCameraColor()
-    {
-        if(world == 2)
-        {
+    private void SetVirtualCameraColor() {
+        if(world == 2) {
             volumes[1].gameObject.SetActive(false);
             fog[0].SetActive(false);
             fog[1].SetActive(true);
         }
-        
     }
 }
