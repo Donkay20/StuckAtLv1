@@ -9,7 +9,7 @@ public class PinballPyrobomb : MonoBehaviour
     Rigidbody2D rb;
     private Vector3 mousePosition;
     private Camera mainCamera;
-    private readonly float FIREBALL_SPEED = 5f;
+    private readonly float FIREBALL_SPEED = 6f;
     private readonly float FIREBALL_BASE_DURATION = 15f;
     private readonly int FIREBALL_BASE_DAMAGE = 50;
     private int damage;
@@ -39,10 +39,10 @@ public class PinballPyrobomb : MonoBehaviour
     }
 
     public void ActivateExplosion() {
+        rb.velocity = Vector2.zero;
         explosionCollider.enabled = true;
         GetComponent<SpriteRenderer>().sprite = explosionSprite;
         Destroy(fireballBase);
-        rb.velocity = Vector2.zero;
         duration = 1f;
     }
 

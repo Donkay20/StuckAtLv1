@@ -174,7 +174,7 @@ public class AbsorbBullet : MonoBehaviour
                     slotManager.AcquireSkill(30);
                     break;
                 
-                case "Imp3":
+                case "Imp3":        //Magic Circle
                     slotManager.AcquireSkill(31);
                     break;
             }
