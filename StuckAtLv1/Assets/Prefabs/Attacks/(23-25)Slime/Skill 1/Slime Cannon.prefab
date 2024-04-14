@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 8839935749617907959}
   - {fileID: 1071027149053905768}
   - {fileID: 6953230706498843152}
+  properSprite: {fileID: 0}
 --- !u!212 &6341955715213962188
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -60,7 +61,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301630932789172894}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -94,7 +95,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c6e74a7418fc9c048baf086dedaaa788, type: 3}
+  m_Sprite: {fileID: 791079164, guid: 690419111df72104b8c21d7afe03914a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

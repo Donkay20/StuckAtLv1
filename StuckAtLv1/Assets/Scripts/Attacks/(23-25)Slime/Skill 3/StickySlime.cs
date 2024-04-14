@@ -12,7 +12,11 @@ public class StickySlime : MonoBehaviour
     private int damage;
     private float duration;
     private float size;
+    [SerializeField] Sprite properSprite;
+
+
     void Start() {
+        GetComponent<SpriteRenderer>().sprite = properSprite;
         slot = GetComponentInParent<Slot>();
         AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
 
