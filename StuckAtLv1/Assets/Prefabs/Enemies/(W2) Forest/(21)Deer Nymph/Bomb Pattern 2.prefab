@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 262698430454756163}
   - component: {fileID: 4682720255242300204}
+  - component: {fileID: -893453697459410645}
   m_Layer: 0
   m_Name: Bomb Pattern 2
   m_TagString: Untagged
@@ -59,6 +60,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 3
+--- !u!114 &-893453697459410645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5252840007010379992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bda372a335522642a9e62cb84ab2610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &402015314902976141
 PrefabInstance:
   m_ObjectHideFlags: 0

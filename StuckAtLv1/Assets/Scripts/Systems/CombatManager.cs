@@ -320,6 +320,11 @@ public class CombatManager : MonoBehaviour
             enemyGroup.BattleEnd();
         }
 
+        BattleOver[] remainingAdds = FindObjectsByType<BattleOver>(FindObjectsSortMode.None);
+        foreach (BattleOver b in remainingAdds) {
+            b.BattleEnd();
+        }
+
         //Disable UI
         survivalHourglass.SetActive(false);
         combatSkull.SetActive(false);
@@ -363,6 +368,7 @@ public class CombatManager : MonoBehaviour
 
     public void IntroTransitionAnimationComplete() {
         Debug.Log("Intro animation method called");
+        character.Heal(0);
         spawner.enabled = true; 
     }
 

@@ -56,14 +56,6 @@ Handles main character's active stats in combat, their buffs, and their damage h
             afterimage = 0;
             afterimageText.text = afterimage.ToString("f1");
         }
-
-        if (currentHp > MAX_HP) {
-            healthBarColor.color = Color.green;
-        } else if (afterimage > 0) {
-            healthBarColor.color = Color.blue;
-        } else {
-            healthBarColor.color = Color.red;   
-        }
     }
 
     public void TakeDamage(int damage) {

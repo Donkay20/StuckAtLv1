@@ -29,6 +29,7 @@ public class StickySlime : MonoBehaviour
                     enemy.ApplyStun(2f);
                     FindAnyObjectByType<Character>().Heal(1);
                     enemy.transform.SetParent(FindAnyObjectByType<EnemyManager>().transform, true);
+                    enemy.transform.localScale = new Vector2(1, 1);
                     FindAnyObjectByType<OnHitBonus>().ApplyDamageBonus(slot, enemy, damage);
                 }
             }   

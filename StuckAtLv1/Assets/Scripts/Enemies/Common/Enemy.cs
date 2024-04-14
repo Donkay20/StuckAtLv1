@@ -334,6 +334,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     public void Cleanse() {
+        transform.localScale = new Vector2(1, 1);
         anemiaApplied = false;  
         anemiaDamage = 0; 
         anemiaTimer = 0; 

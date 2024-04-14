@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9200365589662831845}
   - component: {fileID: 2928350444488599461}
+  - component: {fileID: 3866086645467721111}
   m_Layer: 13
   m_Name: SquirrelLine (RtoL)
   m_TagString: Untagged
@@ -88,6 +89,18 @@ MonoBehaviour:
   - {fileID: 5988345486427798797}
   Left: 0
   Right: 1
+--- !u!114 &3866086645467721111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280651396727720677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bda372a335522642a9e62cb84ab2610, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &585195939481590293
 PrefabInstance:
   m_ObjectHideFlags: 0
