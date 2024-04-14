@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &845520146164499079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8568271772585797122}
+  - component: {fileID: 1996353259311892285}
+  m_Layer: 0
+  m_Name: CataEV4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8568271772585797122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845520146164499079}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1996353259311892285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845520146164499079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: OoOoO! Ghosts!
+  dialogue:
+  - Jamp and Lucy turn a corner, and are met face to face with many moaning, sick,
+    ghosts.
+  - "\"Oh\u2026 hi, everyone\u2026\""
+  - '"Other ghosts?"'
+  - "\"Yeah\u2026they\u2019re all sick because of the altar. Let me talk to them,
+    I\u2019m sure I can convince them to let us through.\""
+  - "\"No, I\u2019ll do it. I\u2019m the one encroaching on their territory, so I
+    should explain myself.\""
+  - Lucy smiles.
+  - '"Thank you, Jamp!"'
+  - "\"Ahem\u2026 attention, please!\""
+  - '[CHOOSE]'
+  - The ghosts groan even more.
+  - '"Please! Believe me!"'
+  - "\"Um\u2026 I don\u2019t think they do\u2026\""
+  - "\"Gah! They\u2019re angry!\""
+  - The ghosts groan angrily.
+  - "\"They\u2019re calling you arrogant!\""
+  - "\"WHAT? I am anything but\u2013\""
+  - The ghosts lunge forward.
+  - "\"Oh whatever! Let\u2019s try not to hurt them!\""
+  - '"Hehe! Okay!"'
+  - '[END]'
+  - The groaning stops.
+  - "\"\u2026!\""
+  - The ghosts part themselves for Jamp and Lucy.
+  - "\"Now I really do have to pay them, huh\u2026\""
+  - '"Alright, alright! Here you go."'
+  - '"Thank you, everyone! Bye bye!"'
+  - '[END]'
+  names:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  optionsToSelect:
+  - If you let me through, I'll heal your sickness!
+  - "If you let me through, I\u2019ll pay you 100 gold!"
+  skipToThisValueAfterChoices: 0900000014000000
+  outcome: 1a0000001b000000

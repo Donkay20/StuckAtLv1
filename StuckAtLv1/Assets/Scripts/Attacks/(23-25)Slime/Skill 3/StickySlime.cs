@@ -50,14 +50,17 @@ public class StickySlime : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.TryGetComponent<Enemy>(out var enemy)) {
-            enemy.ApplySlow(1, duration);
-            enemyList.Add(enemy);
+            if (!enemy.CompareTag("BigSlime") && !enemy.CompareTag("Sandworm") && !enemy.CompareTag("ShadowKnight") 
+            && !enemy.CompareTag("DarkJamp") && !enemy.CompareTag("FinalBossPhase1") && !enemy.CompareTag("FinalBossPhase2") && !enemy.CompareTag("FinalBossPhase3")) {
+                enemy.ApplySlow(1, duration);
+                enemyList.Add(enemy);
 
-            Transform enemyTransform = enemy.transform;
-            enemyTransform.SetParent(transform, true);
+                Transform enemyTransform = enemy.transform;
+                enemyTransform.SetParent(transform, true);
 
-            Vector2 localPosition = enemyTransform.localPosition;
-            enemyPositions[enemyTransform] = localPosition;
+                Vector2 localPosition = enemyTransform.localPosition;
+                enemyPositions[enemyTransform] = localPosition;
+            }
         }
     }  
 }

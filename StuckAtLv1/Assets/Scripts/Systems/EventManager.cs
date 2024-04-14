@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,12 +11,12 @@ public class EventManager : MonoBehaviour
     [SerializeField] private Character player;
     [SerializeField] private Movement playerMove;
     //backend stuff
-    [SerializeField] private Event[] ruinsEvents, forestEvents, sewerEvents, abyssEvents;
+    [SerializeField] private Event[] ruinsEvents, forestEvents, catacombsEvents, abyssEvents;
     [SerializeField] private TextMeshProUGUI title, nameText, dialogueText, button1Text, button2Text, button3Text, health, afterimages, money;
     [SerializeField] private Button button1, button2, button3, advanceButton;
     [SerializeField] private Image speaker, background;
-    [SerializeField] private Sprite def, jamp, oldMan, lonelyGhost, angryGhost, oldShadow, ghostShadow, ash, fairy, wolf, tree;
-    [SerializeField] private Sprite ruinsBG, forestBG, sewerBG, abyssBG;
+    [SerializeField] private Sprite def, jamp, oldMan, lonelyGhost, angryGhost, oldShadow, ghostShadow, ash, fairy, wolf, tree, lucy, imp;
+    [SerializeField] private Sprite ruinsBG, forestBG, catacombsBG, abyssBG;
     private Event selectedEvent; //chosen event
     private string[] dialogue, names, options; private int[] skip, outcome; //copy from the chosen event
     private int messageCounter, numberOfButtons, outcomeDecided; //messagecounter is to track what line we're on, where numberofbuttons is to track how many buttons to display
@@ -56,11 +53,12 @@ public class EventManager : MonoBehaviour
                 background.sprite = ruinsBG;
                 break;
             case 2: //forest
-                selectedEvent = forestEvents[Random.Range(0, ruinsEvents.Length)];
+                selectedEvent = forestEvents[Random.Range(0, forestEvents.Length)];
                 background.sprite = forestBG;
                 break;
-            case 3: //sewer
-                //todo
+            case 3: //catacombs
+                selectedEvent = catacombsEvents[Random.Range(0, catacombsEvents.Length)];
+                background.sprite = catacombsBG;
                 break;
             case 4: //abyss
                 //todo
@@ -92,6 +90,7 @@ public class EventManager : MonoBehaviour
                     nameText.text = names[number];
                     dialogueText.text = dialogue[number];
                     switch(names[number]) {
+                        //Universal
                         case "NARRATION":
                             nameText.text = "";
                             speaker.sprite = def;
@@ -99,6 +98,8 @@ public class EventManager : MonoBehaviour
                         case "Jamp":
                             speaker.sprite = jamp;
                             break;
+                        
+                        //Ruins
                         case "Old Man":
                             speaker.sprite = oldMan;
                             break;
@@ -114,6 +115,8 @@ public class EventManager : MonoBehaviour
                         case "Ghost Shadow":
                             speaker.sprite = ghostShadow;
                             break;
+
+                        //Forest
                         case "Ash":
                             speaker.sprite = ash;
                             break;
@@ -125,6 +128,14 @@ public class EventManager : MonoBehaviour
                             break;
                         case "Tree":
                             speaker.sprite = tree;
+                            break;
+
+                        //Catacombs
+                        case "Lucy":
+                            speaker.sprite = lucy;
+                            break;
+                        case "Imp":
+                            speaker.sprite = imp;
                             break;
                     }
                     messageCounter++;
@@ -175,6 +186,12 @@ public class EventManager : MonoBehaviour
                 button1.interactable = false;
             }
         }
+
+        if (selectedEvent.GetTitle() == "OoOoO! Ghosts!") {     //If you don't have 100 gold, you can't bribe the ghosts.
+            if (player.money < 100) {
+                button2.interactable = false;
+            }
+        }
     }
 
     private void DisableButtons() { //gets rid of all the buttons
@@ -190,7 +207,7 @@ public class EventManager : MonoBehaviour
         button3.onClick.AddListener(()=> {DialogueOption(2);});
     }
 
-    private void ResolveOutcome() { //all of the outcomes for the events.
+    private void ResolveOutcome() {     //all of the outcomes for the events.
         /*  
             Progress:
                 Ruins:
@@ -199,13 +216,22 @@ public class EventManager : MonoBehaviour
                     3. done
                     4. done
                     5. done
+
                 Forest:
                     1. done
                     2. done
                     3. done
                     4. done
                     5. done
-                Sewer:
+
+                Catacombs:
+                    1. done
+                    2. done
+                    3. todo
+                    4. todo
+                    5. todo
+
+                Abyss:
                     1. todo
                     2. todo
                     3. todo
@@ -300,12 +326,57 @@ public class EventManager : MonoBehaviour
             case 17:    //Jamp leaves the tree alone. Nothing happens. (event 4, forest)
                 resolve = "normal";
                 break;
-            case 18:    //Jamp knocks out all the squirrels. Nothing happens. (event 5, forest)
-                resolve = "normal";
+            case 18:    //Jamp knocks out all the squirrels. Gets an upgrade. (event 5, forest)
+                resolve = "upgrade";
                 break;
             case 19:    //fight vs squirrel swarm (event 5, forest)
                 combat.ReceiveCondition(outcomeDecided);
                 resolve = "combat";
+                break;
+            case 20:    //Jamp eats the shiny mushroom (event 1, catacombs)
+                playerMove.SetExternalModifier(6f);
+                resolve = "normal";
+                break;
+            case 21:    //Jamp skips the shiny mushroom, nothing happens (event 1, catacombs)
+                resolve = "normal";
+                break;
+            case 22:    //Jamp gets the question right, gets upgrade (event 2, catacombs)
+                resolve = "upgrade";
+                break;
+            case 23:    //Jamp gets the question wrong, fights imp swarm (event 2, catacombs)
+                combat.ReceiveCondition(outcomeDecided);
+                resolve = "combat";
+                break;
+            case 24:    //Jamp gets rewarded from jumping (event 3, catacombs)
+                playerMove.SetExternalModifier(-2.5f);
+                player.money += 1000;
+                resolve = "normal";
+                break;
+            case 25:    //Jamp gets punished for his cowardice (event 3, catacombs)
+                if (player.money < 1000) {
+                    player.money = 0;
+                } else {
+                    player.money -= 1000;
+                }
+                resolve = "normal";
+                break;
+            case 26:    //Jamp fights the ghost swarm (event 4, catacombs)
+                combat.ReceiveCondition(outcomeDecided);
+                resolve = "combat";
+                break;
+            case 27:    //Jamp pays the ghosts 100g (cannot pay if he doesn't have 100g) (event 4, catacombs)
+                player.money -= 100;
+                resolve = "normal";
+                break;
+            case 28:    //Jamp heals 50 hp from the leech (event 5, catacombs)
+                player.currentHp += 50;
+                resolve = "normal";
+                break;
+            case 29:    //Jamp loses 1/2 hp from the untreated fall (event 5, catacombs)
+                if (player.currentHp > 1) {
+                    player.currentHp /= 2;
+                }
+                resolve = "normal";
                 break;
         }
         eventAnimation.SetTrigger("Outro");

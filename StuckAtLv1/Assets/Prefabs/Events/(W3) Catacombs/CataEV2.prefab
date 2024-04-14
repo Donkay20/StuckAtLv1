@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2082498202577360800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 901673459165804099}
+  - component: {fileID: 8367484616471327129}
+  m_Layer: 0
+  m_Name: CataEV2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &901673459165804099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082498202577360800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8367484616471327129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082498202577360800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Stalactites & Stalagmites
+  dialogue:
+  - "Jamp and Lucy continue through the cave system, when suddenly\u2026"
+  - '"NYEHEHE! STOP RIGHT THERE!"'
+  - '"Ooo! A feisty imp!"'
+  - '"Eeek! Go away! Let us pass!"'
+  - '"Not so fast, I will only let you pass if you answer one question!"'
+  - "\"Oh, brother\u2026fine, give it to me!\""
+  - '"Alright, here goes!"'
+  - '"What is the name of the mineral formation that hangs from the cave ceiling?"'
+  - '[CHOOSE]'
+  - "\"Muahaha! It\u2019s obviously 'stalactites!'\""
+  - "\"Grrr\u2026that is correct. Fine, you may pass.\""
+  - '"Thank you Mr. Imp!! Bye bye!"'
+  - '[END]'
+  - "\"Muahaha! It\u2019s obviously 'stalagmites!'\""
+  - '"BZZZZZT! WRONG! You may NOT pass!"'
+  - "\"Oh come on! I\u2019ve had enough of humouring you! Get out of the way, or
+    else I\u2019ll make you!"
+  - '"Hehe! Bring it on little boy!"'
+  - '[END]'
+  names:
+  - NARRATION
+  - Imp
+  - Lucy
+  - Jamp
+  - Imp
+  - Jamp
+  - Imp
+  - Imp
+  - '[CHOOSE]'
+  - Jamp
+  - Imp
+  - Lucy
+  - '[END]'
+  - Jamp
+  - Imp
+  - Jamp
+  - Imp
+  - '[END]'
+  optionsToSelect:
+  - Stalactites.
+  - Stalagmites.
+  skipToThisValueAfterChoices: 090000000d000000
+  outcome: 1600000017000000

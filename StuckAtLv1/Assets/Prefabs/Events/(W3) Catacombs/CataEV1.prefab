@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1848888065235252841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3426423567816154197}
+  - component: {fileID: 7264250282006319850}
+  m_Layer: 0
+  m_Name: CataEV1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3426423567816154197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848888065235252841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7264250282006319850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848888065235252841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: The Shiny Mushroom
+  dialogue:
+  - '"Ooh! Look, Jamp! These mushrooms glow in the dark!"'
+  - "\"Wow! They\u2019re quite pretty!\""
+  - "\"Don\u2019t you wanna try one? They\u2019re really yummy! My favourite snack!\""
+  - '[CHOOSE]'
+  - "\"Well, don\u2019t mind if I do!\""
+  - Jamp eats the mushroom in one bite.
+  - "\"Ugh\u2026what on earth\u2026\""
+  - "\"Oh no\u2026I think these mushrooms aren\u2019t edible to vampires\u2026\""
+  - '"WHY WOULD YOU DO THAT!?"'
+  - "\"I\u2019m sorry!! I didn\u2019t know!\""
+  - "\"I-It\u2019s okay, I just\u2026need a minute.\""
+  - The mushroom's chemicals are incompatible with Jamp's vampiric nature, tripling
+    his dash cooldown for the next fight.
+  - '[END]'
+  - "\"Um\u2026not that I don\u2019t trust your judgement, but are you sure that\u2019s
+    safe to eat? For a vampire, at least?\""
+  - "\"Hmm\u2026I have no idea!\""
+  - "\"Don\u2019t try to feed me something that\u2019ll kill me! Come on, let\u2019s
+    keep going!\""
+  - '[END]'
+  names:
+  - Lucy
+  - Jamp
+  - Lucy
+  - '[CHOOSE]'
+  - Jamp
+  - NARRATION
+  - Jamp
+  - Lucy
+  - Jamp
+  - Lucy
+  - Jamp
+  - NARRATION
+  - '[END]'
+  - Jamp
+  - Lucy
+  - Jamp
+  - '[END]'
+  optionsToSelect:
+  - Eat the mushroom.
+  - Don't eat the mushroom.
+  skipToThisValueAfterChoices: 040000000d000000
+  outcome: 1400000015000000

@@ -38,8 +38,7 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnEnemy() {
         int enemyID = -1; //Vector3 position;
-        if (eventCondition) {
-        //special conditions are for events.
+        if (eventCondition) { //special conditions are for events where you fight a specific type of enemy.
             switch (condition) {
             case 2:     //Ruins Event 2
                 enemyID = Random.Range(0, 3);
@@ -55,6 +54,12 @@ public class EnemyManager : MonoBehaviour
                 break;
             case 19:    //Forest Event 5
                 enemyID = Random.Range(9, 12);
+                break;
+            case 23:    //Catacombs Event 2
+                enemyID = Random.Range(24, 27);
+                break;
+            case 26:    //Catacombs Event 4
+                enemyID = Random.Range(21, 24);
                 break;
             }
         } else {
