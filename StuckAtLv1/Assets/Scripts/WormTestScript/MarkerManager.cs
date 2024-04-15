@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MarkerManager : MonoBehaviour
 {
-    private float interval = 5f;
+    private float interval = 0.5f;
     private float timer;
 
     public class Marker
@@ -24,7 +24,6 @@ public class MarkerManager : MonoBehaviour
     void Update()
     {
         UpdateMarkerList();
-
     }
     
     public void UpdateMarkerList()

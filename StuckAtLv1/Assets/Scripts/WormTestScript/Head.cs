@@ -53,7 +53,12 @@ public class Head : MonoBehaviour
         {
             MarkerManager markM = bodyParts[i - 1].GetComponent<MarkerManager>();
             bodyParts[i].transform.position = Vector2.MoveTowards(bodyParts[i].transform.position, markM.markerList[0].position, step);
-            bodyParts[i].transform.rotation = markM.markerList[0].rotation;
+
+
+            //Rotate bodyparts
+            float angle = Mathf.Atan2(markM.markerList[0].position.y - bodyParts[i].transform.position.y, markM.markerList[0].position.x - bodyParts[i].transform.position.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+            bodyParts[i].transform.rotation = Quaternion.RotateTowards(bodyParts[i].transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             markM.markerList.RemoveAt(0);
         }
     }
