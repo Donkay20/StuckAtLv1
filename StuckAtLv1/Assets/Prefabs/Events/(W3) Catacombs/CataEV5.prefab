@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5467062779286048136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6644434069349597961}
+  - component: {fileID: 2968288777864058057}
+  m_Layer: 0
+  m_Name: CataEV5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6644434069349597961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467062779286048136}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2968288777864058057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467062779286048136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27289c4b3f9dcbe4dbb8162aadf406a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Tripping on Rocks
+  dialogue:
+  - "Jamp and Lucy keep walking, until\u2026"
+  - '"Gah!"'
+  - Jamp trips.
+  - "\"Ow\u2026I scraped my knee!\""
+  - '"Oh no!"'
+  - Lucy looks around frantically, until she finds a glowing blue leech.
+  - '"Here, use this! These little guys can heal you by sucking your blood!"'
+  - Jamp looks at the leech in fear, it squirms around grossly.
+  - "\"Um\u2026\""
+  - '[CHOOSE]'
+  - '"Alright fine! Just, please, be quick!"'
+  - '"You got it!"'
+  - "Lucy places the leech on Jamp\u2019s knee."
+  - It sucks the blood, but a new, healthy patch of skin forms.
+  - '"Oh, thank the gods!"'
+  - '"Hehe! You should trust me more! I know my way around here!"'
+  - "\"Heh\u2026right\u2026anyway, let\u2019s keep going!\""
+  - Jamp heals 50 HP.
+  - '[END]'
+  - '"N-no way! Get that disgusting thing away from me!!"'
+  - "\"Aww\u2026okay.\""
+  - Jamp gets up, but the pain persists.
+  - "\"Ow\u2026 ow\u2026 ow\u2026\""
+  - '"Hehe!"'
+  - Jamp loses half of his health.
+  - '[END]'
+  names:
+  - NARRATION
+  - Jamp
+  - NARRATION
+  - Jamp
+  - Lucy
+  - NARRATION
+  - Lucy
+  - NARRATION
+  - Jamp
+  - '[CHOOSE]'
+  - Jamp
+  - Lucy
+  - NARRATION
+  - NARRATION
+  - Jamp
+  - Lucy
+  - Jamp
+  - NARRATION
+  - '[END]'
+  - Jamp
+  - Lucy
+  - NARRATION
+  - Jamp
+  - Lucy
+  - NARRATION
+  - '[END]'
+  optionsToSelect:
+  - Use the leech.
+  - Reject the leech.
+  skipToThisValueAfterChoices: 0a00000013000000
+  outcome: 1c0000001d000000

@@ -189,6 +189,24 @@ public class CombatManager : MonoBehaviour
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;
+                case 23:    //Catacombs Event 2
+                    uIObjective.text = "Defeat!";
+                    objective = "combat";
+                    combatSkull.SetActive(true);
+                    enemiesToKill = 70;
+                    spawner.SetSpawnTimer(0.2f);
+                    uIObjectiveNumber.text = enemiesToKill.ToString();
+                    StartCoroutine(CombatTracker());
+                    break;
+                case 26:    //Catacombs Event 4
+                    uIObjective.text = "Defeat!";
+                    objective = "combat";
+                    combatSkull.SetActive(true);
+                    enemiesToKill = 60;
+                    spawner.SetSpawnTimer(0.2f);
+                    uIObjectiveNumber.text = enemiesToKill.ToString();
+                    StartCoroutine(CombatTracker());
+                    break;
             }
         } else {
             switch (format) {
