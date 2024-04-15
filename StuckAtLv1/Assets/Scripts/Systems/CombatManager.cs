@@ -53,7 +53,6 @@ public class CombatManager : MonoBehaviour
         }
     }
     
-
     private void OnEnable() {
         combatAnimation.SetTrigger("Intro");
         combatUIAnimation.SetTrigger("Intro");  

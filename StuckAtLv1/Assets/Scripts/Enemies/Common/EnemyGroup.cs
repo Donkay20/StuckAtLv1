@@ -5,9 +5,8 @@ using UnityEngine;
 public class EnemyGroup : MonoBehaviour
 {
     [SerializeField] private float lifetime;
-    private float delayTimer = 1f;
     [SerializeField] private GameObject[] enemiesInGroup;
-    [SerializeField] private bool Left, Right;
+    [SerializeField] private bool Left, Right, Up, Down;
     private Character target;
 
     private void Start() {
@@ -16,15 +15,13 @@ public class EnemyGroup : MonoBehaviour
 
         if (Left) {FindAnyObjectByType<CombatManager>().WarningAnimation("Left");}
         if (Right) {FindAnyObjectByType<CombatManager>().WarningAnimation("Right");}
+        if (Up) {FindAnyObjectByType<CombatManager>().WarningAnimation("Left");}
+        if (Down) {FindAnyObjectByType<CombatManager>().WarningAnimation("Right");}
     }
 
     void Update() {
-        if (lifetime < 0) {
+        if (lifetime > 0) {
             lifetime -= Time.deltaTime;
-        }
-        
-        if (delayTimer < 0) {
-            delayTimer -= Time.deltaTime; //delete if unused
         }
 
         if (lifetime <= 0) {
@@ -39,6 +36,16 @@ public class EnemyGroup : MonoBehaviour
         if (Right) {
             transform.Translate(10 * Time.deltaTime * Vector2.left);
             //shift right
+        }
+
+        if (Up) {
+            transform.Translate(8 * Time.deltaTime * Vector2.down);
+            //shift down
+        }
+
+        if (Down) {
+            transform.Translate(8 * Time.deltaTime * Vector2.up);
+            //shift up
         }
     }
 

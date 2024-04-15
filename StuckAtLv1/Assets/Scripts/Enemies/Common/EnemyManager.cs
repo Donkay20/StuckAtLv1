@@ -12,8 +12,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] MapManager mapManager;
     [SerializeField] GameObject[] forestSpecialEnemies;
+    [SerializeField] GameObject[] catacombsSpecialEnemies;
     private List<Enemy> activeEnemyList = new List<Enemy>();
-    private float timer, specialTimer;
+    [SerializeField] private float timer, specialTimer;
     int condition; bool eventCondition;
 
     private void OnEnable() {
@@ -90,12 +91,14 @@ public class EnemyManager : MonoBehaviour
     private void SpawnSpecialEnemy(int world) {
         switch (world) {
             case 2:
-                GameObject newSpecialEnemy = Instantiate(forestSpecialEnemies[Random.Range(0, forestSpecialEnemies.Length)]);
-                newSpecialEnemy.transform.position += player.transform.position;
-                newSpecialEnemy.transform.parent = transform;
+                GameObject forestSpecialEnemy = Instantiate(forestSpecialEnemies[Random.Range(0, forestSpecialEnemies.Length)]);
+                forestSpecialEnemy.transform.position += player.transform.position;
+                forestSpecialEnemy.transform.parent = transform;
                 break;
             case 3:
-                //todo
+                GameObject cataSpecialEnemy = Instantiate(catacombsSpecialEnemies[Random.Range(0, catacombsSpecialEnemies.Length)]);
+                cataSpecialEnemy.transform.position += player.transform.position;
+                cataSpecialEnemy.transform.parent = transform;
                 break;
             case 4:
                 break;
