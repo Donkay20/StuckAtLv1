@@ -166,8 +166,25 @@ public class DialogueManager : MonoBehaviour
                 case "CaveIntro":
                     gameManager.ReceiveCommand("map");
                     break;
+                case "CaveMiniBossIntro":
+                    gameManager.ReceiveCommand("miniboss");
+                    break;
+                case "CaveMiniBossEnd":
+                    gameManager.ReceiveCommand("map");    
+                    break;
+                case "CaveBossIntro":
+                    gameManager.ReceiveCommand("boss");
+                    break;
+                case "CaveBossEnd":
+                    SceneManager.LoadScene("CaveEnd", LoadSceneMode.Additive);
+                    SceneManager.UnloadSceneAsync("CaveBossEnd");
+                    break;
+                case "CaveEnd":
+                    SceneManager.LoadScene("AbyssIntro", LoadSceneMode.Additive);
+                    SceneManager.UnloadSceneAsync("CaveEnd");
+                    break;
 
-                    //put cave shit here
+                    //abyss stuff goes here
 
                 case "AbyssEnd":
                     SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive);
@@ -331,8 +348,19 @@ public class DialogueManager : MonoBehaviour
             case "CaveIntro":
                 gameManager.ReceiveCommand("map");
                 break;
+            case "CaveMiniBossIntro":
+                gameManager.ReceiveCommand("miniboss");
+                break;
+            case "CaveBossEnd":
+                SceneManager.LoadScene("CaveEnd", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("CaveBossEnd");
+                break;
+            case "CaveEnd":
+                SceneManager.LoadScene("AbyssIntro", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("CaveEnd");
+                break;
 
-                //put cave shit here
+                //abyss stuff goes here
 
             case "AbyssEnd":
                 SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive);

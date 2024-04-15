@@ -34,6 +34,8 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     Rigidbody2D body;
     Animator anim;
     SpriteRenderer rend;
+    public delegate void DamageTakenEvent();
+    public event DamageTakenEvent OnDamageTaken;
     private BuffManager buffManager;
     public GameObject particlePrefab;
     private Vector3 force;
@@ -177,6 +179,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         }
 
         anim.SetTrigger("Hit");
+        OnDamageTaken?.Invoke();
 
         if (damageTextPrefab) {
             var dmg = Instantiate(damageTextPrefab, transform.position, Quaternion.identity);

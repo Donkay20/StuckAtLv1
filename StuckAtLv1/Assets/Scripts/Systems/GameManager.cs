@@ -290,6 +290,9 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                                 SceneManager.LoadScene("CaveBossIntro", LoadSceneMode.Additive);
                             }
                             break;
+                        case 4:
+                            //todo
+                            break;
                     }
                 }
 
@@ -382,12 +385,9 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                     scaling = mapManager.GetLevel();
                     break;
                 case 2:
-                    scaling = mapManager.GetWorld() * mapManager.GetLevel();
-                    break;
                 case 3:
-                    scaling = mapManager.GetWorld() * mapManager.GetLevel();
-                    break;
                 case 4:
+                case 5:
                     scaling = mapManager.GetWorld() * mapManager.GetLevel();
                     break;
             }

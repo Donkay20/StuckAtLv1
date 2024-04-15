@@ -63,6 +63,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Dialogue/Cave/CaveIntro.unity
     guid: c63e38fb05580b043a02b6c1e2c1cf32
   - enabled: 1
+    path: Assets/Scenes/Dialogue/Cave/CaveMiniBossIntro.unity
+    guid: d43879194505702448c436476328ffe4
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Cave/CaveMiniBossEnd.unity
+    guid: 000d345ee4b16af449128dd5022f8cd9
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Cave/CaveBossIntro.unity
+    guid: 00c79bedc184bd642931f7e21d49814b
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Cave/CaveBossEnd.unity
+    guid: ae4db98635e12b64692f7c6c918df8fc
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Cave/CaveEnd.unity
+    guid: a2edc24a5a87c604f9a0dae9ab3d8d8b
+  - enabled: 1
     path: Assets/Scenes/Dialogue/Tiffany/TiffBossIntro.unity
     guid: a3a75c9a2ad48474db01da81abd2b182
   - enabled: 1
