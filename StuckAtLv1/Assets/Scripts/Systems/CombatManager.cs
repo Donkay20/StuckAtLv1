@@ -18,7 +18,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private BuffManager buffManager;
     [SerializeField] private SlotManager slotManager;
     [SerializeField] private CombatUIAnimation uIAnimation;
-    [SerializeField] private GameObject bossUI, bossSecondaryUI;
+    [SerializeField] private GameObject bossUI, bossSecondaryUI, bossAdditionalInfo;
     [SerializeField] private GameObject survivalHourglass;
     [SerializeField] private GameObject combatSkull;
     [SerializeField] private GameObject warningLeft, warningRight;
@@ -76,6 +76,7 @@ public class CombatManager : MonoBehaviour
 
         bossUI.SetActive(false);
         bossSecondaryUI.SetActive(false);
+        bossAdditionalInfo.SetActive(false);
 
         switch (mapProgress.GetWorld()) {
             //choose a room, set it to be active, position the character to the spawn point
@@ -346,6 +347,7 @@ public class CombatManager : MonoBehaviour
         survivalHourglass.SetActive(false);
         combatSkull.SetActive(false);
         if (objective == "miniboss" || objective == "boss") {
+            bossAdditionalInfo.SetActive(false);
             bossSecondaryUI.SetActive(false);
             bossUI.SetActive(false);
         }

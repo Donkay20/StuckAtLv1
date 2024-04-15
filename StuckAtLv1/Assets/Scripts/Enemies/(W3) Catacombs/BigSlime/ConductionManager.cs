@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ConductionManager : MonoBehaviour
@@ -8,12 +9,18 @@ public class ConductionManager : MonoBehaviour
     [SerializeField] private Conductor[] conductors;
     [SerializeField] private ConductorBolt[] conductorBolts;
     [SerializeField] private TextMeshProUGUI conductorCountUI;
+    [SerializeField] private GameObject additionalInfo;
     private int[] conductorsActivated = new int[3];
     private ConductorBolt[] chosenBolts = new ConductorBolt[3];
     private int conductorsActive;
     private bool boltBarrage;
     void Start() {
         
+    }
+
+    void OnEnable() {
+        additionalInfo.SetActive(true);
+        conductorCountUI.text = "Conductors: "+ conductorsActive + "/3";
     }
 
     void Update() {
@@ -23,6 +30,7 @@ public class ConductionManager : MonoBehaviour
     public void ActivateConductor(int id) {
         conductorsActivated[conductorsActive] = id;
         conductorsActive++;
+        conductorCountUI.text = "Conductors: "+ conductorsActive + "/3";
         if (conductorsActive == 3) {
             BoltBarrageSetup();
         }
@@ -122,8 +130,10 @@ public class ConductionManager : MonoBehaviour
     }
 
     private IEnumerator BoltBarrage() {
-        //todo
-        yield return new WaitForSeconds(0);
+        chosenBolts[0].gameObject.SetActive(true);
+        chosenBolts[1].gameObject.SetActive(true);
+        chosenBolts[2].gameObject.SetActive(true);
+        yield return new WaitForSeconds(5);
         DeactivateAllConductors();
     }
 
@@ -131,6 +141,12 @@ public class ConductionManager : MonoBehaviour
         conductors[conductorsActivated[0]].Deactivate();
         conductors[conductorsActivated[1]].Deactivate();
         conductors[conductorsActivated[2]].Deactivate();
+
+        conductorsActivated[0] = 0; conductorsActivated[1] = 0; conductorsActivated[2] = 0;
+        chosenBolts[0] = null; chosenBolts[1] = null; chosenBolts[2] = null;
+
+        conductorsActive = 0; 
+        conductorCountUI.text = "Conductors: "+ conductorsActive + "/3";
         boltBarrage = false;
     }
 

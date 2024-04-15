@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ConductorBolt : MonoBehaviour
@@ -8,6 +5,11 @@ public class ConductorBolt : MonoBehaviour
     private readonly int BOLT_DAMAGE = 30;
     private bool hitCheck;
     private float hitRefreshRate = 0.25f;
+    private Animator anim;
+
+    void Start() {
+        anim = GetComponent<Animator>();
+    }
 
     void Update() {
         if (hitRefreshRate > 0 && !hitCheck) {
@@ -17,6 +19,10 @@ public class ConductorBolt : MonoBehaviour
         if (hitRefreshRate <= 0 && !hitCheck) {
             hitCheck = true;
         }
+    }
+
+    private void OnEnable() {
+        anim.SetTrigger("activate");
     }
 
     private void ResetHitCheck() {
