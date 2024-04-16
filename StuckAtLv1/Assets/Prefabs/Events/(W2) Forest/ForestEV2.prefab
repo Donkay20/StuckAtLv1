@@ -57,7 +57,7 @@ MonoBehaviour:
   - "\"I landed myself in the palace infirmary many times as a child, so I\u2019ve
     picked up a thing or two about first aid! Leave this to me!\""
   - Jamp bandages the wolf's paw.
-  - "\"Grrrr\u2026\""
+  - The wolf growls.
   - The wolf pounces on Jamp.
   - '"Ahhh!!! What the hell? I just helped you!!"'
   - '"The animals are still crazy, remember?"'
@@ -71,7 +71,7 @@ MonoBehaviour:
   - "\"I landed myself in the palace infirmary many times as a child, so I\u2019ve
     picked up a thing or two about first aid! Leave this to me!\""
   - Jamp bandages the wolf's paw.
-  - "\"Grrrr\u2026\""
+  - The wolf growls.
   - The wolf pounces on Jamp.
   - '"Ahhh!!! What the hell? I just helped you!!"'
   - '"The animals are still crazy, remember?"'
@@ -95,7 +95,7 @@ MonoBehaviour:
   - Ash
   - Jamp
   - NARRATION
-  - Wolf
+  - NARRATION
   - NARRATION
   - Jamp
   - Ash
@@ -108,7 +108,7 @@ MonoBehaviour:
   - Ash
   - Jamp
   - NARRATION
-  - Wolf
+  - NARRATION
   - NARRATION
   - Jamp
   - Ash

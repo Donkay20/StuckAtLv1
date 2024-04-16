@@ -33,6 +33,7 @@ public class ConductionManager : MonoBehaviour
         conductorsActive++;
         conductorCountUI.text = "Conductors: "+ conductorsActive + "/3";
         if (conductorsActive == 3) {
+            conductorCountUI.text = "Shock imminent!";
             BoltBarrageSetup();
         }
     }
