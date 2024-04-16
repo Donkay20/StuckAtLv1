@@ -177,6 +177,10 @@ public class AbsorbBullet : MonoBehaviour
                 case "Imp3":        //Magic Circle
                     slotManager.AcquireSkill(31);
                     break;
+
+                case "BigSlime" :   //Conductive Goop
+                    slotManager.AcquireSkill(32);
+                    break;
             }
 
             if (slotManager.IsBloodsuckerActive()) {    //legendary 9

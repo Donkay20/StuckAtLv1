@@ -93,6 +93,10 @@ GameObject:
   - component: {fileID: 975203437682436130}
   - component: {fileID: 4162029527838280919}
   - component: {fileID: 3908435765817147052}
+  - component: {fileID: 1542185502439335500}
+  - component: {fileID: 2011049633091210258}
+  - component: {fileID: 8093328440913719072}
+  - component: {fileID: 6630918810476029124}
   m_Layer: 7
   m_Name: Slime MidBoss
   m_TagString: BigSlime
@@ -189,3 +193,122 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1542185502439335500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956090943824370894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ae85e3d3b5e4242bfdf3abb38e7688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetGameObject: {fileID: 0}
+  moneyDropPrefab: {fileID: 0}
+  damageTextPrefab: {fileID: 1713743412437274532, guid: 9e69095aeeb4b1e49840c8d74d107da6, type: 3}
+  gameManager: {fileID: 0}
+  baseSpeed: 1.5
+  hp: 10000
+  baseHP: 10000
+  maxHP: 10000
+  damage: 4
+  alteredSpeed: 0
+  alteredSpeedTimer: 0
+  tutorial: 0
+  particlePrefab: {fileID: 1210264596843239824, guid: 5a411476ff72944458cd122769dcdca7, type: 3}
+--- !u!114 &2011049633091210258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956090943824370894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa62230a9b5581541bda279ce1040c84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyScript: {fileID: 1542185502439335500}
+  target: {fileID: 0}
+  bossHPBar: {fileID: 0}
+  sizeBar: {fileID: 0}
+  bossHPBarFill: {fileID: 0}
+  sizeBarFill: {fileID: 0}
+  bossName: {fileID: 0}
+  secondaryBarTextName: {fileID: 0}
+  slimeBarrageBullet: {fileID: 2311187145655329313, guid: 122a91c97f219d843ad90066b83e2009, type: 3}
+  slimeSlice: {fileID: 4242553677396287666, guid: d91383e7838656b4d8fa4de848482acf, type: 3}
+--- !u!50 &8093328440913719072
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956090943824370894}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 200000
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!61 &6630918810476029124
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956090943824370894}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.19}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 9, y: 5.53125}
+    newSize: {x: 10, y: 7}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 7.29, y: 4.44}
+  m_EdgeRadius: 0
