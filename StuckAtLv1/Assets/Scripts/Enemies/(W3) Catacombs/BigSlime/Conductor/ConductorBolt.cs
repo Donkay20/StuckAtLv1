@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ConductorBolt : MonoBehaviour
 {
-    private readonly int BOLT_DAMAGE = 100;
+    private readonly int BOLT_DAMAGE = 200;
     private bool hitCheck;
     private float hitRefreshRate = 0.25f;
     private BoxCollider2D boltCollider;
