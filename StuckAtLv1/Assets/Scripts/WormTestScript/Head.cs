@@ -59,12 +59,12 @@ public class Head : MonoBehaviour
             
             if(enemyScript.GetAlteredSpeedTimer() > 0) {
                 if(enemyScript.GetBaseSpeed() > 0) {
-                    body.velocity = force * enemyScript.GetAlteredSpeed();
+                    body.velocity = force * (enemyScript.GetAlteredSpeed() + 0.5f);
                 }
             }
             else {
                 if (enemyScript.GetBaseSpeed() > 0) {
-                    body.velocity = force * enemyScript.GetBaseSpeed();
+                    body.velocity = force * (enemyScript.GetBaseSpeed() + 0.5f);
                 }    
             }
 
