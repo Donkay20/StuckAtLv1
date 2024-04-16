@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2335341418744104025}
   - component: {fileID: 223492428082270229}
   - component: {fileID: 522036500099036380}
+  - component: {fileID: 8112107883418499054}
   m_Layer: 0
   m_Name: Slime Puddle
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 773b6f1ceca8ee548a415b9453f1eaf4, type: 3}
+  m_Sprite: {fileID: 602871686, guid: f2feade4f0e0d5040904e04f47fcc0e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -154,3 +155,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b0f8c9bb1cacd74e843037fc47b58e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8112107883418499054
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8739093503068924005}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d63f3132db2e16f4694e8dd73f7233c5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7c39752ae904a3a4a88916c46ca9ca85
+guid: 94f03866434f45d4abe2b2c53fd1a3b8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Imp_0
+      name: SlimePuddle1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
-        height: 96
+        width: 170
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ee387b6a00b7b64e917c69d78c2f61c
-      internalID: 1647995589
+      spriteID: 3ed050ed1a19c0e4984fcfa12dde649d
+      internalID: -512384279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Imp_1
+      name: SlimePuddle1_1
       rect:
         serializedVersion: 2
-        x: 96
+        x: 170
         y: 0
-        width: 96
-        height: 96
+        width: 170
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83209437cc5fb1a4eaf6e37222e15996
-      internalID: -1454222208
+      spriteID: deb92b68116f2fc42afb760fc5d71543
+      internalID: 1933445390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Imp_2
+      name: SlimePuddle1_2
       rect:
         serializedVersion: 2
-        x: 192
+        x: 340
         y: 0
-        width: 96
-        height: 96
+        width: 170
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,29 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21691513bec9b734c9e7c5c59fbf3035
-      internalID: -586056284
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Imp_3
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 96
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3d5ff4d2bf1642d42815688842f4c5e9
-      internalID: -960272542
+      spriteID: 7c785a565bc754b4995a5ecb6043d3fe
+      internalID: -1506774011
       vertices: []
       indices: 
       edges: []
@@ -217,10 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Imp_0: 1647995589
-      Imp_1: -1454222208
-      Imp_2: -586056284
-      Imp_3: -960272542
+      SlimePuddle1_0: -512384279
+      SlimePuddle1_1: 1933445390
+      SlimePuddle1_2: -1506774011
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
