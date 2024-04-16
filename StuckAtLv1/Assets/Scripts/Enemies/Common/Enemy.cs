@@ -357,4 +357,19 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     public bool IsStunned() {
         return stunApplied;
     }
+
+    public float GetBaseSpeed()
+    {
+        return baseSpeed;
+    }
+
+    public float GetAlteredSpeed()
+    {
+        return alteredSpeed;
+    }
+
+    public float GetAlteredSpeedTimer()
+    {
+        return alteredSpeedTimer;
+    }
 }

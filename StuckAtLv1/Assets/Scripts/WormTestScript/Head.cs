@@ -23,12 +23,12 @@ public class Head : MonoBehaviour
     {
         //MoveTowardsPlayer();
         FacePlayer();
-        MoveBodyParts();
+        
     }
     
     void FixedUpdate()
     {
-       
+        MoveBodyParts();
     }
 
     void MoveTowardsPlayer()
@@ -52,8 +52,25 @@ public class Head : MonoBehaviour
         for(int i = 1; i < bodyParts.Count; i++)
         {
             MarkerManager markM = bodyParts[i - 1].GetComponent<MarkerManager>();
-            bodyParts[i].transform.position = Vector2.MoveTowards(bodyParts[i].transform.position, markM.markerList[0].position, step);
+            
+            Rigidbody2D body = bodyParts[i].GetComponent<Rigidbody2D>();
+            Vector3 force = (markM.markerList[0].position - bodyParts[i].transform.position).normalized;
+            Enemy enemyScript = this.GetComponent<Enemy>();
+            
+            if(enemyScript.GetAlteredSpeedTimer() > 0) {
+                if(enemyScript.GetBaseSpeed() > 0) {
+                    body.velocity = force * enemyScript.GetAlteredSpeed();
+                }
+            }
+            else {
+                if (enemyScript.GetBaseSpeed() > 0) {
+                    body.velocity = force * enemyScript.GetBaseSpeed();
+                }    
+            }
 
+            
+
+            //bodyParts[i].transform.position = Vector2.MoveTowards(bodyParts[i].transform.position, markM.markerList[0].position, step);
 
             //Rotate bodyparts
             float angle = Mathf.Atan2(markM.markerList[0].position.y - bodyParts[i].transform.position.y, markM.markerList[0].position.x - bodyParts[i].transform.position.x) * Mathf.Rad2Deg;

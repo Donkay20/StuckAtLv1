@@ -21,7 +21,7 @@ public class MarkerManager : MonoBehaviour
 
     public List<Marker> markerList = new List<Marker>();
 
-    void Update()
+    void FixedUpdate()
     {
         UpdateMarkerList();
     }
