@@ -350,7 +350,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         rend.color = new Color(1,1,1);
     }
 
-    public void SetSpeed(int speedToSet) {
+    public void SetSpeed(float speedToSet) {
         baseSpeed = speedToSet;
     }
 

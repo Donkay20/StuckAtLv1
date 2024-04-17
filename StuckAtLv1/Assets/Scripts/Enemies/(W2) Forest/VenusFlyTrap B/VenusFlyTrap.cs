@@ -32,7 +32,8 @@ public class VenusFlyTrap : MonoBehaviour
     private float suctionTimer;
     private readonly int MAX_RAGE = 360;
     private int bossMaxHP, rage;
-    private bool mapwideSuctionPrep, mapwideSuction, hyperSuction; private float mapwideSuctionPrepTimer, hyperSuctionPrepTimer;
+    private bool mapwideSuctionPrep, mapwideSuction, hyperSuction; 
+    private float mapwideSuctionPrepTimer, hyperSuctionPrepTimer;
     void Start() {
         resetTimer = 1;
         attackTimer = attackTimerResetValue;

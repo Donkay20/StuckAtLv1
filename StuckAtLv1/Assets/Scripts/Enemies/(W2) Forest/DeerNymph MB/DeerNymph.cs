@@ -20,7 +20,7 @@ public class DeerNymph : MonoBehaviour
     [SerializeField] private Image bossHPBarFill, angerBarFill;
     [SerializeField] private TextMeshProUGUI bossName, secondaryBarTextName;
     private readonly int MAX_ANGER = 100;
-    private readonly int BASE_SPEED = 2;
+    private readonly float BASE_SPEED = 2;
     private readonly float CHARGE_SPEED = 2;
     private int deerwomanMaxHP, anger;
     private float attackTimer, angerDrainAttackTimer;
@@ -146,11 +146,11 @@ public class DeerNymph : MonoBehaviour
     }
 
     private void HitSomething(bool crystal) {
-        anim.SetBool("Charging",false);
+        anim.SetBool("Charging", false);
         charging = false; StopAllCoroutines();
         if (crystal) {  //stop momentum, deal a bunch of damage to the boss and stun
             rb.velocity = new Vector2(0, 0);
-            enemyScript.TakeDamage(deerwomanMaxHP / 5);
+            enemyScript.TakeDamage(deerwomanMaxHP / 4);
             enemyScript.ApplySlow(0.1f, 3);
         } else {        //just stop momentum
             enemyScript.ApplySlow(0.1f, 1);
