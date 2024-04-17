@@ -27,7 +27,7 @@ public class PinballPyrobomb : MonoBehaviour
         AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
 
         damage = asb.GetDamageBonus(slot, FIREBALL_BASE_DAMAGE);
-        size = asb.GetSizeBonus(slot); transform.localScale = new Vector2(size, size);
+        size = asb.GetSizeBonus(slot); transform.localScale = new Vector2(size + 1f, size + 1f);
         duration = asb.GetDurationBonus(slot, FIREBALL_BASE_DURATION);
     }
 
