@@ -271,10 +271,16 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 break;
             default:
                 if (finalBoss && FindAnyObjectByType<FinalBossManager>().GetPhase() == 1) {
-                    FindAnyObjectByType<FinalBossManager>().Phase1EnemyDied();
+                    FinalBossManager finalBossManager = FindAnyObjectByType<FinalBossManager>();
+                    if (finalBossManager != null) {
+                        finalBossManager.Phase1EnemyDied();
+                    }
                 }
                 if (abyssMidboss) {
-                    FindAnyObjectByType<MonsterSwarm>().EnemyDied();
+                    MonsterSwarm swarm = FindAnyObjectByType<MonsterSwarm>();
+                    if (swarm != null) {
+                        swarm.EnemyDied();
+                    }
                 }
                 if (fromSpecialEnemy) {
                     Destroy(gameObject);

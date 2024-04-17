@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,9 +12,10 @@ public class MonsterSwarm : MonoBehaviour
     [SerializeField] private GameObject bossHPBar, calamityBar;
     [SerializeField] private TextMeshProUGUI bossTitle, calamityTitle;
     [SerializeField] private Image hpBarFill, calamityBarFill;
-    private readonly int CALAMITY_MAX;
+    [SerializeField] private CinemachineVirtualCamera cam;
+    private readonly float CALAMITY_MAX = 20;
     private int swarmMaxHP;
-    private int calamity;
+    private float calamity;
     void Start() {
         swarmMaxHP = enemyScript.maxHP;
         enemyScript.SetTarget(FindAnyObjectByType<Character>().gameObject);
@@ -33,9 +35,19 @@ public class MonsterSwarm : MonoBehaviour
     void Update() {
         hpBarFill.fillAmount = (float) enemyScript.GetHealth() / swarmMaxHP;
         calamityBarFill.fillAmount = (float) calamity / CALAMITY_MAX;
+
+        calamity += Time.deltaTime;
+        if (calamity >= CALAMITY_MAX) {
+            Calamity();
+        }
     }
 
     public void EnemyDied() {
         enemyScript.TakeDamage(1);
+    }
+
+    private void Calamity() {
+        //todo
+        calamity = 0;
     }
 }
