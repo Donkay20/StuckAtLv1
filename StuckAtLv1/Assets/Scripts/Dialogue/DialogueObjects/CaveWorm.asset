@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Cave Worm
   location: 
-  neutralSprite: {fileID: 0}
+  neutralSprite: {fileID: 21300000, guid: 870f423717618e14aa75f089444d2ced, type: 3}
   happySprite: {fileID: 0}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}
