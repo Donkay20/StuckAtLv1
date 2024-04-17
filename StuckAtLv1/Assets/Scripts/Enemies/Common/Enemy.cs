@@ -23,7 +23,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     [SerializeField] int damage;
     [SerializeField] private float alteredSpeed, alteredSpeedTimer;
     [Space]
-    [SerializeField] private bool tutorial;
+    [SerializeField] private bool tutorial, fromSpecialEnemy;
     private bool anemiaApplied; 
     private float anemiaTimer;
     private float anemiaActiveTick = 1;
@@ -40,7 +40,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     public GameObject particlePrefab;
     private Vector3 force;
     private int moneyOnKill;
-    private bool finalBoss;
+    private bool finalBoss, abyssMidboss;
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
@@ -66,6 +66,12 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             finalBoss = true;
         } else {
             finalBoss = false;
+        }
+
+        if (FindObjectOfType<MapManager>(includeInactive: true).GetWorld() == 5 && FindObjectOfType<MapManager>(includeInactive: true).GetLevel() == 5) {
+            abyssMidboss = true;
+        } else {
+            abyssMidboss = false;
         }
 
         buffManager = FindAnyObjectByType<BuffManager>();
@@ -266,6 +272,12 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             default:
                 if (finalBoss && FindAnyObjectByType<FinalBossManager>().GetPhase() == 1) {
                     FindAnyObjectByType<FinalBossManager>().Phase1EnemyDied();
+                }
+                if (abyssMidboss) {
+                    FindAnyObjectByType<MonsterSwarm>().EnemyDied();
+                }
+                if (fromSpecialEnemy) {
+                    Destroy(gameObject);
                 }
                 EnemyPool.Instance.ReturnEnemy(gameObject);
                 break;
