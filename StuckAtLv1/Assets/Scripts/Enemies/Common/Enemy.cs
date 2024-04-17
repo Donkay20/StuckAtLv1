@@ -58,9 +58,6 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         gameManager = FindAnyObjectByType<GameManager>();
         hp = baseHP + gameManager.ScaleDifficulty();
         maxHP = baseHP + gameManager.ScaleDifficulty();
-        if (!gameObject.CompareTag("LichEffigy") || !gameObject.CompareTag("FinalBossPhase1") || !gameObject.CompareTag("FinalBossPhase2") || !gameObject.CompareTag("FinalBossPhase3")) {   //add conditionals for certain enemies that shouldn't move
-            baseSpeed += gameManager.ScaleDifficulty() / 10;
-        }
         moneyOnKill = 5;
     }
 

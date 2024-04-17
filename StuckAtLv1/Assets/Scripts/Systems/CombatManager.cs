@@ -1,4 +1,5 @@
 using System.Collections;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject[] sewerSpawn = new GameObject[5];
     [SerializeField] private GameObject tiffanyRoom;
     [SerializeField] private GameObject tiffanySpawn;
+    [SerializeField] private CinemachineVirtualCamera cam1, cam2;
     //todo, abyss
     private int enemiesToKill, timeLeft, condition, roomChosen;
     private bool bossIsAlive;
@@ -76,55 +78,32 @@ public class CombatManager : MonoBehaviour
         bossSecondaryUI.SetActive(false);
         bossAdditionalInfo.SetActive(false);
 
+        switch (format) {
+            case "combat":
+            case "survival":
+                roomChosen = Random.Range(0, 4);
+                break;
+            case "miniboss":
+                roomChosen = 4;
+                break;
+            case "boss":
+                roomChosen = 5;
+                break;
+        }
+
         switch (mapProgress.GetWorld()) {
             //choose a room, set it to be active, position the character to the spawn point
             case 1: //Ruins
-                switch (format) {
-                    case "combat":
-                    case "survival":
-                        roomChosen = Random.Range(0, 4);
-                        break;
-                    case "miniboss":
-                        roomChosen = 4;
-                        break;
-                    case "boss":
-                        roomChosen = 5; //todo
-                        break;
-                }
                 ruinsRooms[roomChosen].SetActive(true);
                 room = ruinsRooms[roomChosen];
                 character.gameObject.transform.position = ruinsSpawn[roomChosen].transform.position;
                 break;
             case 2: //Forest
-                switch (format) {
-                    case "combat":
-                    case "survival":
-                        roomChosen = Random.Range(0, 2); //adjust when more forest rooms are made available.
-                        break;
-                    case "miniboss":
-                        roomChosen = 4;
-                        break;
-                    case "boss":
-                        roomChosen = 5;
-                        break;
-                }
                 forestRooms[roomChosen].SetActive(true);
                 room = forestRooms[roomChosen];
                 character.gameObject.transform.position = forestSpawn[roomChosen].transform.position;
                 break;
-            case 3:
-                switch (format) {
-                    case "combat":
-                    case "survival":
-                        roomChosen = Random.Range(0, 1); //adjust when more catacombs rooms are made available.
-                        break;
-                    case "miniboss":
-                        roomChosen = 4;
-                        break;
-                    case "boss":
-                        roomChosen = 5;
-                        break;
-                }
+            case 3: //Catacombs
                 sewerRooms[roomChosen].SetActive(true);
                 room = sewerRooms[roomChosen];
                 character.gameObject.transform.position = sewerSpawn[roomChosen].transform.position;
@@ -318,24 +297,30 @@ public class CombatManager : MonoBehaviour
 
     private IEnumerator Finish() {
         //Disable the spawner & get rid of all remaining enemies, damage numbers, money, and drops
-        spawner.ClearEnemies();
-        spawner.enabled = false;
+        spawner.ClearEnemies(); spawner.enabled = false;
 
+        //If camera sizes were changed, reset them
+        cam1.m_Lens.OrthographicSize = 8; cam2.m_Lens.OrthographicSize = 8;
+
+        //Clear all damage numbers
         DamageNumberParent[] remainingDamageNumbers = FindObjectsByType<DamageNumberParent>(FindObjectsSortMode.None);
         foreach (DamageNumberParent d in remainingDamageNumbers) {
             d.BattleOver();
         }
 
+        //Clear all drops
         ExtraDrop[] remainingMoneyDrops = FindObjectsByType<ExtraDrop>(FindObjectsSortMode.None);
         foreach (ExtraDrop moneybags in remainingMoneyDrops) {
             moneybags.DestroyExtraDrops();
         }
 
+        //Clear all enemy groups
         EnemyGroup[] remainingEnemyGroups = FindObjectsByType<EnemyGroup>(FindObjectsSortMode.None);
         foreach (EnemyGroup enemyGroup in remainingEnemyGroups) {
             enemyGroup.BattleEnd();
         }
 
+        //Clear all enemy instantiations (i.e. attacks)
         BattleOver[] remainingAdds = FindObjectsByType<BattleOver>(FindObjectsSortMode.None);
         foreach (BattleOver b in remainingAdds) {
             b.BattleEnd();

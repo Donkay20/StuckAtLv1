@@ -181,6 +181,10 @@ public class AbsorbBullet : MonoBehaviour
                 case "BigSlime" :   //Conductive Goop
                     slotManager.AcquireSkill(32);
                     break;
+
+                case "Sandworm":    //Sand Pillar
+                    slotManager.AcquireSkill(33);
+                    break;
             }
 
             if (slotManager.IsBloodsuckerActive()) {    //legendary 9

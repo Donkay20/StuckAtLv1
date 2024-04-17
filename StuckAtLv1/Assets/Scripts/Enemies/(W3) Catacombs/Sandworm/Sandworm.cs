@@ -16,27 +16,30 @@ public class Sandworm : MonoBehaviour {
     [SerializeField] private CinemachineVirtualCamera cam;
     [Header("Boss Attacks")]
     [SerializeField] private GameObject mapwideAttack;
+    [SerializeField] private GameObject sandSwirl;
     //backend
     private readonly float MAX_SPEED = 6;
     private readonly float MIN_SPEED = 1;
-    private readonly float ATTACK_COOLDOWN = 10;
+    private readonly float SPEED_BOOST_FACTOR = 0.1f;
+    private readonly float SLOWDOWN_FACTOR = 1f;
+    private readonly float ATTACK_COOLDOWN = 15;
+    private float cameraSize = 8;
     private float attackTimer;
     private int bossMaxHP;
-    private float speed;
+    private float speed = 3;
     
     void Start() {
         attackTimer = ATTACK_COOLDOWN;
         bossMaxHP = enemyScript.maxHP;
+        enemyScript.SetTarget(FindAnyObjectByType<Character>().gameObject);
     }
 
     private void OnEnable() {
         bossHPBar.SetActive(true);
         bossName.text = "The Sandworm.";
-        bossHPBarFill.fillAmount = 1;
 
         momentumBar.SetActive(true);
         momentumName.text = "Momentum";
-        momentumBarFill.fillAmount = 0;
     }
 
     void Update() {
@@ -47,48 +50,45 @@ public class Sandworm : MonoBehaviour {
         if (attackTimer <= 0) {
             Attack();
         }
+
+        if (cameraSize < 12) {
+            cameraSize += Time.deltaTime;
+            cam.m_Lens.OrthographicSize = cameraSize;
+        }
     }
 
     private void Attack() {
         switch (Random.Range(0,2)) {
             case 0:
-                StartCoroutine(MapwideAttack());
+                Instantiate(mapwideAttack);
                 break;
             case 1:
-
+                Instantiate(sandSwirl, target.transform.position, Quaternion.identity);
                 break;
         }
-    }
-
-    private IEnumerator Quicksand() {
-        yield return new WaitForSeconds(0);
-    }
-
-    private IEnumerator MapwideAttack() {
-        Instantiate(mapwideAttack);
-        yield return new WaitForSeconds(7.5f);
+        attackTimer = ATTACK_COOLDOWN;
     }
 
     private void SpeedUp() {
-        if (speed + 0.1f > MAX_SPEED) {
+        if (speed + SPEED_BOOST_FACTOR > MAX_SPEED) {
             speed = MAX_SPEED;
         } else {
-            speed += 0.1f;
+            speed += SPEED_BOOST_FACTOR;
         }
         enemyScript.SetSpeed(speed);
     }
 
     public void Slowdown() {
-        if (speed - 0.5f < MIN_SPEED) {
+        if (speed - SLOWDOWN_FACTOR < MIN_SPEED) {
             speed = MIN_SPEED;
         } else {
-            speed -= 0.5f;
+            speed -= SLOWDOWN_FACTOR;
         }
         enemyScript.SetSpeed(speed);
     }
 
-    private void OnTriggerEnter2D(Collider2D col) {
-        if (col.TryGetComponent<Enemy>(out var enemy)) {
+    private void OnCollisionEnter2D(Collision2D col) {
+        if (col.collider.TryGetComponent<Enemy>(out var enemy)) {
             enemy.TakeDamage(50);
             SpeedUp();
         }

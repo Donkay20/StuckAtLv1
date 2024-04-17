@@ -351,6 +351,9 @@ public class DialogueManager : MonoBehaviour
             case "CaveMiniBossIntro":
                 gameManager.ReceiveCommand("miniboss");
                 break;
+            case "CaveBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
             case "CaveBossEnd":
                 SceneManager.LoadScene("CaveEnd", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("CaveBossEnd");
