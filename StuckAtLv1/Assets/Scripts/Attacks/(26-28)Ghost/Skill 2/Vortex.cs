@@ -27,7 +27,7 @@ public class Vortex : MonoBehaviour
         AttackSlotBonus asb = FindAnyObjectByType<AttackSlotBonus>();
 
         size = asb.GetSizeBonus(slot);
-        transform.localScale = new Vector2(size, size);
+        transform.localScale = new Vector2(size + 1.5f, size + 1.5f);
 
         duration = asb.GetDurationBonus(slot, VORTEX_BASE_DURATION);
 
