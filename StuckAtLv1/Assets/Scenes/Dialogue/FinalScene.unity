@@ -206,7 +206,7 @@ PrefabInstance:
     - target: {fileID: 8126827850983673292, guid: c4f34feda12fe6d4db89ce62ac89de61, type: 3}
       propertyPath: charactersRight.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 172b7fe41d39e8644accbb4e6bfe5b11, type: 2}
+      objectReference: {fileID: 11400000, guid: 9ddce0053108e4845adec6bddc184346, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -273,11 +273,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.size
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.size
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[0]
@@ -297,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[4]
-      value: Old Man
+      value: Lucy
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[5]
@@ -349,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[17]
-      value: Old Man
+      value: Lucy
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[18]
@@ -357,7 +357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[19]
-      value: Flower
+      value: Jamp
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[20]
@@ -365,7 +365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[21]
-      value: Jamp
+      value: ' '
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: names.Array.data[22]
@@ -373,7 +373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.size
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.data[1]
@@ -445,11 +445,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.data[20]
-      value: neutral
+      value: happy
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: emotions.Array.data[21]
-      value: happy
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[0]
@@ -461,7 +461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[2]
-      value: "Ash! And Gramps! It\u2019s good to see you again!"
+      value: "Ash! And Gramps! And Lucy! It\u2019s good to see you again!"
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[3]
@@ -469,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[4]
-      value: "The King of the Vespera Realm! That\u2019s a high title!"
+      value: "Hehe! The King of the Vespera Realm! That\u2019s a high title!"
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[5]
@@ -523,7 +523,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[17]
-      value: "Hehe, I\u2019m sure. See you around, your majesty."
+      value: Hehe! See you around, your majesty.
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[18]
@@ -532,15 +532,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[19]
-      value: "\u2026"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
-      propertyPath: sentences.Array.data[20]
       value: Goodbye, mother.
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
-      propertyPath: sentences.Array.data[21]
+      propertyPath: sentences.Array.data[20]
       value: I hope to see you again someday!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
+      propertyPath: sentences.Array.data[21]
+      value: (The End.)
       objectReference: {fileID: 0}
     - target: {fileID: 8764759665048796826, guid: e7dfc7fd967000446b470d168b9318d7, type: 3}
       propertyPath: sentences.Array.data[22]
