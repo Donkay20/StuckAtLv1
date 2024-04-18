@@ -68,7 +68,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             finalBoss = false;
         }
 
-        if (FindObjectOfType<MapManager>(includeInactive: true).GetWorld() == 5 && FindObjectOfType<MapManager>(includeInactive: true).GetLevel() == 5) {
+        if (FindObjectOfType<MapManager>(includeInactive: true).GetWorld() == 4 && FindObjectOfType<MapManager>(includeInactive: true).GetLevel() == 5) {
             abyssMidboss = true;
         } else {
             abyssMidboss = false;
@@ -194,7 +194,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
         if (hp < 1) {
             if (!tutorial) {
                 CombatManager c = FindAnyObjectByType<CombatManager>();
-                if (c.GetObjective() == "miniboss" && (gameObject.CompareTag("Knight") || gameObject.CompareTag("DeerNymph")) || gameObject.CompareTag("BigSlime")) {
+                if (c.GetObjective() == "miniboss" && (gameObject.CompareTag("Knight") || gameObject.CompareTag("DeerNymph")) || gameObject.CompareTag("BigSlime") || gameObject.CompareTag("Swarm")) {
                     c.EnemyKilled();
                 } else if (c.GetObjective() == "boss" && (gameObject.CompareTag("Lich") || gameObject.CompareTag("VenusFlyTrap") || gameObject.CompareTag("Sandworm") || gameObject.CompareTag("FinalBossPhase3")) ) {
                     c.EnemyKilled();
@@ -253,6 +253,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             case "Knight":  
             case "Lich":
             case "DeerNymph":
+            case "Swarm":
                 Destroy(gameObject);
                 break;
             case "VenusFlyTrap":

@@ -117,88 +117,108 @@ public class DialogueManager : MonoBehaviour
             Scene currentScene = gameObject.scene;
             Debug.Log("Current scene: " + currentScene.name);
             switch (currentScene.name) {
-                case "OpeningScene":
-                    SceneManager.LoadScene("ArtifactIntro");
-                    break;
-                case "ArtifactIntro":
-                    SceneManager.LoadScene("Tutorial");
-                    break;
-                case "RuinsIntro":
-                    SceneManager.LoadScene("MainGame");
-                    break;
-                case "RuinsMiniBossIntro":
-                    gameManager.ReceiveCommand("miniboss");
-                    break;
-                case "RuinsMiniBossEnd":
-                    gameManager.ReceiveCommand("map");    
-                    break;
-                case "RuinsBossIntro":
-                    gameManager.ReceiveCommand("boss");
-                    break;
-                case "RuinsBossEnd":
-                    SceneManager.LoadScene("RuinsEnd", LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync("RuinsBossEnd");
-                    break;
-                case "RuinsEnd":
-                    SceneManager.LoadScene("ForestIntro", LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync("RuinsEnd");
-                    break;
-                case "ForestIntro":
-                    gameManager.ReceiveCommand("map");
-                    break;
-                case "ForestMiniBossIntro":
-                    gameManager.ReceiveCommand("miniboss");
-                    break;
-                case "ForestMiniBossEnd":
-                    gameManager.ReceiveCommand("map");    
-                    break;
-                case "ForestBossIntro":
-                    gameManager.ReceiveCommand("boss");
-                    break;
-                case "ForestBossEnd":
-                    SceneManager.LoadScene("ForestEnd", LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync("ForestBossEnd");
-                    break;
-                case "ForestEnd":
-                    SceneManager.LoadScene("CaveIntro", LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync("ForestEnd");
-                    break;
-                case "CaveIntro":
-                    gameManager.ReceiveCommand("map");
-                    break;
-                case "CaveMiniBossIntro":
-                    gameManager.ReceiveCommand("miniboss");
-                    break;
-                case "CaveMiniBossEnd":
-                    gameManager.ReceiveCommand("map");    
-                    break;
-                case "CaveBossIntro":
-                    gameManager.ReceiveCommand("boss");
-                    break;
-                case "CaveBossEnd":
-                    SceneManager.LoadScene("CaveEnd", LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync("CaveBossEnd");
-                    break;
-                case "CaveEnd":
-                    SceneManager.LoadScene("AbyssIntro", LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync("CaveEnd");
-                    break;
+                //Intro
+            case "OpeningScene":
+                SceneManager.LoadScene("ArtifactIntro");
+                break;
+            case "ArtifactIntro":
+                SceneManager.LoadScene("Tutorial");
+                break;
+            
+            //Ruins
+            case "RuinsIntro":
+                SceneManager.LoadScene("MainGame");
+                break;
+            case "RuinsMiniBossIntro":
+                gameManager.ReceiveCommand("miniboss");
+                break;
+            case "RuinsMiniBossEnd":
+                gameManager.ReceiveCommand("map");    
+                break;
+            case "RuinsBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
+            case "RuinsBossEnd":
+                SceneManager.UnloadSceneAsync("RuinsBossEnd");
+                SceneManager.LoadScene("RuinsEnd", LoadSceneMode.Additive);
+                break;
+            case "RuinsEnd":
+                SceneManager.LoadScene("ForestIntro", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("RuinsEnd");
+                break;
 
-                    //abyss stuff goes here
+            //Forest
+            case "ForestIntro":
+                gameManager.ReceiveCommand("map");
+                break;
+            case "ForestMiniBossIntro":
+                gameManager.ReceiveCommand("miniboss");
+                break;
+            case "ForestMiniBossEnd":
+                gameManager.ReceiveCommand("map");    
+                break;
+            case "ForestBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
+            case "ForestBossEnd":
+                SceneManager.LoadScene("ForestEnd", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("ForestBossEnd");
+                break;
+            case "ForestEnd":
+                SceneManager.LoadScene("CaveIntro", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("ForestEnd");
+                break;
 
-                case "AbyssEnd":
-                    SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive);
-                    SceneManager.UnloadSceneAsync("AbyssEnd");
-                    break;
-                case "TiffBossIntro":
-                    gameManager.ReceiveCommand("boss");
-                    break;
-                case "TiffBossEnd":
-                    SceneManager.LoadScene("FinalScene");
-                    break;
-                case "FinalScene":
-                    SceneManager.LoadScene("TitleScreen");
-                    break;
+            //Catacombs
+            case "CaveIntro":
+                gameManager.ReceiveCommand("map");
+                break;
+            case "CaveMiniBossIntro":
+                gameManager.ReceiveCommand("miniboss");
+                break;
+            case "CaveMiniBossEnd":
+                gameManager.ReceiveCommand("map");    
+                break;
+            case "CaveBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
+            case "CaveBossEnd":
+                SceneManager.LoadScene("CaveEnd", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("CaveBossEnd");
+                break;
+            case "CaveEnd":
+                SceneManager.LoadScene("AbyssIntro", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("CaveEnd");
+                break;
+            
+            //Abyss
+            case "AbyssIntro":
+                gameManager.ReceiveCommand("map");
+                break;
+            case "AbyssMiniBossIntro":
+                gameManager.ReceiveCommand("miniboss");
+                break;
+            case "AbyssMiniBossEnd":
+                gameManager.ReceiveCommand("map");    
+                break;
+            case "AbyssBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
+            case "AbyssBossEnd":
+                SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("AbyssBossEnd");
+                break;
+
+            //Final Boss
+            case "TiffBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
+            case "TiffBossEnd":
+                SceneManager.LoadScene("FinalScene");
+                break;
+            case "FinalScene":
+                SceneManager.LoadScene("TitleScreen");
+                break;
             }
         }
         if (lines.Count > 0) {
@@ -299,12 +319,15 @@ public class DialogueManager : MonoBehaviour
     private void SkipDialogue() {
         Scene currentScene = gameObject.scene;
         switch (currentScene.name) {
+                //Intro
             case "OpeningScene":
                 SceneManager.LoadScene("ArtifactIntro");
                 break;
             case "ArtifactIntro":
                 SceneManager.LoadScene("Tutorial");
                 break;
+            
+            //Ruins
             case "RuinsIntro":
                 SceneManager.LoadScene("MainGame");
                 break;
@@ -325,6 +348,8 @@ public class DialogueManager : MonoBehaviour
                 SceneManager.LoadScene("ForestIntro", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("RuinsEnd");
                 break;
+
+            //Forest
             case "ForestIntro":
                 gameManager.ReceiveCommand("map");
                 break;
@@ -345,11 +370,16 @@ public class DialogueManager : MonoBehaviour
                 SceneManager.LoadScene("CaveIntro", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("ForestEnd");
                 break;
+
+            //Catacombs
             case "CaveIntro":
                 gameManager.ReceiveCommand("map");
                 break;
             case "CaveMiniBossIntro":
                 gameManager.ReceiveCommand("miniboss");
+                break;
+            case "CaveMiniBossEnd":
+                gameManager.ReceiveCommand("map");    
                 break;
             case "CaveBossIntro":
                 gameManager.ReceiveCommand("boss");
@@ -362,13 +392,26 @@ public class DialogueManager : MonoBehaviour
                 SceneManager.LoadScene("AbyssIntro", LoadSceneMode.Additive);
                 SceneManager.UnloadSceneAsync("CaveEnd");
                 break;
-
-                //abyss stuff goes here
-
-            case "AbyssEnd":
-                SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive);
-                SceneManager.UnloadSceneAsync("AbyssEnd");
+            
+            //Abyss
+            case "AbyssIntro":
+                gameManager.ReceiveCommand("map");
                 break;
+            case "AbyssMiniBossIntro":
+                gameManager.ReceiveCommand("miniboss");
+                break;
+            case "AbyssMiniBossEnd":
+                gameManager.ReceiveCommand("map");    
+                break;
+            case "AbyssBossIntro":
+                gameManager.ReceiveCommand("boss");
+                break;
+            case "AbyssBossEnd":
+                SceneManager.LoadScene("TiffBossIntro", LoadSceneMode.Additive);
+                SceneManager.UnloadSceneAsync("AbyssBossEnd");
+                break;
+
+            //Final Boss
             case "TiffBossIntro":
                 gameManager.ReceiveCommand("boss");
                 break;
@@ -378,7 +421,7 @@ public class DialogueManager : MonoBehaviour
             case "FinalScene":
                 SceneManager.LoadScene("TitleScreen");
                 break;
-        }
+            }
     }
 
     private void InitializeButtons() {

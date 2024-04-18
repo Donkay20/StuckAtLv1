@@ -28,6 +28,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private GameObject[] forestSpawn = new GameObject[5];
     [SerializeField] private GameObject[] sewerRooms = new GameObject[5];
     [SerializeField] private GameObject[] sewerSpawn = new GameObject[5];
+    [SerializeField] private GameObject[] abyssRooms = new GameObject[5];
+    [SerializeField] private GameObject[] abyssSpawn = new GameObject[5];
     [SerializeField] private GameObject tiffanyRoom;
     [SerializeField] private GameObject tiffanySpawn;
     [SerializeField] private CinemachineVirtualCamera cam1, cam2;
@@ -108,9 +110,12 @@ public class CombatManager : MonoBehaviour
                 room = sewerRooms[roomChosen];
                 character.gameObject.transform.position = sewerSpawn[roomChosen].transform.position;
                 break;
-            case 4:
+            case 4: //Abyss
+                abyssRooms[roomChosen].SetActive(true);
+                room = abyssRooms[roomChosen];
+                character.gameObject.transform.position = abyssSpawn[roomChosen].transform.position;
                 break;
-            case 5:
+            case 5: //Final Boss
                 tiffanyRoom.SetActive(true);
                 room = tiffanyRoom;
                 character.gameObject.transform.position = tiffanySpawn.transform.position;
@@ -220,7 +225,7 @@ public class CombatManager : MonoBehaviour
                 spawner.SetSpawnTimer(2f);
                 uIObjective.text = "Defeat boss!!";
 
-                if (mapProgress.GetWorld() == 3) {
+                if (mapProgress.GetWorld() == 5) {
                     spawner.SetSpawnTimer(1f);
                     uIObjective.text = "Kill Tiffany!!";
                 }

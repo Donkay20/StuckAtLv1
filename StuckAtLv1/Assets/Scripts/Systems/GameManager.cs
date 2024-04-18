@@ -113,6 +113,12 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 4:
+                            if (mapManager.GetLevel() == 0) {   
+                                SceneManager.UnloadSceneAsync("AbyssIntro");
+                            }
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.UnloadSceneAsync("AbyssMiniBossEnd");
+                            }
                             break;
                     }
                     mapUI.SetActive(true);
@@ -223,7 +229,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             SceneManager.UnloadSceneAsync("CaveMiniBossIntro");
                             break;
                         case 4:
-                            //todo
+                            SceneManager.UnloadSceneAsync("AbyssMiniBossIntro");
                             break;
                     }
                 }
@@ -249,7 +255,7 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             SceneManager.UnloadSceneAsync("CaveBossIntro"); 
                             break;
                         case 4:
-                            //todo
+                            SceneManager.UnloadSceneAsync("AbyssBossIntro"); 
                             break;
                         case 5:
                             SceneManager.UnloadSceneAsync("TiffBossIntro");
@@ -291,7 +297,12 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 4:
-                            //todo
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.LoadScene("AbyssMiniBossIntro", LoadSceneMode.Additive);
+                            }
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.LoadScene("AbyssBossIntro", LoadSceneMode.Additive);
+                            }
                             break;
                     }
                 }
@@ -327,6 +338,13 @@ There are separate combat, map, event, and upgrade scripts that manage each even
                             }
                             break;
                         case 4:
+                            if (mapManager.GetLevel() == 5) {
+                                SceneManager.LoadScene("AbyssMiniBossEnd", LoadSceneMode.Additive);
+                            }
+                            if (mapManager.GetLevel() == 11) {
+                                SceneManager.LoadScene("AbyssBossEnd", LoadSceneMode.Additive);
+                                UpdateSlotProtocol(); //no new slot
+                            }
                             break;
                         case 5:
                             if (mapManager.GetLevel() == 0) {
@@ -457,6 +475,11 @@ There are separate combat, map, event, and upgrade scripts that manage each even
     }
 
     private void UpdateSlotProtocol() {
+        mapUI.SetActive(true);
+        mapManager.NewWorld();
+        mapManager.SetLinesOff();
+        mapUI.SetActive(false);
+
         if (mapManager.GetWorld() < 5) {
             maxSlots++;
 
@@ -470,25 +493,6 @@ There are separate combat, map, event, and upgrade scripts that manage each even
 
             pauseMenu.IncreaseMaxSlots();
         }
-
-        mapUI.SetActive(true);
-        mapManager.NewWorld();
-        mapManager.SetLinesOff();
-        mapUI.SetActive(false);
-        
-        /*
-        switch (mapManager.GetWorld()) {
-            case 2:
-                enemyPool.WorldOneClear();
-                break;
-            case 3:
-                enemyPool.WorldTwoClear();
-                break;
-            case 4:
-                enemyPool.WorldThreeClear();
-                break;
-        }
-        */
 
         //virtualCamera.SetForest();
     }

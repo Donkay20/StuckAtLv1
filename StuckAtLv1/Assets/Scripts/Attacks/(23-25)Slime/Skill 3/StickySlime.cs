@@ -50,8 +50,7 @@ public class StickySlime : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.TryGetComponent<Enemy>(out var enemy)) {
-            if (!enemy.CompareTag("BigSlime") && !enemy.CompareTag("Sandworm") && !enemy.CompareTag("ShadowKnight") 
-            && !enemy.CompareTag("DarkJamp") && !enemy.CompareTag("FinalBossPhase1") && !enemy.CompareTag("FinalBossPhase2") && !enemy.CompareTag("FinalBossPhase3")) {
+            if (!enemy.CompareTag("BigSlime") && !enemy.CompareTag("Sandworm") && !enemy.CompareTag("DarkJamp") && !enemy.CompareTag("FinalBossPhase1") && !enemy.CompareTag("FinalBossPhase2") && !enemy.CompareTag("FinalBossPhase3")) {
                 enemy.ApplySlow(1, duration);
                 enemyList.Add(enemy);
 

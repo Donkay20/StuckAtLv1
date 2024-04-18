@@ -64,10 +64,10 @@ public class Debuff : MonoBehaviour
     //If true: turn the debuff on. If false: turn the debuff off.
         int i = 0;
         switch(debuffType) {
-            case "slow": //Reduces the speed modifier.
+            case "slow": //Reduces the speed modifier. Higher % = higher slow.
                 i = 1;
                 if (x) {
-                    movement.SpeedDebuff *= severity;
+                    movement.SpeedDebuff *= severity; 
                 } else {
                     movement.SpeedDebuff /= severity;
                 }

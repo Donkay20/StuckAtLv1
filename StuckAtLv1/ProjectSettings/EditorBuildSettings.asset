@@ -78,6 +78,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Dialogue/Cave/CaveEnd.unity
     guid: a2edc24a5a87c604f9a0dae9ab3d8d8b
   - enabled: 1
+    path: Assets/Scenes/Dialogue/Abyss/AbyssIntro.unity
+    guid: 3a6659cf353c6e64988bac2c4447b088
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Abyss/AbyssMiniBossIntro.unity
+    guid: 0a0656b0743d3ba4799c84eb00d4fb49
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Abyss/AbyssMiniBossEnd.unity
+    guid: d48b1ff7d4f74fc4a85aa33b8d9bb7b7
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Abyss/AbyssBossIntro.unity
+    guid: 1d1953ac20815254f83208424c125036
+  - enabled: 1
+    path: Assets/Scenes/Dialogue/Abyss/AbyssBossEnd.unity
+    guid: 30eb5282d9623d84f8c0dbd07d2ecdf1
+  - enabled: 1
     path: Assets/Scenes/Dialogue/Tiffany/TiffBossIntro.unity
     guid: a3a75c9a2ad48474db01da81abd2b182
   - enabled: 1
