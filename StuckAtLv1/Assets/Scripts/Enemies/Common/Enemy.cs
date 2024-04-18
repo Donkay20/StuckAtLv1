@@ -95,7 +95,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             }    
         }
 
-        if (this.CompareTag("LichEffigy") == false) {
+        if (this.CompareTag("LichEffigy") == false && this.CompareTag("VenusFlyTrap") == false) {
             Flip(force.x);
         }
     }
