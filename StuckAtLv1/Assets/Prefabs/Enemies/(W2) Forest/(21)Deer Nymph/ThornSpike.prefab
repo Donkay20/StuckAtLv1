@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c008db1380d524eb79c242d033edc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thornSpikeActiveSprite: {fileID: 21300000, guid: 92a0c5ad1c77b8b48aa23ced244605dd, type: 3}
+  thornSpikeActiveSprite: {fileID: -2130489153, guid: fbd6a3b4857ed3940a2dc9e6648f2437, type: 3}
 --- !u!58 &4551864816886656213
 CircleCollider2D:
   m_ObjectHideFlags: 0
