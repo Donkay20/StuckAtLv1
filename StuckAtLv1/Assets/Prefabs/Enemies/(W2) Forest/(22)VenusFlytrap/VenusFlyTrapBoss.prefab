@@ -114,6 +114,7 @@ MonoBehaviour:
   alteredSpeed: 0
   alteredSpeedTimer: 0
   tutorial: 0
+  fromSpecialEnemy: 0
   particlePrefab: {fileID: 0}
 --- !u!70 &6692597431739556998
 CapsuleCollider2D:
@@ -669,6 +670,7 @@ MonoBehaviour:
   enrageName: {fileID: 0}
   attackTimerResetValue: 7
   suctionTimerResetValue: 25
+  cam: {fileID: 0}
 --- !u!1 &7543526581933207413
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,6 +767,7 @@ GameObject:
   - component: {fileID: 3748437372480646047}
   - component: {fileID: 3373953631476661495}
   - component: {fileID: 5403362717212384542}
+  - component: {fileID: 920421383337278988}
   m_Layer: 0
   m_Name: Vine Ground
   m_TagString: Untagged
@@ -894,6 +897,27 @@ PointEffector2D:
   m_ForceMode: 0
   m_Drag: 0
   m_AngularDrag: 0
+--- !u!95 &920421383337278988
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7782383710498583442}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51470c218ae5ff7468e2cc87ac9f2d4f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9052461349186608022
 GameObject:
   m_ObjectHideFlags: 0

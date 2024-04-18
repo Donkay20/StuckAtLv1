@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1125258589167329358}
   - component: {fileID: 7073777991028992972}
   - component: {fileID: 1514574306278564486}
+  - component: {fileID: 9709078643479135}
   m_Layer: 16
   m_Name: Fly Bomb
   m_TagString: Untagged
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: cda9c51da01a1e749b3b5aaf96b0e7fb, type: 3}
+  m_Sprite: {fileID: -810593692, guid: 29b7f4098ff0560409b02fe8230b4199, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,9 +164,30 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01, y: -0.31}
+  m_Offset: {x: -0.00999999, y: -0.009429097}
   serializedVersion: 2
-  m_Radius: 0.43
+  m_Radius: 0.5051427
+--- !u!95 &9709078643479135
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6972607621073479977}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d898964ce0b2ce7428b5789a4eb52df5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7936060474746351683
 GameObject:
   m_ObjectHideFlags: 0
