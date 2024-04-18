@@ -189,13 +189,22 @@ public class CombatManager : MonoBehaviour
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;
+                case 33:    //Abyss Event 4
+                    uIObjective.text = "Defeat!";
+                    objective = "combat";
+                    combatSkull.SetActive(true);
+                    enemiesToKill = 100;
+                    spawner.SetSpawnTimer(0.1f);
+                    uIObjectiveNumber.text = enemiesToKill.ToString();
+                    StartCoroutine(CombatTracker());
+                    break;
             }
         } else {
             switch (format) {
             case "combat":
                 objective = "combat";
                 combatSkull.SetActive(true);
-                spawner.SetSpawnTimer(0.5f);
+                spawner.SetSpawnTimer(0.7f - (0.1f * mapProgress.GetWorld()));
                 enemiesToKill = mapProgress.GetWorld() * (10 + (2 * mapProgress.GetLevel())); //orig 10
                 uIObjectiveNumber.text = enemiesToKill.ToString(); uIObjective.text = "Defeat!";
                 StartCoroutine(CombatTracker());
@@ -204,7 +213,7 @@ public class CombatManager : MonoBehaviour
             case "survival":
                 objective = "survival";
                 survivalHourglass.SetActive(true);
-                spawner.SetSpawnTimer(0.5f);
+                spawner.SetSpawnTimer(0.7f - (0.1f * mapProgress.GetWorld())); 
                 timeLeft = mapProgress.GetWorld() * (20 + mapProgress.GetLevel()); //orig 20
                 uIObjectiveNumber.text = timeLeft.ToString(); uIObjective.text = "Survive!";
                 StartCoroutine(SurvivalTimer());

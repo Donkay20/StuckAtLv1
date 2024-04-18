@@ -62,6 +62,9 @@ public class EnemyManager : MonoBehaviour
             case 26:    //Catacombs Event 4
                 enemyID = Random.Range(21, 24);
                 break;
+            case 33:    //Abyss Event 4
+                enemyID = Random.Range(0, 27);
+                break; 
             }
         } else {
             switch(mapManager.GetWorld()) {

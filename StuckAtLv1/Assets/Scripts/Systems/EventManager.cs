@@ -61,7 +61,8 @@ public class EventManager : MonoBehaviour
                 background.sprite = catacombsBG;
                 break;
             case 4: //abyss
-                //todo
+                selectedEvent = abyssEvents[Random.Range(0, abyssEvents.Length)];
+                background.sprite = abyssBG;
                 break;
         }
 
@@ -137,6 +138,8 @@ public class EventManager : MonoBehaviour
                         case "Imp":
                             speaker.sprite = imp;
                             break;
+
+                        //Abyss (none)
                     }
                     messageCounter++;
                     break;
@@ -216,30 +219,28 @@ public class EventManager : MonoBehaviour
                     3. done
                     4. done
                     5. done
-
                 Forest:
                     1. done
                     2. done
                     3. done
                     4. done
                     5. done
-
                 Catacombs:
                     1. done
                     2. done
-                    3. todo
-                    4. todo
-                    5. todo
-
+                    3. done
+                    4. done
+                    5. done
                 Abyss:
-                    1. todo
-                    2. todo
-                    3. todo
-                    4. todo
-                    5. todo
+                    1. done
+                    2. done
+                    3. done
+                    4. done
+                    5. done
         */
 
         switch(outcomeDecided) {
+            //Ruins
             case 0:     //+10 HP (event 1, ruins)
                 player.currentHp += 10;
                 resolve = "normal";
@@ -293,6 +294,8 @@ public class EventManager : MonoBehaviour
             case 9:     //nothing happens (event 5, ruins)
                 resolve = "normal";
                 break;
+            
+            //Forest
             case 10:    //-500g if 500+g (event 1, forest)
                 player.money -= 500;
                 resolve = "normal";
@@ -333,6 +336,8 @@ public class EventManager : MonoBehaviour
                 combat.ReceiveCondition(outcomeDecided);
                 resolve = "combat";
                 break;
+
+            //Catacombs
             case 20:    //Jamp eats the shiny mushroom (event 1, catacombs)
                 playerMove.SetExternalModifier(6f);
                 resolve = "normal";
@@ -377,6 +382,27 @@ public class EventManager : MonoBehaviour
                     player.currentHp /= 2;
                 }
                 resolve = "normal";
+                break;
+            
+            //Abyss
+            case 30:    //Jamp gets an upgrade from the old man (event 1, abyss)
+                resolve = "upgrade";
+                break;
+            case 31:    //Jamp gets an upgrade from ash (event 2, abyss)
+                resolve = "upgrade";
+                break;
+            case 32:    //Jamp gets an upgrade from lucy (event 3, abyss)
+                resolve = "upgrade";
+                break;
+            case 33:    //Jamp fights some enemies (event 4, abyss)
+                combat.ReceiveCondition(outcomeDecided);
+                resolve = "combat";
+                break;
+            case 34:    //Jamp finds a temple and gets recovered (event 5, abyss)
+                if (player.currentHp < 10) {
+                    player.currentHp = 10;
+                }
+                resolve = "upgrade";
                 break;
         }
         eventAnimation.SetTrigger("Outro");
