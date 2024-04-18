@@ -38,7 +38,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject[] fog;
 
     void Awake() {
-        world = 1;
+        world = 2;
         level = 0;
         section = 2;
 
