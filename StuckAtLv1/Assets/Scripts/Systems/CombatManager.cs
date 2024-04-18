@@ -63,7 +63,9 @@ public class CombatManager : MonoBehaviour
     public void Setup(string format) {
         Enemy[] remainingEnemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
         foreach (Enemy straggler in remainingEnemies) {
-            straggler.SelfDestruct();
+            if (straggler != null) {
+                straggler.SelfDestruct();
+            }
         }
         /*
         Set-up includes:
@@ -249,7 +251,7 @@ public class CombatManager : MonoBehaviour
 
     public void EnemyKilled() {
         //for combat-type encounter use only
-        if(objective == "combat") {
+        if (objective == "combat") {
             enemiesToKill--;
             if (enemiesToKill <= 0) {
                 uIObjectiveNumber.text = "Clear!";
@@ -258,7 +260,7 @@ public class CombatManager : MonoBehaviour
             }
         }
 
-        if(objective == "miniboss" || objective == "boss") {
+        if (objective == "miniboss" || objective == "boss") {
             bossIsAlive = false;
         }
     }
@@ -319,30 +321,39 @@ public class CombatManager : MonoBehaviour
         //Clear all damage numbers
         DamageNumberParent[] remainingDamageNumbers = FindObjectsByType<DamageNumberParent>(FindObjectsSortMode.None);
         foreach (DamageNumberParent d in remainingDamageNumbers) {
-            d.BattleOver();
+            if (d != null) {
+                d.BattleOver();
+            }
         }
 
         //Clear all drops
         ExtraDrop[] remainingMoneyDrops = FindObjectsByType<ExtraDrop>(FindObjectsSortMode.None);
         foreach (ExtraDrop moneybags in remainingMoneyDrops) {
-            moneybags.DestroyExtraDrops();
+            if (moneybags != null) {
+                moneybags.DestroyExtraDrops();
+            }
         }
 
         //Clear all enemy groups
         EnemyGroup[] remainingEnemyGroups = FindObjectsByType<EnemyGroup>(FindObjectsSortMode.None);
         foreach (EnemyGroup enemyGroup in remainingEnemyGroups) {
-            enemyGroup.BattleEnd();
+            if (enemyGroup != null) {
+                enemyGroup.BattleEnd();
+            }
         }
 
         //Clear all enemy instantiations (i.e. attacks)
         BattleOver[] remainingAdds = FindObjectsByType<BattleOver>(FindObjectsSortMode.None);
         foreach (BattleOver b in remainingAdds) {
-            b.BattleEnd();
+            if (b != null) {
+                b.BattleEnd();
+            }
         }
 
         //Disable UI
         survivalHourglass.SetActive(false);
         combatSkull.SetActive(false);
+        
         if (objective == "miniboss" || objective == "boss") {
             bossAdditionalInfo.SetActive(false);
             bossSecondaryUI.SetActive(false);

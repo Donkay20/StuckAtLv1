@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,14 +17,18 @@ public class EvilJamp : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bossName, experienceBarTextName, additionalInfoText;
     [Header("Attacks")]
     [SerializeField] private GameObject orbitingBats;   //level 20 bonus (level 60 bonus)
+    [SerializeField] private GameObject quickSlash;     //enhanced at lv.40 & lv.80
     //backend
-    private readonly int EXPERIENCE_TO_LEVEL = 6;
+    private readonly int EXPERIENCE_TO_LEVEL = 5;
     private readonly int MAX_LEVEL = 100;
-    private int level = 10;
+    private int quickAttackSize, orbitAttackSize;
+    private int level;
     private float experience;
     private int bossMaxHP;
     void Start() {
         level = 10;
+        quickAttackSize = 1;
+        orbitAttackSize = 1;
         bossMaxHP = enemyScript.maxHP;
         enemyScript.SetTarget(FindAnyObjectByType<Character>().gameObject);
     }
@@ -65,36 +70,49 @@ public class EvilJamp : MonoBehaviour
                 spawner.SetSpawnTimer(1f);
                 break;
             case 40:
-                //todo, enhance normal attacks
+                quickAttackSize = 2;
                 break;
             case 50:
                 enemyScript.SetSpeed(3.5f);
                 break;
             case 60:
-                orbitingBats.transform.localScale = new Vector2(2, 2);
+                UpgradeOrbitingBats();
                 break;
             case 70:
                 spawner.SetSpawnTimer(0.75f);
                 break;
             case 80:
-                //todo, enhance normal attacks
+                quickAttackSize = 3;
                 break;
             case 90:
                 Nuke();
                 break;
             case 100:
                 spawner.SetSpawnTimer(0.5f);
-                orbitingBats.transform.localScale = new Vector2(3, 3);
+                UpgradeOrbitingBats();
                 enemyScript.SetSpeed(5);
-                //enhance normal attacks
+                StartCoroutine(Level100Attack());
                 break;
         }
         experience = 0;
         Attack();
     }
 
-    private void Attack() {
-        //todo
+    private void Attack() { //Quick Slash
+        GameObject qs = Instantiate(quickSlash, target.transform.position, Quaternion.Euler(0, 0, Random.Range(0,361)));
+        qs.transform.localScale = new Vector2(quickAttackSize, quickAttackSize);
+    }
+
+    private void UpgradeOrbitingBats() {
+        orbitAttackSize++;
+        orbitingBats.transform.localScale = new Vector2(orbitAttackSize, orbitAttackSize);
+    }
+
+    private IEnumerator Level100Attack() {
+        while (true) {
+            yield return new WaitForSeconds(1f);
+            Attack();
+        }
     }
 
     private void Nuke() {

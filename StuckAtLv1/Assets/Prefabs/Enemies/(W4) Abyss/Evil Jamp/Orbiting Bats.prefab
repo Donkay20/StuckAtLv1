@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6677267063324925973}
   - component: {fileID: 3750095446545273289}
   - component: {fileID: 1934782172374238244}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bat 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2451183376249278894}
   - component: {fileID: 7029288992895026920}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Orbiting Bats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 2374996177868077579}
   - component: {fileID: 741720856725829866}
   - component: {fileID: 8516201068829482988}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bat 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
