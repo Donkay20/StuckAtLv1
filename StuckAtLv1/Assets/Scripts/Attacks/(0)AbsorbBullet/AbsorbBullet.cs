@@ -185,6 +185,10 @@ public class AbsorbBullet : MonoBehaviour
                 case "Sandworm":    //Sand Pillar
                     slotManager.AcquireSkill(33);
                     break;
+
+                case "DarkJamp":    //Level Down
+                    slotManager.AcquireSkill(34);
+                    break;
             }
 
             if (slotManager.IsBloodsuckerActive()) {    //legendary 9

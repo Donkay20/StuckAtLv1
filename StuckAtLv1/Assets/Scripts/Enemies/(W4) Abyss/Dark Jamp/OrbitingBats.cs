@@ -7,7 +7,11 @@ public class OrbitingBats : MonoBehaviour
         if (col.TryGetComponent<Character>(out var player)) {
             BuffManager b = FindAnyObjectByType<BuffManager>();
             b.AddDebuff("bleed", 0.3f, 3f);
-            player.TakeDamage(BAT_BASE_DAMAGE);
+            if (player.currentHp > 10) {
+                player.TakeDamage(player.currentHp / 5);
+            } else {
+                player.TakeDamage(BAT_BASE_DAMAGE);
+            }
         }
     }
 }
