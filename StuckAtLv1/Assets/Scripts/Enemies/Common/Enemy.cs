@@ -196,7 +196,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
                 CombatManager c = FindAnyObjectByType<CombatManager>();
                 if (c.GetObjective() == "miniboss" && (gameObject.CompareTag("Knight") || gameObject.CompareTag("DeerNymph")) || gameObject.CompareTag("BigSlime") || gameObject.CompareTag("Swarm")) {
                     c.EnemyKilled();
-                } else if (c.GetObjective() == "boss" && (gameObject.CompareTag("Lich") || gameObject.CompareTag("VenusFlyTrap") || gameObject.CompareTag("Sandworm") || gameObject.CompareTag("FinalBossPhase3")) ) {
+                } else if (c.GetObjective() == "boss" && (gameObject.CompareTag("Lich") || gameObject.CompareTag("VenusFlyTrap") || gameObject.CompareTag("Sandworm") || gameObject.CompareTag("DarkJamp") || gameObject.CompareTag("FinalBossPhase3")) ) {
                     c.EnemyKilled();
                 } else if (c.GetObjective() == "combat") {
                     c.EnemyKilled();
@@ -254,6 +254,7 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
             case "Lich":
             case "DeerNymph":
             case "Swarm":
+            case "DarkJamp":
                 Destroy(gameObject);
                 break;
             case "VenusFlyTrap":
