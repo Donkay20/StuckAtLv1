@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Bat Jamp
   location: 
-  neutralSprite: {fileID: 0}
+  neutralSprite: {fileID: 21300000, guid: b00309ee346ff2549b704f86d7f85426, type: 3}
   happySprite: {fileID: 0}
   sadSprite: {fileID: 0}
   thinkingSprite: {fileID: 0}
