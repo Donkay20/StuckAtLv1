@@ -10,9 +10,9 @@ public class Knight : MonoBehaviour
     [SerializeField] private GameObject sword; 
     [SerializeField] private Enemy enemyScript, swordScript;
     //handles scripts and objects
-    [SerializeField] private GameObject bossHPBar;
-    [SerializeField] private Image bossHPBarFill;
-    [SerializeField] private TextMeshProUGUI bossName;
+    [SerializeField] private GameObject bossHPBar, swordHPBar, additionalInfo;
+    [SerializeField] private Image bossHPBarFill, swordHPBarFill;
+    [SerializeField] private TextMeshProUGUI bossName, swordName, additionalInfoText;
     //UI stuff
     [SerializeField] private GameObject swordBeamPrefab, lateralSlashPrefab; 
     [SerializeField] private GameObject swordBeamParent, lateralSlashParent;
@@ -31,12 +31,25 @@ public class Knight : MonoBehaviour
         bossName.text = "The Knight.";
         bossHPBar.SetActive(true);
         bossHPBarFill.fillAmount = 1;
+        //hp bar
+        swordHPBar.SetActive(true);
+        swordName.text = "Sword";
+        swordHPBarFill.fillAmount = 0;
+        //secondary hp bar
+        additionalInfo.SetActive(true);
+        additionalInfoText.text = "";
+        //additional info
     }
 
     void Update() {
         bossHPBarFill.fillAmount = (float) enemyScript.GetHealth() / KNIGHT_MAX_HP;
+        swordHPBarFill.fillAmount = (float) swordScript.GetHealth() / 30;
+
         if (vulnerable) {
             swordCooldown -= Time.deltaTime;
+            additionalInfoText.text = "Sword regen in " + swordCooldown.ToString("f1");
+        } else {
+            additionalInfoText.text = "";
         }
 
         if (swordCooldown <= 0 && vulnerable) {
