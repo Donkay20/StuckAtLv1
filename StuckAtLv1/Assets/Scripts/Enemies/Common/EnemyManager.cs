@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
@@ -81,7 +78,6 @@ public class EnemyManager : MonoBehaviour
                 case 5:
                     enemyID = Random.Range(0, 27);
                     break;
-                
             }
         }
         GameObject newEnemy = EnemyPool.Instance.GetEnemy(enemyID); //change this value to test specific enemies or attacks
@@ -104,6 +100,18 @@ public class EnemyManager : MonoBehaviour
                 cataSpecialEnemy.transform.parent = transform;
                 break;
             case 4:
+                switch (Random.Range(0,2)) {
+                    case 0:
+                        GameObject abyssForestSpecialEnemy = Instantiate(forestSpecialEnemies[Random.Range(0, forestSpecialEnemies.Length)]);
+                        abyssForestSpecialEnemy.transform.position += player.transform.position;
+                        abyssForestSpecialEnemy.transform.parent = transform;
+                        break;
+                    case 1:
+                        GameObject abyssCataSpecialEnemy = Instantiate(catacombsSpecialEnemies[Random.Range(0, catacombsSpecialEnemies.Length)]);
+                        abyssCataSpecialEnemy.transform.position += player.transform.position;
+                        abyssCataSpecialEnemy.transform.parent = transform;
+                        break;
+                }
                 break;
         }
     }
@@ -128,14 +136,12 @@ public class EnemyManager : MonoBehaviour
 
         float f = Random.value > 0.5f ? -1f : 1f;
 
-        if(Random.value > 0.5f) 
-        {
+        if (Random.value > 0.5f) {
             position.x = Random.Range(-spawnArea.x, spawnArea.x);
             position.y = spawnArea.y * f;
         } else {
             position.y = Random.Range(-spawnArea.y, spawnArea.y);
             position.x = spawnArea.x * f;
-
         }
         position.z = 0;
         return position;

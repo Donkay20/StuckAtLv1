@@ -27,14 +27,13 @@ public class DeerNymph : MonoBehaviour
     private bool charging, chargePrep;
     private Vector2 angleToCharge;
     Rigidbody2D rb;
-
     private Animator anim;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         deerwomanMaxHP = enemyScript.maxHP;
         enemyScript.SetTarget(FindAnyObjectByType<Character>().gameObject);
-        attackTimer = 5;
+        attackTimer = 10;
         angerDrainAttackTimer = 1;
         anim = GetComponent<Animator>();
     }
@@ -82,25 +81,25 @@ public class DeerNymph : MonoBehaviour
                 FlowerBombAttack();
                 break;
         }
-        attackTimer = 5;
+        attackTimer = 10;
     }
 
     public void RaiseAnger() {  //when the deer pheromone attack hits the deer nymph, call this method
-        if (anger < MAX_ANGER && !charging && !chargePrep) {
-            if (anger + 30 > MAX_ANGER) {
+        if ((anger < MAX_ANGER) && !charging && !chargePrep) {
+            if (anger + 50 > MAX_ANGER) {
                 anger = 100;
             } else {
-                anger += 30;
+                anger += 50;
             }
         }
 
-        if (anger == MAX_ANGER) {
+        if (anger >= MAX_ANGER) {
             StartCoroutine(ChargeAttack());
         }
     }
 
     private IEnumerator SpikeBarrage() {
-        int spikes = 10;
+        int spikes = 7;
         while (spikes > 0) {
             yield return new WaitForSeconds(0.2f);
             Instantiate(thornSpike);
@@ -121,8 +120,10 @@ public class DeerNymph : MonoBehaviour
 
         yield return new WaitForSeconds(4); //track player during this time w/ the charge line
         
-        chargePrep = false; charging = true; chargeLine.SetActive(false);
-        anim.SetBool("Charge",false);
+        chargePrep = false; 
+        charging = true; 
+        chargeLine.SetActive(false);
+        anim.SetBool("Charge", false);
         anim.SetBool("Charging", true);
         rb.velocity = angleToCharge;
 
@@ -150,7 +151,7 @@ public class DeerNymph : MonoBehaviour
         charging = false; StopAllCoroutines();
         if (crystal) {  //stop momentum, deal a bunch of damage to the boss and stun
             rb.velocity = new Vector2(0, 0);
-            enemyScript.TakeDamage(deerwomanMaxHP / 4);
+            enemyScript.TakeDamage(deerwomanMaxHP / 3);
             enemyScript.ApplySlow(0.1f, 3);
         } else {        //just stop momentum
             enemyScript.ApplySlow(0.1f, 1);

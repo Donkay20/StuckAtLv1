@@ -12,9 +12,6 @@ public class UpgradeManager : MonoBehaviour
     private int[] legendaryUpgradePool = new int[15];
     private int[] upgradeRarities = new int[3];         //rarity storage for the 4 upgrades that are available. (rarity: 0-common, 1-rare, 2-legendary)
     private int[] upgradeSelection = new int[3];        //upgrade ID storage for the 4 upgrades that are available.
-
-    //private bool commonUpgradesAvailable, rareUpgradesAvailable, legendaryUpgradeAvailable, allUpgradesTaken;   //for later use (maybe?)
-
     private int upgradePositionSelected, slotSelected;                      //determined which one that is clicked on in the game menu (goes from 0-2 for upgradeselected and 0-4 for slot selected)
     [SerializeField] private Slot[] slots = new Slot[5];                    //slots
     //in-game buttons
@@ -54,6 +51,10 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private string[] legendaryUpgradeText = new string[15]; 
     [SerializeField] private Character character;
     [SerializeField] private TextMeshProUGUI rerollButtonText, characterMoney;
+    [Space]
+    [SerializeField] private GameObject[] slot3Positions;
+    [SerializeField] private GameObject[] slot4Positions;
+    [SerializeField] private GameObject[] slot5Positions;
     [Space]
     //other
     [SerializeField] private GameManager notify;
@@ -491,6 +492,27 @@ public class UpgradeManager : MonoBehaviour
         slotButtons[maxSlots-1].gameObject.SetActive(true);
 
         switch (maxSlots) {
+            case 3:
+                slotButtons[0].transform.position = slot3Positions[0].transform.position;
+                slotButtons[1].transform.position = slot3Positions[1].transform.position;
+                slotButtons[2].transform.position = slot3Positions[2].transform.position;
+                break;
+            case 4:
+                slotButtons[0].transform.position = slot4Positions[0].transform.position;
+                slotButtons[1].transform.position = slot4Positions[1].transform.position;
+                slotButtons[2].transform.position = slot4Positions[2].transform.position;
+                slotButtons[3].transform.position = slot4Positions[3].transform.position;
+                break;
+            case 5:
+                slotButtons[0].transform.position = slot5Positions[0].transform.position;
+                slotButtons[1].transform.position = slot5Positions[1].transform.position;
+                slotButtons[2].transform.position = slot5Positions[2].transform.position;
+                slotButtons[3].transform.position = slot5Positions[3].transform.position;
+                slotButtons[4].transform.position = slot5Positions[4].transform.position;
+                break;
+        }
+        /*
+        switch (maxSlots) {
             //temp method
             case 3:
                 slotButtons[0].gameObject.transform.Translate(-1.5f, 0, 0);
@@ -508,6 +530,7 @@ public class UpgradeManager : MonoBehaviour
                 slotButtons[3].gameObject.transform.Translate(-1.5f, 0, 0);
                 break;
         }
+        */
         notify.CalculateWeight();
         DisplayWeight();
         Debug.Log("Upgrade Manager: Maximum slots increased to " + maxSlots + ". Process successful.");

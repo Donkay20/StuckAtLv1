@@ -20,7 +20,7 @@ public class Fissure : MonoBehaviour
         //set the parent before anything else, by grabbing the parent's relation to the slot
 
         size = asb.GetSizeBonus(slot);
-        transform.localScale = new Vector2(size, size);
+        transform.localScale = new Vector2(size, size * 3);
 
         timer = asb.GetDurationBonus(slot, FISSURE_BASE_DURATION);
 
@@ -47,8 +47,7 @@ public class Fissure : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D col) {
-        Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null) {
+        if (col.TryGetComponent<Enemy>(out var enemy)) {
             enemy.ApplySlow(0.5f, 0.5f);  
             //As long as the enemy is in the fissure, they will remain slowed.
         }
