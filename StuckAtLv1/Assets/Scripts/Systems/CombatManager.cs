@@ -142,7 +142,7 @@ public class CombatManager : MonoBehaviour
                     objective = "combat";
                     combatSkull.SetActive(true);
                     enemiesToKill = 15;
-                    spawner.SetSpawnTimer(0.4f);
+                    spawner.SetSpawnTimer(0.7f);
                     uIObjectiveNumber.text = enemiesToKill.ToString();
                     StartCoroutine(CombatTracker());
                     break;

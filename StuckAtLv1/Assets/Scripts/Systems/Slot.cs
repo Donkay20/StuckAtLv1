@@ -278,7 +278,7 @@ public class Slot : MonoBehaviour
 
         if (rareUpgrades[3] > 0) {                      //rare 3
             if (character.currentHp <= 10) {
-                critChance += 30 * rareUpgrades[3];
+                critChance += 50 * rareUpgrades[3];
             }
         }
         //critical hit chance bonuses end here
@@ -288,7 +288,7 @@ public class Slot : MonoBehaviour
         //bonuses upon crit begin here
         if (rareUpgrades[4] > 0 && isCrit) {            //rare 4
             if (character.currentHp <= 10) {
-                character.GainAfterimage(0.5f, false);
+                character.GainAfterimage(0.75f, false);
             }
         }
 
@@ -311,7 +311,7 @@ public class Slot : MonoBehaviour
         }
         if (rareUpgrades[3] > 0) {
             if (character.currentHp <= 10) {
-                critChance += 30 * rareUpgrades[3];
+                critChance += 50 * rareUpgrades[3];
             }
         }
         return critChance;

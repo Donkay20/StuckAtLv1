@@ -62,8 +62,10 @@ Class that handles enemy stats and HP values and taking damage, as well as attac
     }
 
     private void OnEnable() {
-        if (FindObjectOfType<MapManager>(includeInactive: true).GetWorld() == 5 && FindAnyObjectByType<FinalBossManager>().GetPhase() == 1) {
-            finalBoss = true;
+        if (FindObjectOfType<MapManager>(includeInactive: true).GetWorld() == 5) {
+            if (FindAnyObjectByType<FinalBossManager>().GetPhase() == 1) {
+                finalBoss = true;
+            }
         } else {
             finalBoss = false;
         }
