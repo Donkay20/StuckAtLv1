@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BlueSkull : MonoBehaviour
 {
-    private readonly int BLUE_SKULL_DMG = 2;
+    private readonly int BLUE_SKULL_DMG = 1;
     [SerializeField] private Character targetCharacter;
     [SerializeField] private GameObject targetGameObject;
     
@@ -27,7 +27,7 @@ public class BlueSkull : MonoBehaviour
         if (targetCharacter != null) {
             targetCharacter.TakeDamage(BLUE_SKULL_DMG);
         } else {
-            throw new NullReferenceException("ERROR: Null instance found; Knight's Sword Beam.");
+            throw new NullReferenceException("ERROR: Null instance found; Lich's Skull Wave.");
         }
     }
 }

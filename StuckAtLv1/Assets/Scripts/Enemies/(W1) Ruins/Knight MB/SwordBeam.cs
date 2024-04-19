@@ -1,12 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class SwordBeam : MonoBehaviour
 {
-    private readonly int SWORD_BEAM_DMG = 2;
+    private readonly int SWORD_BEAM_DMG = 1;
     private readonly float SWORD_BEAM_SPD = 2f;
     private float lifetime = 5f;
     [SerializeField] private Character targetCharacter;
@@ -25,13 +22,9 @@ public class SwordBeam : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         transform.right = targetGameObject.transform.position - transform.position;
-        direction = targetGameObject.transform.position - transform.position;
+        direction = (targetGameObject.transform.position - transform.position).normalized;
     }
 
-    void FixedUpdate() {
-        //rb.velocity = direction * SWORD_BEAM_SPD;
-    }
-    
     void Update() {
         lifetime -= Time.deltaTime;
         rb.velocity = direction * SWORD_BEAM_SPD;

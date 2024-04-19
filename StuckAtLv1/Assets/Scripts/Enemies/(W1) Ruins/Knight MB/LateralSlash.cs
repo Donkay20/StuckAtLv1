@@ -7,7 +7,7 @@ public class LateralSlash : MonoBehaviour
 {
     private float warningTime = 0f; 
     private float activeTime = 0.3f;
-    private readonly int LATERAL_SLASH_DAMAGE = 2;
+    private readonly int LATERAL_SLASH_DAMAGE = 1;
     private readonly float LATERAL_SLASH_MAX_TIMER = 1.7f;
     private bool attackProcced;
     BoxCollider2D attackCollider;
