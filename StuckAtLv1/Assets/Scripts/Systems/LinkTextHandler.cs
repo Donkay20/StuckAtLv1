@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class LinkTextHandler : MonoBehaviour, IPointerClickHandler
 {
@@ -10,6 +9,9 @@ public class LinkTextHandler : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Canvas canvas;
     [SerializeField] private Camera cameraToUse;
     [SerializeField] private KeywordDetail keywordDetail;
+    [SerializeField] private Button associatedButton;
+    [SerializeField] private int buttonIdentity;
+    [SerializeField] private UpgradeManager upgradeManager;
 
     private void Awake() {
         linkedText = GetComponent<TMP_Text>();
@@ -27,6 +29,9 @@ public class LinkTextHandler : MonoBehaviour, IPointerClickHandler
             Debug.Log(linkTaggedText);
             TMP_LinkInfo linkInfo = linkedText.textInfo.linkInfo[linkTaggedText];
             keywordDetail.Enable(linkInfo.GetLinkID());
+        } else {
+            associatedButton.Select();
+            upgradeManager.ClickedUpgrade(buttonIdentity);
         }
     }
 }
