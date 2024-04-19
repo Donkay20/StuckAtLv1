@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Lich : MonoBehaviour
 {
-    private readonly int LICH_MAX_HP = 1500;
+    private readonly int LICH_MAX_HP = 1200;
     private readonly int EFFIGY_MAX_HP = 100;
     [SerializeField] private Enemy[] effigies;
     [SerializeField] private Enemy enemyScript;
