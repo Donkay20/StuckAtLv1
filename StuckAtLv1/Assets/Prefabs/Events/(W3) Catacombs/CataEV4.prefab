@@ -77,33 +77,33 @@ MonoBehaviour:
   - '"Thank you, everyone! Bye bye!"'
   - '[END]'
   names:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - NARRATION
+  - Lucy
+  - Jamp
+  - Lucy
+  - Jamp
+  - NARRATION
+  - Lucy
+  - Jamp
+  - '[CHOOSE]'
+  - NARRATION
+  - Jamp
+  - Lucy
+  - Jamp
+  - NARRATION
+  - Lucy
+  - Jamp
+  - NARRATION
+  - Jamp
+  - Lucy
+  - '[END]'
+  - NARRATION
+  - Jamp
+  - NARRATION
+  - Jamp
+  - Jamp
+  - Lucy
+  - '[END]'
   optionsToSelect:
   - If you let me through, I'll heal your sickness!
   - "If you let me through, I\u2019ll pay you 100 gold!"
